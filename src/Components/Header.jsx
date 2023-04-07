@@ -20,10 +20,11 @@ const Header = () => {
           <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap text-white">PASC HUB</span>
         </a>
       </div>
+      
       <div className="flex items-center">
           <div className="flex items-center ml-3">
             <div>
-              <button type="button" className="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-600" aria-expanded="false" data-dropdown-toggle="dropdown-user">
+              <button type="button" className="flex text-sm  bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-600" aria-expanded="false" data-dropdown-toggle="dropdown-user">
                 <span className="sr-only">Open user menu</span>
                 <img className="w-8 h-8 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user photo"></img>
               </button>
@@ -54,11 +55,12 @@ const Header = () => {
             </div>
           </div>
         </div>
+        
     </div>
   </div>
 </nav>
 
-<aside id="logo-sidebar" className="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700" aria-label="Sidebar">
+<aside id="logo-sidebar" className="fixed  top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700" aria-label="Sidebar">
    <div className="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
       <ul className="space-y-2 font-medium">
          <li>
