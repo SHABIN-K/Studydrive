@@ -1,11 +1,19 @@
-import React from 'react';
-import Header from './Components/User/Header';
+import React from "react";
+import { Routes, Route } from "react-router-dom";
 
+import { Header } from "./Components/User";
+import { Home, Login } from "./Pages/User";
 function App() {
   return (
-    <div className="bg-gray-100">
-        <Header/>
-    </div>
+    <>
+      <Header />
+      <main>
+        <Routes>
+          <Route path="*" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      </main>
+    </>
   );
 }
 
