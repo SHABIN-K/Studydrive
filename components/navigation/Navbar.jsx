@@ -48,11 +48,11 @@ const Navbar = () => {
         />
 
         <div
-          className={`absolute top-[60px] right-0 left-0 bg-[#1c1c24] z-10 shadow-secondary py-4 ${
-            !toggleDrawer ? "-translate-y-[100vh]" : "translate-y-0"
-          } transition-all duration-700`}
+          className={`absolute top-[50px] start-0 bg-[#1c1c24] z-10 shadow-secondary py-3 ${
+            !toggleDrawer ? "-translate-x-[100vh]" : "translate-x-0"
+          } transition-all duration-700 min-h-full`}
         >
-          <ul className="mb-4">
+          <ul className="mb-4 p-3">
             {navlinks.map((data) => {
               return (
                 <li
