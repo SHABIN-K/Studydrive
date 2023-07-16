@@ -9,8 +9,8 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>
-        <div className="relative sm:p-8 p-4 bg-[#13131a] min-h-screen flex flex-row">
+      <body className="bg-[#13131a] min-h-screen">
+        <div className="relative sm:p-8 p-4  flex flex-row">
           <div className="sm:flex hidden mr-10 relative">
             <Sidebar />
           </div>
