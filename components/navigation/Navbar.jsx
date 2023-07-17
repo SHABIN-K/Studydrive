@@ -64,7 +64,7 @@ const Navbar = () => {
               <li
                 key={data.name}
                 className={`flex p-4 ${
-                  isActive === data.name && "bg-[#3a3a43]"
+                  isActive === data.name && "bg-[#3a3a43] rounded-full"
                 }`}
                 onClick={() => {
                   setIsActive(data.name);
