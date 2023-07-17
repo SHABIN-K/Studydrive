@@ -1,21 +1,46 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 import { navlinks } from "@/constants";
-import { close, logo, menu, search, sun } from "@/public/assets";
+import { close, logo, menu, search } from "@/public/assets";
 
 const Navbar = () => {
   const router = useRouter();
+  const sidebarRef = useRef(null);
+  const menuButtonRef = useRef(null);
   const [isActive, setIsActive] = useState("home");
   const [toggleDrawer, setToggleDrawer] = useState(false);
 
   const handleToggleDrawer = () => {
     setToggleDrawer((prev) => !prev);
   };
+
+  const handleCloseSidebar = () => {
+    setToggleDrawer(false);
+  };
+
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (
+        sidebarRef.current &&
+        !sidebarRef.current.contains(event.target) &&
+        menuButtonRef.current &&
+        !menuButtonRef.current.contains(event.target)
+      ) {
+        handleCloseSidebar();
+      }
+    };
+
+    document.addEventListener("click", handleOutsideClick);
+
+    return () => {
+      document.removeEventListener("click", handleOutsideClick);
+    };
+  }, []);
 
   return (
     <nav className="flex md:flex-row flex-col-reverse justify-between mb-[35px] gap-6">
@@ -48,17 +73,25 @@ const Navbar = () => {
           />
         </div>
 
-        <Image
-          src={toggleDrawer ? close : menu}
-          alt="menu icon"
-          className="w-[34px] h-[34px] object-contain cursor-pointer fill-[#808191]"
+        <div
+          className={`w-[34px] h-[34px] object-contain cursor-pointer transition-transform transform ${
+            toggleDrawer ? "rotate-45" : "rotate-0"
+          }`}
           onClick={handleToggleDrawer}
-        />
+          ref={menuButtonRef}
+        >
+          <Image
+            src={toggleDrawer ? close : menu}
+            alt="menu icon"
+            className="w-full h-full"
+          />
+        </div>
 
         <div
           className={`${
             toggleDrawer ? "translate-x-0" : "-translate-x-full"
           } fixed top-0 bottom-0 left-0 rounded-r-[10px] bg-[#1c1c24] z-10 shadow-secondary py-5 w-[250px] transition-transform duration-1000`}
+          ref={sidebarRef}
         >
           <ul className="mb-4 p-3">
             {navlinks.map((data) => (
