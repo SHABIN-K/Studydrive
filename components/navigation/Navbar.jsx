@@ -6,7 +6,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 import { navlinks } from "@/constants";
-import { logo, menu, search, sun } from "@/public/assets";
+import { close, logo, menu, search, sun } from "@/public/assets";
 
 const Navbar = () => {
   const router = useRouter();
@@ -47,17 +47,18 @@ const Navbar = () => {
             className="w-[60%] h-[60%] object-contain"
           />
         </div>
+
         <Image
-          src={menu}
+          src={toggleDrawer ? close : menu}
           alt="menu icon"
-          className="w-[34px] h-[34px] object-contain cursor-pointer"
+          className="w-[34px] h-[34px] object-contain cursor-pointer fill-[#808191]"
           onClick={handleToggleDrawer}
         />
 
         <div
           className={`${
             toggleDrawer ? "translate-x-0" : "-translate-x-full"
-          } fixed top-0 bottom-0 left-0 bg-[#1c1c24] z-10 shadow-secondary py-5 w-[250px] transition-transform duration-1000`}
+          } fixed top-0 bottom-0 left-0 rounded-r-[10px] bg-[#1c1c24] z-10 shadow-secondary py-5 w-[250px] transition-transform duration-1000`}
         >
           <ul className="mb-4 p-3">
             {navlinks.map((data) => (

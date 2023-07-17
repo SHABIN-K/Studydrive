@@ -12,8 +12,10 @@ import menu from './menu.svg';
 import money from './money.svg';
 import loader from './loader.svg';
 import thirdweb from './thirdweb.png';
+import close from './close.svg';
 
 export {
+  close,
   tagType,
   createCampaign,
   dashboard,
