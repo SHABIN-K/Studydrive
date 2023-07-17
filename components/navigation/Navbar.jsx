@@ -72,6 +72,8 @@ const Navbar = () => {
             className="w-[60%] h-[60%] object-contain"
           />
         </div>
+        
+        <p className="text-[#4acd8d] font-bold align-middle text-center subpixel-antialiased text-2xl">PASC HUB</p>
 
         <div
           className={`w-[34px] h-[34px] object-contain cursor-pointer transition-transform transform ${
