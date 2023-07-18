@@ -8,7 +8,7 @@ import menu from './menu.svg';
 import loader from './loader.svg';
 import addUser from './addUser.svg';
 import about from './about.svg';
-import upload from './upload.png';
+import upload from './upload.svg';
 import close from './close.svg';
 
 
