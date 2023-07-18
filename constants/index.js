@@ -1,9 +1,8 @@
 import {
-  createCampaign,
+  about,
+  addUser,
   dashboard,
-  payment,
-  profile,
-  withdraw,
+  upload,
 } from "@/public/assets";
 
 export const navlinks = [
@@ -13,23 +12,18 @@ export const navlinks = [
     link: "/",
   },
   {
-    name: "campaign",
-    imgUrl: createCampaign,
-    link: "/",
-  },
-  {
     name: "Upload",
-    imgUrl: payment,
+    imgUrl: upload,
     link: "/",
   },
   {
     name: "About Us",
-    imgUrl: withdraw,
+    imgUrl: about,
     link: "/",
   },
   {
-    name: "Share App",
-    imgUrl: profile,
+    name: "invite friends",
+    imgUrl: addUser,
     link: "/",
   },
 ];

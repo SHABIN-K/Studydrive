@@ -112,7 +112,7 @@ const Navbar = () => {
                   src={data.imgUrl}
                   alt={data.name}
                   className={`w-[24px] h-[24px] object-contain ${
-                    isActive === data.name ? "grayscale-0" : "grayscale"
+                    isActive === data.name ? "text-[#1dc071]" : "text-[#808191]"
                   }`}
                 />
                 <p
