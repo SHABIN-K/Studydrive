@@ -7,7 +7,7 @@ import {
 
 export const navlinks = [
   {
-    name: "home",
+    name: "Home",
     imgUrl: dashboard,
     link: "/",
   },
