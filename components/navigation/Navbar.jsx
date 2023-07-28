@@ -3,16 +3,10 @@
 import { useEffect, useRef, useState } from "react";
 
 import Image from "next/image";
-import { Teko } from "next/font/google";
 import { useRouter } from "next/navigation";
 
 import { navlinks } from "@/constants";
 import { close, logo, menu, search } from "@/public/assets";
-
-const font = Teko({
-  weight: "400",
-  subsets: ["latin"],
-});
 
 const Navbar = () => {
   const router = useRouter();
@@ -79,7 +73,10 @@ const Navbar = () => {
           />
         </div>
 
-        <p className="text-[#4acd8d] font-bold align-middle text-center subpixel-antialiased text-2xl" className={font.className}>
+        <p
+          className="text-[#4acd8d] font-bold align-middle text-center subpixel-antialiased text-2xl"
+          style={{ fontFamily: "Tektur, sans-serif" }}
+        >
           PASC HUB
         </p>
 
