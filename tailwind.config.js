@@ -10,6 +10,9 @@ module.exports = {
       fontFamily: {
         epilogue: ["Epilogue", "sans-serif"],
       },
+      screens: {
+        xs: "400px",
+      },
       boxShadow: {
         secondary: "10px 10px 20px rgba(2, 2, 2, 0.25)",
       },

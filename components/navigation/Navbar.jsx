@@ -45,6 +45,9 @@ const Navbar = () => {
 
   return (
     <nav className="flex md:flex-row flex-col-reverse justify-between mb-[35px] gap-6">
+      <p className="text-[#4acd8d] align-middle text-center subpixel-antialiased text-3xl font-bold hidden md:block">
+        Pasc Hub
+      </p>
       <div className="lg:flex-1 flex flex-row max-w-[458px] py-2 pl-4 pr-2 h-[52px] bg-[#1c1c24] rounded-[100px]">
         <input
           type="text"
@@ -74,8 +77,8 @@ const Navbar = () => {
           />
         </div>
 
-        <p className="text-[#4acd8d] align-middle text-center subpixel-antialiased text-2xl">
-          PASC HUB
+        <p className="text-[#4acd8d] align-middle text-center subpixel-antialiased text-3xl font-bold">
+          Pasc Hub
         </p>
 
         <div
@@ -95,7 +98,7 @@ const Navbar = () => {
         <div
           className={`${
             toggleDrawer ? "translate-x-0" : "-translate-x-full"
-          } fixed top-0 bottom-0 left-0 rounded-r-[10px] bg-[#1c1c24] z-10 shadow-secondary py-5 w-[250px] transition-transform duration-1000`}
+          } fixed top-0 bottom-0 left-0 rounded-r-[10px] bg-[#1c1c24] z-10  py-5 w-[250px] transition-transform duration-1000`}
           ref={sidebarRef}
         >
           <ul className="mb-4 p-3">
