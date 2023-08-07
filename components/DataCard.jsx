@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
-import img from "@/public/test.png";
+import img from "@/public/icons/test.png";
 
 const DataCard = ({ data, name }) => {
   const router = useRouter();
