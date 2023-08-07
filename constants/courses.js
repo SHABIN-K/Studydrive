@@ -78,7 +78,7 @@ export const courses = [
     },
     {
       id: 4,
-      name: "political science",
+      name: "ba arabic",
       img: "/img",
       link: "/videos",
       descrition: "videos lesson",
