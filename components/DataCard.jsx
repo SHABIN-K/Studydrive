@@ -12,7 +12,7 @@ const DataCard = ({ data }) => {
       onClick={() => router.push(data.link)}
     >
       <div className="w-16 h-16 md:w-20 md:h-20 bg-gray-300 rounded-full overflow-hidden">
-        <Image src={img} objectFit="cover" alt={data.descrption} />
+        <Image src={img} objectFit="cover" alt={data.description} />
       </div>
       <p className="text-[#808191] text-base font-medium md:font-semibold font-sans md:font-mono tracking-tighter mt-1 text-center">
         {data.name}
