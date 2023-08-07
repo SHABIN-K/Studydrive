@@ -19,11 +19,11 @@ export const navlinks = [
   {
     name: "About Us",
     imgUrl: about,
-    link: "/",
+    link: "/support/about",
   },
   {
     name: "invite friends",
     imgUrl: addUser,
-    link: "/",
+    link: "/support/invite",
   },
 ];
