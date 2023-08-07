@@ -8,8 +8,8 @@ const Feed = () => {
         Courses
       </h1>
       <div className="grid grid-cols-3 md:grid-cols-6  mt-3 gap-1.5 md:gap-[26px] justify-between md:justify-start">
-        {courses.map((course) => {
-          return <DataCard key={course.id} data={course} />;
+        {courses.map((course, index) => {
+          return <DataCard key={index} data={course} />;
         })}
       </div>
     </div>

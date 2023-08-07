@@ -13,7 +13,7 @@ const Navbar = () => {
   const router = useRouter();
   const sidebarRef = useRef(null);
   const menuButtonRef = useRef(null);
-  const [isActive, setIsActive] = useState("home");
+  const [isActive, setIsActive] = useState("Home");
   const [toggleDrawer, setToggleDrawer] = useState(false);
 
   const handleToggleDrawer = () => {
@@ -98,7 +98,7 @@ const Navbar = () => {
         <div
           className={`${
             toggleDrawer ? "translate-x-0" : "-translate-x-full"
-          } fixed top-0 bottom-0 left-0 rounded-r-[10px] bg-[#1c1c24] z-10  py-5 w-[250px] transition-transform duration-1000`}
+          } fixed top-0 bottom-0 left-0 rounded-r-[10px] bg-[#1c1c24] z-10  py-5 w-[250px] transition-transform duration-1000 `}
           ref={sidebarRef}
         >
           <ul className="mb-4 p-3">
@@ -106,8 +106,8 @@ const Navbar = () => {
               <li
                 key={data.name}
                 className={`flex p-4 ${
-                  isActive === data.name && "bg-[#3a3a43] rounded-full"
-                }`}
+                  isActive === data.name && "bg-[#3a3a43]"
+                } hover:bg-[#2c2f32] rounded-full`}
                 onClick={() => {
                   setIsActive(data.name);
                   setToggleDrawer(false);
