@@ -3,6 +3,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
+import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
@@ -45,10 +46,11 @@ const Navbar = () => {
 
   return (
     <nav className="flex md:flex-row flex-col-reverse justify-between mb-[35px] gap-6">
-      <p className="text-[#4acd8d] align-middle text-center subpixel-antialiased text-3xl font-bold hidden md:block">
+      <p className=" text-[#4acd8d] align-middle text-center subpixel-antialiased text-3xl font-bold hidden sm:block">
         Pasc Hub
       </p>
-      <div className="lg:flex-1 flex flex-row max-w-[458px] py-2 pl-4 pr-2 h-[52px] bg-[#1c1c24] rounded-[100px]">
+
+      <div className="lg:flex-1 flex flex-row max-w-[658px] py-2 pl-4 pr-2 h-[52px] bg-[#1c1c24] rounded-[100px]">
         <input
           type="text"
           placeholder="Search for Study materials"
@@ -61,6 +63,25 @@ const Navbar = () => {
             className="w-[15px] h-[15px] object-contain"
           />
         </div>
+      </div>
+
+      <div className="md:flex hidden flex-row justify-end gap-4">
+        <button
+          type="button"
+          className={`font-epilogue font-semibold text-[16px] leading-[26px] text-white min-h-[52px] px-4 rounded-[10px] bsg-[#1dc071] bg-[#8c6dfd]`}
+        >
+          Login
+        </button>
+
+        <Link href="/">
+          <div className="w-[52px] h-[52px] rounded-full bg-[#2c2f32] flex justify-center items-center cursor-pointer">
+            <Image
+              src={search}
+              alt="user"
+              className="w-[60%] h-[60%] object-contain"
+            />
+          </div>
+        </Link>
       </div>
 
       {/* Small screen navigation */}
