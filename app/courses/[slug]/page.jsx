@@ -1,7 +1,5 @@
-const userCourses = () => {
-  return (
-    <div>page</div>
-  )
-}
+const userCourses = ({ params }) => {
+  return <div>My Post: {params.slug}</div>;
+};
 
-export default userCourses
+export default userCourses;
