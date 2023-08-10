@@ -1,5 +1,3 @@
 export const Mycourses = () => {
-  return (
-    <div>Mycourses</div>
-  )
-}
+  return <div className="text-lime-700">Mycourses</div>;
+};

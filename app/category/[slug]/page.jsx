@@ -1,6 +1,6 @@
 const userCategory = () => {
   return (
-    <div>page userCategory</div>
+    <div className="text-lime-700">page userCategory</div>
   )
 }
 
