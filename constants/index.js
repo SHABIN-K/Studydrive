@@ -14,16 +14,16 @@ export const navlinks = [
   {
     name: "Upload",
     imgUrl: upload,
-    link: "/",
+    link: "/teacher",
   },
   {
     name: "About Us",
     imgUrl: about,
-    link: "/support/about",
+    link: "/about",
   },
   {
     name: "invite friends",
     imgUrl: addUser,
-    link: "/support/invite",
+    link: "/invite",
   },
 ];

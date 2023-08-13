@@ -11,7 +11,7 @@ const DataCard = ({ data, route, style }) => {
     <div className={`rounded-lg ${style}`}>
       <div
         className="card cursor-pointer flex flex-col items-center"
-        onClick={() => router.push(`/student/${route}` + data.link)}
+        onClick={() => router.push(`/${route}` + data.link)}
       >
         <figure className="w-16 h-16 md:w-20 md:h-20 bg-gray-300 rounded-full overflow-hidden">
           <Image src={img} alt={data.description}/>
