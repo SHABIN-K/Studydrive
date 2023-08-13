@@ -36,9 +36,7 @@ const Navbar = () => {
         handleCloseSidebar();
       }
     };
-
     document.addEventListener("click", handleOutsideClick);
-
     return () => {
       document.removeEventListener("click", handleOutsideClick);
     };

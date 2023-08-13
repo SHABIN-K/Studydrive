@@ -19,5 +19,5 @@ module.exports = {
       translate: ["group-hover", "group-focus"],
     },
   },
-  plugins: [],
+  plugins: [require("daisyui")],
 };

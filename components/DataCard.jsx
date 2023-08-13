@@ -6,10 +6,11 @@ import img from "public/icons/test.png";
 
 const DataCard = ({ data, name }) => {
   const router = useRouter();
+  //https://daisyui.com/components/card/
   return (
     <div
       className="cursor-pointer flex flex-col items-center"
-      onClick={() => router.push(name + data.link)}
+      onClick={() => router.push(`/student/${name}` + data.link)}
     >
       <div className="w-16 h-16 md:w-20 md:h-20 bg-gray-300 rounded-full overflow-hidden">
         <Image src={img} objectFit="cover" alt={data.description} />
