@@ -8,6 +8,7 @@
 }
 
 /* Disable touch highlighting for all elements */
+
 * {
   -webkit-tap-highlight-color: transparent; /* For iOS Safari */
   -webkit-touch-callout: none; /* Disable callout, iOS long-press menu */
@@ -21,6 +22,7 @@
 /* Disable touch highlighting for all elements */
 
 /* scroll-bar 28, 28, 36*/
+
 *::-webkit-scrollbar {
   width: 17px;
 }
