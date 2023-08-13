@@ -120,7 +120,7 @@ export const courses = [
   },
   {
     id: 5,
-    name: "BSC MATHEMATICS",
+    name: "Bsc mathematics",
     imgUrl: "monkey",
     link: "/videos",
     description:
@@ -128,7 +128,7 @@ export const courses = [
   },
   {
     id: 6,
-    name: "BSC PSYCHOLOGY",
+    name: "Bsc Psychology",
     imgUrl: "/imgUrl",
     link: "/study",
     description:
@@ -136,7 +136,7 @@ export const courses = [
   },
   {
     id: 7,
-    name: "BCA",
+    name: "Bca",
     imgUrl: "/imgUrl",
     link: "/videos",
     description:
@@ -144,7 +144,7 @@ export const courses = [
   },
   {
     id: 8,
-    name: "BBA",
+    name: "Bba",
     imgUrl: "/imgUrl",
     link: "/videos",
     description:
@@ -152,7 +152,7 @@ export const courses = [
   },
   {
     id: 9,
-    name: "BSW",
+    name: "Bsw",
     imgUrl: "monkey",
     link: "/videos",
     description:
@@ -160,7 +160,7 @@ export const courses = [
   },
   {
     id: 10,
-    name: "BCOM FINANCE",
+    name: "Bcom Finance",
     imgUrl: "/imgUrl",
     link: "/study",
     description:
@@ -168,7 +168,7 @@ export const courses = [
   },
   {
     id: 11,
-    name: "BCOM COMPUTER APPLICATION",
+    name: "Bcom Computer Application",
     imgUrl: "/imgUrl",
     link: "/videos",
     description:
@@ -176,7 +176,7 @@ export const courses = [
   },
   {
     id: 12,
-    name: "BCOM CO-OPERATION",
+    name: "Bcom Co-operation",
     imgUrl: "/imgUrl",
     link: "/videos",
     description:
@@ -184,7 +184,7 @@ export const courses = [
   },
   {
     id: 13,
-    name: "MA ENGLISH",
+    name: "Ma English",
     imgUrl: "/imgUrl",
     link: "/videos",
     description:
@@ -192,7 +192,7 @@ export const courses = [
   },
   {
     id: 14,
-    name: "MSW",
+    name: "Msw",
     imgUrl: "/imgUrl",
     link: "/videos",
     description:
@@ -200,7 +200,7 @@ export const courses = [
   },
   {
     id: 15,
-    name: "MCOM FINANCE",
+    name: "Mcom Finance",
     imgUrl: "/imgUrl",
     link: "/videos",
     description:

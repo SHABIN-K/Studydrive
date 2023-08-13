@@ -22,7 +22,11 @@ const Sidebar = () => {
         <div className="flex flex-col justify-center items-center gap-3 ">
           {navlinks.map((data) => {
             return (
-              <div key={data.name}>
+              <div
+                key={data.name}
+                className="tooltip tooltip-right"
+                data-tip={data.name}
+              >
                 <Icon
                   {...data}
                   isActive={isActive}
