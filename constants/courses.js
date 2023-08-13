@@ -104,7 +104,7 @@ export const courses = [
   },
   {
     id: 3,
-    name: "Ba Economics",
+    name: "Economics",
     imgUrl: "/imgUrl",
     link: "/videos",
     description:
@@ -112,15 +112,15 @@ export const courses = [
   },
   {
     id: 4,
-    name: "Political Science",
-    imgUrl: "/imgUrl",
+    name: "Bsw",
+    imgUrl: "monkey",
     link: "/videos",
     description:
-      "BA Political Science is an academic program that examines political systems, theories, and dynamics, fostering a comprehensive understanding of governance and public affairs.",
+      "BSW (Bachelor of Social Work) is an academic program that equips students with the skills and understanding to address social issues and contribute to community welfare.",
   },
   {
     id: 5,
-    name: "Bsc mathematics",
+    name: "Mathematics",
     imgUrl: "monkey",
     link: "/videos",
     description:
@@ -128,7 +128,7 @@ export const courses = [
   },
   {
     id: 6,
-    name: "Bsc Psychology",
+    name: "Psychology",
     imgUrl: "/imgUrl",
     link: "/study",
     description:
@@ -152,11 +152,11 @@ export const courses = [
   },
   {
     id: 9,
-    name: "Bsw",
-    imgUrl: "monkey",
+    name: "Political Science",
+    imgUrl: "/imgUrl",
     link: "/videos",
     description:
-      "BSW (Bachelor of Social Work) is an academic program that equips students with the skills and understanding to address social issues and contribute to community welfare.",
+      "BA Political Science is an academic program that examines political systems, theories, and dynamics, fostering a comprehensive understanding of governance and public affairs.",
   },
   {
     id: 10,
@@ -168,7 +168,7 @@ export const courses = [
   },
   {
     id: 11,
-    name: "Bcom Computer Application",
+    name: "Bcom CA",
     imgUrl: "/imgUrl",
     link: "/videos",
     description:
