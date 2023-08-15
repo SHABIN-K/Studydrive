@@ -16,7 +16,7 @@ const DataCard = ({ data, route, style }) => {
         <figure className="w-16 h-16 md:w-20 md:h-20 bg-gray-300 rounded-full overflow-hidden">
           <Image src={img} alt={data.description}/>
         </figure>
-        <div className=" items-center text-center">
+        <div className="items-center text-center">
           <h2 className="text-base font-medium md:font-semibold font-sans md:font-mono tracking-tighter mt-2 text-[#808191]">
             {data.name}
           </h2>
