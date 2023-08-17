@@ -22,7 +22,7 @@ export const navlinks = [
     link: "/about",
   },
   {
-    name: "invite friends",
+    name: "Share app",
     imgUrl: addUser,
     link: "/invite",
   },
