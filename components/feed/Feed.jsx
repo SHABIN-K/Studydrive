@@ -1,5 +1,5 @@
 import { courses } from "@/constants/courses";
-import DataCard from "../DataCard";
+import MenuCard from "../MenuCard";
 
 const Feed = () => {
   return (
@@ -9,7 +9,7 @@ const Feed = () => {
       </h1>
       <div className="grid grid-cols-4 md:grid-cols-5  mt-2 gap-1.5 md:gap-[26px] justify-between md:justify-start">
         {courses.map((course, index) => {
-          return <DataCard key={index} data={course} route="courses" style="mt-2 md:mt-0" />;
+          return <MenuCard key={index} data={course} route="courses" style="mt-2 md:mt-0" />;
         })}
       </div>
     </div>

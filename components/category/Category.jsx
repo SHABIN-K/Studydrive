@@ -1,5 +1,5 @@
 import { category } from "@/constants/category";
-import DataCard from "../DataCard";
+import MenuCard from "../MenuCard";
 
 const Category = () => {
   return (
@@ -9,7 +9,7 @@ const Category = () => {
       </h1>
       <div className="grid grid-cols-4 md:flex md:flex-wrap mt-[18px] xs:gap-1.5 md:gap-[26px]">
         {category.map((category, index) => {
-          return <DataCard key={index} data={category} route="category" />;
+          return <MenuCard key={index} data={category} route="category" />;
         })}
       </div>
     </div>

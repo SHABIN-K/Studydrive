@@ -63,6 +63,7 @@ const Navbar = () => {
         </div>
       </div>
 
+{/*
       <div className="md:flex hidden flex-row justify-end gap-4">
         <button
           type="button"
@@ -81,7 +82,7 @@ const Navbar = () => {
           </div>
         </Link>
       </div>
-
+*/}
       {/* Small screen navigation */}
 
       <div className="sm:hidden flex justify-between items-center relative">

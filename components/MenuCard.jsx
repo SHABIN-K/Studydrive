@@ -3,7 +3,7 @@ import Image from "next/image";
 
 import img from "public/icons/test.png";
 
-const DataCard = ({ data, route, style }) => {
+const MenuCard = ({ data, route, style }) => {
   //https://daisyui.com/components/card/
   return (
     <div className={`rounded-lg ${style}`}>
@@ -28,4 +28,4 @@ const DataCard = ({ data, route, style }) => {
   );
 };
 
-export default DataCard;
+export default MenuCard;
