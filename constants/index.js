@@ -14,7 +14,7 @@ export const navlinks = [
   {
     name: "Upload",
     imgUrl: upload,
-    link: "/teacher",
+    link: "/dashboard",
   },
   {
     name: "About Us",
