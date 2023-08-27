@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
-import "@/styles/globals.css";
+import "@/app/globals.css";
 import Image from "next/image";
 import { useRouter } from "next/router";
 
