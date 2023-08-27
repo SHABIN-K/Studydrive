@@ -1,5 +1,4 @@
-import "@/styles/globals.css";
-import { Navbar, Sidebar } from "@/components/navigation";
+import "../globals.css";
 
 export const metadata = {
   title: "pasc hub",
@@ -9,17 +8,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="bg-[#13131a] min-h-screen">
-        <div className="relative sm:p-8 p-4  flex flex-row">
-          <div className="sm:flex hidden mr-10 relative">
-            <Sidebar />
-          </div>
-          <div className="flex-1 max-sm:w-full max-w-[1280px] mx-auto sm:pr-5">
-            <Navbar />
-            {children}
-          </div>
-        </div>
-      </body>
+      <body className="bg-[#13131a] min-h-screen">{children}</body>
     </html>
   );
 }
