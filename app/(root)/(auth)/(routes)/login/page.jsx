@@ -20,7 +20,7 @@ const Login = () => {
       const response = await signIn("credentials", {
         email,
         password,
-        redirect: false,
+        redirect: true,
       });
 
       if (response.error) {
@@ -28,8 +28,9 @@ const Login = () => {
         return;
       }
       router.replace("dashboard");
+      console.log("login api calling ended");
     } catch (error) {
-      console.log(error);
+      console.log("NEXT_AUTH Error :::"+error);
     }
   };
 
@@ -118,13 +119,24 @@ const Login = () => {
                   <span>{error}</span>
                 </div>
               )}
-              <button
-                type="button"
-                onClick={handleSubmit}
-                className="btn bg-[#4acd8d] hover:bg-green-500 w-full text-white focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-              >
-                Sign in
-              </button>
+              <div className="flex gap-1 mr-5 md:mr-0">
+                <button
+                  type="button"
+                  onClick={() => {
+                    router.push("/");
+                  }}
+                  className="flex items-center px-5 py-2 text-sm text-white transition-colors duration-200 bg-[#1c1c24] border rounded-lg gap-x-2 sm:w-auto"
+                >
+                  HOME
+                </button>
+                <button
+                  type="button"
+                  onClick={handleSubmit}
+                  className="btn bg-[#4acd8d] hover:bg-green-500 min-w-[75%] text-white focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                >
+                  Sign in
+                </button>
+              </div>
             </form>
           </div>
         </div>
