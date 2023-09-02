@@ -4,15 +4,33 @@ import Image from "next/image";
 import { logo } from "@/public/assets";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 
 const Login = () => {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-  const handleSubmit = () => {
-    console.log("Form submitted");
-    router.push("/dashboard");
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log("login api calling");
+
+    try {
+      const response = await signIn("credentials", {
+        email,
+        password,
+        redirect: false,
+      });
+
+      if (response.error) {
+        setError("Invalid Credentials");
+        return;
+      }
+      router.replace("dashboard");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -82,6 +100,24 @@ const Login = () => {
                   Forgot password?
                 </a>
               </div>
+              {error && (
+                <div className="flex alert alert-error h-1">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="stroke-current shrink-0 h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                  <span>{error}</span>
+                </div>
+              )}
               <button
                 type="button"
                 onClick={handleSubmit}
