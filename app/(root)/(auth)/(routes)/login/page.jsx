@@ -11,27 +11,31 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
+      setIsLoading(true);
       const response = await signIn("credentials", {
         email,
         password,
         redirect: false,
       });
       console.log(response);
-
-      if (response.error) {
+      const isLoginSuccessful = !response.error;
+      if (isLoginSuccessful) {
+        router.push("/dashboard");
+        console.log("Login successful");
+      } else {
         setError("Invalid email or password");
         setTimeout(() => setError(""), 2000);
-        return;
       }
-      router.push("/dashboard");
-      console.log("login successfull");
     } catch (error) {
-      console.log("NEXT_AUTH Error :::" + error);
+      console.error("NEXT_AUTH Error:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -53,7 +57,7 @@ const Login = () => {
               Sign in to your account
             </h1>
 
-            <form className="space-y-4 md:space-y-6">
+            <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
               <div>
                 <label
                   htmlFor="username"
@@ -130,13 +134,11 @@ const Login = () => {
                 >
                   HOME
                 </button>
-                <button
-                  type="button"
-                  onClick={handleSubmit}
+                <input
+                  type="submit"
+                  value={isLoading ? "Pleasewait.." : "Login"}
                   className="btn bg-[#4acd8d] hover:bg-green-500 min-w-[75%] text-white focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-                >
-                  Sign in
-                </button>
+                />
               </div>
             </form>
           </div>

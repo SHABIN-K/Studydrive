@@ -30,8 +30,21 @@ const authOptions = {
   pages: {
     signIn: "/login",
   },
+  callbacks: {
+    jwt(params) {
+      // console.log(params);
+      //update token
+      if (params.user?.role) {
+        params.token.role = params.user.role;
+      }
+      //return final_token
+      return params.token;
+    },
+  },
 };
 
 const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };
+
+

@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 const MyDash = () => {
   const router = useRouter();
   const { data: session } = useSession();
-  console.log(session);
+  //console.log(session);
 
   return (
     <div className="grid place-items-center h-screen">
@@ -24,9 +24,9 @@ const MyDash = () => {
           back
         </button>
         <button
-          onClick={(e) => {
-            signOut().then(() => {
-              router.push("/invite");
+          onClick={() => {
+            signOut({ redirect: false }).then(() => {
+              router.push("/");
               console.log(
                 "Successfully redirected to the home //page after logout."
               );
