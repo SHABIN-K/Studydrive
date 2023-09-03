@@ -20,7 +20,7 @@ const Login = () => {
       const response = await signIn("credentials", {
         email,
         password,
-        redirect: true,
+        redirect: false,
       });
 
       if (response.error) {

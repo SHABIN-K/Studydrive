@@ -8,7 +8,7 @@ const authOptions = {
       credentials: {},
 
       async authorize(credentials) {
-        //const { email, password } = credentials;
+        const { email, password } = credentials;
         const user = { id: "1", name: "J Smith", email: "jsmith@example.com" };
         return user;
       },
