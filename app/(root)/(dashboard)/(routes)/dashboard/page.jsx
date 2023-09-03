@@ -3,9 +3,10 @@
 import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
-const Dashboard = () => {
+const MyDash = () => {
   const router = useRouter();
   const { data: session } = useSession();
+  console.log(session);
 
   return (
     <div className="grid place-items-center h-screen">
@@ -23,9 +24,13 @@ const Dashboard = () => {
           back
         </button>
         <button
-          onClick={() => {
-            signOut();
-            router.push('/')
+          onClick={(e) => {
+            signOut().then(() => {
+              router.push("/invite");
+              console.log(
+                "Successfully redirected to the home //page after logout."
+              );
+            });
           }}
           className="bg-red-500 text-white font-bold px-6 py-2 mt-3"
         >
@@ -36,4 +41,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default MyDash;

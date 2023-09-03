@@ -14,7 +14,6 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("login api calling");
 
     try {
       const response = await signIn("credentials", {
@@ -22,21 +21,23 @@ const Login = () => {
         password,
         redirect: false,
       });
+      console.log(response);
 
       if (response.error) {
-        setError("Invalid Credentials");
+        setError("Invalid email or password");
+        setTimeout(() => setError(""), 2000);
         return;
       }
-      router.replace("dashboard");
-      console.log("login api calling ended");
+      router.push("/dashboard");
+      console.log("login successfull");
     } catch (error) {
-      console.log("NEXT_AUTH Error :::"+error);
+      console.log("NEXT_AUTH Error :::" + error);
     }
   };
 
   return (
     <section>
-      <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+      <div className="flex flex-col items-center justify-center px-6 py-28 mx-auto md:h-screen lg:py-0">
         <div>
           <a
             href="/"

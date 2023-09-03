@@ -7,10 +7,19 @@ const authOptions = {
       name: "credentials",
       credentials: {},
 
-      async authorize(credentials) {
+      async authorize(credentials, req) {
         const { email, password } = credentials;
-        const user = { id: "1", name: "J Smith", email: "jsmith@example.com" };
-        return user;
+
+        if (email !== "me@g.com" || password !== "123") {
+          throw new Error("invalid credentials");
+        }
+
+        return {
+          id: "2453",
+          name: "J Smith",
+          email: "me@g.com",
+          role: "admin",
+        };
       },
     }),
   ],
