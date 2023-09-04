@@ -10,30 +10,30 @@ const LoginPage = () => {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setIsLoading(true);
     try {
-      setIsLoading(true);
       const response = await signIn("credentials", {
         email,
         password,
-        callbackUrl: "/dashboard"
+        redirect: false,
       });
       console.log("Response:", response);
-      const isLoginSuccessful = !response.error;
-      if (isLoginSuccessful) {
-        router.push("/dashboard");
-        console.log("Redirecting to:", "/dashboard");
+      if (response.error) {
+        setError(response.error);
+        setTimeout(() => setError(""), 3000);
       } else {
-        setError("Invalid email or password");
-        setTimeout(() => setError(""), 2000);
+        //Redirect to the dashboard on successful login
+        router.push("/dashboard");
+        // console.log("Redirecting to:", "/dashboard");
       }
     } catch (error) {
-      console.error("NEXT_AUTH Error:", error);
+      console.error("NEXT_AUTH Error: " + error);
+      setError("An error occurred during login.");
     } finally {
       setIsLoading(false);
     }
