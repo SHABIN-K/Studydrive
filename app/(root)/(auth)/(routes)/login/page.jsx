@@ -6,7 +6,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 
-const Login = () => {
+const LoginPage = () => {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -21,13 +21,13 @@ const Login = () => {
       const response = await signIn("credentials", {
         email,
         password,
-        redirect: false,
+        callbackUrl: "/dashboard"
       });
-      console.log(response);
+      console.log("Response:", response);
       const isLoginSuccessful = !response.error;
       if (isLoginSuccessful) {
-        router.push("/dashboard");
-        console.log("Login successful");
+       // router.push("/dashboard");
+        console.log("Redirecting to:", "/dashboard");
       } else {
         setError("Invalid email or password");
         setTimeout(() => setError(""), 2000);
@@ -57,7 +57,7 @@ const Login = () => {
               Sign in to your account
             </h1>
 
-            <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
+            <form className="space-y-4 md:space-y-6">
               <div>
                 <label
                   htmlFor="username"
@@ -134,11 +134,13 @@ const Login = () => {
                 >
                   HOME
                 </button>
-                <input
-                  type="submit"
-                  value={isLoading ? "Pleasewait.." : "Login"}
+                <button
+                  type="button"
+                  onClick={handleSubmit}
                   className="btn bg-[#4acd8d] hover:bg-green-500 min-w-[75%] text-white focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-                />
+                >
+                  {isLoading ? "Pleasewait.." : "Login"}
+                </button>
               </div>
             </form>
           </div>
@@ -147,4 +149,4 @@ const Login = () => {
     </section>
   );
 };
-export default Login;
+export default LoginPage;

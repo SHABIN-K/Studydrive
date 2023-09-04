@@ -1,16 +1,14 @@
 import { withAuth } from "next-auth/middleware";
-import { NextResponse } from "next/server"
+import { NextResponse } from "next/server";
 
 export default withAuth(
-  function middleware() {
+  function middleware(req) {
     //return NextResponse
-    return NextResponse.rewrite(new URL("/dashboard", req.url))
+    return NextResponse.rewrite(new URL("/dashboard", req.url));
   },
   {
     callbacks: {
-      authorized(token) {
-        return token?.role === 'admin';
-      },
+      authorized: ({ token }) => token?.role === "admin",
     },
   }
 );

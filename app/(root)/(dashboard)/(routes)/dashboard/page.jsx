@@ -25,12 +25,7 @@ const MyDash = () => {
         </button>
         <button
           onClick={() => {
-            signOut({ redirect: false }).then(() => {
-              router.push("/");
-              console.log(
-                "Successfully redirected to the home //page after logout."
-              );
-            });
+            signOut({ callbackUrl: "/" });
           }}
           className="bg-red-500 text-white font-bold px-6 py-2 mt-3"
         >

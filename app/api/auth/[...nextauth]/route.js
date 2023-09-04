@@ -4,6 +4,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 const authOptions = {
   providers: [
     CredentialsProvider({
+      id: "credentials",
       name: "credentials",
       credentials: {},
 
@@ -29,16 +30,26 @@ const authOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   pages: {
     signIn: "/login",
+    //error: '/error'
   },
   callbacks: {
-    jwt(params) {
-      // console.log(params);
-      //update token
-      if (params.user?.role) {
-        params.token.role = params.user.role;
+   // async redirect({ url, baseUrl }) {
+   //   console.log("-----------------------------------------------------");
+   //   if (url.startsWith("/")) {
+   //     console.log("+++++++++++++++++++++++++++++++++++++++++++++++");
+   //     console.log(`api calling first : ${baseUrl}${url}`);
+   //     return `${baseUrl}${url}`;
+   //   } else if (new URL(url).origin === baseUrl) {
+   //     console.log("api calling second :" +url);
+   //     return url;
+   //   }
+   //   return baseUrl;
+   // },
+    async jwt({ token, user }) {
+      if (user) {
+        token.role = user.role;
       }
-      //return final_token
-      return params.token;
+      return token;
     },
   },
 };
@@ -46,5 +57,3 @@ const authOptions = {
 const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };
-
-
