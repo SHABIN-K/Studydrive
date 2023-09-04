@@ -21,7 +21,7 @@ const authOptions = {
             role: "admin",
           };
         } else {
-          throw new Error("Invalid credentials");
+          throw new Error("Invalid email or password");
         }
       },
     }),
@@ -35,13 +35,13 @@ const authOptions = {
     // error: "/login",
   },
   callbacks: {
-    async redirect({ url, baseUrl }) {
-      // Check if the URL is a callback URL and redirect accordingly
-      if (url === "/dashboard") {
-        return url; // Allow redirection to /dashboard
-      }
-      return baseUrl; // Redirect to the base URL (e.g., /login) if not /dashboard
-    },
+   // async redirect({ url, baseUrl }) {
+   //   // Check if the URL is a callback URL and redirect accordingly
+   //   if (url === "/dashboard") {
+   //     return url; // Allow redirection to /dashboard
+   //   }
+   //   return baseUrl; // Redirect to the base URL (e.g., /login) if not /dashboard
+   // },
     async jwt({ token, user }) {
       if (user) {
         token.role = user.role;

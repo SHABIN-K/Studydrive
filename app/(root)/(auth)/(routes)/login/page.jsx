@@ -28,8 +28,8 @@ const LoginPage = () => {
         setTimeout(() => setError(""), 3000);
       } else {
         //Redirect to the dashboard on successful login
-        router.push("/dashboard");
-        // console.log("Redirecting to:", "/dashboard");
+        window.location.href = "/dashboard";
+        console.log("Redirecting to:", "/dashboard");
       }
     } catch (error) {
       console.error("NEXT_AUTH Error: " + error);
