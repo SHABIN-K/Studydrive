@@ -26,7 +26,7 @@ const LoginPage = () => {
       console.log("Response:", response);
       const isLoginSuccessful = !response.error;
       if (isLoginSuccessful) {
-       // router.push("/dashboard");
+        router.push("/dashboard");
         console.log("Redirecting to:", "/dashboard");
       } else {
         setError("Invalid email or password");
