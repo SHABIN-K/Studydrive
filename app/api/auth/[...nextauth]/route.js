@@ -28,20 +28,21 @@ const authOptions = {
   ],
   session: {
     strategy: "jwt",
+    maxAge: 30 * 24 * 60 * 60, //30 days
   },
   secret: process.env.NEXTAUTH_SECRET,
   pages: {
     signIn: "/login",
-    // error: "/login",
+    error: "/login",
   },
   callbacks: {
-   // async redirect({ url, baseUrl }) {
-   //   // Check if the URL is a callback URL and redirect accordingly
-   //   if (url === "/dashboard") {
-   //     return url; // Allow redirection to /dashboard
-   //   }
-   //   return baseUrl; // Redirect to the base URL (e.g., /login) if not /dashboard
-   // },
+    // async redirect({ url, baseUrl }) {
+       // Check if the URL is a callback URL and redirect accordingly
+    //   if (url === "/dashboard") {
+    //     return url; // Allow redirection to /dashboard
+    //   }
+    //   return baseUrl; // Redirect to the base URL (e.g., /login) if not /dashboard
+    // },
     async jwt({ token, user }) {
       if (user) {
         token.role = user.role;
