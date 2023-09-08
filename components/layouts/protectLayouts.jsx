@@ -12,7 +12,7 @@ export const ProtectedLayout = ({ children }) => {
     if (status === "unauthenticated") router.replace("/login");
   }, [status, router]);
   // if the user is authorized, render the page
-  if (status === "authentiecated") return <div>{children}</div>;
+  if (status === "authenticated") return <div>{children}</div>;
 
   // if the user refreshed the page or somehow navigated to the protected page
   return <Loading />;
