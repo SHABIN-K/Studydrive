@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 const MyDash = () => {
   const router = useRouter();
   const { data: session } = useSession();
-  //console.log(session);
 
   return (
     <div className="grid place-items-center h-screen">

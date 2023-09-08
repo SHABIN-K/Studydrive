@@ -10,8 +10,7 @@ const DataCard = ({ data, route }) => {
       <Link
         href={{
           pathname: `/${route}/`,
-          query: { name: data.link,  number: 1
-          },
+          query: { name: data.link, number: 1 },
         }}
       >
         <div className="card cursor-pointer items-center">
