@@ -13,4 +13,4 @@ export default withAuth(
   }
 );
 
-export const config = { matcher: ["/dashboard","/upload"] };
+export const config = { matcher: ["/dashboard"] };
