@@ -1,8 +1,8 @@
 const Loading = () => {
   return (
-    <>
-      <div class="custom-loader" />
-    </>
+    <div className="flex justify-center items-center h-[100vh] ">
+      <div className="loader" />
+    </div>
   );
 };
 
