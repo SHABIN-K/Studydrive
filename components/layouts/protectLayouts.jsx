@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import Loading from "../ui/Loading";
 
-export const ProtectedLayouts = ({ children }) => {
+export const ProtectedLayout = ({ children }) => {
   const router = useRouter();
   const { status } = useSession();
   useEffect(() => {

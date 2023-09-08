@@ -1,4 +1,4 @@
-import { ProtectedLayouts } from "@/components/layouts/protectedLayouts";
+import { ProtectedLayout } from "@/components/layouts/protectLayouts";
 
 export const metadata = {
   title: "Dashboard | pasc hub",
@@ -6,9 +6,5 @@ export const metadata = {
 };
 
 export default function DashboardLayout({ children }) {
-  return (
-    <section>
-      <ProtectedLayouts>{children}</ProtectedLayouts>
-    </section>
-  );
+  return <ProtectedLayout>{children}</ProtectedLayout>;
 }
