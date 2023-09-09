@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 
 import { navlinks } from "@/constants";
 import { logo, sun } from "@/public/assets";
-import Icon from "./Icon";
+import Icon from "../ui/Icon";
 
 const Sidebar = () => {
   const router = useRouter();

@@ -1,4 +1,4 @@
-import DataCard from "@/components/DataCard";
+import DataCard from "@/components/cards/DataCard";
 import { category } from "@/constants/category";
 
 const Mycourses = () => {
