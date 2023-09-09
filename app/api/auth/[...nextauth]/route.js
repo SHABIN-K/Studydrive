@@ -37,7 +37,7 @@ const authOptions = {
   },
   callbacks: {
     // async redirect({ url, baseUrl }) {
-       // Check if the URL is a callback URL and redirect accordingly
+    // Check if the URL is a callback URL and redirect accordingly
     //   if (url === "/dashboard") {
     //     return url; // Allow redirection to /dashboard
     //   }

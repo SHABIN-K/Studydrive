@@ -131,7 +131,7 @@ const LoginPage = () => {
                   onClick={handleSubmit}
                   className="btn bg-[#4acd8d] hover:bg-green-500 min-w-[75%] text-white focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                 >
-                  {isLoading ? "Pleasewait.." : "Login"}
+                  {isLoading ? "Please wait..." : "Login"}
                 </button>
               </div>
             </form>
