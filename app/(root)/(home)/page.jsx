@@ -1,6 +1,5 @@
 import Feed from "@/components/Feed";
-import { category } from "@/constants/category";
-import { courses } from "@/constants/courses";
+import { category, courses } from "@/constants";
 
 export default function Home() {
   return (
