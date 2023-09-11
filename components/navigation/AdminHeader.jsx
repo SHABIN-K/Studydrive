@@ -1,158 +1,62 @@
-/* eslint-disable @next/next/no-page-custom-font */
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { signOut } from "next-auth/react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
-import { navlinks } from "@/constants";
-import { close, logo, menu, search } from "@/public/assets";
-
-const Navbar = () => {
-  const router = useRouter();
-  const sidebarRef = useRef(null);
-  const menuButtonRef = useRef(null);
-  const [isActive, setIsActive] = useState("Home");
-  const [toggleDrawer, setToggleDrawer] = useState(false);
-
-  const handleToggleDrawer = () => {
-    setToggleDrawer((prev) => !prev);
-  };
-
-  const handleCloseSidebar = () => {
-    setToggleDrawer(false);
-  };
-
-  useEffect(() => {
-    const handleOutsideClick = (event) => {
-      if (
-        sidebarRef.current &&
-        !sidebarRef.current.contains(event.target) &&
-        menuButtonRef.current &&
-        !menuButtonRef.current.contains(event.target)
-      ) {
-        handleCloseSidebar();
-      }
-    };
-    document.addEventListener("click", handleOutsideClick);
-    return () => {
-      document.removeEventListener("click", handleOutsideClick);
-    };
-  }, []);
-
+const AdminHeader = () => {
   return (
-    <nav className="flex md:flex-row flex-col-reverse justify-between mb-[35px] gap-6">
-      <p className=" text-[#4acd8d] align-middle text-center subpixel-antialiased text-3xl font-bold hidden sm:block">
-        Pasc Hub
-      </p>
-
-      <div className="lg:flex-1 flex flex-row max-w-[658px] py-2 pl-4 pr-2 h-[52px] bg-[#1c1c24] rounded-[100px]">
-        <input
-          type="text"
-          placeholder="Search for Study materials"
-          className="flex w-full font-epilogue font-normal text-[14px] placeholder:text-[#4b5264] text-white bg-transparent outline-none"
-        />
-        <div className="w-[72px] h-full rounded-[20px] bg-[#4acd8d] flex justify-center items-center cursor-pointer">
-          <Image
-            src={search}
-            alt="search icon"
-            className="w-[15px] h-[15px] object-contain"
-          />
-        </div>
-      </div>
-
-{/*
-      <div className="md:flex hidden flex-row justify-end gap-4">
-        <button
-          type="button"
-          className={`font-epilogue font-semibold text-[16px] leading-[26px] text-white min-h-[52px] px-4 rounded-[10px] bsg-[#1dc071] bg-[#8c6dfd]`}
-        >
-          Login
-        </button>
-
-        <Link href="/">
-          <div className="w-[52px] h-[52px] rounded-full bg-[#2c2f32] flex justify-center items-center cursor-pointer">
-            <Image
-              src={search}
-              alt="user"
-              className="w-[60%] h-[60%] object-contain"
-            />
-          </div>
+    <div className="navbar bg-base-100">
+      <div className="flex-1">
+        <Link href="/admin">
+          <p className="text-[#4acd8d] subpixel-antialiased text-2xl font-bold ml-5">
+            Pasc Hub
+            <span className="text-white text-sm ml-1">Admin Panel</span>
+          </p>
         </Link>
       </div>
-*/}
-      {/* Small screen navigation */}
-
-      <div className="sm:hidden flex justify-between items-center relative">
-        <div
-          className="w-[40px] h-[40px] rounded-[10px] bg-[#2c2f32] flex justify-center items-center cursor-pointer"
-          onClick={() => router.push("/")}
-        >
-          <Image
-            src={logo}
-            alt="user icon"
-            className="w-[60%] h-[60%] object-contain"
-          />
-        </div>
-
-        <p className="text-[#4acd8d] align-middle text-center subpixel-antialiased text-3xl font-bold">
-          Pasc Hub
-        </p>
-
-        <div
-          className={`w-[34px] h-[34px] object-contain cursor-pointer transition-transform transform ${
-            toggleDrawer ? "rotate-45" : "rotate-0"
-          }`}
-          onClick={handleToggleDrawer}
-          ref={menuButtonRef}
-        >
-          <Image
-            src={toggleDrawer ? close : menu}
-            alt="menu icon"
-            className="w-full h-full"
-          />
-        </div>
-
-        <div
-          className={`${
-            toggleDrawer ? "translate-x-0" : "-translate-x-full"
-          } fixed top-0 bottom-0 left-0 rounded-r-[10px] bg-[#1c1c24] z-10  py-5 w-[250px] transition-transform duration-1000 `}
-          ref={sidebarRef}
-        >
-          <ul className="mb-4 p-3">
-            {navlinks.map((data) => (
-              <li
-                key={data.name}
-                className={`flex p-4 ${
-                  isActive === data.name && "bg-[#3a3a43]"
-                } hover:bg-[#2c2f32] rounded-full`}
-                onClick={() => {
-                  setIsActive(data.name);
-                  setToggleDrawer(false);
-                  router.push(data.link);
-                }}
-              >
-                <Image
-                  src={data.imgUrl}
-                  alt={data.name}
-                  className={`w-[24px] h-[24px] object-contain ${
-                    isActive === data.name ? "grayscale-0" : "grayscale"
-                  }`}
-                />
-                <p
-                  className={`ml-[20px] font-epilogue font-semibold text-[14px] ${
-                    isActive === data.name ? "text-[#1dc071]" : "text-[#808191]"
-                  }`}
-                >
-                  {data.name}
-                </p>
+      <div className="flex-none gap-2">
+        <div className="dropdown dropdown-end md:mr-2">
+          <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+            <div className="w-7">
+              <Image
+                src="/assets/dashboard.svg"
+                width={12}
+                height={12}
+                alt="dashboard icon"
+                className="bg-base-100"
+              />
+            </div>
+          </label>
+          <ul
+            tabIndex={0}
+            className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
+          >
+            <Link href="/dashboard">
+              <li>
+                <a className="justify-between">
+                  Dashboard
+                  <span className="badge">New</span>
+                </a>
               </li>
-            ))}
+            </Link>
+            <Link href="/">
+              <li>
+                <a>Home</a>
+              </li>
+            </Link>
+            <li
+              onClick={() => {
+                signOut({ callbackUrl: "/" });
+              }}
+            >
+              <a>Logout</a>
+            </li>
           </ul>
         </div>
       </div>
-    </nav>
+    </div>
   );
 };
 
-export default Navbar;
+export default AdminHeader;
