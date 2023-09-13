@@ -3,8 +3,34 @@
 import { signOut } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
+import Swal from "sweetalert2";
 
 const AdminHeader = () => {
+  const handleSignOutButton = () => {
+    Swal.fire({
+      title: "Logout",
+      text: "Are you sure you want to log out?",
+      icon: "question",
+      width: "20em",
+      color: "#fff",
+      background: "#13131a",
+      showCancelButton: true,
+      confirmButtonColor: "#4acd8d",
+      cancelButtonColor: "#1c1c24",
+      confirmButtonText: "Yes, log out",
+      showLoaderOnConfirm: true,
+      customClass: {
+        cancelButton: "bordered-alert",
+        popup: "bordered-alert",
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        signOut({ callbackUrl: "/" });
+      } else {
+        console.log("cancelled");
+      }
+    });
+  };
   return (
     <div className="navbar bg-base-100">
       <div className="flex-1">
@@ -25,6 +51,7 @@ const AdminHeader = () => {
                 height={12}
                 alt="dashboard icon"
                 className="bg-base-100"
+                title="switch to another pages"
               />
             </div>
           </label>
@@ -45,11 +72,7 @@ const AdminHeader = () => {
                 <a>Home</a>
               </li>
             </Link>
-            <li
-              onClick={() => {
-                signOut({ callbackUrl: "/" });
-              }}
-            >
+            <li onClick={handleSignOutButton}>
               <a>Logout</a>
             </li>
           </ul>

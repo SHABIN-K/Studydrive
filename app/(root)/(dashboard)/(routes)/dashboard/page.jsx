@@ -23,6 +23,12 @@ const MyDash = () => {
           back
         </button>
         <button
+          onClick={() => router.push("/admin")}
+          className="bg-lime-500 text-white font-bold px-6 py-2 mt-3"
+        >
+          admin
+        </button>
+        <button
           onClick={() => {
             signOut({ callbackUrl: "/" });
           }}

@@ -1,6 +1,8 @@
 {
     "figma.autocompleteBlocks": true,
     "cSpell.words": [
-        "Pasc"
+        "Pasc",
+        "Swal",
+        "sweetalert"
     ]
 }
