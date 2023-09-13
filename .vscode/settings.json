@@ -1,6 +1,7 @@
 {
     "figma.autocompleteBlocks": true,
     "cSpell.words": [
+        "headlessui",
         "Pasc",
         "Swal",
         "sweetalert"

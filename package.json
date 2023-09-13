@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@changesets/cli": "^2.26.2",
+    "@headlessui/react": "^1.7.17",
     "autoprefixer": "10.4.14",
     "bcryptjs": "^2.4.3",
     "eslint": "8.44.0",
