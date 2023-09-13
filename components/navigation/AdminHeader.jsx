@@ -32,7 +32,7 @@ const AdminHeader = () => {
     });
   };
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar bg-base-100 border-b border-green-400">
       <div className="flex-1">
         <Link href="/admin">
           <p className="text-[#4acd8d] subpixel-antialiased text-2xl font-bold ml-5">
