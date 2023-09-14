@@ -1,5 +1,2 @@
-import AdminHeader from "./AdminHeader";
-import Navbar from "./Navbar";
-import Sidebar from "./Sidebar";
-
-export { Sidebar, Navbar, AdminHeader };
+export { default as Navbar } from "./Navbar";
+export { default as Sidebar } from "./Sidebar";
