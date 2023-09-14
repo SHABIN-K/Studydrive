@@ -1,10 +1,13 @@
 "use client";
-import { AdminDashBoard, AdminUser } from "@/components/admin";
-import { Tab } from "@headlessui/react";
-import { signOut } from "next-auth/react";
+
 import Image from "next/image";
 import Link from "next/link";
+
 import Swal from "sweetalert2";
+import { Tab } from "@headlessui/react";
+import { signOut } from "next-auth/react";
+
+import { AdminDashBoard, AdminUser } from "@/components/admin";
 
 const Tabs = ["Dashboard", "Users"];
 
