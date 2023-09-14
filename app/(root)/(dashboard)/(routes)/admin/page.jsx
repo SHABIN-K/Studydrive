@@ -88,7 +88,7 @@ const AdminPanel = () => {
               </div>
             </div>
           </div>
-          <main className="flex-1 overflow-x-hidden overflow-y-auto bg-[#1c1c22]">
+          <main className="flex-1 overflow-x-hidden overflow-y-auto bg-[#121216]">
             <Tab.Group>
               <Tab.List className="flex space-x-1 sm:w-2/5">
                 {Tabs.map((tab, index) => (
