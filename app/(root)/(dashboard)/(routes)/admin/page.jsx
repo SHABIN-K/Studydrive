@@ -7,9 +7,9 @@ import Swal from "sweetalert2";
 import { Tab } from "@headlessui/react";
 import { signOut } from "next-auth/react";
 
-import { AdminDashBoard, AdminUser } from "@/components/admin";
+import { AdminPlayground, AdminUser } from "@/components/admin";
 
-const Tabs = ["Dashboard", "Users"];
+const Tabs = ["Users", "Playground"];
 
 const AdminPanel = () => {
   const handleSignOutButton = () => {
@@ -106,10 +106,10 @@ const AdminPanel = () => {
               </Tab.List>
               <Tab.Panels className="mt-2">
                 <Tab.Panel>
-                  <AdminDashBoard />
+                  <AdminUser />
                 </Tab.Panel>
                 <Tab.Panel>
-                  <AdminUser />
+                  <AdminPlayground />
                 </Tab.Panel>
               </Tab.Panels>
             </Tab.Group>

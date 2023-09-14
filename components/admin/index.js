@@ -1,2 +1,2 @@
-export { default as AdminDashBoard } from "./AdminDashBoard";
+export { default as AdminPlayground } from "./AdminPlayground";
 export { default as AdminUser } from "./AdminUser";
