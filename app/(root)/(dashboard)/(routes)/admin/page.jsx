@@ -104,7 +104,7 @@ const AdminPanel = () => {
                   </Tab>
                 ))}
               </Tab.List>
-              <Tab.Panels className="mt-2">
+              <Tab.Panels className="mt-3 mx-2 sm:mx-8">
                 <Tab.Panel>
                   <AdminUser />
                 </Tab.Panel>
