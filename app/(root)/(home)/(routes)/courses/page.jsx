@@ -1,5 +1,6 @@
 import DataCard from "@/components/cards/DataCard";
-import { category } from "@/constants/category";
+import { category } from "@/constants";
+
 
 const Mycourses = () => {
   return (

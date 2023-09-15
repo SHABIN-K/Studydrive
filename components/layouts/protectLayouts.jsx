@@ -2,7 +2,7 @@
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import Loading from "../ui/Loading";
+import Loader from "../ui/Loading";
 
 export const ProtectedLayout = ({ children }) => {
   const router = useRouter();
@@ -15,5 +15,5 @@ export const ProtectedLayout = ({ children }) => {
   if (status === "authenticated") return <div>{children}</div>;
 
   // if the user refreshed the page or somehow navigated to the protected page
-  return <Loading />;
+  return <Loader/>;
 };

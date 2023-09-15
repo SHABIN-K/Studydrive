@@ -1,4 +1,4 @@
-const Loading = () => {
+const Loader = () => {
   return (
     <div className="flex justify-center items-center h-[100vh] ">
       <div className="loader" />
@@ -6,4 +6,4 @@ const Loading = () => {
   );
 };
 
-export default Loading;
+export default Loader;
