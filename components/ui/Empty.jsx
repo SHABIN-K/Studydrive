@@ -14,7 +14,7 @@ export const Empty = ({ label, error, reset }) => {
           />
         </div>
         <h1 className="text-muted-foreground text-2xl text-center">{label}</h1>
-        <p className="text-muted-foreground text-sm text-center">
+        <p className="text-muted-foreground text-sm text-center select-text">
           {error.message}
         </p>
       </div>

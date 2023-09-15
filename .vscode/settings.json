@@ -4,6 +4,7 @@
         "headlessui",
         "Pasc",
         "Swal",
-        "sweetalert"
+        "sweetalert",
+        "tanstack"
     ]
 }

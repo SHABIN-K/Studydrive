@@ -69,17 +69,13 @@ const AdminPanel = () => {
                   className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
                 >
                   <Link href="/dashboard">
-                    <li>
-                      <a className="justify-between">
-                        Dashboard
-                        <span className="badge">New</span>
-                      </a>
+                    <li className="justify-between">
+                      Dashboard
+                      <span className="badge">New</span>
                     </li>
                   </Link>
                   <Link href="/">
-                    <li>
-                      <a>Home</a>
-                    </li>
+                    <li>Home</li>
                   </Link>
                   <li onClick={handleSignOutButton}>
                     <a>Logout</a>
