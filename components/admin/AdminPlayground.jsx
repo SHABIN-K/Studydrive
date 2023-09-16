@@ -1,8 +1,10 @@
-
 const AdminPlayground = () => {
   return (
-    <div>AdminDashBoard</div>
-  )
-}
+    <div>
+      <div className="">d</div>
+    </div>
+  );
+};
 
-export default AdminPlayground
+export default AdminPlayground;
+//crud
