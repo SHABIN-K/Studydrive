@@ -1,71 +1,14 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import Swal from "sweetalert2";
 
 import Table from "./Table";
 import { tableData } from ".";
+import AdminModel from "./AdminModel";
 
 const AdminUser = () => {
+  let [isOpen, setIsOpen] = useState(false);
+
   const data = useMemo(() => tableData, []);
-
-
-
-  const handleUpdateButton = async () => {
-    const { value: formValues } = await Swal.fire({
-      title: 'Update Profile',
-      html:
-        '<input id="swal-input1" class="swal2-input">' +
-        '<input id="swal-input2" class="swal2-input">'+
-        '<input id="swal-input3" class="swal2-input">'+
-        '<input id="swal-input4" class="swal2-input">',
-      focusConfirm: false,
-      preConfirm: () => {
-        return [
-          document.getElementById('swal-input1').value,
-          document.getElementById('swal-input2').value,
-          document.getElementById('swal-input3').value,
-          document.getElementById('swal-input4').value,
-        ]
-      }
-    })
-    
-    if (formValues) {
-      Swal.fire(JSON.stringify(formValues))
-    }
-  };
-
-  const handleDeleteButton = () => {
-    Swal.fire({
-      title: "Deactivate account",
-      text: "This will permanently deactivate your account",
-      icon: "warning",
-      color: "#fff",
-      background: "#13131a",
-      showCancelButton: true,
-      confirmButtonColor: "#4acd8d",
-      cancelButtonColor: "#1c1c24",
-      confirmButtonText: "Yes, delete it!",
-      showLoaderOnConfirm: true,
-      customClass: {
-        cancelButton: "bordered-alert",
-        popup: "bordered-alert",
-      },
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire({
-          title: "deactivated!",
-          text: "Your account has been permanently deactivated.",
-          icon: "success",
-          color: "#fff",
-          background: "#13131a",
-          showLoaderOnConfirm: true,
-          customClass: {
-            popup: "bordered-alert",
-          },
-        });
-      }
-    });
-  };
-
   /** @type import('@tanstack/react-table').ColumnDef<any> */
   const columns = [
     {
@@ -107,7 +50,49 @@ const AdminUser = () => {
     },
   ];
 
-  return <Table data={data} columns={columns} />;
+  const handleDeleteButton = () => {
+    Swal.fire({
+      title: "Deactivate account",
+      text: "This will permanently deactivate your account",
+      icon: "warning",
+      color: "#fff",
+      background: "#13131a",
+      showCancelButton: true,
+      confirmButtonColor: "#4acd8d",
+      cancelButtonColor: "#1c1c24",
+      confirmButtonText: "Yes, delete it!",
+      showLoaderOnConfirm: true,
+      customClass: {
+        cancelButton: "bordered-alert",
+        popup: "bordered-alert",
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "deactivated!",
+          text: "Your account has been permanently deactivated.",
+          icon: "success",
+          color: "#fff",
+          background: "#13131a",
+          showLoaderOnConfirm: true,
+          customClass: {
+            popup: "bordered-alert",
+          },
+        });
+      }
+    });
+  };
+
+  const handleUpdateButton = () => {
+    setIsOpen(true);
+  };
+
+  return (
+    <>
+      <Table data={data} columns={columns} />
+      <AdminModel isOpen={isOpen} setIsOpen={setIsOpen}/>
+    </>
+  );
 };
 
 export default AdminUser;
