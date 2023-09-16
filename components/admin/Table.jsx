@@ -1,23 +1,43 @@
+import { useState } from "react";
 import {
   flexRender,
   getCoreRowModel,
   getPaginationRowModel,
+  getFilteredRowModel,
   useReactTable,
 } from "@tanstack/react-table";
 
 const Table = ({ data, columns }) => {
+  const [filtering, setFiltering] = useState("");
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    state: {
+      globalFilter: filtering,
+    },
+    onGlobalFilterChange: setFiltering,
   });
+
   return (
     <div className="flex flex-col">
+      {/* filter input */}
+      <div className="item-start mb-3">
+        <input
+          type="text"
+          placeholder="Filtering...."
+          value={filtering}
+          onChange={(e) => setFiltering(e.target.value)}
+          className="input input-bordered input-md sm:input-sm w-full max-w-xs"
+        />
+      </div>
+      {/* table */}
       <div className="-m-1.5 overflow-x-auto">
         <div className="p-1.5 min-w-full inline-block align-middle">
-          <div className="overflow-hidden">
-            <table className="min-w-full">
+          <div className="overflow-hidden border rounded-lg border-gray-700">
+            <table className="min-w-full divide-y divide-gray-700 min-h-[280px]">
               <thead>
                 {table.getHeaderGroups().map((headerGroup, index) => (
                   <tr key={index}>
@@ -26,16 +46,17 @@ const Table = ({ data, columns }) => {
                         key={index}
                         className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase"
                       >
-                        {flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
+                        {header.isPlaceholder
+                          ? null
+                          : flexRender(
+                              header.column.columnDef.header,
+                              header.getContext()
+                            )}
                       </th>
                     ))}
                   </tr>
                 ))}
               </thead>
-
               <tbody className="divide-y divide-gray-700">
                 {table.getRowModel().rows?.length ? (
                   table.getRowModel().rows.map((row, index) => (
@@ -64,6 +85,23 @@ const Table = ({ data, columns }) => {
             </table>
           </div>
         </div>
+      </div>
+      {/* table controller */}
+      <div className="items-center justify-start py-4 space-x-2">
+        <button
+          className="btn_table"
+          onClick={() => table.previousPage()}
+          disabled={!table.getCanPreviousPage()}
+        >
+          Previous
+        </button>
+        <button
+          className="btn_table"
+          onClick={() => table.nextPage()}
+          disabled={!table.getCanNextPage()}
+        >
+          Next
+        </button>
       </div>
     </div>
   );

@@ -8,6 +8,11 @@ const AdminUser = () => {
   /** @type import('@tanstack/react-table').ColumnDef<any> */
   const columns = [
     {
+      accessorKey: "NO",
+      header: "NO",
+      cell: (info) => `${info.row.index + 1}`,
+    },
+    {
       accessorKey: "name",
       header: "Name",
     },
@@ -33,7 +38,7 @@ const AdminUser = () => {
   ];
   return (
     <div className="">
-      <div className="p-5 border-2 rounded-xl border-[#1dc071] bg-base-100 mb-5">
+      <div className="p-5 border-2 rounded-xl border-[#1dc071] bg-base-100 mb-5 ">
         <Table data={data} columns={columns} />
       </div>
     </div>
