@@ -1,7 +1,11 @@
 const AdminPlayground = () => {
   return (
-    <div>
-      <div className="">d</div>
+    <div className="mx-[40%]">
+      <p>coming soon</p>
+      <p>coming soon</p>
+      <p>coming soon</p>
+      <p>coming soon</p>
+      <p>coming soon</p>
     </div>
   );
 };

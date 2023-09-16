@@ -3,7 +3,6 @@ import { Dialog, Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 
 const role = ["Admin", "superAdmin"];
-
 const AdminModel = ({ isOpen, setIsOpen }) => {
   const [selected, setSelected] = useState(role[0]);
   const handleCloseModal = () => {
@@ -40,10 +39,10 @@ const AdminModel = ({ isOpen, setIsOpen }) => {
                 leaveTo="opacity-0 scale-95"
               >
                 {/* The actual dialog panel  */}
-                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                <Dialog.Panel className="w-full max-w-sm transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                   <Dialog.Title
                     as="h3"
-                    className="text-lg font-medium leading-6 text-gray-900"
+                    className="text-xl font-semibold leading-6 text-gray-900"
                   >
                     Edit User Profile
                   </Dialog.Title>
@@ -56,18 +55,12 @@ const AdminModel = ({ isOpen, setIsOpen }) => {
                     <form>
                       <div className="grid w-full items-center gap-4">
                         <div className="flex flex-col space-y-1.5">
-                          <label htmlFor="name">Name</label>
-                          <input id="name" />
-                          <label htmlFor="name">Email</label>
-                          <input id="name" />
-                          <label htmlFor="name">Phone Number</label>
-                          <input id="name" />
-                        </div>
-                        <div className="flex flex-col space-y-1.5">
-                          <label htmlFor="framework">User role</label>
+                          <label className="text-gray-900 text-sm font-medium">
+                            User role
+                          </label>
                           <Listbox value={selected} onChange={setSelected}>
                             <div className="relative mt-1">
-                              <Listbox.Button className="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
+                              <Listbox.Button className="relative w-full cursor-pointer rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
                                 <span className="block truncate">
                                   {selected}
                                 </span>
@@ -78,6 +71,7 @@ const AdminModel = ({ isOpen, setIsOpen }) => {
                                   />
                                 </span>
                               </Listbox.Button>
+
                               <Transition
                                 as={Fragment}
                                 leave="transition ease-in duration-100"
@@ -125,21 +119,59 @@ const AdminModel = ({ isOpen, setIsOpen }) => {
                             </div>
                           </Listbox>
                         </div>
+
+                        <div className="flex flex-col space-y-1.5">
+                          <label
+                            htmlFor="name"
+                            className="text-gray-900 text-sm font-medium"
+                          >
+                            Name
+                          </label>
+                          <input
+                            type="text"
+                            id="name"
+                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1"
+                          />
+
+                          <label
+                            htmlFor="email"
+                            className="text-gray-900 text-sm font-medium"
+                          >
+                            Email
+                          </label>
+                          <input
+                            type="email"
+                            id="email"
+                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1"
+                          />
+
+                          <label
+                            htmlFor="number"
+                            className="text-gray-900 text-sm font-medium"
+                          >
+                            Phone Number
+                          </label>
+                          <input
+                            type="tel"
+                            id="number"
+                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1"
+                          />
+                        </div>
                       </div>
                     </form>
                   </div>
 
-                  <div className="mt-4">
+                  <div className="mt-4 space-x-3">
                     <button
                       type="button"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                      className="btn_form"
                       onClick={handleCloseModal}
                     >
                       Cancel
                     </button>
                     <button
                       type="button"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                      className="btn_form"
                       onClick={handleCloseModal}
                     >
                       Edit profile
