@@ -9,14 +9,18 @@ import {
 
 const Table = ({ data, columns }) => {
   const [filtering, setFiltering] = useState("");
+
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
     state: {
       globalFilter: filtering,
+    },
+    initialState: {
+      pagination: { pageSize: 5, pageIndex: 0 },
     },
     onGlobalFilterChange: setFiltering,
   });
@@ -27,7 +31,7 @@ const Table = ({ data, columns }) => {
       <div className="item-start mb-3">
         <input
           type="text"
-          placeholder="Filtering...."
+          placeholder="Search...."
           value={filtering}
           onChange={(e) => setFiltering(e.target.value)}
           className="input input-bordered input-md sm:input-sm w-full max-w-xs"
@@ -37,7 +41,7 @@ const Table = ({ data, columns }) => {
       <div className="-m-1.5 overflow-x-auto">
         <div className="p-1.5 min-w-full inline-block align-middle">
           <div className="overflow-hidden border rounded-lg border-gray-700">
-            <table className="min-w-full divide-y divide-gray-700 min-h-[280px]">
+            <table className="min-w-full divide-y divide-gray-700">
               <thead>
                 {table.getHeaderGroups().map((headerGroup, index) => (
                   <tr key={index}>
