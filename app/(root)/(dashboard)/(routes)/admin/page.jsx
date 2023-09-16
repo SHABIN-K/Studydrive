@@ -9,7 +9,7 @@ import { signOut } from "next-auth/react";
 
 import { AdminPlayground, AdminUser } from "@/components/admin";
 
-const Tabs = ["Users", "Playground"];
+const Tabs = ["Playground", "Users"];
 
 const AdminPanel = () => {
   const handleSignOutButton = () => {
@@ -69,13 +69,17 @@ const AdminPanel = () => {
                   className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
                 >
                   <Link href="/dashboard">
-                    <li className="justify-between">
-                      Dashboard
-                      <span className="badge">New</span>
+                    <li>
+                      <div className="justify-between">
+                        Dashboard
+                        <span className="badge">New</span>
+                      </div>
                     </li>
                   </Link>
                   <Link href="/">
-                    <li>Home</li>
+                    <li>
+                      <div>Home</div>
+                    </li>
                   </Link>
                   <li onClick={handleSignOutButton}>
                     <a>Logout</a>
@@ -102,10 +106,10 @@ const AdminPanel = () => {
               </Tab.List>
               <Tab.Panels className="mt-3 mx-2 sm:mx-8">
                 <Tab.Panel>
-                  <AdminUser />
+                  <AdminPlayground />
                 </Tab.Panel>
                 <Tab.Panel>
-                  <AdminPlayground />
+                  <AdminUser />
                 </Tab.Panel>
               </Tab.Panels>
             </Tab.Group>
