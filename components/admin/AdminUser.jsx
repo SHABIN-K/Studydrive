@@ -6,7 +6,8 @@ import { tableData } from ".";
 import AdminModel from "./AdminModel";
 
 const AdminUser = () => {
-  let [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [userData, setUserData] = useState({});
 
   const data = useMemo(() => tableData, []);
   /** @type import('@tanstack/react-table').ColumnDef<any> */
@@ -31,16 +32,16 @@ const AdminUser = () => {
     {
       accessorKey: "action",
       header: "Action",
-      cell: () => (
+      cell: (info) => (
         <div className="flex text-left space-x-3">
           <button
-            onClick={handleUpdateButton}
+            onClick={() => handleUpdateButton(info.row.original)}
             className="btn btn-xs sm:btn-sm text-blue-500 hover:text-blue-700 cursor-pointer border-blue-400"
           >
             Edit
           </button>
           <button
-            onClick={handleDeleteButton}
+            onClick={() => handleDeleteButton(info.row.original)}
             className="btn btn-xs sm:btn-sm text-red-500 hover:text-red-700 cursor-pointer border-red-400"
           >
             Remove
@@ -61,7 +62,6 @@ const AdminUser = () => {
       confirmButtonColor: "#4acd8d",
       cancelButtonColor: "#1c1c24",
       confirmButtonText: "Yes, delete it!",
-      showLoaderOnConfirm: true,
       customClass: {
         cancelButton: "bordered-alert",
         popup: "bordered-alert",
@@ -74,7 +74,6 @@ const AdminUser = () => {
           icon: "success",
           color: "#fff",
           background: "#13131a",
-          showLoaderOnConfirm: true,
           customClass: {
             popup: "bordered-alert",
           },
@@ -83,14 +82,26 @@ const AdminUser = () => {
     });
   };
 
-  const handleUpdateButton = () => {
+  const handleUpdateButton = (userData) => {
+    setUserData(userData);
     setIsOpen(true);
+  };
+
+  const handleSubmitModal = () => {
+    console.log("hey submit Button");
+    setIsOpen(false);
   };
 
   return (
     <>
       <Table data={data} columns={columns} />
-      <AdminModel isOpen={isOpen} setIsOpen={setIsOpen}/>
+      <AdminModel
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        userData={userData}
+        setUserData={setUserData}
+        handleSubmitModal={handleSubmitModal}
+      />
     </>
   );
 };

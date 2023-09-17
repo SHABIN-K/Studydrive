@@ -17,6 +17,14 @@ export const Empty = ({ label, error, reset }) => {
         <p className="text-muted-foreground text-sm text-center select-text">
           {error.message}
         </p>
+        <button className="btn_form"
+        onClick={
+          // Attempt to recover by trying to re-render the segment
+          () => reset()
+        }
+      >
+        Try again
+      </button>
       </div>
     </section>
   );
