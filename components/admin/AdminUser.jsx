@@ -14,7 +14,7 @@ const AdminUser = () => {
   const columns = [
     {
       accessorKey: "NO",
-      header: "NO",
+      header: "#",
       cell: (info) => `${info.row.index + 1}`,
     },
     {

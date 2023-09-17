@@ -5,10 +5,46 @@ import { Fragment, useState } from "react";
 const role = ["Admin", "superAdmin"];
 
 const AdminPlayground = () => {
-  const [selected, setSelected] = useState(role[0]);
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  const [userRole, setUserRole] = useState(role[0]);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = async () => {
+    try {
+      setIsLoading(true);
+      setError(null);
+
+      // Simulate an asynchronous operation (e.g., sending data to a server)
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      // Reset the form after successful submission
+
+      handleReset();
+
+      console.log("User created successfully!");
+    } catch (err) {
+      setError("An error occurred while creating the user.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleReset = () => {
+    setUserRole(role[0]);
+    setName("");
+    setEmail("");
+    setPhoneNumber("");
+    setPassword("");
+  };
+
   return (
-    <div className="flex min-h-full p-4 text-center justify-start items-start">
-      <div className="w-full max-w-sm transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+    <div className="flex min-h-full p-4 text-center">
+      <div className="w-full max-w-sm max-h-xs transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
         <h1 as="h3" className="text-xl font-semibold leading-6 text-gray-900">
           Create User
         </h1>
@@ -23,10 +59,10 @@ const AdminPlayground = () => {
                 <label className="text-gray-900 text-sm font-medium">
                   User role
                 </label>
-                <Listbox value={selected} onChange={setSelected}>
+                <Listbox value={userRole} onChange={setUserRole}>
                   <div className="relative mt-1">
                     <Listbox.Button className="relative w-full cursor-pointer rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
-                      <span className="block truncate">{selected}</span>
+                      <span className="block truncate">{userRole}</span>
                       <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                         <ChevronUpDownIcon
                           className="h-5 w-5 text-gray-400"
@@ -54,16 +90,16 @@ const AdminPlayground = () => {
                             }
                             value={role}
                           >
-                            {({ selected }) => (
+                            {({ userRole }) => (
                               <>
                                 <span
                                   className={`block truncate ${
-                                    selected ? "font-medium" : "font-normal"
+                                    userRole ? "font-medium" : "font-normal"
                                   }`}
                                 >
                                   {role}
                                 </span>
-                                {selected && (
+                                {userRole && (
                                   <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600">
                                     <CheckIcon
                                       className="h-5 w-5"
@@ -91,7 +127,14 @@ const AdminPlayground = () => {
                 <input
                   type="text"
                   id="name"
+                  name="name"
+                  value={name}
+                  placeholder="joe Black"
+                  onChange={(e) => {
+                    setName(e.target.value);
+                  }}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1"
+                  required
                 />
 
                 <label
@@ -103,7 +146,13 @@ const AdminPlayground = () => {
                 <input
                   type="email"
                   id="email"
+                  value={email}
+                  placeholder="joe@example.com"
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                  }}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1"
+                  required
                 />
 
                 <label
@@ -115,7 +164,13 @@ const AdminPlayground = () => {
                 <input
                   type="tel"
                   id="number"
+                  value={phoneNumber}
+                  placeholder="+912344353434"
+                  onChange={(e) => {
+                    setPhoneNumber(e.target.value);
+                  }}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1"
+                  required
                 />
                 <label
                   htmlFor="number"
@@ -124,22 +179,33 @@ const AdminPlayground = () => {
                   Password
                 </label>
                 <input
-                  type="tel"
-                  id="number"
+                  type="password"
+                  id="password"
+                  placeholder="••••••••"
+                  value={password}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                  }}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1"
+                  required
                 />
               </div>
             </div>
-          </form>
-        </div>
 
-        <div className="mt-4 space-x-3">
-          <button type="button" className="btn_form">
-            Cancel
-          </button>
-          <button type="button" className="btn_form">
-            Create
-          </button>
+            <div className="mt-4 space-x-3">
+              <button type="button" className="btn_form" onClick={handleReset}>
+                Clear
+              </button>
+              <button
+                type="button"
+                className="btn_form"
+                onClick={handleSubmit}
+                disabled={isLoading}
+              >
+                {isLoading ? "Creating..." : "Create"}
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
