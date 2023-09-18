@@ -1,9 +1,9 @@
 import { useMemo, useState } from "react";
 import Swal from "sweetalert2";
 
-import Table from "./Table";
+import Table from "./ui/Table";
 import { tableData } from ".";
-import AdminModel from "./AdminModel";
+import AdminModel from "./ui/AdminModel";
 
 const AdminUser = () => {
   const [isOpen, setIsOpen] = useState(false);
