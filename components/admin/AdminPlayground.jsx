@@ -115,9 +115,7 @@ const AdminPlayground = () => {
                     </Transition>
                   </div>
                 </Listbox>
-              </div>
-
-              <div className="flex flex-col space-y-1.5">
+                
                 <label
                   htmlFor="name"
                   className="text-gray-900 text-sm font-medium"
