@@ -7,11 +7,11 @@ import Image from "next/image";
 const Custom404 = () => {
   const router = useRouter();
   return (
-    <section className="bg-[#13131a] ">
+    <section className="bg-[#13131a]">
     <div className="container min-h-screen px-6 py-12 mx-auto lg:flex lg:items-center lg:gap-12">
       <div className="w-full lg:w-1/2">
         <p className="text-xl font-medium text-[#4acd8d]">404 Error</p>
-        <h1 className="mt-3 text-2xl font-semibold text-gray-800 dark:text-white md:text-3xl">
+        <h1 className="mt-3 text-2xl font-semibold text-white md:text-3xl">
           Page not found
         </h1>
         <p className="mt-4 text-[#808191]">
