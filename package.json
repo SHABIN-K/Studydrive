@@ -12,6 +12,7 @@
     "@changesets/cli": "^2.26.2",
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.0.18",
+    "@prisma/client": "^5.4.1",
     "@tanstack/react-table": "^8.9.9",
     "autoprefixer": "10.4.14",
     "bcryptjs": "^2.4.3",
@@ -28,6 +29,7 @@
     "zustand": "^4.4.1"
   },
   "devDependencies": {
-    "daisyui": "^3.5.1"
+    "daisyui": "^3.5.1",
+    "prisma": "^5.4.1"
   }
 }
