@@ -1,3 +1,4 @@
+import prisma from "@/libs/prisma";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import { Fragment, useState } from "react";
@@ -5,7 +6,7 @@ import { Fragment, useState } from "react";
 const role = ["Admin", "superAdmin"];
 
 const AdminPlayground = () => {
-  const [error, setError] = useState("");
+  //const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const [userRole, setUserRole] = useState(role[0]);
@@ -14,21 +15,17 @@ const AdminPlayground = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
     try {
-      setIsLoading(true);
-      setError(null);
-
-      // Simulate an asynchronous operation (e.g., sending data to a server)
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
-      // Reset the form after successful submission
-
-      handleReset();
-
+      const response = await prisma.create({
+        name: "hello world"
+      })
+      console.log(response);
       console.log("User created successfully!");
     } catch (err) {
-      setError("An error occurred while creating the user.");
+      console.error("NEXT_AUTH_ERROR: " + err);
     } finally {
       setIsLoading(false);
     }
@@ -115,7 +112,7 @@ const AdminPlayground = () => {
                     </Transition>
                   </div>
                 </Listbox>
-                
+
                 <label
                   htmlFor="name"
                   className="text-gray-900 text-sm font-medium"
