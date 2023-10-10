@@ -1,15 +1,18 @@
-import prisma from "@/libs/prisma";
+import axios from "axios";
+import toast from "react-hot-toast";
+
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import { Fragment, useState } from "react";
+import { UserValidation } from "@/libs/validations/user";
 
-const role = ["Admin", "superAdmin"];
+const role = ["ADMIN", "USER"];
 
 const AdminPlayground = () => {
   //const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const [userRole, setUserRole] = useState(role[0]);
+  const [userRole, setUserRole] = useState(role[1]);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -18,21 +21,47 @@ const AdminPlayground = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
+
+    // Validate user input using the schema
+    const userInput = {
+      email,
+      name,
+      password,
+      phoneNumber,
+    };
+
+    // Validate the user input
+    // const validation = UserValidation.parse(userInput);
+    // console.log(validation);
+
     try {
-      const response = await prisma.create({
-        name: "hello world"
-      })
-      console.log(response);
-      console.log("User created successfully!");
+      UserValidation.parse(userInput);
+      // If validation is successful, make the API request
+      const response = await axios.post("/api/user", {
+        userRole,
+        name,
+        email,
+        phoneNumber,
+        password,
+      });
+
+      if (response.statusText === "OK") {
+        toast.error(response.data);
+      } else {
+        toast.success("Successfully created");
+        handleReset();
+      }
     } catch (err) {
       console.error("NEXT_AUTH_ERROR: " + err);
+      console.log(err.response);
+      toast.error("something went wrong !!");
     } finally {
       setIsLoading(false);
     }
   };
 
   const handleReset = () => {
-    setUserRole(role[0]);
+    setUserRole(role[1]);
     setName("");
     setEmail("");
     setPhoneNumber("");
