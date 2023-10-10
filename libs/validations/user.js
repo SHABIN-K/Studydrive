@@ -14,11 +14,11 @@ const User = z.object({
       required_error: "Password is required",
       invalid_type_error: "Password must be a string",
     })
-    .min(5, { message: "Minimum 8 characters." })
-    .max(1000, { message: "Maximum 1000 characters." })
+    .min(5, { message: "Minimum 5 characters." })
+    .max(100, { message: "Maximum 100 characters." })
     .regex(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{5,}$/,
-      "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character."
+      /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{5,100}$/,
+      "Password must contain at least one uppercase letter, one number, and one special character."
     ),
   name: z
     .string({
