@@ -30,26 +30,33 @@ const AdminPlayground = () => {
       phoneNumber,
     };
 
-    // Validate the user input
-    // const validation = UserValidation.parse(userInput);
-    // console.log(validation);
-
     try {
-      UserValidation.parse(userInput);
-      // If validation is successful, make the API request
-      const response = await axios.post("/api/user", {
-        userRole,
-        name,
-        email,
-        phoneNumber,
-        password,
-      });
+      // Validate the user input
+      const validation = UserValidation.safeParse(userInput);
 
-      if (response.statusText === "OK") {
-        toast.error(response.data);
+      //if validation is failure, return error message
+      if (validation.success === false) {
+        console.log("failed validation");
+        let error_data = validation.error.issues;
+        error_data.forEach((err) => {
+          toast.error(err.message);
+        });
       } else {
-        toast.success("Successfully created");
-        handleReset();
+        // If validation is successful, make the API request
+        const response = await axios.post("/api/user", {
+          userRole,
+          name,
+          email,
+          phoneNumber,
+          password,
+        });
+
+        if (response.statusText === "OK") {
+          toast.error(response.data);
+        } else {
+          toast.success("Successfully created");
+          handleReset();
+        }
       }
     } catch (err) {
       console.error("NEXT_AUTH_ERROR: " + err);
