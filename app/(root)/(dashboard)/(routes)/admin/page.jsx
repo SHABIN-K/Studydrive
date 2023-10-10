@@ -41,7 +41,7 @@ const AdminPanel = () => {
     <section>
       <div className="flex h-screen font-normal">
         <div className="flex-1 flex flex-col overflow-hidden">
-          <div className="navbar bg-base-100 border-b border-green-400">
+          <div className="navbar bg-[#1d232a] border-b border-green-400">
             <div className="flex-1">
               <Link href="/admin">
                 <p className="text-[#4acd8d] subpixel-antialiased text-2xl font-bold ml-5">
@@ -59,7 +59,7 @@ const AdminPanel = () => {
                       width={12}
                       height={12}
                       alt="dashboard icon"
-                      className="bg-base-100"
+                      className="bg-[#1d232a]"
                       title="switch to another pages"
                     />
                   </div>
