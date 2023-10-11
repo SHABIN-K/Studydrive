@@ -53,7 +53,7 @@ const AdminUser = () => {
     },
   ];
 
-  const handleDeleteButton = (userData) => {
+  const handleDeleteButton = (userDelete) => {
     Swal.fire({
       title: "Deactivate account",
       text: "This will permanently deactivate your account",
@@ -73,7 +73,7 @@ const AdminUser = () => {
         try {
           const res = await axios.delete("/api/user", {
             data: {
-              email: userData.email,
+              email: userDelete.email,
             },
           });
           console.log(res);
@@ -91,7 +91,7 @@ const AdminUser = () => {
           } else {
             Swal.fire({
               title: "Deactivation Failed",
-              text: "An error occurred while deactivating your account.",
+              text: "User not found",
               icon: "error",
               color: "#fff",
               background: "#13131a",

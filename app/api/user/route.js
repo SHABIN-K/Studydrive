@@ -55,7 +55,6 @@ export async function DELETE(req) {
     const user = await prisma.user.findFirst({
       where: { email: email },
     });
-    console.log(user);
 
     if (user) {
       //delete the user's profile (assuming a one-to-one relationship)

@@ -2,7 +2,7 @@ import { Fragment, useState } from "react";
 import { Dialog, Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 
-const role = ["Admin", "superAdmin"];
+const role = ["ADMIN", "USER"];
 
 const AdminModel = ({
   isOpen,
@@ -11,7 +11,7 @@ const AdminModel = ({
   setUserData,
   handleSubmitModal,
 }) => {
-  const [selected, setSelected] = useState(role[0]);
+  const [selected, setSelected] = useState(role[1]);
   const handleCloseModal = () => {
     setIsOpen(false);
   };
