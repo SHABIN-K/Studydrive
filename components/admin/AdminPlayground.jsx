@@ -36,10 +36,8 @@ const AdminPlayground = () => {
 
       //if validation is failure, return error message
       if (validation.success === false) {
-        console.log("failed validation");
-        
-        let error_data = validation.error.issues;
-        error_data.forEach((err) => {
+        const { issues } = validation.error;
+        issues.forEach((err) => {
           toast.error(err.message);
         });
       } else {
@@ -52,7 +50,7 @@ const AdminPlayground = () => {
           password,
         });
 
-        if (response.statusText === "OK") {
+        if (response.statusText === "FAILED") {
           toast.error(response.data);
         } else {
           toast.success("Successfully created");

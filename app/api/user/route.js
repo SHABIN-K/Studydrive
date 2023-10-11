@@ -13,7 +13,7 @@ export async function POST(req) {
     if (existingUser) {
       return new Response("User with this email already exists", {
         status: 200,
-        statusText: 'OK',
+        statusText: 'FAILED',
       });
     }
 
