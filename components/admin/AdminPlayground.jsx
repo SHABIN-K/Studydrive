@@ -32,7 +32,7 @@ const AdminPlayground = () => {
 
     try {
       // Validate the user input
-      const validation = UserValidation.safeParse(userInput);
+      const validation = UserValidation.registration.safeParse(userInput);
 
       //if validation is failure, return error message
       if (validation.success === false) {

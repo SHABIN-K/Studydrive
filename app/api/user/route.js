@@ -98,3 +98,47 @@ export async function DELETE(req) {
     });
   }
 }
+
+export async function PATCH(req) {
+  const { id, userRole, name, email, phoneNumber } = await req.json();
+  try {
+    // Check if a user already exists by email
+    const existingUser = await prisma.user.findFirst({
+      where: { email: email },
+    });
+
+    // User with this email already exists
+    // If an existing user with the same email is found and it's not the current user,
+    // return an error response
+    if (existingUser && existingUser.id !== id) {
+      return new Response("User with this email already exists", {
+        status: 200,
+        statusText: "FAILED",
+      });
+    }
+
+    // update the user
+    const updateUser = await prisma.user.update({
+      where: { id: id },
+      data: {
+        userRole: userRole,
+        name,
+        email,
+        phoneNumber,
+      },
+    });
+
+    return new Response(JSON.stringify(updateUser), {
+      status: 201, // Created
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  } catch (error) {
+    console.error("Error processing the request:", error);
+
+    return new Response("An error occurred", {
+      status: 500, // Internal Server Error
+    });
+  }
+}

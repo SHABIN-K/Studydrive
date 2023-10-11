@@ -5,11 +5,13 @@ import toast from "react-hot-toast";
 
 import Table from "./ui/Table";
 import AdminModel from "./ui/AdminModel";
+import { UserValidation } from "@/libs/validations/user";
 
 const AdminUser = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [userData, setUserData] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+
+  const [userData, setUserData] = useState({});
   const [tableData, setTableData] = useState([]);
   const [dataFetched, setDataFetched] = useState(false);
 
@@ -19,7 +21,6 @@ const AdminUser = () => {
         setIsLoading(true);
         try {
           const response = await axios.get("/api/user");
-          console.log(response.data);
           setTableData(response.data);
           setDataFetched(true);
         } catch (error) {
@@ -53,6 +54,10 @@ const AdminUser = () => {
     {
       accessorKey: "phoneNumber",
       header: "Phone Number",
+    },
+    {
+      accessorKey: "userRole",
+      header: "Role",
     },
     {
       accessorKey: "action",
@@ -113,8 +118,8 @@ const AdminUser = () => {
               },
             });
             setTableData((prevTableData) =>
-            prevTableData.filter((user) => user.email !== userDelete.email)
-          );
+              prevTableData.filter((user) => user.email !== userDelete.email)
+            );
           } else {
             Swal.fire({
               title: "Deactivation Failed",
@@ -142,10 +147,63 @@ const AdminUser = () => {
     setIsOpen(true);
   };
 
-  //submit button from admin dialogbox
-  const handleSubmitModal = () => {
-    console.log("hey submit Button");
-    setIsOpen(false);
+  //Submit button form dialog box
+  const handleSubmitButton = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    // Validate user input using the schema
+    const userInput = {
+      name: userData.name,
+      email: userData.email,
+      phoneNumber: userData.phoneNumber,
+    };
+
+    try {
+      // Validate the user input
+      const validation = UserValidation.profileUpdate.safeParse(userInput);
+
+      //if validation is failure, return error message
+      if (validation.success === false) {
+        const { issues } = validation.error;
+        issues.forEach((err) => {
+          toast.error(err.message);
+        });
+      } else {
+        // If validation is successful, make the API request
+        const response = await axios.patch("/api/user", {
+          id: userData.id,
+          name: userData.name,
+          email: userData.email,
+          phoneNumber: userData.phoneNumber,
+          userRole: userData.userRole,
+        });
+
+        if (response.statusText === "FAILED") {
+          toast.error(response.data);
+        } else {
+          const updatedUserData = response.data;
+          const userIndex = tableData.findIndex(
+            (user) => user.id === updatedUserData.id
+          );
+          if (userIndex !== -1) {
+            setTableData((prevTableData) => {
+              const updatedTableData = [...prevTableData];
+              updatedTableData[userIndex] = updatedUserData;
+              return updatedTableData;
+            });
+          }
+          toast.success("Successfully updated");
+        }
+      }
+    } catch (err) {
+      console.error("NEXT_AUTH_ERROR: " + err);
+      console.log(err.response);
+      toast.error("something went wrong !!");
+    } finally {
+      setIsLoading(false);
+      setIsOpen(false);
+    }
   };
 
   return (
@@ -156,7 +214,8 @@ const AdminUser = () => {
         setIsOpen={setIsOpen}
         userData={userData}
         setUserData={setUserData}
-        handleSubmitModal={handleSubmitModal}
+        handleSubmitButton={handleSubmitButton}
+        isLoading={isLoading}
       />
     </>
   );

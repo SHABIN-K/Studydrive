@@ -8,16 +8,16 @@ const User = z.object({
     })
     .email({ message: "Invalid email address." })
     .min(5, { message: "Email must be at least 5 characters long." })
-    .max(30, { message: "Email can be at most 30 characters long." }),
+    .max(100, { message: "Email can be at most 100 characters long." }),
   password: z
     .string({
       required_error: "Password is required.",
       invalid_type_error: "Password must be a string.",
     })
     .min(5, { message: "Password must be at least 5 characters long." })
-    .max(100, { message: "Password can be at most 100 characters long." })
+    .max(200, { message: "Password can be at most 200 characters long." })
     .regex(
-      /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{5,100}$/,
+      /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{5,200}$/,
       "Password must contain at least one uppercase letter, one number, and one special character."
     ),
   name: z
@@ -37,9 +37,18 @@ const User = z.object({
     }),
 });
 
-export const UserValidation = User.required({
-  email: true,
-  password: true,
-  name: true,
-  phoneNumber: true,
-});
+const UserProfileUpdate = User.omit({ password: true });
+
+export const UserValidation = {
+  registration: User.required({
+    email: true,
+    password: true,
+    name: true,
+    phoneNumber: true,
+  }),
+  profileUpdate: UserProfileUpdate.required({
+    email: true,
+    name: true,
+    phoneNumber: true,
+  }),
+};

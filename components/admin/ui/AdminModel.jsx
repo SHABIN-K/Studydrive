@@ -6,15 +6,17 @@ const role = ["ADMIN", "USER"];
 
 const AdminModel = ({
   isOpen,
+  isLoading,
   setIsOpen,
   userData,
   setUserData,
-  handleSubmitModal,
+  handleSubmitButton,
 }) => {
-  const [selected, setSelected] = useState(role[1]);
+  const [selected, setSelected] = useState(role[0]);
   const handleCloseModal = () => {
     setIsOpen(false);
   };
+
   return (
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={handleCloseModal}>
@@ -170,7 +172,7 @@ const AdminModel = ({
                           onChange={(e) =>
                             setUserData({
                               ...userData,
-                              phonenumber: e.target.value,
+                              phoneNumber: e.target.value,
                             })
                           }
                           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1"
@@ -191,9 +193,9 @@ const AdminModel = ({
                   <button
                     type="button"
                     className="btn_form"
-                    onClick={handleSubmitModal}
+                    onClick={handleSubmitButton}
                   >
-                    Edit profile
+                    {isLoading ? "updating" : "Edit profile"}
                   </button>
                 </div>
               </Dialog.Panel>
