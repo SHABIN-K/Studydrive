@@ -1,17 +1,40 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Swal from "sweetalert2";
 import axios from "axios";
 import toast from "react-hot-toast";
 
 import Table from "./ui/Table";
-import { tableData } from ".";
 import AdminModel from "./ui/AdminModel";
 
 const AdminUser = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [userData, setUserData] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
+  const [tableData, setTableData] = useState([]);
+  const [dataFetched, setDataFetched] = useState(false);
 
-  const data = useMemo(() => tableData, []);
+  useEffect(() => {
+    if (!dataFetched) {
+      const fetchData = async () => {
+        setIsLoading(true);
+        try {
+          const response = await axios.get("/api/user");
+          console.log(response.data);
+          setTableData(response.data);
+          setDataFetched(true);
+        } catch (error) {
+          console.error("Error fetching table data:", error);
+          toast.error("something went wrong in fetching table data");
+        } finally {
+          setIsLoading(false);
+        }
+      };
+
+      fetchData();
+    }
+  }, [dataFetched]);
+
+  const data = useMemo(() => tableData, [tableData]);
   /** @type import('@tanstack/react-table').ColumnDef<any> */
   const columns = [
     {
@@ -28,7 +51,7 @@ const AdminUser = () => {
       header: "Email",
     },
     {
-      accessorKey: "phonenumber",
+      accessorKey: "phoneNumber",
       header: "Phone Number",
     },
     {
@@ -53,6 +76,7 @@ const AdminUser = () => {
     },
   ];
 
+  //Delete button form table
   const handleDeleteButton = (userDelete) => {
     Swal.fire({
       title: "Deactivate account",
@@ -88,6 +112,9 @@ const AdminUser = () => {
                 popup: "bordered-alert",
               },
             });
+            setTableData((prevTableData) =>
+            prevTableData.filter((user) => user.email !== userDelete.email)
+          );
           } else {
             Swal.fire({
               title: "Deactivation Failed",
@@ -109,11 +136,13 @@ const AdminUser = () => {
     });
   };
 
-  const handleUpdateButton = (userData) => {
-    setUserData(userData);
+  //Update button form table
+  const handleUpdateButton = (userUpdate) => {
+    setUserData(userUpdate);
     setIsOpen(true);
   };
 
+  //submit button from admin dialogbox
   const handleSubmitModal = () => {
     console.log("hey submit Button");
     setIsOpen(false);
@@ -121,7 +150,7 @@ const AdminUser = () => {
 
   return (
     <>
-      <Table data={data} columns={columns} />
+      <Table data={data} columns={columns} isLoading={isLoading} />
       <AdminModel
         isOpen={isOpen}
         setIsOpen={setIsOpen}

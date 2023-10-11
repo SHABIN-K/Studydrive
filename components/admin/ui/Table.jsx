@@ -7,7 +7,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 
-const Table = ({ data, columns }) => {
+const Table = ({ data, columns, isLoading }) => {
   const [filtering, setFiltering] = useState("");
 
   const table = useReactTable({
@@ -82,7 +82,7 @@ const Table = ({ data, columns }) => {
                   ) : (
                     <tr>
                       <td colSpan={columns.length} className="h-24 text-center">
-                        No results.
+                        {isLoading ? "loading..." : "No results"}
                       </td>
                     </tr>
                   )}

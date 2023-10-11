@@ -166,7 +166,7 @@ const AdminModel = ({
                         <input
                           type="tel"
                           id="number"
-                          value={userData.phonenumber}
+                          value={userData.phoneNumber}
                           onChange={(e) =>
                             setUserData({
                               ...userData,

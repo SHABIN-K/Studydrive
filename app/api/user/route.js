@@ -1,6 +1,24 @@
 import prisma from "@/libs/prisma";
 import bcrypt from "bcrypt";
 
+export async function GET() {
+  try {
+    const allUsers = await prisma.user.findMany();
+    return new Response(JSON.stringify(allUsers), {
+      status: 200, // Created
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  } catch (error) {
+    console.error("Error processing the request:", error);
+
+    return new Response("An error occurred", {
+      status: 500, // Internal Server Error
+    });
+  }
+}
+
 export async function POST(req) {
   const { userRole, name, email, phoneNumber, password } = await req.json();
   try {
