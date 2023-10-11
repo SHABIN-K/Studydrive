@@ -6,14 +6,14 @@ export async function POST(req) {
   try {
     // Check if a user already exists by email
     const existingUser = await prisma.user.findFirst({
-      where: { email: email }, 
+      where: { email: email },
     });
 
     // User with this email already exists
     if (existingUser) {
       return new Response("User with this email already exists", {
         status: 200,
-        statusText: 'FAILED',
+        statusText: "FAILED",
       });
     }
 
@@ -39,6 +39,40 @@ export async function POST(req) {
         "Content-Type": "application/json",
       },
     });
+  } catch (error) {
+    console.error("Error processing the request:", error);
+
+    return new Response("An error occurred", {
+      status: 500, // Internal Server Error
+    });
+  }
+}
+
+export async function DELETE(req) {
+  const { email } = await req.json();
+  try {
+    //find the user by email
+    const user = await prisma.user.findFirst({
+      where: { email: email },
+    });
+    console.log(user);
+
+    if (user) {
+      //delete the user's profile (assuming a one-to-one relationship)
+      await prisma.user.delete({
+        where: { id: user.id },
+      });
+
+      // Process the data and send an appropriate response
+      return new Response("Request processed successfully", {
+        status: 200,
+      });
+    } else {
+      return new Response("User not found", {
+        statusText: "FAILED",
+        status: 201, // Not Found
+      });
+    }
   } catch (error) {
     console.error("Error processing the request:", error);
 

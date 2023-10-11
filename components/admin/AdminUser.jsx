@@ -1,5 +1,7 @@
 import { useMemo, useState } from "react";
 import Swal from "sweetalert2";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 import Table from "./ui/Table";
 import { tableData } from ".";
@@ -51,7 +53,7 @@ const AdminUser = () => {
     },
   ];
 
-  const handleDeleteButton = () => {
+  const handleDeleteButton = (userData) => {
     Swal.fire({
       title: "Deactivate account",
       text: "This will permanently deactivate your account",
@@ -66,18 +68,43 @@ const AdminUser = () => {
         cancelButton: "bordered-alert",
         popup: "bordered-alert",
       },
-    }).then((result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
-        Swal.fire({
-          title: "deactivated!",
-          text: "Your account has been permanently deactivated.",
-          icon: "success",
-          color: "#fff",
-          background: "#13131a",
-          customClass: {
-            popup: "bordered-alert",
-          },
-        });
+        try {
+          const res = await axios.delete("/api/user", {
+            data: {
+              email: userData.email,
+            },
+          });
+          console.log(res);
+          if (res.status === 200) {
+            Swal.fire({
+              title: "Deactivated!",
+              text: "Your account has been permanently deactivated.",
+              icon: "success",
+              color: "#fff",
+              background: "#13131a",
+              customClass: {
+                popup: "bordered-alert",
+              },
+            });
+          } else {
+            Swal.fire({
+              title: "Deactivation Failed",
+              text: "An error occurred while deactivating your account.",
+              icon: "error",
+              color: "#fff",
+              background: "#13131a",
+              customClass: {
+                popup: "bordered-alert",
+              },
+            });
+          }
+        } catch (error) {
+          console.error("NEXT_AUTH_ERROR: " + error);
+          console.log(error.response);
+          toast.error("something went wrong !!");
+        }
       }
     });
   };
