@@ -3,7 +3,6 @@ import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import { Fragment } from "react";
 
 const RoleSelect = ({ value, onChange, data, }) => {
-  console.log("value", value);
   return (
     <Listbox value={value} onChange={onChange}>
       <div className="relative mt-1">
