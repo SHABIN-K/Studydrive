@@ -195,7 +195,7 @@ const AdminModel = ({
                     className="btn_form"
                     onClick={handleSubmitButton}
                   >
-                    {isLoading ? "updating" : "Edit profile"}
+                    {isLoading ? "updating..." : "Update"}
                   </button>
                 </div>
               </Dialog.Panel>

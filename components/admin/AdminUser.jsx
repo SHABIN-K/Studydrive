@@ -105,7 +105,6 @@ const AdminUser = () => {
               email: userDelete.email,
             },
           });
-          console.log(res);
           if (res.status === 200) {
             Swal.fire({
               title: "Deactivated!",
