@@ -49,7 +49,6 @@ const AdminPlayground = () => {
           phoneNumber,
           password,
         });
-
         if (response.statusText === "FAILED") {
           toast.error(response.data);
         } else {
@@ -67,7 +66,7 @@ const AdminPlayground = () => {
   };
 
   const handleReset = () => {
-    setUserRole(role[1]);
+    setUserRole(roles[1]);
     setName("");
     setEmail("");
     setPhoneNumber("");
@@ -92,8 +91,8 @@ const AdminPlayground = () => {
                   User role
                 </label>
                 <RoleSelect
-                  selectedRole={userRole}
-                  setSelectedRole={setUserRole}
+                  value={userRole}
+                  onChange={setUserRole}
                   data={roles}
                 />
 

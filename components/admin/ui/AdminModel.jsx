@@ -69,8 +69,8 @@ const AdminModel = ({
                           User role
                         </label>
                         <RoleSelect
-                          selectedRole={selected}
-                          setSelectedRole={setSelected}
+                          value={selected}
+                          onChange={setSelected}
                           data={roles}
                         />
 
