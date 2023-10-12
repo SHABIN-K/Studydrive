@@ -150,7 +150,6 @@ const AdminUser = () => {
   const handleSubmitButton = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    console.log("frontend data :", userData.userRole);
 
     // Validate user input using the schema
     const userInput = {
@@ -178,7 +177,7 @@ const AdminUser = () => {
           phoneNumber: userData.phoneNumber,
           userRole: userData.userRole,
         });
-        console.log("backend data :", response.data);
+
         if (response.statusText === "FAILED") {
           toast.error(response.data);
         } else {
