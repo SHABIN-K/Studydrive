@@ -2,6 +2,9 @@ import { Fragment, useState } from "react";
 import { Dialog, Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 
+import FormButtons from "./FormButtons";
+import FormField from "./FormField";
+
 const role = ["ADMIN", "USER"];
 
 const AdminModel = ({
@@ -124,50 +127,31 @@ const AdminModel = ({
                             </Transition>
                           </div>
                         </Listbox>
-                      </div>
 
-                      <div className="flex flex-col space-y-1.5">
-                        <label
-                          htmlFor="name"
-                          className="text-gray-900 text-sm font-medium"
-                        >
-                          Name
-                        </label>
-                        <input
+                        <FormField
+                          label="Name"
                           type="text"
-                          id="name"
+                          name="name"
                           value={userData.name}
                           onChange={(e) =>
                             setUserData({ ...userData, name: e.target.value })
                           }
-                          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1"
                         />
 
-                        <label
-                          htmlFor="email"
-                          className="text-gray-900 text-sm font-medium"
-                        >
-                          Email
-                        </label>
-                        <input
+                        <FormField
+                          label="Email"
                           type="email"
-                          id="email"
+                          name="email"
                           value={userData.email}
                           onChange={(e) =>
                             setUserData({ ...userData, email: e.target.value })
                           }
-                          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1"
                         />
 
-                        <label
-                          htmlFor="number"
-                          className="text-gray-900 text-sm font-medium"
-                        >
-                          Phone Number
-                        </label>
-                        <input
+                        <FormField
+                          label="Phone Number"
                           type="tel"
-                          id="number"
+                          name="phoneNumber"
                           value={userData.phoneNumber}
                           onChange={(e) =>
                             setUserData({
@@ -175,28 +159,16 @@ const AdminModel = ({
                               phoneNumber: e.target.value,
                             })
                           }
-                          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1"
                         />
                       </div>
                     </div>
+                    <FormButtons
+                      primaryLabel={isLoading ? "Updating..." : "Update"}
+                      secondaryLabel="Cancel"
+                      onPrimaryClick={handleSubmitButton}
+                      onSecondaryClick={handleCloseModal}
+                    />
                   </form>
-                </div>
-
-                <div className="mt-4 space-x-3">
-                  <button
-                    type="button"
-                    className="btn_form"
-                    onClick={handleCloseModal}
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    type="button"
-                    className="btn_form"
-                    onClick={handleSubmitButton}
-                  >
-                    {isLoading ? "updating..." : "Update"}
-                  </button>
                 </div>
               </Dialog.Panel>
             </Transition.Child>

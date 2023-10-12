@@ -4,7 +4,10 @@ import toast from "react-hot-toast";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import { Fragment, useState } from "react";
+
 import { UserValidation } from "@/libs/validations/user";
+import FormButtons from "./ui/FormButtons";
+import FormField from "./ui/FormField";
 
 const role = ["ADMIN", "USER"];
 
@@ -148,93 +151,46 @@ const AdminPlayground = () => {
                   </div>
                 </Listbox>
 
-                <label
-                  htmlFor="name"
-                  className="text-gray-900 text-sm font-medium"
-                >
-                  Name
-                </label>
-                <input
+                <FormField
+                  label="Name"
                   type="text"
-                  id="name"
                   name="name"
                   value={name}
                   placeholder="joe Black"
-                  onChange={(e) => {
-                    setName(e.target.value);
-                  }}
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1"
-                  required
+                  onChange={(e) => setName(e.target.value)}
                 />
-
-                <label
-                  htmlFor="email"
-                  className="text-gray-900 text-sm font-medium"
-                >
-                  Email
-                </label>
-                <input
+                <FormField
+                  label="Email"
                   type="email"
-                  id="email"
+                  name="email"
                   value={email}
                   placeholder="joe@example.com"
-                  onChange={(e) => {
-                    setEmail(e.target.value);
-                  }}
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1"
-                  required
+                  onChange={(e) => setEmail(e.target.value)}
                 />
-
-                <label
-                  htmlFor="number"
-                  className="text-gray-900 text-sm font-medium"
-                >
-                  Phone Number
-                </label>
-                <input
+                <FormField
+                  label="Phone Number"
                   type="tel"
-                  id="number"
+                  name="phonenumber"
                   value={phoneNumber}
                   placeholder="+912344353434"
-                  onChange={(e) => {
-                    setPhoneNumber(e.target.value);
-                  }}
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1"
-                  required
+                  onChange={(e) => setPhoneNumber(e.target.value)}
                 />
-                <label
-                  htmlFor="number"
-                  className="text-gray-900 text-sm font-medium"
-                >
-                  Password
-                </label>
-                <input
+                <FormField
+                  label="Password"
                   type="password"
-                  id="password"
-                  placeholder="••••••••"
+                  name="phonenumber"
                   value={password}
-                  onChange={(e) => {
-                    setPassword(e.target.value);
-                  }}
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1"
-                  required
+                  placeholder="••••••••"
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
             </div>
-
-            <div className="mt-4 space-x-3">
-              <button type="button" className="btn_form" onClick={handleReset}>
-                Clear
-              </button>
-              <button
-                type="button"
-                className="btn_form"
-                onClick={handleSubmit}
-                disabled={isLoading}
-              >
-                {isLoading ? "Creating..." : "Create"}
-              </button>
-            </div>
+            <FormButtons
+              primaryLabel={isLoading ? "Creating..." : "Create"}
+              secondaryLabel="Clear"
+              onPrimaryClick={handleSubmit}
+              onSecondaryClick={handleReset}
+            />
           </form>
         </div>
       </div>
@@ -243,4 +199,3 @@ const AdminPlayground = () => {
 };
 
 export default AdminPlayground;
-//crud
