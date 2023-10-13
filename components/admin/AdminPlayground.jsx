@@ -130,13 +130,15 @@ const AdminPlayground = () => {
                 />
               </div>
             </div>
-            <FormButtons
-              primaryLabel={isLoading ? "Creating..." : "Create"}
-              secondaryLabel="Clear"
-              onPrimaryClick={handleSubmit}
-              onSecondaryClick={handleReset}
-              className="btn_form"
-            />
+            <div className="mt-4 space-x-3">
+              <FormButtons
+                primaryLabel={isLoading ? "Creating..." : "Create"}
+                secondaryLabel="Clear"
+                onPrimaryClick={handleSubmit}
+                onSecondaryClick={handleReset}
+                className="btn_form"
+              />
+            </div>
           </form>
         </div>
       </div>

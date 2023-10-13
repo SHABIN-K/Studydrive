@@ -110,13 +110,15 @@ const AdminModel = ({
                         />
                       </div>
                     </div>
-                    <FormButtons
-                      primaryLabel={isLoading ? "Updating..." : "Update"}
-                      secondaryLabel="Cancel"
-                      onPrimaryClick={handleSubmitButton}
-                      onSecondaryClick={handleCloseModal}
-                      className="btn_form"
-                    />
+                    <div className="mt-4 space-x-3">
+                      <FormButtons
+                        primaryLabel={isLoading ? "Updating..." : "Update"}
+                        secondaryLabel="Cancel"
+                        onPrimaryClick={handleSubmitButton}
+                        onSecondaryClick={handleCloseModal}
+                        className="btn_form"
+                      />
+                    </div>
                   </form>
                 </div>
               </Dialog.Panel>
