@@ -1,7 +1,7 @@
 import { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 
-import FormButtons from "./FormButtons";
+import FormButtons from "../../ui/FormButtons";
 import FormField from "./FormField";
 import RoleSelect from "./RoleSelect";
 import { roles } from "..";
@@ -115,6 +115,7 @@ const AdminModel = ({
                       secondaryLabel="Cancel"
                       onPrimaryClick={handleSubmitButton}
                       onSecondaryClick={handleCloseModal}
+                      className="btn_form"
                     />
                   </form>
                 </div>

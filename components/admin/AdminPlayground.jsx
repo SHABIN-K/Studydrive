@@ -3,7 +3,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 
 import { UserValidation } from "@/libs/validations/user";
-import FormButtons from "./ui/FormButtons";
+import FormButtons from "../ui/FormButtons";
 import FormField from "./ui/FormField";
 import RoleSelect from "./ui/RoleSelect";
 import { roles } from ".";
@@ -135,6 +135,7 @@ const AdminPlayground = () => {
               secondaryLabel="Clear"
               onPrimaryClick={handleSubmit}
               onSecondaryClick={handleReset}
+              className="btn_form"
             />
           </form>
         </div>
