@@ -5,12 +5,12 @@ import { logo } from "@/public/assets";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
+import toast from "react-hot-toast";
 
 const LoginPage = () => {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e) => {
@@ -22,18 +22,15 @@ const LoginPage = () => {
         password,
         redirect: false,
       });
-      console.log("Response:", response);
       if (response.error) {
-        setError(response.error);
-        setTimeout(() => setError(""), 3000);
+        toast.error(response.error);
       } else {
         //Redirect to the dashboard on successful login
         window.location.href = "/dashboard";
-        console.log("Redirecting to:", "/dashboard");
       }
     } catch (error) {
       console.error("NEXT_AUTH Error: " + error);
-      setError("An error occurred during login.");
+      toast.error("something went wrong during login attempt");
     } finally {
       setIsLoading(false);
     }
@@ -98,33 +95,15 @@ const LoginPage = () => {
                   className="border sm:text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
                 />
               </div>
-              {error && (
-                <div className="flex alert alert-error h-1">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="stroke-current shrink-0 h-6 w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                  <span>{error}</span>
-                </div>
-              )}
               <div className="flex gap-1 mr-5 md:mr-0">
                 <button
                   type="button"
                   onClick={() => {
-                    router.push("/");
+                    router.back();
                   }}
                   className="flex items-center px-5 py-2 text-sm text-white transition-colors duration-200 bg-[#1c1c24] border rounded-lg gap-x-2 sm:w-auto"
                 >
-                  HOME
+                  Back
                 </button>
                 <button
                   type="button"
