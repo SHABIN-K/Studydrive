@@ -7,6 +7,9 @@ import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import toast from "react-hot-toast";
 
+import FormButtons from "@/components/ui/FormButtons";
+import FormField from "@/components/ui/FormField";
+
 const LoginPage = () => {
   const router = useRouter();
   const [email, setEmail] = useState("");
@@ -55,63 +58,37 @@ const LoginPage = () => {
             </h1>
 
             <form className="space-y-4 md:space-y-6">
-              <div>
-                <label
-                  htmlFor="username"
-                  className="block mb-2 text-sm font-medium text-white"
-                >
-                  Your email
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  id="email"
-                  placeholder="name@example.com"
-                  autoComplete="email"
-                  onChange={(e) => {
-                    setEmail(e.target.value);
-                  }}
-                  required
-                  className="border sm:text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="password"
-                  className="block mb-2 text-sm font-medium text-white"
-                >
-                  Password
-                </label>
-                <input
-                  type="password"
-                  name="password"
-                  id="password"
-                  placeholder="••••••••"
-                  autoComplete="current-password"
-                  onChange={(e) => {
-                    setPassword(e.target.value);
-                  }}
-                  required
-                  className="border sm:text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
-                />
-              </div>
+              <FormField
+                label="Your email"
+                type="email"
+                name="email"
+                value={email}
+                placeholder="name@example.com"
+                onChange={(e) => setEmail(e.target.value)}
+                autoComplete="email"
+                classLabel="label_loinForm"
+                classInput="input_loinForm"
+              />
+              <FormField
+                label="Your Password"
+                type="password"
+                name="password"
+                value={password}
+                placeholder="••••••••"
+                onChange={(e) => setPassword(e.target.value)}
+                autoComplete="current-password"
+                classLabel="label_loinForm"
+                classInput="input_loinForm"
+              />
               <div className="flex gap-1 mr-5 md:mr-0">
-                <button
-                  type="button"
-                  onClick={() => {
-                    router.back();
-                  }}
-                  className="flex items-center px-5 py-2 text-sm text-white transition-colors duration-200 bg-[#1c1c24] border rounded-lg gap-x-2 sm:w-auto"
-                >
-                  Back
-                </button>
-                <button
-                  type="button"
-                  onClick={handleSubmit}
-                  className="btn bg-[#4acd8d] hover:bg-green-500 min-w-[75%] text-white focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-                >
-                  {isLoading ? "Please wait..." : "Login"}
-                </button>
+                <FormButtons
+                  primaryLabel={isLoading ? "Please wait..." : "Login"}
+                  secondaryLabel="Back"
+                  onPrimaryClick={handleSubmit}
+                  onSecondaryClick={() => router.back()}
+                  primaryClassName="btn_loginFormPrimary"
+                  secondaryClassName="btn_loginFormSecondary"
+                />
               </div>
             </form>
           </div>

@@ -86,13 +86,39 @@ body {
 
 /*sweetAlert custom*/
 
-/* admin  button*/
+/* admin  button and input*/
 .btn_table {
   @apply btn btn-xs sm:btn-sm border border-transparent font-semibold text-white bg-gray-700 hover:bg-gray-600 focus:ring-offset-gray-800 transition-all
   focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2;
 }
 
 .btn_form {
-  @apply inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ;
+  @apply inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2;
 }
-/* admin table button*/
+
+.input_form {
+  @apply bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1;
+}
+
+.label_form {
+  @apply text-gray-900 text-sm font-medium;
+}
+/* admin table button and input*/
+
+
+/*login page button*/
+.btn_loginFormSecondary {
+  @apply flex items-center px-5 py-2 text-sm text-white transition-colors duration-200 bg-[#1c1c24] border rounded-lg gap-x-2 sm:w-auto;
+}
+.btn_loginFormPrimary {
+  @apply btn bg-[#4acd8d] hover:bg-green-500 min-w-[75%] text-white focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center;
+}
+
+.input_loinForm {
+  @apply border sm:text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500;
+}
+
+.label_loinForm {
+  @apply block mb-2 text-sm font-medium text-white;
+}
+/*login page button*/

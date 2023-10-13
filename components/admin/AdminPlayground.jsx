@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 
 import { UserValidation } from "@/libs/validations/user";
 import FormButtons from "../ui/FormButtons";
-import FormField from "./ui/FormField";
+import FormField from "../ui/FormField";
 import RoleSelect from "./ui/RoleSelect";
 import { roles } from ".";
 
@@ -87,9 +87,7 @@ const AdminPlayground = () => {
           <form>
             <div className="grid w-full items-center gap-4">
               <div className="flex flex-col space-y-1.5">
-                <label className="text-gray-900 text-sm font-medium">
-                  User role
-                </label>
+                <label className="label_form">User role</label>
                 <RoleSelect
                   value={userRole}
                   onChange={setUserRole}
@@ -103,6 +101,8 @@ const AdminPlayground = () => {
                   value={name}
                   placeholder="joe Black"
                   onChange={(e) => setName(e.target.value)}
+                  classLabel="label_form"
+                  classInput="input_form"
                 />
                 <FormField
                   label="Email"
@@ -111,6 +111,8 @@ const AdminPlayground = () => {
                   value={email}
                   placeholder="joe@example.com"
                   onChange={(e) => setEmail(e.target.value)}
+                  classLabel="label_form"
+                  classInput="input_form"
                 />
                 <FormField
                   label="Phone Number"
@@ -119,6 +121,8 @@ const AdminPlayground = () => {
                   value={phoneNumber}
                   placeholder="+912344353434"
                   onChange={(e) => setPhoneNumber(e.target.value)}
+                  classLabel="label_form"
+                  classInput="input_form"
                 />
                 <FormField
                   label="Password"
@@ -127,6 +131,8 @@ const AdminPlayground = () => {
                   value={password}
                   placeholder="••••••••"
                   onChange={(e) => setPassword(e.target.value)}
+                  classLabel="label_form"
+                  classInput="input_form"
                 />
               </div>
             </div>
@@ -136,7 +142,8 @@ const AdminPlayground = () => {
                 secondaryLabel="Clear"
                 onPrimaryClick={handleSubmit}
                 onSecondaryClick={handleReset}
-                className="btn_form"
+                primaryClassName="btn_form"
+                secondaryClassName="btn_form"
               />
             </div>
           </form>

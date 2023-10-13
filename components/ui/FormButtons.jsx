@@ -3,14 +3,23 @@ const FormButtons = ({
   secondaryLabel,
   onPrimaryClick,
   onSecondaryClick,
-  className,
+  primaryClassName,
+  secondaryClassName,
 }) => {
   return (
     <>
-      <button type="button" className={className} onClick={onSecondaryClick}>
+      <button
+        type="button"
+        className={secondaryClassName}
+        onClick={onSecondaryClick}
+      >
         {secondaryLabel}
       </button>
-      <button type="button" className={className} onClick={onPrimaryClick}>
+      <button
+        type="button"
+        className={primaryClassName}
+        onClick={onPrimaryClick}
+      >
         {primaryLabel}
       </button>
     </>

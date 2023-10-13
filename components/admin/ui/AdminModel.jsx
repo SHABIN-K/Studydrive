@@ -1,8 +1,8 @@
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 
 import FormButtons from "../../ui/FormButtons";
-import FormField from "./FormField";
+import FormField from "../../ui/FormField";
 import RoleSelect from "./RoleSelect";
 import { roles } from "..";
 
@@ -14,7 +14,6 @@ const AdminModel = ({
   setUserData,
   handleSubmitButton,
 }) => {
-  const [selected, setSelected] = useState(roles[0]);
   const handleCloseModal = () => {
     setIsOpen(false);
   };
@@ -65,9 +64,7 @@ const AdminModel = ({
                   <form>
                     <div className="grid w-full items-center gap-4">
                       <div className="flex flex-col space-y-1.5">
-                        <label className="text-gray-900 text-sm font-medium">
-                          User role
-                        </label>
+                        <label className="label_form">User role</label>
                         <RoleSelect
                           value={userData.userRole}
                           onChange={(newValue) => {
@@ -84,6 +81,8 @@ const AdminModel = ({
                           onChange={(e) =>
                             setUserData({ ...userData, name: e.target.value })
                           }
+                          classLabel="label_form"
+                          classInput="input_form"
                         />
 
                         <FormField
@@ -94,6 +93,8 @@ const AdminModel = ({
                           onChange={(e) =>
                             setUserData({ ...userData, email: e.target.value })
                           }
+                          classLabel="label_form"
+                          classInput="input_form"
                         />
 
                         <FormField
@@ -107,6 +108,8 @@ const AdminModel = ({
                               phoneNumber: e.target.value,
                             })
                           }
+                          classLabel="label_form"
+                          classInput="input_form"
                         />
                       </div>
                     </div>
@@ -116,7 +119,8 @@ const AdminModel = ({
                         secondaryLabel="Cancel"
                         onPrimaryClick={handleSubmitButton}
                         onSecondaryClick={handleCloseModal}
-                        className="btn_form"
+                        primaryClassName="btn_form"
+                        secondaryClassName="btn_form"
                       />
                     </div>
                   </form>
