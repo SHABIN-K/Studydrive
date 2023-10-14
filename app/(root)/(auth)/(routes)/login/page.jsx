@@ -9,6 +9,7 @@ import toast from "react-hot-toast";
 
 import FormButtons from "@/components/ui/FormButtons";
 import FormField from "@/components/ui/FormField";
+import { UserValidation } from "@/libs/validations/user";
 
 const LoginPage = () => {
   const router = useRouter();
@@ -19,17 +20,38 @@ const LoginPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
+
+    // Validate user input using the schema
+    const userInput = {
+      email,
+      password,
+    };
+
     try {
-      const response = await signIn("credentials", {
-        email,
-        password,
-        redirect: false,
-      });
-      if (response.error) {
-        toast.error(response.error);
+      // Validate the user input
+      const validation = UserValidation.UserLogin.safeParse(userInput);
+
+      //if validation is failure, return error message
+      if (validation.success === false) {
+        const { issues } = validation.error;
+        issues.forEach((err) => {
+          toast.error(err.message);
+        });
       } else {
-        //Redirect to the dashboard on successful login
-        window.location.href = "/dashboard";
+        // If validation is successful, make the API request
+        const response = await signIn("credentials", {
+          email,
+          password,
+          redirect: false,
+        });
+
+        console.log(response.error);
+        if (response.error) {
+          toast.error(response.error);
+        } else {
+          //Redirect to the dashboard on successful login
+           window.location.href = "/dashboard";
+        }
       }
     } catch (error) {
       console.error("NEXT_AUTH Error: " + error);

@@ -17,8 +17,8 @@ const User = z.object({
     .min(5, { message: "Password must be at least 5 characters long." })
     .max(200, { message: "Password can be at most 200 characters long." })
     .regex(
-      /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{5,200}$/,
-      "Password must contain at least one uppercase letter, one number, and one special character."
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{5,200}$/,
+      "Password must contain at least one uppercase letter, one lowercase letter, and one number. Only alphanumeric characters are allowed."
     ),
   name: z
     .string({
