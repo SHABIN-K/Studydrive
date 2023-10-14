@@ -1,5 +1,8 @@
+import bcrypt from "bcrypt";
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
+
+import prisma from "@/libs/prisma";
 
 const authOptions = {
   providers: [
@@ -11,17 +14,35 @@ const authOptions = {
       async authorize(credentials, req) {
         const { email, password } = credentials;
 
-        if (!email || !password) throw new Error("both fields are required");
+        try {
+          const user = await prisma.user.findFirst({
+            where: {
+              email: email,
+            },
+          });
 
-        if (email === "me@g.com" && password === "123") {
-          return {
-            id: "2453",
-            name: "J Smith",
-            email: "me@g.com",
-            role: "admin",
-          };
-        } else {
-          throw new Error("Invalid email or password");
+          if (user) {
+            // check password
+            const passwordMatch = await bcrypt.compare(password, user.password);
+
+            if (passwordMatch) {
+              console.log(user);
+              // If everything is successful, return the user
+              return {
+                id: "2453",
+                name: "J Smith",
+                email: "me@g.com",
+                role: "admin",
+              };
+            } else {
+              throw new Error("Invalid password!");
+            }
+          } else {
+            throw new Error("Invalid email address!");
+          }
+        } catch (error) {
+          console.error("Error processing the request:", error);
+          throw error;
         }
       },
     }),

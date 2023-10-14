@@ -45,12 +45,12 @@ const LoginPage = () => {
           redirect: false,
         });
 
-        console.log(response.error);
         if (response.error) {
           toast.error(response.error);
         } else {
           //Redirect to the dashboard on successful login
-           window.location.href = "/dashboard";
+          toast.success("Successfully Logged in");
+          window.location.href = "/dashboard";
         }
       }
     } catch (error) {
