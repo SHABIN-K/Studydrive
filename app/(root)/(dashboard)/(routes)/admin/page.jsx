@@ -1,17 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
-
-import Image from "next/image";
+import { useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 import Swal from "sweetalert2";
 import { Tab } from "@headlessui/react";
-import { useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
 
 import { AdminPlayground, AdminUser } from "@/components/admin";
-import { useEffect } from "react";
 
 const Tabs = ["Playground", "Users"];
 
