@@ -6,12 +6,15 @@ import Link from "next/link";
 import Swal from "sweetalert2";
 import { Tab } from "@headlessui/react";
 import { signOut } from "next-auth/react";
+import { useSession } from "next-auth/react";
 
 import { AdminPlayground, AdminUser } from "@/components/admin";
 
 const Tabs = ["Playground", "Users"];
 
 const AdminPanel = () => {
+  const { data: session } = useSession();
+  console.log(session);
   const handleSignOutButton = () => {
     Swal.fire({
       title: "Logout",

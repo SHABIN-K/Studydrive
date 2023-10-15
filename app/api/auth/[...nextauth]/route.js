@@ -28,14 +28,8 @@ const authOptions = {
             const passwordMatch = await bcrypt.compare(password, user.password);
 
             if (passwordMatch) {
-              console.log(user);
               // If everything is successful, return the user
-              return {
-                id: "2453",
-                name: "J Smith",
-                email: "me@g.com",
-                role: "admin",
-              };
+              return user;
             } else {
               throw new Error("Invalid password!");
             }
@@ -59,18 +53,18 @@ const authOptions = {
     error: "/login",
   },
   callbacks: {
-    // async redirect({ url, baseUrl }) {
-    // Check if the URL is a callback URL and redirect accordingly
-    //   if (url === "/dashboard") {
-    //     return url; // Allow redirection to /dashboard
-    //   }
-    //   return baseUrl; // Redirect to the base URL (e.g., /login) if not /dashboard
-    // },
     async jwt({ token, user }) {
       if (user) {
-        token.role = user.role;
+        console.log(user);
+        token.role = user.userRole;
       }
       return token;
+    },
+    async session({ session, token, user }) {
+      console.log("session :", session);
+      console.log("token :", token);
+      console.log("user :", user);
+      return session;
     },
   },
 };
