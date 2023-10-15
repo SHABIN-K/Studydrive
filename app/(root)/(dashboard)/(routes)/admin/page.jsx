@@ -1,13 +1,12 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 import Swal from "sweetalert2";
 import { Tab } from "@headlessui/react";
-import { useRouter } from "next/navigation";
-import { signOut } from "next-auth/react";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 
 import { AdminPlayground, AdminUser } from "@/components/admin";
 import { useEffect } from "react";
@@ -18,10 +17,11 @@ const AdminPanel = () => {
   const router = useRouter();
   const { data: session } = useSession();
 
-  useEffect(() => {
-    //If the user is not an ADMIN user, redirect them to the dashboard page.
-    if (session.user.role === "USER") return router.replace("/dashboard");
-  }, [session, router]);
+  if (session && session.user.role !== "ADMIN") {
+    // If the user is not an admin, redirect to the dashboard
+    router.push("/dashboard");
+    return null; // You can also render a message here if needed
+  }
 
   //handle signout button
   const handleSignOutButton = () => {
