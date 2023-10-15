@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
 import Image from "next/image";
@@ -5,16 +6,29 @@ import Link from "next/link";
 
 import Swal from "sweetalert2";
 import { Tab } from "@headlessui/react";
+import { useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
 
 import { AdminPlayground, AdminUser } from "@/components/admin";
+import { useEffect } from "react";
 
 const Tabs = ["Playground", "Users"];
 
 const AdminPanel = () => {
+  const router = useRouter();
   const { data: session } = useSession();
-  console.log(session);
+
+  useEffect(() => {
+    //If the user is not an ADMIN user, redirect them to the dashboard page.
+    if (session.user.role === "USER") {
+      return router.replace("/dashboard");
+    } else {
+      renderAdminPanel();
+    }
+  }, [session, router]);
+
+  //handle signout button
   const handleSignOutButton = () => {
     Swal.fire({
       title: "Logout",
@@ -40,87 +54,93 @@ const AdminPanel = () => {
       }
     });
   };
-  return (
-    <section>
-      <div className="flex h-screen font-normal">
-        <div className="flex-1 flex flex-col overflow-hidden">
-          <div className="navbar bg-[#1d232a] border-b border-green-400">
-            <div className="flex-1">
-              <Link href="/admin">
-                <p className="text-[#4acd8d] subpixel-antialiased text-2xl font-bold ml-5">
-                  Pasc Hub
-                  <span className="text-white text-sm ml-1">Admin Panel</span>
-                </p>
-              </Link>
-            </div>
-            <div className="flex-none gap-2">
-              <div className="dropdown dropdown-end md:mr-2">
-                <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                  <div className="w-7">
-                    <Image
-                      src="/assets/dashboard.svg"
-                      width={12}
-                      height={12}
-                      alt="dashboard icon"
-                      className="bg-[#1d232a]"
-                      title="switch to another pages"
-                    />
-                  </div>
-                </label>
-                <ul
-                  tabIndex={0}
-                  className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
-                >
-                  <Link href="/dashboard">
-                    <li>
-                      <div className="justify-between">
-                        Dashboard
-                        <span className="badge">New</span>
-                      </div>
+
+  const renderAdminPanel = () => {
+    return (
+      <section>
+        <div className="flex h-screen font-normal">
+          <div className="flex-1 flex flex-col overflow-hidden">
+            <div className="navbar bg-[#1d232a] border-b border-green-400">
+              <div className="flex-1">
+                <Link href="/admin">
+                  <p className="text-[#4acd8d] subpixel-antialiased text-2xl font-bold ml-5">
+                    Pasc Hub
+                    <span className="text-white text-sm ml-1">Admin Panel</span>
+                  </p>
+                </Link>
+              </div>
+              <div className="flex-none gap-2">
+                <div className="dropdown dropdown-end md:mr-2">
+                  <label
+                    tabIndex={0}
+                    className="btn btn-ghost btn-circle avatar"
+                  >
+                    <div className="w-7">
+                      <Image
+                        src="/assets/dashboard.svg"
+                        width={12}
+                        height={12}
+                        alt="dashboard icon"
+                        className="bg-[#1d232a]"
+                        title="switch to another pages"
+                      />
+                    </div>
+                  </label>
+                  <ul
+                    tabIndex={0}
+                    className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
+                  >
+                    <Link href="/dashboard">
+                      <li>
+                        <div className="justify-between">
+                          Dashboard
+                          <span className="badge">New</span>
+                        </div>
+                      </li>
+                    </Link>
+                    <Link href="/">
+                      <li>
+                        <div>Home</div>
+                      </li>
+                    </Link>
+                    <li onClick={handleSignOutButton}>
+                      <a>Logout</a>
                     </li>
-                  </Link>
-                  <Link href="/">
-                    <li>
-                      <div>Home</div>
-                    </li>
-                  </Link>
-                  <li onClick={handleSignOutButton}>
-                    <a>Logout</a>
-                  </li>
-                </ul>
+                  </ul>
+                </div>
               </div>
             </div>
+            <main className="flex-1 overflow-x-hidden overflow-y-auto bg-[#121216]">
+              <Tab.Group>
+                <Tab.List className="flex space-x-1 sm:w-2/5">
+                  {Tabs.map((tab, index) => (
+                    <Tab
+                      key={index}
+                      className={({ selected }) =>
+                        `w-full py-2.5 text-base font-semibold text-white outline-none ${
+                          selected && "border-b-4 border-green-400 "
+                        }`
+                      }
+                    >
+                      {tab}
+                    </Tab>
+                  ))}
+                </Tab.List>
+                <Tab.Panels className="mt-3 mx-2 sm:mx-8">
+                  <Tab.Panel>
+                    <AdminPlayground />
+                  </Tab.Panel>
+                  <Tab.Panel>
+                    <AdminUser />
+                  </Tab.Panel>
+                </Tab.Panels>
+              </Tab.Group>
+            </main>
           </div>
-          <main className="flex-1 overflow-x-hidden overflow-y-auto bg-[#121216]">
-            <Tab.Group>
-              <Tab.List className="flex space-x-1 sm:w-2/5">
-                {Tabs.map((tab, index) => (
-                  <Tab
-                    key={index}
-                    className={({ selected }) =>
-                      `w-full py-2.5 text-base font-semibold text-white outline-none ${
-                        selected && "border-b-4 border-green-400 "
-                      }`
-                    }
-                  >
-                    {tab}
-                  </Tab>
-                ))}
-              </Tab.List>
-              <Tab.Panels className="mt-3 mx-2 sm:mx-8">
-                <Tab.Panel>
-                  <AdminPlayground />
-                </Tab.Panel>
-                <Tab.Panel>
-                  <AdminUser />
-                </Tab.Panel>
-              </Tab.Panels>
-            </Tab.Group>
-          </main>
         </div>
-      </div>
-    </section>
-  );
+      </section>
+    );
+  };
 };
 
 export default AdminPanel;
