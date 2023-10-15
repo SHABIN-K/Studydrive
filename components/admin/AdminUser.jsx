@@ -6,34 +6,27 @@ import toast from "react-hot-toast";
 import Table from "./ui/Table";
 import AdminModel from "./ui/AdminModel";
 import { UserValidation } from "@/libs/validations/user";
+import useUsers from "@/libs/hooks/useUsers";
 
 const AdminUser = () => {
+  const { data: fetchedData, error, isLoading: loading } = useUsers();
+
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const [userData, setUserData] = useState({});
   const [tableData, setTableData] = useState([]);
-  const [dataFetched, setDataFetched] = useState(false);
 
   useEffect(() => {
-    if (!dataFetched) {
-      const fetchData = async () => {
-        setIsLoading(true);
-        try {
-          const response = await axios.get("/api/user");
-          setTableData(response.data);
-          setDataFetched(true);
-        } catch (error) {
-          console.error("Error fetching table data:", error);
-          toast.error("something went wrong in fetching table data");
-        } finally {
-          setIsLoading(false);
-        }
-      };
-
-      fetchData();
+    if (fetchedData) {
+      setTableData(fetchedData);
     }
-  }, [dataFetched]);
+
+    if (error) {
+      console.error("Error fetching table data:", error);
+      toast.error("Something went wrong in fetching table data");
+    }
+  }, [fetchedData, error]);
 
   const data = useMemo(() => tableData, [tableData]);
   /** @type import('@tanstack/react-table').ColumnDef<any> */
@@ -207,7 +200,7 @@ const AdminUser = () => {
 
   return (
     <>
-      <Table data={data} columns={columns} isLoading={isLoading} />
+      <Table data={data} columns={columns} isLoading={loading} />
       <AdminModel
         isOpen={isOpen}
         setIsOpen={setIsOpen}
