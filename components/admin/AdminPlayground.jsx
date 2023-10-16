@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 
 import { UserValidation } from "@/libs/validations/user";
 import FormButtons from "../ui/FormButtons";

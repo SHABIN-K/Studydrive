@@ -5,7 +5,7 @@ import { logo } from "@/public/assets";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 
 import FormButtons from "@/components/ui/FormButtons";
 import FormField from "@/components/ui/FormField";

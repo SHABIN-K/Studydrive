@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import Swal from "sweetalert2";
 import axios from "axios";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 
 import Table from "./ui/Table";
 import AdminModel from "./ui/AdminModel";
