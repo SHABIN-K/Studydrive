@@ -1,3 +1,5 @@
+import { useRef, useEffect } from "react";
+
 const FormButtons = ({
   primaryLabel,
   secondaryLabel,
@@ -6,6 +8,23 @@ const FormButtons = ({
   primaryClassName,
   secondaryClassName,
 }) => {
+  const primaryButtonRef = useRef();
+
+  useEffect(() => {
+    const handleKeyPress = (event) => {
+      console.log("hey Enter Keypress");
+      if (event.key === "Enter") {
+        primaryButtonRef.current.click();
+      }
+    };
+
+    document.addEventListener("keypress", handleKeyPress);
+
+    return () => {
+      document.removeEventListener("keypress", handleKeyPress);
+    };
+  }, []);
+
   return (
     <>
       <button
@@ -16,6 +35,7 @@ const FormButtons = ({
         {secondaryLabel}
       </button>
       <button
+        ref={primaryButtonRef}
         type="button"
         className={primaryClassName}
         onClick={onPrimaryClick}

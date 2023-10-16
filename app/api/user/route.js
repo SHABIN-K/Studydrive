@@ -104,13 +104,34 @@ export async function PATCH(req) {
   try {
     // Check if a user already exists by email
     const existingUser = await prisma.user.findFirst({
-      where: { email: email },
+      where: { id: id },
     });
 
-    // User with this email already exists
-    // If an existing user with the same email is found and it's not the current user,
-    // return an error response
-    if (existingUser && existingUser.id !== id) {
+    // Check if any data has changed
+    const hasDataChanged =
+      existingUser.userRole !== userRole ||
+      existingUser.name !== name ||
+      existingUser.email !== email ||
+      existingUser.phoneNumber !== phoneNumber;
+
+    if (!hasDataChanged) {
+      return new Response("No changes were made", {
+        status: 200, // OK
+        statusText: "FAILED",
+      });
+    }
+
+    // Check if another user with the same email exists
+    const otherUserWithSameEmail = await prisma.user.findFirst({
+      where: {
+        email: email,
+        id: {
+          not: id,
+        },
+      },
+    });
+
+    if (otherUserWithSameEmail) {
       return new Response("User with this email already exists", {
         status: 200,
         statusText: "FAILED",

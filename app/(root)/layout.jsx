@@ -11,7 +11,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className="bg-[#13131a] min-h-screen">
         <AuthProvider>
-          <Toaster richColors position="top-center" />
+          <Toaster richColors closeButton  position="top-center" />
           {children}
         </AuthProvider>
       </body>
