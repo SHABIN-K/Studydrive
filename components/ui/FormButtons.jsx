@@ -12,7 +12,6 @@ const FormButtons = ({
 
   useEffect(() => {
     const handleKeyPress = (event) => {
-      console.log("hey Enter Keypress");
       if (event.key === "Enter") {
         primaryButtonRef.current.click();
       }
