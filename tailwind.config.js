@@ -10,6 +10,7 @@ module.exports = {
       fontFamily: {
         epilogue: ["Epilogue", "sans-serif"],
       },
+      colors: {},
       screens: {
         xs: "400px",
       },

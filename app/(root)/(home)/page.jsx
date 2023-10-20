@@ -4,7 +4,7 @@ import { category, courses } from "@/constants";
 export default function Home() {
   return (
     <div className="md:flex">
-      <div className="md:ml-10">
+      <div>
         <Feed
           label="Discover categories"
           feedData={category}
