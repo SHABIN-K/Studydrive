@@ -4,12 +4,13 @@ import { Tab } from "@headlessui/react";
 
 import { AdminPlayground, AdminUser } from "@/components/admin";
 import AdminNavbar from "@/components/admin/ui/AdminNavbar";
+import { ProctectAdminlayout } from "@/components/layouts/ProctectAdminlayout";
 
 const Tabs = ["Playground", "Users"];
 
 const AdminPanel = () => {
   return (
-    <section>
+    <ProctectAdminlayout>
       <div className="flex h-screen font-normal">
         <div className="flex-1 flex flex-col overflow-hidden">
           <AdminNavbar />
@@ -41,7 +42,7 @@ const AdminPanel = () => {
           </main>
         </div>
       </div>
-    </section>
+    </ProctectAdminlayout>
   );
 };
 

@@ -1,7 +1,4 @@
-import {
-  ProtectedLayout,
-  ProctectAdminlayout,
-} from "@/components/layouts/protectLayouts";
+import { ProtectedLayout } from "@/components/layouts/protectLayouts";
 
 export const metadata = {
   title: "Dashboard | pasc hub",
@@ -9,9 +6,5 @@ export const metadata = {
 };
 
 export default function AdminLayout({ children }) {
-  return (
-    <ProtectedLayout>
-      <ProctectAdminlayout>{children} </ProctectAdminlayout>
-    </ProtectedLayout>
-  );
+  return <ProtectedLayout>{children}</ProtectedLayout>;
 }
