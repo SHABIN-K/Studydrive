@@ -1,6 +1,8 @@
+import { Toaster } from "sonner";
+
 import AuthProvider from "@/components/layouts/ProviderLayouts";
 import "../globals.css";
-import { Toaster } from "sonner";
+
 export const metadata = {
   title: "pasc hub",
   description: "study material web app for students",

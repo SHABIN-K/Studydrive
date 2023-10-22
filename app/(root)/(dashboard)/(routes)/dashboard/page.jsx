@@ -16,7 +16,7 @@ const MyDash = () => {
         <div className="flex flex-row">
           <AdminSidebar />
           <main className="">
-            <div className="w-[100px] h-[100px] bg-orange-900" />
+           
           </main>
         </div>
       </div>
