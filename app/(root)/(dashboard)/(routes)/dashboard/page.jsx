@@ -9,10 +9,10 @@ const MyDash = () => {
       <div className="flex-1 flex flex-col overflow-hidden">
         <AdminNavbar />
         <div className="flex flex-row">
-          <AdminSidebar />
-          <main className="">
-           
-          </main>
+          <div className="md:flex hidden ">
+            <AdminSidebar />
+          </div>
+          <main className=""></main>
         </div>
       </div>
     </section>
