@@ -105,7 +105,6 @@ body {
 }
 /* admin table button and input*/
 
-
 /*login page button*/
 .btn_loginFormSecondary {
   @apply flex items-center px-5 py-2 text-sm text-white transition-colors duration-200 bg-[#1c1c24] border rounded-lg gap-x-2 sm:w-auto;
@@ -122,3 +121,7 @@ body {
   @apply block mb-2 text-sm font-medium text-white;
 }
 /*login page button*/
+
+.btn_sidebar {
+  @apply flex items-center px-4 py-2  text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700;
+}
