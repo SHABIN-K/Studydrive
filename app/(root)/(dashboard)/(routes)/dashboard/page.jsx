@@ -12,7 +12,7 @@ const MyDash = () => {
           <AdminNavbar label="Dashboard" />
         </div>
         <div className="flex flex-row">
-          <div className="md:flex hidden ">
+          <div className="md:flex hidden">
             <AdminSidebar />
           </div>
           <main className="p-5 md:p-4 overflow-auto items-start justify-center flex-grow">
@@ -37,7 +37,3 @@ const MyDash = () => {
 };
 
 export default MyDash;
-/*
-<div className="bg-[#1d232a] p-3 rounded-lg text-center mt-5 border border-green-400 ">
-content here
-</div>*/
