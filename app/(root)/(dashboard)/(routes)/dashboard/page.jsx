@@ -1,8 +1,9 @@
 "use client";
 
-import Upload from "@/components/admin/Upload";
+import Upload from "@/components/admin/ui/Upload";
 import AdminNavbar from "@/components/admin/ui/AdminNavbar";
 import AdminSidebar from "@/components/admin/ui/AdminSidebar";
+import Stepper from "@/components/admin/ui/Stepper";
 
 const MyDash = () => {
   return (
@@ -25,8 +26,9 @@ const MyDash = () => {
                   Upload your summaries and other study documents to Pasc Hub
                 </p>
               </div>
+              <Stepper />
               <div className="bg-[#1d232a] p-3 rounded-lg text-center mt-5 border border-green-400 w-full max-h-[440px] mb-5 overflow-hidden">
-                <Upload/>
+                <Upload />
               </div>
             </div>
           </main>
