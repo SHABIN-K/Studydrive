@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { close, menu } from "@/public/assets";
 import AdminSidebar from "./AdminSidebar";
 
-const AdminNavbar = () => {
+const AdminNavbar = ({ label }) => {
   const sidebarRef = useRef(null);
   const menuButtonRef = useRef(null);
   const [toggleDrawer, setToggleDrawer] = useState(false);
@@ -41,7 +41,7 @@ const AdminNavbar = () => {
           <Link href="/admin">
             <p className="text-[#4acd8d] subpixel-antialiased text-2xl font-bold ml-5">
               Pasc Hub
-              <span className="text-white text-sm ml-1">Admin Panel</span>
+              <span className="text-white text-sm ml-1">{label}</span>
             </p>
           </Link>
         </div>

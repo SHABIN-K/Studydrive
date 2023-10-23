@@ -13,7 +13,7 @@ const AdminPanel = () => {
     <ProctectAdminlayout>
       <div className="flex h-screen font-normal">
         <div className="flex-1 flex flex-col overflow-hidden">
-          <AdminNavbar />
+          <AdminNavbar label="Admin panel"/>
           <main className="flex-1 overflow-x-hidden overflow-y-auto bg-[#121216]">
             <Tab.Group>
               <Tab.List className="flex space-x-1 sm:w-2/5">
