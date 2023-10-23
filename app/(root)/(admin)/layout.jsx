@@ -1,7 +1,7 @@
 import { ProtectedLayout } from "@/components/layouts/protectLayouts";
 
 export const metadata = {
-  title: "Dashboard | pasc hub",
+  title: "Admin panel | pasc hub",
   description: "study material web app for students",
 };
 

@@ -62,7 +62,7 @@ const LoginPage = () => {
   };
 
   return (
-    <section>
+    <section className="flex items-center justify-center">
       <div className="flex flex-col items-center justify-center px-6 py-28 mx-auto md:h-screen lg:py-0">
         <div>
           <a
