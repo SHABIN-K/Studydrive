@@ -5,8 +5,8 @@ const Stepper = () => {
   };
   return (
     <ol class="flex items-center py-1 space-x-2 sm:space-x-4 text-sm sm:text-base font-medium text-center text-gray-400">
-      <li class="flex items-center text-blue-600 dark:text-blue-500">
-        <span class="flex items-center justify-center w-5 h-5 mr-2 text-xs border border-blue-600 rounded-full shrink-0 dark:border-blue-500">
+      <li class="flex items-center text-green-400">
+        <span class="flex items-center justify-center w-5 h-5 mr-2 text-xs border border-green-400 rounded-full shrink-0">
           1
         </span>
         UPLOAD
