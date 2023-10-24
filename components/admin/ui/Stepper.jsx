@@ -1,4 +1,6 @@
-const Stepper = () => {
+
+
+const Stepper = ({ steps, currentStep, onStepChange }) => {
   const style = {
     common_span:
       "flex items-center justify-center w-5 h-5 mr-2 text-xs border border-gray-500 rounded-full shrink-0 dark:border-gray-400",
@@ -12,6 +14,7 @@ const Stepper = () => {
         UPLOAD
         <svg
           class="w-3 h-3 ml-2 sm:ml-4"
+
           aria-hidden="true"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -27,9 +30,7 @@ const Stepper = () => {
         </svg>
       </li>
       <li class="flex items-center">
-        <span class={`${style.common_span}`}>
-          2
-        </span>
+        <span class={`${style.common_span}`}>2</span>
         DETAILS
         <svg
           class="w-3 h-3 ml-2 sm:ml-4"
@@ -48,9 +49,7 @@ const Stepper = () => {
         </svg>
       </li>
       <li class="flex items-center">
-        <span class={`${style.common_span}`}>
-          3
-        </span>
+        <span class={`${style.common_span}`}>3</span>
         DONE
       </li>
     </ol>
