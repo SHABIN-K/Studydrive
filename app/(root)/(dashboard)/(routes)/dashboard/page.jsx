@@ -1,25 +1,19 @@
 "use client";
+
+import { useState } from "react";
 import dynamic from "next/dynamic";
-import Upload from "@/components/admin/ui/Upload";
+
+const Stepper = dynamic(() => import("@/components/admin/ui/Stepper"));
+const DocDetails = dynamic(() => import("@/components/admin/ui/DocDetails"));
+const UploadDone = dynamic(() => import("@/components/admin/ui/UploadDone"));
+
 import AdminNavbar from "@/components/admin/ui/AdminNavbar";
 import AdminSidebar from "@/components/admin/ui/AdminSidebar";
-
-const Stepper = dynamic(() => import("@/components/admin/ui/Stepper"), {
-  ssr: false,
-});
-
-import FormButtons from "@/components/ui/FormButtons";
-import DocDetails from "@/components/admin/ui/DocDetails";
-import { useState } from "react";
-import UploadDone from "@/components/admin/ui/UploadDone";
+import Upload from "@/components/admin/ui/Upload";
 
 const MyDash = () => {
   const [activeStep, setActiveStep] = useState(0);
-  const steps = [{ label: "UPLOAD" }, { label: "DETAILS" }, { label: "DONE" }];
-
-  const handleNextBtn = () => {
-    setActiveStep(activeStep + 1);
-  };
+  const steps = ["UPLOAD", "DETAILS", "DONE"];
 
   const getSectionComponent = () => {
     switch (activeStep) {
@@ -33,6 +27,7 @@ const MyDash = () => {
         return null;
     }
   };
+
   return (
     <section className="flex h-screen font-normal">
       <div className="flex-1 flex flex-col overflow-auto">
@@ -56,12 +51,14 @@ const MyDash = () => {
                 {getSectionComponent()}
               </div>
               <div className="md:w-full md:flex md:justify-end">
-                <button
-                  onClick={() => setActiveStep(activeStep - 1)}
-                  className="btn text-white w-[11rem] text-center border-green-400 border hover:border-green-400 right-0"
-                >
-                  Previous
-                </button>
+                {activeStep !== 0 && (
+                  <button
+                    onClick={() => setActiveStep(activeStep - 1)}
+                    className="btn text-white w-[11rem] text-center border-green-400 border hover:border-green-400 right-0"
+                  >
+                    Previous
+                  </button>
+                )}
 
                 {activeStep !== steps.length - 1 && (
                   <button
