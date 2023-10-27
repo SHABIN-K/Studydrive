@@ -30,7 +30,7 @@ const MyDash = () => {
   };
 
   const handleUploadBtn = () => {
-    setIsloading(true);
+    setIsLoading(true);
     try {
       setActiveStep(activeStep + 1);
     } catch (error) {
@@ -41,7 +41,7 @@ const MyDash = () => {
   };
 
   const handleSubmitBtn = () => {
-    setIsloading(true);
+    setIsLoading(true);
     try {
       setActiveStep(activeStep + 1);
     } catch (error) {
