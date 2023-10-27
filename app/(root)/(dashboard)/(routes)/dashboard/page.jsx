@@ -13,6 +13,7 @@ import Upload from "@/components/admin/ui/Upload";
 
 const MyDash = () => {
   const [activeStep, setActiveStep] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
   const steps = ["UPLOAD", "DETAILS", "DONE"];
 
   const getSectionComponent = () => {
@@ -25,6 +26,28 @@ const MyDash = () => {
         return <UploadDone />;
       default:
         return null;
+    }
+  };
+
+  const handleUploadBtn = () => {
+    setIsloading(true);
+    try {
+      setActiveStep(activeStep + 1);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleSubmitBtn = () => {
+    setIsloading(true);
+    try {
+      setActiveStep(activeStep + 1);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -62,10 +85,13 @@ const MyDash = () => {
 
                 {activeStep !== steps.length - 1 && (
                   <button
-                    onClick={() => setActiveStep(activeStep + 1)}
+                    onClick={
+                      activeStep === 0 ? handleUploadBtn : handleSubmitBtn
+                    }
                     className="btn text-white w-[11rem] text-center border-green-400 border hover:border-green-400 right-0"
                   >
-                    Next
+                    {activeStep === 0 ? "Upload" : "Submit"}
+                    {isLoading && "ing..."}
                   </button>
                 )}
               </div>
