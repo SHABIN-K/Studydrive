@@ -6,5 +6,5 @@ export const metadata = {
 };
 
 export default function AuthLayout({ children }) {
-  return <ProtectedAuthLayout>{children}</ProtectedAuthLayout>;
+  return <section>{children}</section>;
 }
