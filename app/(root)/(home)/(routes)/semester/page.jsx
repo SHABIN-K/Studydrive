@@ -17,7 +17,7 @@ const UserSemester = () => {
               <SemCard
                 key={index}
                 data={sem}
-                route="view-modules"
+                route="view-subjects"
                 course={course}
                 category={category}
               />
