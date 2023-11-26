@@ -18,7 +18,7 @@ const DataCard = ({ data, route, course }) => {
             <Image src={img} alt={data.description} />
           </figure>
           <div className="items-center text-center">
-            <h2 className="text-base font-medium md:font-semibold font-sans md:font-mono tracking-tighter mt-2 text-[#808191]">
+            <h2 className="text-base font-medium md:font-semibold font-sans md:font-mono mt-2 text-[#808191]">
               {data.name}
             </h2>
           </div>
