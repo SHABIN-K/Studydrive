@@ -1,7 +1,27 @@
-import React from "react";
+"use client";
 
-const userSemester = () => {
-  return <div> UserSemester</div>;
+import { semester } from "@/constants";
+import { useSearchParams } from "next/navigation";
+const UserSemester = () => {
+  const searchParams = useSearchParams();
+  const name = searchParams.get("name");
+  const category = searchParams.get("category");
+  return (
+    <div>
+      <h1 className="select_header">Select Semester</h1>
+      <div className="items-center">
+        <div className="grid grid-cols-2 mt-[18px] gap-[26px]">
+          {semester.map((sem, index) => {
+            return (
+              <div key={index} className="">
+                {sem.name} Semester
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
 };
 
-export default userSemester;
+export default UserSemester;

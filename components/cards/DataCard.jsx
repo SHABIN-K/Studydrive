@@ -3,14 +3,14 @@ import Image from "next/image";
 
 import img from "public/icons/test.png";
 
-const DataCard = ({ data, route }) => {
+const DataCard = ({ data, route, course }) => {
   //https://daisyui.com/components/card/
   return (
-    <div className="rounded-lg bg-[#1c1c24] hover:bg-[#2c2f32] py-2 shadow-sm shadow-gray-500">
+    <div className="rounded-lg bg-[#1c1c24] hover:bg-[#2c2f32] py-2">
       <Link
         href={{
           pathname: `/${route}/`,
-          query: { name: data.link, number: 1 },
+          query: { name: course, category: data.link },
         }}
       >
         <div className="card cursor-pointer items-center">

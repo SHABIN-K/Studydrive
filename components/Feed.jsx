@@ -5,7 +5,7 @@ const Feed = ({ label, feedData, styleHead, style, route, cardStyle }) => {
   return (
     <div>
       <h1
-        className={`font-epilogue font-bold sm:font-semibold text-[20px] text-green-300 text-left ${styleHead}`}
+        className={`select_header ${styleHead}`}
       >
         {label}
       </h1>

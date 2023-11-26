@@ -86,6 +86,10 @@ body {
 
 /*sweetAlert custom*/
 
+.select_header {
+  @apply font-epilogue font-bold sm:font-semibold text-[20px] text-green-300 text-left;
+}
+
 /* admin  button and input*/
 .btn_table {
   @apply btn btn-xs sm:btn-sm border border-transparent font-semibold text-white bg-gray-700 hover:bg-gray-600 focus:ring-offset-gray-800 transition-all

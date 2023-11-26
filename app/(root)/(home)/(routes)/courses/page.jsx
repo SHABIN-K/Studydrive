@@ -1,17 +1,28 @@
+"use client";
 import DataCard from "@/components/cards/DataCard";
 import { category } from "@/constants";
 
+import { useSearchParams } from "next/navigation";
 
 const Mycourses = () => {
+  const searchParams = useSearchParams();
+  const search = searchParams.get("name");
   return (
     <div>
-      <h1 className="font-epilogue font-bold sm:font-semibold text-[20px] text-green-300 text-left">
+      <h1 className="select_header">
         Select Category
       </h1>
       <div className="item-center">
         <div className="grid grid-cols-2 mt-[18px] gap-[26px]">
           {category.map((category, index) => {
-            return <DataCard key={index} data={category} route="semester" />;
+            return (
+              <DataCard
+                key={index}
+                data={category}
+                route="semester"
+                course={search}
+              />
+            );
           })}
         </div>
       </div>

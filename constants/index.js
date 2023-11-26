@@ -184,3 +184,37 @@ export const courses = [
       "MCom Finance is a postgraduate program that offers specialized knowledge in financial management, preparing you for dynamic roles in the world of finance and business.",
   },
 ];
+
+
+export const semester = [
+  {
+    id: 1,
+    name: "First",
+    link: "one",
+  },
+  {
+    id: 2,
+    name: "Second",
+    link: "two",
+  },
+  {
+    id: 3,
+    name: "Third",
+    link: "three",
+  },
+  {
+    id: 4,
+    name: "Fourth",
+    link: "four",
+  },
+  {
+    id: 5,
+    name: "Fifth",
+    link: "Five",
+  },
+  {
+    id: 6,
+    name: "Sixth",
+    link: "six",
+  },
+];
