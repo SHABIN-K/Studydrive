@@ -1,10 +1,11 @@
 "use client";
 
+import SemCard from "@/components/cards/SemCard";
 import { semester } from "@/constants";
 import { useSearchParams } from "next/navigation";
 const UserSemester = () => {
   const searchParams = useSearchParams();
-  const name = searchParams.get("name");
+  const course = searchParams.get("name");
   const category = searchParams.get("category");
   return (
     <div>
@@ -13,9 +14,13 @@ const UserSemester = () => {
         <div className="grid grid-cols-2 mt-[18px] gap-[26px]">
           {semester.map((sem, index) => {
             return (
-              <div key={index} className="">
-                {sem.name} Semester
-              </div>
+              <SemCard
+                key={index}
+                data={sem}
+                route="view-modules"
+                course={course}
+                category={category}
+              />
             );
           })}
         </div>

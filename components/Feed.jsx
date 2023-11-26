@@ -9,7 +9,7 @@ const Feed = ({ label, feedData, styleHead, style, route, cardStyle }) => {
       >
         {label}
       </h1>
-      <div className={`grid grid-cols-4 md:gap-[26px] ${style}`}>
+      <div className={`grid grid-cols-3 md:gap-[26px] ${style}`}>
         {feed.map((FeedData, index) => {
           return (
             <MenuCard

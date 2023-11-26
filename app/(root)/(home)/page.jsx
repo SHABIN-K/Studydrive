@@ -19,7 +19,7 @@ export default function Home() {
           styleHead="mt-3"
           style="md:grid-cols-5  mt-4 gap-1.5 justify-between md:justify-start"
           cardStyle="mt-2 md:mt-0"
-          route="courses"
+          route="category"
         />
       </div>
     </div>

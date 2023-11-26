@@ -155,7 +155,7 @@ export const courses = [
     id: 12,
     name: "Bcom Co-operation",
     imgUrl: "/imgUrl",
-    link: "/bcomcooperation",
+    link: "bcomcooperation",
     description:
       "BCom Cooperation is an academic program that explores the principles of cooperative management and business strategies, fostering an understanding of collaborative enterprises.",
   },
@@ -210,7 +210,7 @@ export const semester = [
   {
     id: 5,
     name: "Fifth",
-    link: "Five",
+    link: "five",
   },
   {
     id: 6,
