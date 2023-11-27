@@ -3,7 +3,7 @@ import { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import { toast } from "sonner";
 
-const Upload = ({ files, setFiles }) => {
+const UploadDoc = ({ files, setFiles }) => {
   const onDrop = useCallback(
     (acceptedFiles) => {
       if (files.length + acceptedFiles.length > 3) {
@@ -31,6 +31,7 @@ const Upload = ({ files, setFiles }) => {
         "application/pdf",
         "application/msword",
         "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "application/vnd.openxmlformats-officedocument.presentationml.presentation",
       ].includes(file.type)
     ) {
       toast.error("Invalid file type. Supported types are PDF, DOC, and DOCX.");
@@ -73,7 +74,7 @@ const Upload = ({ files, setFiles }) => {
           </p>
           <a className="btn md:hidden flex mb-2 text-white">Browse my files</a>
           <p className="text-sm md:text-xs text-gray-400">
-            Supported file : pdf, doc, docx
+            Supported file : pdf, doc, docx, pptx
           </p>
           <input
             id="dropzone-file"
@@ -104,4 +105,4 @@ const Upload = ({ files, setFiles }) => {
   );
 };
 
-export default Upload;
+export default UploadDoc;

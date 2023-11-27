@@ -15,7 +15,7 @@ const SemCard = ({ data, route, course, category }) => {
       >
         <div className="card cursor-pointer items-center">
           <figure className="w-16 h-16 md:w-20 md:h-20 bg-gray-300 rounded-full overflow-hidden">
-            <Image src={img} alt="select you semester" />
+            <Image src={data.imgUrl} alt="select you semester" />
           </figure>
           <div className="items-center text-center">
             <h2 className="text-base font-medium md:font-semibold font-sans md:font-mono mt-2 text-white">

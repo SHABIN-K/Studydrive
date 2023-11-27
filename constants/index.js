@@ -1,5 +1,16 @@
 import { about, addUser, dashboard, upload } from "@/public/assets";
-import { play, qp, study, syllabus } from "@/public/icons";
+import {
+  five,
+  four,
+  one,
+  play,
+  qp,
+  six,
+  study,
+  syllabus,
+  three,
+  two,
+} from "@/public/icons";
 
 export const navlinks = [
   {
@@ -185,31 +196,37 @@ export const semester = [
     id: 1,
     name: "First",
     link: "one",
+    imgUrl: one,
   },
   {
     id: 2,
     name: "Second",
     link: "two",
+    imgUrl: two,
   },
   {
     id: 3,
     name: "Third",
     link: "three",
+    imgUrl: three,
   },
   {
     id: 4,
     name: "Fourth",
     link: "four",
+    imgUrl: four,
   },
   {
     id: 5,
     name: "Fifth",
     link: "five",
+    imgUrl: five,
   },
   {
     id: 6,
     name: "Sixth",
     link: "six",
+    imgUrl: six,
   },
 ];
 
