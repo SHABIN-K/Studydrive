@@ -57,11 +57,12 @@ export default function MyModal() {
               >
                 <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-[#1c1c24] p-6 text-left align-middle shadow-xl transition-all">
                   <Image
-                    src="/invite_img.png"
-                    width={350}
+                    src="/invite_img.webp"
+                    width={340}
                     height={100}
                     alt="invite friends"
                     className="mx-auto mb-auto my-auto"
+                    loading="lazy"
                   />
                   <Dialog.Title
                     as="h3"
