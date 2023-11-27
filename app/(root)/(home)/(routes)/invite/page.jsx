@@ -1,28 +1,30 @@
-"use client"
-import { Dialog, Transition } from '@headlessui/react'
-import { Fragment, useState } from 'react'
+"use client";
+
+import Image from "next/image";
+import { Dialog, Transition } from "@headlessui/react";
+import { Fragment, useState } from "react";
 
 export default function MyModal() {
-  const [isOpen, setIsOpen] = useState(true)
-  const [isLinkCopied, setIsLinkCopied]= useState(false) 
+  const [isOpen, setIsOpen] = useState(true);
+  const [isLinkCopied, setIsLinkCopied] = useState(false);
 
   function closeModal() {
-    setIsOpen(false)
+    setIsOpen(false);
   }
 
   const handleInviteClick = () => {
-    const link = 'https://www.your-link.com';
-    navigator.clipboard.writeText(link)
+    const link = "https://www.your-link.com";
+    navigator.clipboard
+      .writeText(link)
       .then(() => {
-        console.log('Link copied to clipboard:', link);
+        console.log("Link copied to clipboard:", link);
         setIsLinkCopied(true);
         setTimeout(() => {
           setIsLinkCopied(false);
-          
         }, 1000);
       })
       .catch((error) => {
-        console.error('Error copying link to clipboard:', error);
+        console.error("Error copying link to clipboard:", error);
       });
   };
 
@@ -54,10 +56,12 @@ export default function MyModal() {
                 leaveTo="opacity-0 scale-95"
               >
                 <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-[#1c1c24] p-6 text-left align-middle shadow-xl transition-all">
-                  <img
-                   className="mx-auto mb-auto my-auto"
-                   src="/361.png"
-                   alt="Image Alt Text"
+                  <Image
+                    src="/361.png"
+                    width={350}
+                    height={100}
+                    alt="invite friends"
+                    className="mx-auto mb-auto my-auto"
                   />
                   <Dialog.Title
                     as="h3"
@@ -67,7 +71,8 @@ export default function MyModal() {
                   </Dialog.Title>
                   <div className="mt-2">
                     <p className="text-sm text-gray-400">
-                    Maximize your learning potential – inspire your friends to join us in an exciting collaborative study journey!
+                      Maximize your learning potential – inspire your friends to
+                      join us in an exciting collaborative study journey!
                     </p>
                   </div>
 
@@ -75,16 +80,15 @@ export default function MyModal() {
                     <button
                       type="button"
                       className="inline-flex justify-center rounded-md border border-transparent bg-gray-700 px-4 py-2 text-sm font-medium text-[#4acd8d] hover:bg-gray-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                     onClick={handleInviteClick}
-                  
+                      onClick={handleInviteClick}
                     >
                       Invite Friends
                     </button>
                   </div>
                   {isLinkCopied && (
-                <div className="mt-4 text-green-500 text-sm">
-                  Link copied to clipboard!
-                </div>
+                    <div className="mt-4 text-green-500 text-sm">
+                      Link copied to clipboard!
+                    </div>
                   )}
                 </Dialog.Panel>
               </Transition.Child>
@@ -93,5 +97,5 @@ export default function MyModal() {
         </Dialog>
       </Transition>
     </>
-  )
+  );
 }
