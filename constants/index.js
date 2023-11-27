@@ -1,5 +1,5 @@
-//navbar-items
 import { about, addUser, dashboard, upload } from "@/public/assets";
+import { play, qp, study, syllabus } from "@/public/icons";
 
 export const navlinks = [
   {
@@ -29,28 +29,28 @@ export const category = [
   {
     id: 1,
     name: "Videos",
-    imgUrl: "monkey",
+    imgUrl: play,
     link: "videos",
     description: "videos lesson",
   },
   {
     id: 2,
     name: "Study Materials",
-    imgUrl: "/imgUrl",
+    imgUrl: study,
     link: "notes",
     description: "videos lesson",
   },
   {
     id: 3,
     name: "Syllabus",
-    imgUrl: "/imgUrl",
+    imgUrl: syllabus,
     link: "syllabus",
     description: "videos lesson",
   },
   {
     id: 4,
     name: "Question Papers",
-    imgUrl: "/imgUrl",
+    imgUrl: qp,
     link: "questionpapers",
     description: "videos lesson",
   },

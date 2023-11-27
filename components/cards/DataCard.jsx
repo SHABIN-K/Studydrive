@@ -1,8 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
 
-import img from "public/icons/doc.png";
-
 const DataCard = ({ data, route, course }) => {
   //https://daisyui.com/components/card/
   return (
@@ -15,10 +13,10 @@ const DataCard = ({ data, route, course }) => {
       >
         <div className="card cursor-pointer items-center">
           <figure className="w-16 h-16 md:w-20 md:h-20 bg-gray-300 rounded-full overflow-hidden">
-            <Image src={img} alt={data.description} />
+            <Image src={data.imgUrl} alt={data.description} />
           </figure>
           <div className="items-center text-center">
-            <h2 className="text-base font-medium md:font-semibold font-sans md:font-mono mt-2 text-[#808191]">
+            <h2 className="text-base font-medium md:font-semibold font-sans md:font-mono mt-2 text-white">
               {data.name}
             </h2>
           </div>
