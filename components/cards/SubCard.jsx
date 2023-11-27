@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import img from "public/icons/test.png";
+import img from "public/icons/doc.png";
 
 const SubCard = ({ data }) => {
   //https://daisyui.com/components/card/

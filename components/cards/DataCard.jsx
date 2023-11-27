@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 
-import img from "public/icons/test.png";
+import img from "public/icons/doc.png";
 
 const DataCard = ({ data, route, course }) => {
   //https://daisyui.com/components/card/
