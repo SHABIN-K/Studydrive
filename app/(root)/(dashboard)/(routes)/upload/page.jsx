@@ -1,6 +1,6 @@
 
 const Upload = () => {
-  return <div>page</div>;
+  return <div>Upload</div>;
 };
 
 export default Upload;
