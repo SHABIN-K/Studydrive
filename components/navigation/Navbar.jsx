@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 
 import { navlinks } from "@/constants";
 import { close, logo, menu, search } from "@/public/assets";
+import DialogBox from "../ui/DialogBox";
 
 const Navbar = () => {
   const router = useRouter();
@@ -14,6 +15,7 @@ const Navbar = () => {
   const menuButtonRef = useRef(null);
   const [isActive, setIsActive] = useState("Home");
   const [toggleDrawer, setToggleDrawer] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleToggleDrawer = () => {
     setToggleDrawer((prev) => !prev);
@@ -61,7 +63,7 @@ const Navbar = () => {
         </div>
       </div>
 
-{/*
+      {/*
       <div className="md:flex hidden flex-row justify-end gap-4">
         <button
           type="button"
@@ -129,7 +131,7 @@ const Navbar = () => {
                 onClick={() => {
                   setIsActive(data.name);
                   setToggleDrawer(false);
-                  router.push(data.link);
+                  data.btn ? setIsOpen(true) : router.push(data.link);
                 }}
               >
                 <Image
@@ -151,6 +153,7 @@ const Navbar = () => {
           </ul>
         </div>
       </div>
+      {isOpen && <DialogBox isOpen={isOpen} setIsOpen={setIsOpen} />}
     </nav>
   );
 };

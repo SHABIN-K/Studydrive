@@ -20,7 +20,7 @@ export const navlinks = [
   {
     name: "Share app",
     imgUrl: addUser,
-    link: "/invite",
+    btn: true,
   },
 ];
 

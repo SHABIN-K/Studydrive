@@ -8,10 +8,12 @@ import { useRouter } from "next/navigation";
 import { navlinks } from "@/constants";
 import { logo, sun } from "@/public/assets";
 import Icon from "../ui/Icon";
+import DialogBox from "../ui/DialogBox";
 
 const Sidebar = () => {
   const router = useRouter();
   const [isActive, setIsActive] = useState("Home");
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <aside className="flex justify-between items-center flex-col sticky top-5 h-[89vh]">
       <Link href="/">
@@ -32,7 +34,7 @@ const Sidebar = () => {
                   isActive={isActive}
                   handleClick={() => {
                     setIsActive(data.name);
-                    router.push(data.link);
+                    data.btn ? setIsOpen(true) : router.push(data.link);
                   }}
                 />
               </div>
@@ -40,6 +42,7 @@ const Sidebar = () => {
           })}
         </div>
         <Icon className="bg-[#1c1c24] shadow-secondary" imgUrl={sun} />
+        {isOpen && <DialogBox isOpen={isOpen} setIsOpen={setIsOpen} />}
       </div>
     </aside>
   );

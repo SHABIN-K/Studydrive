@@ -4,8 +4,7 @@ import Image from "next/image";
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 
-export default function MyModal() {
-  const [isOpen, setIsOpen] = useState(true);
+const DialogBox = ({ isOpen, setIsOpen }) => {
   const [isLinkCopied, setIsLinkCopied] = useState(false);
 
   function closeModal() {
@@ -99,4 +98,6 @@ export default function MyModal() {
       </Transition>
     </>
   );
-}
+};
+
+export default DialogBox;
