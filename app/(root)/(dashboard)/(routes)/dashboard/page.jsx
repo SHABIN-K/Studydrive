@@ -92,20 +92,20 @@ const MyDash = () => {
         {activeStep !== 0 && (
           <button
             onClick={handlePreviousBtn}
-            className="btn text-white w-[11rem] text-center border-green-400 border hover:border-green-400 right-0"
+            className="btn bg-[#1d232a] text-white w-[11rem] text-center border-green-400 border hover:border-green-400 right-0"
           >
             Previous
           </button>
         )}
         {/* Next button */}
         {activeStep !== steps.length - 1 && (
-          <button
+          <div
             onClick={activeStep === 0 ? handleNextBtn : handleSubmitBtn}
-            className="btn text-white w-[11rem] text-center border-green-400 border hover:border-green-400 right-0"
+            className="btn bg-[#1d232a] text-white w-[11rem] text-center border-green-400 border hover:border-green-400 right-0"
           >
             {activeStep === 0 ? "Upload" : "Submit"}
             {isLoading && "ing..."}
-          </button>
+          </div>
         )}
       </div>
     </div>

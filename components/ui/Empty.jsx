@@ -13,8 +13,8 @@ export const Empty = ({ label, error, reset }) => {
             layout="fill" // Add this if you want to use "fill" layout
           />
         </div>
-        <h1 className="text-muted-foreground text-2xl text-center">{label}</h1>
-        <p className="text-muted-foreground text-sm text-center select-text">
+        <h1 className="text-muted-foreground text-2xl text-center text-white">{label}</h1>
+        <p className="text-muted-foreground text-sm text-white text-center select-text">
           {error.message}
         </p>
         <button className="btn_form"

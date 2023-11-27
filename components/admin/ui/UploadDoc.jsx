@@ -72,7 +72,7 @@ const UploadDoc = ({ files, setFiles }) => {
             <span className="font-semibold">Click to upload</span>&nbsp;or&nbsp;
             <span className="font-semibold">Drag & Drop files</span>
           </p>
-          <a className="btn md:hidden flex mb-2 text-white">Browse my files</a>
+          <a className="btn bg-black md:hidden flex mb-2 text-white">Browse my files</a>
           <p className="text-sm md:text-xs text-gray-400">
             Supported file : pdf, doc, docx, pptx
           </p>
@@ -92,7 +92,7 @@ const UploadDoc = ({ files, setFiles }) => {
                 {file.name}
                 <button
                   onClick={() => removeFile(index)}
-                  className="btn btn-xs sm:btn-sm border border-gray-400 ml-2 hover:border-gray-500"
+                  className="btn btn-xs bg-[#1d232a] text-white sm:btn-sm border border-gray-400 ml-2 hover:border-gray-500"
                 >
                   Remove
                 </button>

@@ -39,30 +39,30 @@ export const navlinks = [
 export const category = [
   {
     id: 1,
-    name: "Videos",
-    imgUrl: play,
-    link: "videos",
-    description: "videos lesson",
-  },
-  {
-    id: 2,
     name: "Study Materials",
     imgUrl: study,
     link: "notes",
     description: "videos lesson",
   },
   {
-    id: 3,
+    id: 2,
     name: "Syllabus",
     imgUrl: syllabus,
     link: "syllabus",
     description: "videos lesson",
   },
   {
-    id: 4,
+    id: 3,
     name: "Question Papers",
     imgUrl: qp,
     link: "questionpapers",
+    description: "videos lesson",
+  },
+  {
+    id: 4,
+    name: "Videos",
+    imgUrl: play,
+    link: "videos",
     description: "videos lesson",
   },
 ];
