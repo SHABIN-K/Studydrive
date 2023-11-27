@@ -12,12 +12,13 @@ import Upload from "@/components/admin/ui/Upload";
 const MyDash = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+  const [files, setFiles] = useState([]);
   const steps = ["UPLOAD", "DETAILS", "DONE"];
 
   const getSectionComponent = () => {
     switch (activeStep) {
       case 0:
-        return <Upload />;
+        return <Upload files={files} setFiles={setFiles} />;
       case 1:
         return <DocDetails />;
       case 2:
