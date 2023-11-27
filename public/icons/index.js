@@ -5,7 +5,7 @@ import study from "./study.png";
 import qp from "./qp.png";
 import one from "./one.png";
 import two from "./two.png";
-import three from "./three.png";
+import three from "./three.PNG";
 import four from "./four.png";
 import five from "./five.png";
 import six from "./six.png";
