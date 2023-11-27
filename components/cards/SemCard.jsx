@@ -18,7 +18,7 @@ const SemCard = ({ data, route, course, category }) => {
             <Image src={img} alt="select you semester" />
           </figure>
           <div className="items-center text-center">
-            <h2 className="text-base font-medium md:font-semibold font-sans md:font-mono mt-2 text-[#808191]">
+            <h2 className="text-base font-medium md:font-semibold font-sans md:font-mono mt-2 text-white">
               {data.name} semester
             </h2>
           </div>

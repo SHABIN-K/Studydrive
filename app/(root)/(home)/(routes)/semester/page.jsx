@@ -11,7 +11,7 @@ const UserSemester = () => {
     <div>
       <h1 className="select_header">Select Semester</h1>
       <div className="items-center">
-        <div className="grid grid-cols-2 mt-[18px] gap-[26px]">
+        <div className="grid grid-cols-2 mt-[18px] gap-[18px]">
           {semester.map((sem, index) => {
             return (
               <SemCard
