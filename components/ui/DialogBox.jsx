@@ -17,7 +17,7 @@ const DialogBox = ({ isOpen, setIsOpen }) => {
     url: "https://paschub.vercel.app",
   };
 
-  const sharebtn = () => {
+  const handlesharebtn = () => {
     if (navigator.share) {
       navigator
         .share({
@@ -96,7 +96,7 @@ const DialogBox = ({ isOpen, setIsOpen }) => {
                     <button
                       type="button"
                       className="inline-flex justify-center rounded-md border border-transparent bg-gray-700 px-4 py-2 text-sm font-medium text-[#4acd8d] hover:bg-gray-500"
-                      onClick={(e) => sharebtn(e)}
+                      onClick={(e) => handlesharebtn(e)}
                     >
                       Invite Friends
                     </button>
