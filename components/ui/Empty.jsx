@@ -4,13 +4,14 @@ export const Empty = ({ label, error, reset }) => {
   return (
     <section>
       <div className="p-20 flex flex-col items-center justify-center">
-        <div className="relative h-72 w-72">
+        <div className="relative mb-3">
           <Image
-            src="/empty.png"
+            src="/cry.png"
             alt="Empty"
+            width={320}
+            height={300}
             priority
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            layout="fill" // Add this if you want to use "fill" layout
           />
         </div>
         <h1 className="text-muted-foreground text-2xl text-center text-white">{label}</h1>
