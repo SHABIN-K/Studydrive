@@ -10,7 +10,10 @@ import addUser from "./addUser.svg";
 import about from "./about.svg";
 import upload from "./upload.svg";
 import close from "./close.svg";
-import Cloud from "./cloud.jsx";
+import Cloud from "./cloud";
+import AdminDashIcon from "./AdminDash";
+import SettingIcon from "./setting";
+import AdminuploadIcon from "./adminupload";
 
 export {
   addUser,
@@ -26,4 +29,7 @@ export {
   menu,
   loader,
   Cloud,
+  AdminDashIcon,
+  SettingIcon,
+  AdminuploadIcon,
 };
