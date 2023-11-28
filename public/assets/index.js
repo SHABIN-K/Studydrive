@@ -11,9 +11,10 @@ import about from "./about.svg";
 import upload from "./upload.svg";
 import close from "./close.svg";
 import Cloud from "./cloud";
-import AdminDashIcon from "./AdminDash";
-import SettingIcon from "./setting";
-import AdminuploadIcon from "./adminupload";
+import AdminDashIcon from "./AdminDashIcon";
+import SettingIcon from "./SettingIcon";
+import AdminuploadIcon from "./AdminuploadIcon";
+
 
 export {
   addUser,
