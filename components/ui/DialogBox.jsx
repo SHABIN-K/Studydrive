@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
-import ShareButton from "./ShareButton";
+import { toast } from "sonner";
 
 const DialogBox = ({ isOpen, setIsOpen }) => {
   function closeModal() {
@@ -15,14 +15,32 @@ const DialogBox = ({ isOpen, setIsOpen }) => {
     content:
       "Coffeed is a publication run by Coffee (coffeeinc.in) to bring you a weekly dose of inspiration, experiments and guidance to build out your ideas.",
     url: "https://paschub.vercel.app",
-    btn: (
-      <button
-        type="button"
-        className="inline-flex justify-center rounded-md border border-transparent bg-gray-700 px-4 py-2 text-sm font-medium text-[#4acd8d] hover:bg-gray-500"
-      >
-        Invite Friends
-      </button>
-    ),
+  };
+
+  const sharebtn = () => {
+    if (navigator.share) {
+      navigator
+        .share({
+          title: post.title,
+          text: post.content,
+          url: post.url,
+        })
+        .then(() => {
+          toast("Thanks for sharing!");
+        })
+        .catch(console.error);
+    } else {
+      // navigator.clipboard.writeText(`${post.title} \n\n ${post.content} \n ${post.url}`).then(() =>{
+      //   toast("link copied")
+      // })
+      const el = document.createElement("textarea");
+      el.value = `${post.title} \n\n ${post.content} \n ${post.url}`;
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand("copy");
+      document.body.removeChild(el);
+      toast("Copied to clipboard");
+    }
   };
 
   return (
@@ -75,12 +93,13 @@ const DialogBox = ({ isOpen, setIsOpen }) => {
                   </div>
 
                   <div className="mt-4 flex justify-center">
-                    <ShareButton
-                      title={post.title}
-                      text={post.content}
-                      url={post.url}
-                      btn={post.btn}
-                    />
+                    <button
+                      type="button"
+                      className="inline-flex justify-center rounded-md border border-transparent bg-gray-700 px-4 py-2 text-sm font-medium text-[#4acd8d] hover:bg-gray-500"
+                      onClick={(e) => sharebtn(e)}
+                    >
+                      Invite Friends
+                    </button>
                   </div>
                 </Dialog.Panel>
               </Transition.Child>
