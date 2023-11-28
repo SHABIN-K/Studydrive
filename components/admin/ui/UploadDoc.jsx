@@ -72,7 +72,9 @@ const UploadDoc = ({ files, setFiles }) => {
             <span className="font-semibold">Click to upload</span>&nbsp;or&nbsp;
             <span className="font-semibold">Drag & Drop files</span>
           </p>
-          <a className="btn bg-black md:hidden flex mb-2 text-white">Browse my files</a>
+          <a className="btn bg-black md:hidden flex mb-2 text-white">
+            Browse my files
+          </a>
           <p className="text-sm md:text-xs text-gray-400">
             Supported file : pdf, doc, docx, pptx
           </p>
@@ -86,19 +88,20 @@ const UploadDoc = ({ files, setFiles }) => {
       </label>
       {files.length > 0 && (
         <div className="mt-3 w-full">
-          <ul>
-            {files.map((file, index) => (
-              <li key={index} className="text-white text-sm font-bold mt-1">
-                {file.name}
-                <button
-                  onClick={() => removeFile(index)}
-                  className="btn btn-xs bg-[#1d232a] text-white sm:btn-sm border border-gray-400 ml-2 hover:border-gray-500"
-                >
-                  Remove
-                </button>
-              </li>
-            ))}
-          </ul>
+          {files.map((file, index) => (
+            <ul
+              key={index}
+              className="flex justify-between space-y-1 items-center mr-2  ml-2 hover:bg-gray-800 rounded-lg text-white"
+            >
+              <li className="text-sm font-bold">{file.name}</li>
+              <button
+                onClick={() => removeFile(index)}
+                className="btn btn-xs bg-[#1d232a] sm:btn-sm border border-gray-400 ml-2 hover:border-gray-500"
+              >
+                Remove
+              </button>
+            </ul>
+          ))}
         </div>
       )}
     </div>

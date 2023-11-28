@@ -82,7 +82,7 @@ const MyDash = () => {
       <Stepper steps={steps} activeStep={activeStep} />
 
       {/* Section component based on the active step */}
-      <div className="bg-[#1d232a] p-3 rounded-lg text-center mt-5 border border-green-400 w-full max-h-[440px] mb-5 overflow-hidden">
+      <div className="bg-[#1d232a] p-3 rounded-lg mt-5 border border-green-400 w-full max-h-[440px] mb-5 overflow-hidden">
         {getSectionComponent()}
       </div>
 
