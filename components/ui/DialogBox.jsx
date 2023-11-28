@@ -2,29 +2,27 @@
 
 import Image from "next/image";
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
+import ShareButton from "./ShareButton";
 
 const DialogBox = ({ isOpen, setIsOpen }) => {
-  const [isLinkCopied, setIsLinkCopied] = useState(false);
-
   function closeModal() {
     setIsOpen(false);
   }
 
-  const handleInviteClick = () => {
-    const link = "https://www.your-link.com";
-    navigator.clipboard
-      .writeText(link)
-      .then(() => {
-        console.log("Link copied to clipboard:", link);
-        setIsLinkCopied(true);
-        setTimeout(() => {
-          setIsLinkCopied(false);
-        }, 1000);
-      })
-      .catch((error) => {
-        console.error("Error copying link to clipboard:", error);
-      });
+  const post = {
+    title: "Showcasing the Share button",
+    content:
+      "Coffeed is a publication run by Coffee (coffeeinc.in) to bring you a weekly dose of inspiration, experiments and guidance to build out your ideas.",
+    url: "https://paschub.vercel.app",
+    btn: (
+      <button
+        type="button"
+        className="inline-flex justify-center rounded-md border border-transparent bg-gray-700 px-4 py-2 text-sm font-medium text-[#4acd8d] hover:bg-gray-500"
+      >
+        Invite Friends
+      </button>
+    ),
   };
 
   return (
@@ -77,19 +75,13 @@ const DialogBox = ({ isOpen, setIsOpen }) => {
                   </div>
 
                   <div className="mt-4 flex justify-center">
-                    <button
-                      type="button"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-gray-700 px-4 py-2 text-sm font-medium text-[#4acd8d] hover:bg-gray-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                      onClick={handleInviteClick}
-                    >
-                      Invite Friends
-                    </button>
+                    <ShareButton
+                      title={post.title}
+                      text={post.content}
+                      url={post.url}
+                      btn={post.btn}
+                    />
                   </div>
-                  {isLinkCopied && (
-                    <div className="mt-4 text-green-500 text-sm">
-                      Link copied to clipboard!
-                    </div>
-                  )}
                 </Dialog.Panel>
               </Transition.Child>
             </div>
