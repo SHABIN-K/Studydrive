@@ -1,39 +1,65 @@
 import { DocumentTextIcon, TrashIcon } from "@heroicons/react/20/solid";
 import { useState } from "react";
+import { filesize } from "filesize";
 
 import ComboBox from "./ComboBox";
-import { courses } from "@/constants";
+import { courses, semester } from "@/constants";
+import FormField from "@/components/ui/FormField";
 
 const DocDetails = ({ files, removeFile }) => {
-  const [userCourse, setUserCourses] = useState(courses[5].name);
-  console.log(userCourse);
-  // Extract all course names
-  //const allCourses = courses.map((course) => course.name);
+  const [userCourse, setUserCourses] = useState(courses[6]);
+  const [userSemester, setUserSemester] = useState(semester[0]);
+
   return (
-    <div>
-      <div className="">
-        <h1 className="text-white font-bold">Select the course</h1>
-        <ComboBox value={userCourse} onChange={setUserCourses} data={courses} />
+    <div className="w-full">
+      <div className="flex flex-wrap justify-between mb-4 items-center space-y-1">
+        <ComboBox
+          value={userCourse}
+          onChange={setUserCourses}
+          data={courses}
+          label="Enter the course name :"
+          zIndex={5}
+        />
+        <ComboBox
+          value={userSemester}
+          onChange={setUserSemester}
+          data={semester}
+          label="Enter the Semester"
+          zIndex={4}
+        />
+        <ComboBox
+          value={userCourse}
+          onChange={setUserCourses}
+          data={courses}
+          label="Enter the Subject Name or Code :"
+          zIndex={3}
+        />
       </div>
-      <hr className="bg-gray-700 h-[2px] rounded mt-2 mr-2 ml-2 border-none mb-5" />
+      <hr className="bg-gray-700 h-[2px] rounded mx-2 my-2 border-none" />
       {files.length > 0 && (
         <div className="w-full">
-          {files.map((file, index) => (
-            <div key={index}>
-              <div className="flex justify-between items-center">
-                <p className="flex items-center mt-1">
-                  <DocumentTextIcon className="text-gray-400 w-6 h-6" />
-                  <span className="text-white font-medium text-sm">
-                    {file.name}
-                  </span>
-                </p>
-                <p className="text-gray-400 hover:text-white w-5">
-                  <TrashIcon onClick={() => removeFile(index)} />
-                </p>
+          {files.map((file, index) => {
+            console.log(file);
+            return (
+              <div key={index}>
+                <div className="flex justify-between items-center">
+                  <div className="flex items-center">
+                    <DocumentTextIcon className="text-gray-400 w-6" />
+                    <p className="">
+                      <span className="text-white font-medium text-xs">
+                        {file.name}
+                      </span>
+                      <p className="text-xs">{filesize(file.size)}</p>
+                    </p>
+                  </div>
+                  <p className="text-gray-400 hover:text-white w-5">
+                    <TrashIcon onClick={() => removeFile(index)} />
+                  </p>
+                </div>
+                <hr className="bg-gray-700 h-[2px] rounded mx-2 my-2 border-none" />
               </div>
-              <hr className="bg-gray-700 h-[2px] rounded mt-5 mr-2 ml-2 border-none" />
-            </div>
-          ))}
+            );
+          })}
         </div>
       )}
     </div>

@@ -92,8 +92,7 @@ body {
 
 /* admin  button and input*/
 .btn_table {
-  @apply btn btn-xs sm:btn-sm border border-transparent font-semibold text-white bg-gray-700 hover:bg-gray-600 focus:ring-offset-gray-800 transition-all
-  focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2;
+  @apply btn btn-xs sm:btn-sm border border-transparent font-semibold text-white bg-gray-700 hover:bg-gray-600  transition-all;
 }
 
 .btn_form {
@@ -114,11 +113,11 @@ body {
   @apply flex items-center px-5 py-2 text-sm text-white transition-colors duration-200 bg-[#1c1c24] border rounded-lg gap-x-2 sm:w-auto;
 }
 .btn_loginFormPrimary {
-  @apply btn bg-[#4acd8d] hover:bg-green-500 min-w-[75%] text-white focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center;
+  @apply btn bg-[#4acd8d] hover:bg-green-500 min-w-[75%] text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center;
 }
 
 .input_loinForm {
-  @apply border sm:text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500;
+  @apply border sm:text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white;
 }
 
 .label_loinForm {
