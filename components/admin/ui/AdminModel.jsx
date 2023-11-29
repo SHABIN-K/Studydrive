@@ -71,6 +71,7 @@ const AdminModel = ({
                             setUserData({ ...userData, userRole: newValue });
                           }}
                           data={roles}
+                          style={{ bg: "bg-white" }}
                         />
 
                         <FormField

@@ -9,19 +9,40 @@ const DocDetails = dynamic(() => import("@/components/admin/ui/DocDetails"));
 const UploadDone = dynamic(() => import("@/components/admin/ui/UploadDone"));
 
 import UploadDoc from "@/components/admin/ui/UploadDoc";
+import { courses, semester, category } from "@/constants";
 
 const MyDash = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+
   const [files, setFiles] = useState([
     {
       name: "pdf-file-for-development.pdf",
       size: 132424,
     },
   ]);
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [userCourse, setUserCourses] = useState(courses[6]);
+  const [userSubject, setUserSubject] = useState(courses[5]);
+  const [userSemester, setUserSemester] = useState(semester[0]);
+  const [userCategory, setUserCategory] = useState(category[0].name);
 
-  // Array of steps
+  const [docData, setDocData] = useState(() => ({
+    title,
+    userFile: files,
+    description,
+    userCourse,
+    userSubject,
+    userSemester,
+    userCategory,
+  }));
+
+  // Array of ste
   const steps = ["UPLOAD", "DETAILS", "DONE"];
+  
+  //Extract categories
+  const filteredCategory = category.map((data) => data.name);
 
   // Function to get the appropriate section component based on the active step
   const getSectionComponent = () => {
@@ -35,7 +56,25 @@ const MyDash = () => {
           />
         );
       case 1:
-        return <DocDetails files={files} removeFile={removeFile} />;
+        return (
+          <DocDetails
+            files={files}
+            title={title}
+            description={description}
+            userCourse={userCourse}
+            userSubject={userSubject}
+            userSemester={userSemester}
+            userCategory={userCategory}
+            setTitle={setTitle}
+            setDescription={setDescription}
+            setUserCourses={setUserCourses}
+            setUserSubject={setUserSubject}
+            setUserSemester={setUserSemester}
+            setUserCategory={setUserCategory}
+            removeFile={removeFile}
+            filteredCategory={filteredCategory}
+          />
+        );
       case 2:
         return <UploadDone />;
       default:

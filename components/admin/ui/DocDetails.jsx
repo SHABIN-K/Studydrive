@@ -3,12 +3,17 @@ import { useState } from "react";
 import { filesize } from "filesize";
 
 import ComboBox from "./ComboBox";
-import { courses, semester } from "@/constants";
+import { courses, semester, category } from "@/constants";
 import FormField from "@/components/ui/FormField";
+import RoleSelect from "./ListBox";
 
-const DocDetails = ({ files, removeFile }) => {
+const DocDetails = ({ files, removeFile, filteredCategory }) => {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const [userCourse, setUserCourses] = useState(courses[6]);
+  const [userSubject, setUserSubject] = useState(courses[5]);
   const [userSemester, setUserSemester] = useState(semester[0]);
+  const [userCategory, setUserCategory] = useState(category[0].name);
 
   return (
     <div className="w-full">
@@ -17,7 +22,7 @@ const DocDetails = ({ files, removeFile }) => {
           value={userCourse}
           onChange={setUserCourses}
           data={courses}
-          label="Enter the course name :"
+          label="Enter the Course Name"
           zIndex={5}
         />
         <ComboBox
@@ -28,38 +33,79 @@ const DocDetails = ({ files, removeFile }) => {
           zIndex={4}
         />
         <ComboBox
-          value={userCourse}
-          onChange={setUserCourses}
+          value={userSubject}
+          onChange={setUserSubject}
           data={courses}
-          label="Enter the Subject Name or Code :"
+          label="Enter the Subject Name or Code"
           zIndex={3}
         />
       </div>
       <hr className="bg-gray-700 h-[2px] rounded mx-2 my-2 border-none" />
       {files.length > 0 && (
         <div className="w-full">
-          {files.map((file, index) => {
-            console.log(file);
-            return (
-              <div key={index}>
-                <div className="flex justify-between items-center">
-                  <div className="flex items-center">
-                    <DocumentTextIcon className="text-gray-400 w-6" />
-                    <p className="">
-                      <span className="text-white font-medium text-xs">
-                        {file.name}
-                      </span>
-                      <p className="text-xs">{filesize(file.size)}</p>
-                    </p>
-                  </div>
-                  <p className="text-gray-400 hover:text-white w-5">
-                    <TrashIcon onClick={() => removeFile(index)} />
+          {files.map((file, index) => (
+            <div key={index}>
+              <div className="flex justify-between items-center">
+                <div className="flex items-center">
+                  <DocumentTextIcon className="text-gray-400 w-6" />
+                  <p className="">
+                    <span className="text-white font-medium text-sm">
+                      {file.name}
+                    </span>
+                    <p className="text-xs">{filesize(file.size)}</p>
                   </p>
                 </div>
-                <hr className="bg-gray-700 h-[2px] rounded mx-2 my-2 border-none" />
+                <p className="text-gray-400 hover:text-white w-5">
+                  <TrashIcon onClick={() => removeFile(index)} />
+                </p>
               </div>
-            );
-          })}
+              <hr className="bg-gray-700 h-[2px] rounded mx-2 my-2 border-none" />
+              <div className="space-y-2">
+                <div className="flex flex-wrap lg:flex-nowrap justify-between w-full items-center lg:px-2 lg:space-x-2">
+                  <div className="relative w-full lg:w-1/2">
+                    <FormField
+                      label="title"
+                      type="text"
+                      name="text"
+                      value={file.name.replace(/\.[^/.]+$/, "")}
+                      onChange={(e) => setTitle(e.target.value)}
+                      classLabel="label_loinForm capitalize"
+                      classInput="input_loinForm"
+                    />
+                  </div>
+                  <div className="relative w-full lg:w-1/2">
+                    <label className="label_loinForm capitalize">
+                      category
+                    </label>
+                    <RoleSelect
+                      value={userCategory}
+                      onChange={setUserCategory}
+                      data={filteredCategory}
+                      style={{ bg: "bg-gray-300" }}
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label
+                    htmlFor="description"
+                    className="label_loinForm capitalize"
+                  >
+                    description
+                  </label>
+                  <textarea
+                    id="description"
+                    name="description"
+                    rows="3"
+                    className="input_loinForm"
+                    placeholder="Write document description here"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                  ></textarea>
+                </div>
+              </div>
+              <hr className="bg-gray-700 h-[2px] rounded mx-2 my-2 border-none" />
+            </div>
+          ))}
         </div>
       )}
     </div>

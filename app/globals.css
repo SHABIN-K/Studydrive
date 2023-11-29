@@ -121,7 +121,7 @@ body {
 }
 
 .label_loinForm {
-  @apply block mb-2 text-sm font-medium text-white;
+  @apply block mb-2 text-sm font-medium md:font-semibold text-white;
 }
 /*login page button*/
 

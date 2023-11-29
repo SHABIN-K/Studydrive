@@ -22,6 +22,7 @@ const ComboBox = ({ value, onChange, data, label, zIndex }) => {
           {label}
         </Combobox.Label>
         <div className="relative mt-1">
+
           <div className="relative w-full cursor-text overflow-hidden rounded-lg text-left border-black">
             <Combobox.Input
               className="w-full bg-gray-300 py-2 pl-3 pr-10 text-sm text-black font-medium"
@@ -35,6 +36,7 @@ const ComboBox = ({ value, onChange, data, label, zIndex }) => {
               />
             </Combobox.Button>
           </div>
+
           <Transition
             as={Fragment}
             leave="transition ease-in duration-100"
@@ -86,6 +88,7 @@ const ComboBox = ({ value, onChange, data, label, zIndex }) => {
               )}
             </Combobox.Options>
           </Transition>
+          
         </div>
       </Combobox>
     </div>

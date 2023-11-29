@@ -92,6 +92,7 @@ const AdminPlayground = () => {
                   value={userRole}
                   onChange={setUserRole}
                   data={roles}
+                  style={{ bg: "bg-white" }}
                 />
 
                 <FormField
