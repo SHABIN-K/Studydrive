@@ -66,10 +66,7 @@ const AdminNavbar = ({ label }) => {
             >
               <Link href="/dashboard">
                 <li>
-                  <div className="justify-between">
-                    Dashboard
-                    <span className="badge">New</span>
-                  </div>
+                  <div>Dashboard</div>
                 </li>
               </Link>
               <Link href="/">
