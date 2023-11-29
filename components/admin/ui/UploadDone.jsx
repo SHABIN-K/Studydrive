@@ -43,7 +43,7 @@ const UploadDone = ({ isOpen, setIsOpen, handleInvite }) => {
                   </button>
 
                   <Image
-                    src="/done3.png"
+                    src="/submit.png"
                     width={340}
                     height={100}
                     alt="Done"
