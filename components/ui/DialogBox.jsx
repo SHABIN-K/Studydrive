@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import { toast } from "sonner";
+import { XMarkIcon } from "@heroicons/react/20/solid";
 
 const DialogBox = ({ isOpen, setIsOpen }) => {
   function closeModal() {
@@ -71,13 +72,10 @@ const DialogBox = ({ isOpen, setIsOpen }) => {
                 leaveTo="opacity-0 scale-95"
               >
                 <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-[#1c1c24] p-6 text-left align-middle shadow-xl transition-all">
-                  <button
-                    className="absolute top-4 right-4 text-lg text-[#4acd8d] hover:text-gray-300 cursor-pointer"
+                  <XMarkIcon
+                    className="text-[#4acd8d] hover:text-gray-300 absolute top-4 right-4 text-lg  cursor-pointer w-6 h-6"
                     onClick={closeModal}
-                  >
-                    x
-                  </button>
-
+                  />
                   <Image
                     src="/invite_img.webp"
                     width={340}
