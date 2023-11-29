@@ -22,9 +22,9 @@ const MyDash = () => {
   const getSectionComponent = () => {
     switch (activeStep) {
       case 0:
-        return <UploadDoc files={files} setFiles={setFiles} />;
+        return <UploadDoc files={files} setFiles={setFiles} removeFile={removeFile}/>;
       case 1:
-        return <DocDetails files={files} />;
+        return <DocDetails files={files} removeFile={removeFile}/>;
       case 2:
         return <UploadDone />;
       default:
@@ -63,6 +63,13 @@ const MyDash = () => {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  //Function to handle remove items from the list
+  const removeFile = (fileIndex) => {
+    const updatedFiles = [...files];
+    updatedFiles.splice(fileIndex, 1);
+    setFiles(updatedFiles);
   };
 
   return (
