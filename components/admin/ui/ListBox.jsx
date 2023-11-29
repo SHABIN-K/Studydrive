@@ -2,7 +2,7 @@ import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import { Fragment } from "react";
 
-const RoleSelect = ({ value, onChange, data, }) => {
+const ListBox = ({ value, onChange, data, }) => {
   return (
     <Listbox value={value} onChange={onChange}>
       <div className="relative mt-1">
@@ -58,4 +58,4 @@ const RoleSelect = ({ value, onChange, data, }) => {
   );
 };
 
-export default RoleSelect;
+export default ListBox;

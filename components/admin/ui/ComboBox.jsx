@@ -5,11 +5,11 @@ import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 const ComboBox = ({ value, onChange, data, label, zIndex }) => {
   const [query, setQuery] = useState("");
 
-  const filteredCourse =
+  const filteredData =
     query === ""
       ? data
-      : data.filter((course) =>
-          course.name
+      : data.filter((data) =>
+          data.name
             .toLowerCase()
             .replace(/\s+/g, "")
             .includes(query.toLowerCase().replace(/\s+/g, ""))
@@ -46,12 +46,12 @@ const ComboBox = ({ value, onChange, data, label, zIndex }) => {
               className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 sm:text-sm"
               style={{ zIndex: zIndex }}
             >
-              {filteredCourse.length === 0 && query !== "" ? (
+              {filteredData.length === 0 && query !== "" ? (
                 <div className="relative cursor-default select-none px-4 py-2 text-gray-700">
                   Nothing found.
                 </div>
               ) : (
-                filteredCourse.map((data) => (
+                filteredData.map((data) => (
                   <Combobox.Option
                     key={data.id}
                     className={({ active }) =>

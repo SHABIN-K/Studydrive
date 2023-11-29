@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import { UserValidation } from "@/libs/validations/user";
 import FormButtons from "../ui/FormButtons";
 import FormField from "../ui/FormField";
-import RoleSelect from "./ui/RoleSelect";
+import ListBox from "./ui/ListBox";
 import { roles } from ".";
 
 const AdminPlayground = () => {
@@ -88,7 +88,7 @@ const AdminPlayground = () => {
             <div className="grid w-full items-center gap-4">
               <div className="flex flex-col space-y-1.5">
                 <label className="label_form">User role</label>
-                <RoleSelect
+                <ListBox
                   value={userRole}
                   onChange={setUserRole}
                   data={roles}
