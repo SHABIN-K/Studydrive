@@ -1,5 +1,5 @@
 import { Cloud } from "@/public/assets";
-import { TrashIcon } from "@heroicons/react/20/solid";
+import { DocumentTextIcon, TrashIcon } from "@heroicons/react/20/solid";
 import { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import { toast } from "sonner";
@@ -88,10 +88,13 @@ const UploadDoc = ({ files, setFiles, removeFile }) => {
             className="mt-1 w-full hover:bg-gray-800 rounded-lg py-1"
           >
             <ul className="flex justify-between items-center mr-2 ml-2 text-white">
-              <li className="text-sm font-bold">{file.name}</li>
-              <li className="text-gray-400 hover:text-white w-5">
+              <p className="flex items-center text-sm font-medium mt-1">
+                <DocumentTextIcon className="text-gray-400 w-6 h-6" />
+                <span>{file.name}</span>
+              </p>
+              <p className="text-gray-400 hover:text-white w-5">
                 <TrashIcon onClick={() => removeFile(index)} />
-              </li>
+              </p>
             </ul>
           </div>
         ))}
