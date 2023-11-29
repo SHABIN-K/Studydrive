@@ -17,7 +17,7 @@ const ComboBox = ({ value, onChange, data }) => {
         );
 
   return (
-    <div className="w-72">
+    <div className="w-full md:w-72">
       <Combobox value={value} onChange={onChange}>
         <div className="relative mt-1">
           <div className="relative w-full cursor-text overflow-hidden rounded-lg text-left border-black">

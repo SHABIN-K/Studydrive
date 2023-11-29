@@ -5,14 +5,14 @@ import ComboBox from "./ComboBox";
 import { courses } from "@/constants";
 
 const DocDetails = ({ files, removeFile }) => {
-  const [userCourse, setUserCourses] = useState(courses[5].name);
+  const [userCourse, setUserCourses] = useState(courses[0].name);
   console.log(userCourse);
   // Extract all course names
   //const allCourses = courses.map((course) => course.name);
   return (
     <div>
-      <div className="">
-        <h1 className="text-white font-bold">Select the course</h1>
+      <div className="flex flex-wrap justify-between mb-4 items-center">
+        <h1 className="text-white font-bold">Enter the course name :</h1>
         <ComboBox value={userCourse} onChange={setUserCourses} data={courses} />
       </div>
       <hr className="bg-gray-700 h-[2px] rounded mt-2 mr-2 ml-2 border-none mb-5" />
