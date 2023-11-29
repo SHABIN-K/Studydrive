@@ -71,7 +71,7 @@ const UploadDone = ({ isOpen, setIsOpen, handleInvite }) => {
                       className="inline-flex justify-center rounded-md border border-transparent bg-gray-700 px-4 py-2 text-sm font-medium text-[#4acd8d] hover:bg-gray-500"
                       onClick={handleInvite}
                     >
-                      Done
+                      Submit
                     </button>
                   </div>
                 </Dialog.Panel>
