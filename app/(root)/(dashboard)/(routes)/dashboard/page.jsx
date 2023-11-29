@@ -1,5 +1,4 @@
 "use client";
-
 import { useState } from "react";
 import dynamic from "next/dynamic";
 import { toast } from "sonner";
@@ -14,7 +13,12 @@ import UploadDoc from "@/components/admin/ui/UploadDoc";
 const MyDash = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
-  const [files, setFiles] = useState([]);
+  const [files, setFiles] = useState([
+    {
+      name: "pdf-file-for-development.pdf",
+      size: 132424,
+    },
+  ]);
 
   // Array of steps
   const steps = ["UPLOAD", "DETAILS", "DONE"];
@@ -23,9 +27,15 @@ const MyDash = () => {
   const getSectionComponent = () => {
     switch (activeStep) {
       case 0:
-        return <UploadDoc files={files} setFiles={setFiles} />;
+        return (
+          <UploadDoc
+            files={files}
+            setFiles={setFiles}
+            removeFile={removeFile}
+          />
+        );
       case 1:
-        return <DocDetails files={files} />;
+        return <DocDetails files={files} removeFile={removeFile} />;
       case 2:
         return <UploadDone />;
       default:
@@ -66,6 +76,13 @@ const MyDash = () => {
     }
   };
 
+  //Function to handle remove items from the list
+  const removeFile = (fileIndex) => {
+    const updatedFiles = [...files];
+    updatedFiles.splice(fileIndex, 1);
+    setFiles(updatedFiles);
+  };
+
   return (
     <div className="flex flex-col items-center justify-center">
       {/* Title and description */}
@@ -81,8 +98,11 @@ const MyDash = () => {
       {/* Stepper component */}
       <Stepper steps={steps} activeStep={activeStep} />
 
-      {/* Section component based on the active step */}
+      {/* Section component based on the active step 
       <div className="bg-[#1d232a] p-3 rounded-lg mt-5 border border-green-400 w-full max-h-[440px] mb-5 overflow-hidden">
+      </div>*/}
+
+      <div className="bg-[#1d232a] p-3 rounded-lg mt-5 border border-green-400 w-full max-h-[490px] mb-5 overflow-auto">
         {getSectionComponent()}
       </div>
 
