@@ -1,19 +1,20 @@
 "use client";
 import { useState } from "react";
-import dynamic from "next/dynamic";
 import { toast } from "sonner";
+import dynamic from "next/dynamic";
 
 // Import components dynamically
 const Stepper = dynamic(() => import("@/components/admin/ui/Stepper"));
 const DocDetails = dynamic(() => import("@/components/admin/ui/DocDetails"));
 const UploadDone = dynamic(() => import("@/components/admin/ui/UploadDone"));
+
 import UploadDoc from "@/components/admin/ui/UploadDoc";
-import { courses, semester, category } from "@/constants";
+import { courses, semester, category, subjects } from "@/constants";
 
 const MyDash = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
-  const [inviteModalOpen, setInviteModalOpen] = useState(false);
+  const [submitModalOpen, setSubmitModalOpen] = useState(false);
 
   const [files, setFiles] = useState([
     {
@@ -21,28 +22,32 @@ const MyDash = () => {
       size: 132424,
     },
   ]);
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  const [title, setTitle] = useState(" ");
+  const [description, setDescription] = useState(" ");
   const [userCourse, setUserCourses] = useState(courses[6]);
-  const [userSubject, setUserSubject] = useState(courses[5]);
-  const [userSemester, setUserSemester] = useState(semester[0]);
+  const [userSubject, setUserSubject] = useState(subjects[0]);
+  const [userSemester, setUserSemester] = useState(semester[2]);
   const [userCategory, setUserCategory] = useState(category[0].name);
 
   const [docData, setDocData] = useState(() => ({
     title,
     userFile: files,
     description,
-    userCourse,
+    userCourse: {
+      link: userCourse.link,
+    },
     userSubject,
-    userSemester,
+    userSemester: {
+      link: userSemester.link,
+    },
     userCategory,
   }));
+  console.log(docData);
 
   // Array of ste
   const steps = ["UPLOAD", "DETAILS", "DONE"];
 
-  //Extract categories
-  const filteredCategory = category.map((data) => data.name);
+
 
   // Function to get the appropriate section component based on the active step
   const getSectionComponent = () => {
@@ -59,7 +64,6 @@ const MyDash = () => {
         return (
           <DocDetails
             files={files}
-            title={title}
             description={description}
             userCourse={userCourse}
             userSubject={userSubject}
@@ -71,8 +75,11 @@ const MyDash = () => {
             setUserSubject={setUserSubject}
             setUserSemester={setUserSemester}
             setUserCategory={setUserCategory}
+            courses={courses}
+            semester={semester}
+            subjects={subjects}
+            category={category}
             removeFile={removeFile}
-            filteredCategory={filteredCategory}
           />
         );
       default:
@@ -165,11 +172,8 @@ const MyDash = () => {
         )}
       </div>
 
-      {inviteModalOpen && (
-        <UploadDone
-          isOpen={inviteModalOpen}
-          setIsOpen={setInviteModalOpen}
-        />
+      {submitModalOpen && (
+        <UploadDone isOpen={submitModalOpen} setIsOpen={setSubmitModalOpen} />
       )}
     </div>
   );

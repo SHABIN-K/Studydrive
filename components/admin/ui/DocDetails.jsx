@@ -1,20 +1,31 @@
 import { DocumentTextIcon, TrashIcon } from "@heroicons/react/20/solid";
-import { useState } from "react";
 import { filesize } from "filesize";
 
 import ComboBox from "./ComboBox";
-import { courses, semester, category } from "@/constants";
 import FormField from "@/components/ui/FormField";
 import RoleSelect from "./ListBox";
 
-const DocDetails = ({ files, removeFile, filteredCategory }) => {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [userCourse, setUserCourses] = useState(courses[6]);
-  const [userSubject, setUserSubject] = useState(courses[5]);
-  const [userSemester, setUserSemester] = useState(semester[0]);
-  const [userCategory, setUserCategory] = useState(category[0].name);
-
+const DocDetails = ({
+  files,
+  description,
+  userCourse,
+  userSubject,
+  userSemester,
+  userCategory,
+  setTitle,
+  setDescription,
+  setUserCourses,
+  setUserSubject,
+  setUserSemester,
+  setUserCategory,
+  courses,
+  semester,
+  subjects,
+  category,
+  removeFile,
+}) => {
+    //Extract data 
+    const filteredCategory = category.map((data) => data.name);
   return (
     <div className="w-full">
       <div className="flex flex-wrap justify-between mb-4 items-center space-y-1">
@@ -35,7 +46,7 @@ const DocDetails = ({ files, removeFile, filteredCategory }) => {
         <ComboBox
           value={userSubject}
           onChange={setUserSubject}
-          data={courses}
+          data={subjects}
           label="Enter the Subject Name or Code"
           zIndex={3}
         />
@@ -52,7 +63,7 @@ const DocDetails = ({ files, removeFile, filteredCategory }) => {
                     <span className="text-white font-medium text-sm">
                       {file.name}
                     </span>
-                    <p className="text-xs">{filesize(file.size)}</p>
+                    <span className="text-xs">{filesize(file.size)}</span>
                   </p>
                 </div>
                 <p className="text-gray-400 hover:text-white w-5">
