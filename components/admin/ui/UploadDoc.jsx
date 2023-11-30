@@ -76,6 +76,7 @@ const UploadDoc = ({ files, setFiles, removeFile }) => {
           <p className="text-sm md:text-xs text-gray-400">
             Supported file : pdf, doc, docx, pptx
           </p>
+          <p className="text-sm md:text-xs text-gray-400">Please note that you are allowed to upload a maximum of 3 files.</p>
           <input
             id="dropzone-file"
             type="file"

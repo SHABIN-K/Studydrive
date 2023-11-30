@@ -24,8 +24,9 @@ const DocDetails = ({
   category,
   removeFile,
 }) => {
-    //Extract data 
-    const filteredCategory = category.map((data) => data.name);
+  //Extract data
+  const filteredCategory = category.map((data) => data.name);
+  
   return (
     <div className="w-full">
       <div className="flex flex-wrap justify-between mb-4 items-center space-y-1">
@@ -59,7 +60,7 @@ const DocDetails = ({
               <div className="flex justify-between items-center">
                 <div className="flex items-center">
                   <DocumentTextIcon className="text-gray-400 w-6" />
-                  <p className="">
+                  <p className="grid">
                     <span className="text-white font-medium text-sm">
                       {file.name}
                     </span>
@@ -72,12 +73,12 @@ const DocDetails = ({
               </div>
               <hr className="bg-gray-700 h-[2px] rounded mx-2 my-2 border-none" />
               <div className="space-y-2">
-                <div className="flex flex-wrap lg:flex-nowrap justify-between w-full items-center lg:px-2 lg:space-x-2">
+                <div className="flex flex-wrap lg:flex-nowrap justify-between w-full items-center lg:space-x-2">
                   <div className="relative w-full lg:w-1/2">
                     <FormField
                       label="title"
                       type="text"
-                      name="text"
+                      name={`text-${index}`}
                       value={file.name.replace(/\.[^/.]+$/, "")}
                       onChange={(e) => setTitle(e.target.value)}
                       classLabel="label_loinForm capitalize"
@@ -98,14 +99,14 @@ const DocDetails = ({
                 </div>
                 <div>
                   <label
-                    htmlFor="description"
+                    htmlFor={`description-${index}`}
                     className="label_loinForm capitalize"
                   >
                     description
                   </label>
                   <textarea
-                    id="description"
-                    name="description"
+                    id={`description-${index}`}
+                    name={`description-${index}`}
                     rows="3"
                     className="input_loinForm"
                     placeholder="Write document description here"

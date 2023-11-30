@@ -22,8 +22,8 @@ const MyDash = () => {
       size: 132424,
     },
   ]);
-  const [title, setTitle] = useState(" ");
-  const [description, setDescription] = useState(" ");
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const [userCourse, setUserCourses] = useState(courses[6]);
   const [userSubject, setUserSubject] = useState(subjects[0]);
   const [userSemester, setUserSemester] = useState(semester[2]);
@@ -31,7 +31,6 @@ const MyDash = () => {
 
   const [docData, setDocData] = useState(() => ({
     title,
-    userFile: files,
     description,
     userCourse: {
       link: userCourse.link,
@@ -41,13 +40,15 @@ const MyDash = () => {
       link: userSemester.link,
     },
     userCategory,
+    userFile: files,
   }));
-  console.log(docData);
+  //console.log(files);
+  //console.log(docData);
+  console.log("Title:", title);
+  console.log("Description:", description);
 
   // Array of ste
   const steps = ["UPLOAD", "DETAILS", "DONE"];
-
-
 
   // Function to get the appropriate section component based on the active step
   const getSectionComponent = () => {
