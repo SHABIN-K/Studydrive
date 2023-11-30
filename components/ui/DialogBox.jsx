@@ -57,7 +57,7 @@ const DialogBox = ({ isOpen, setIsOpen }) => {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-black/25" />
+            <div className="fixed inset-0 bg-black/80" aria-hidden="true" />
           </Transition.Child>
 
           <div className="fixed inset-0 overflow-y-auto">

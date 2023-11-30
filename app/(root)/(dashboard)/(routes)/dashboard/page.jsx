@@ -3,18 +3,17 @@ import { useState } from "react";
 import dynamic from "next/dynamic";
 import { toast } from "sonner";
 
+
 // Import components dynamically
 const Stepper = dynamic(() => import("@/components/admin/ui/Stepper"));
 const DocDetails = dynamic(() => import("@/components/admin/ui/DocDetails"));
 const UploadDone = dynamic(() => import("@/components/admin/ui/UploadDone"));
-
 import UploadDoc from "@/components/admin/ui/UploadDoc";
 import { courses, semester, category } from "@/constants";
 
 const MyDash = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
-
   const [files, setFiles] = useState([
     {
       name: "pdf-file-for-development.pdf",
@@ -76,11 +75,12 @@ const MyDash = () => {
           />
         );
       case 2:
-        return <UploadDone />;
+        return <UploadDone isOpen={inviteModalOpen} setIsOpen={setInviteModalOpen} handleInvite={handleInvite} />;
       default:
         return null;
     }
   };
+ 
 
   // Function to handle the "Previous" button click
   const handlePreviousBtn = () => {
@@ -103,11 +103,15 @@ const MyDash = () => {
     setIsLoading(false);
   };
 
+  const handleInvite = () => {
+    console.log("Inviting friends...");
+  };
+
   // Function to handle the "Submit" button click
   const handleSubmitBtn = () => {
     setIsLoading(true);
     try {
-      setActiveStep(activeStep + 1);
+      setInviteModalOpen(true);
     } catch (error) {
       console.log(error);
     } finally {
@@ -165,8 +169,12 @@ const MyDash = () => {
             {activeStep === 0 ? "Upload" : "Submit"}
             {isLoading && "ing..."}
           </div>
+
         )}
       </div>
+      {inviteModalOpen && (
+        <UploadDone isOpen={inviteModalOpen} setIsOpen={setInviteModalOpen} handleInvite={handleInvite}/>
+      )}
     </div>
   );
 };
