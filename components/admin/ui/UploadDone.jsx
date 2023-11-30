@@ -3,7 +3,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import { XMarkIcon } from "@heroicons/react/20/solid";
 
-const UploadDone = ({ isOpen, setIsOpen, handleInvite }) => {
+const UploadDone = ({ isOpen, setIsOpen }) => {
   const closeModal = () => {
     setIsOpen(false);
   };
@@ -67,10 +67,10 @@ const UploadDone = ({ isOpen, setIsOpen, handleInvite }) => {
                   <div className="mt-4 flex justify-center">
                     <button
                       type="button"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-gray-700 px-4 py-2 text-sm font-medium text-[#4acd8d] hover:bg-gray-500"
-                      onClick={handleInvite}
+                      className="inline-flex justify-center rounded-md border border-transparent bg-gray-700 px-6 py-2 text-base font-medium text-[#4acd8d] hover:bg-gray-500"
+                      onClick={closeModal}
                     >
-                      Submit
+                      ok
                     </button>
                   </div>
                 </Dialog.Panel>

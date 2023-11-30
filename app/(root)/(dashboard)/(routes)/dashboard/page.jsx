@@ -101,10 +101,6 @@ const MyDash = () => {
     setIsLoading(false);
   };
 
-  const handleInvite = () => {
-    console.log("Inviting friends...");
-  };
-
   // Function to handle the "Submit" button click
   const handleSubmitBtn = () => {
     setIsLoading(true);
@@ -173,7 +169,6 @@ const MyDash = () => {
         <UploadDone
           isOpen={inviteModalOpen}
           setIsOpen={setInviteModalOpen}
-          handleInvite={handleInvite}
         />
       )}
     </div>
