@@ -1,9 +1,10 @@
 import { Cloud } from "@/public/assets";
+import { DocumentTextIcon, TrashIcon } from "@heroicons/react/20/solid";
 import { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import { toast } from "sonner";
 
-const UploadDoc = ({ files, setFiles }) => {
+const UploadDoc = ({ files, setFiles, removeFile }) => {
   const onDrop = useCallback(
     (acceptedFiles) => {
       if (files.length + acceptedFiles.length > 3) {
@@ -38,12 +39,6 @@ const UploadDoc = ({ files, setFiles }) => {
       return false;
     }
     return true;
-  };
-
-  const removeFile = (fileIndex) => {
-    const updatedFiles = [...files];
-    updatedFiles.splice(fileIndex, 1);
-    setFiles(updatedFiles);
   };
 
   const { getRootProps, getInputProps } = useDropzone({
@@ -86,24 +81,23 @@ const UploadDoc = ({ files, setFiles }) => {
           />
         </div>
       </label>
-      {files.length > 0 && (
-        <div className="mt-3 w-full">
-          {files.map((file, index) => (
-            <ul
-              key={index}
-              className="flex justify-between space-y-1 items-center mr-2  ml-2 hover:bg-gray-800 rounded-lg text-white"
-            >
-              <li className="text-sm font-bold">{file.name}</li>
-              <button
-                onClick={() => removeFile(index)}
-                className="btn btn-xs bg-[#1d232a] sm:btn-sm border border-gray-400 ml-2 hover:border-gray-500"
-              >
-                Remove
-              </button>
+      {files.length > 0 &&
+        files.map((file, index) => (
+          <div
+            key={index}
+            className="mt-1 w-full hover:bg-gray-800 rounded-lg py-1"
+          >
+            <ul className="flex justify-between items-center mr-2 ml-2 text-white">
+              <p className="flex items-center text-sm font-medium mt-1">
+                <DocumentTextIcon className="text-gray-400 w-6 h-6" />
+                <span>{file.name}</span>
+              </p>
+              <p className="text-gray-400 hover:text-white w-5">
+                <TrashIcon onClick={() => removeFile(index)} />
+              </p>
             </ul>
-          ))}
-        </div>
-      )}
+          </div>
+        ))}
     </div>
   );
 };

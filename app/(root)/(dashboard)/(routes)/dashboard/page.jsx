@@ -1,5 +1,4 @@
 "use client";
-
 import { useState } from "react";
 import dynamic from "next/dynamic";
 import { toast } from "sonner";
@@ -10,23 +9,71 @@ const Stepper = dynamic(() => import("@/components/admin/ui/Stepper"));
 const DocDetails = dynamic(() => import("@/components/admin/ui/DocDetails"));
 const UploadDone = dynamic(() => import("@/components/admin/ui/UploadDone"));
 import UploadDoc from "@/components/admin/ui/UploadDoc";
+import { courses, semester, category } from "@/constants";
 
 const MyDash = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
-  const [files, setFiles] = useState([]);
-  const [inviteModalOpen , setInviteModalOpen] = useState(false);
+  const [files, setFiles] = useState([
+    {
+      name: "pdf-file-for-development.pdf",
+      size: 132424,
+    },
+  ]);
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [userCourse, setUserCourses] = useState(courses[6]);
+  const [userSubject, setUserSubject] = useState(courses[5]);
+  const [userSemester, setUserSemester] = useState(semester[0]);
+  const [userCategory, setUserCategory] = useState(category[0].name);
 
-  // Array of steps
+  const [docData, setDocData] = useState(() => ({
+    title,
+    userFile: files,
+    description,
+    userCourse,
+    userSubject,
+    userSemester,
+    userCategory,
+  }));
+
+  // Array of ste
   const steps = ["UPLOAD", "DETAILS", "DONE"];
+  
+  //Extract categories
+  const filteredCategory = category.map((data) => data.name);
 
   // Function to get the appropriate section component based on the active step
   const getSectionComponent = () => {
     switch (activeStep) {
       case 0:
-        return <UploadDoc files={files} setFiles={setFiles} />;
+        return (
+          <UploadDoc
+            files={files}
+            setFiles={setFiles}
+            removeFile={removeFile}
+          />
+        );
       case 1:
-        return <DocDetails files={files} />;
+        return (
+          <DocDetails
+            files={files}
+            title={title}
+            description={description}
+            userCourse={userCourse}
+            userSubject={userSubject}
+            userSemester={userSemester}
+            userCategory={userCategory}
+            setTitle={setTitle}
+            setDescription={setDescription}
+            setUserCourses={setUserCourses}
+            setUserSubject={setUserSubject}
+            setUserSemester={setUserSemester}
+            setUserCategory={setUserCategory}
+            removeFile={removeFile}
+            filteredCategory={filteredCategory}
+          />
+        );
       case 2:
         return <UploadDone isOpen={inviteModalOpen} setIsOpen={setInviteModalOpen} handleInvite={handleInvite} />;
       default:
@@ -72,6 +119,13 @@ const MyDash = () => {
     }
   };
 
+  //Function to handle remove items from the list
+  const removeFile = (fileIndex) => {
+    const updatedFiles = [...files];
+    updatedFiles.splice(fileIndex, 1);
+    setFiles(updatedFiles);
+  };
+
   return (
     <div className="flex flex-col items-center justify-center">
       {/* Title and description */}
@@ -87,8 +141,11 @@ const MyDash = () => {
       {/* Stepper component */}
       <Stepper steps={steps} activeStep={activeStep} />
 
-      {/* Section component based on the active step */}
+      {/* Section component based on the active step 
       <div className="bg-[#1d232a] p-3 rounded-lg mt-5 border border-green-400 w-full max-h-[440px] mb-5 overflow-hidden">
+      </div>*/}
+
+      <div className="bg-[#1d232a] p-3 rounded-lg mt-5 border border-green-400 w-full max-h-[490px] mb-5 overflow-auto">
         {getSectionComponent()}
       </div>
 

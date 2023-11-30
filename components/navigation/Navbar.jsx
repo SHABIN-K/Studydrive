@@ -45,7 +45,7 @@ const Navbar = () => {
   return (
     <nav className="flex md:flex-row flex-col-reverse justify-between mb-[35px] gap-6">
       <p className=" text-[#4acd8d] align-middle text-center subpixel-antialiased text-3xl font-bold hidden sm:block">
-        Pasc Hub
+        Pasc Hub <span className="badge">beta</span>
       </p>
 
       <div className="lg:flex-1 flex flex-row max-w-[658px] py-2 pl-4 pr-2 h-[52px] bg-[#1c1c24] rounded-[100px]">
@@ -98,7 +98,7 @@ const Navbar = () => {
         </div>
 
         <p className="text-[#4acd8d] align-middle text-center subpixel-antialiased text-3xl font-bold">
-          Pasc Hub
+          Pasc Hub<span className="badge">beta</span>
         </p>
 
         <div
