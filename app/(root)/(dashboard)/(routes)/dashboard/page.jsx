@@ -3,7 +3,6 @@ import { useState } from "react";
 import dynamic from "next/dynamic";
 import { toast } from "sonner";
 
-
 // Import components dynamically
 const Stepper = dynamic(() => import("@/components/admin/ui/Stepper"));
 const DocDetails = dynamic(() => import("@/components/admin/ui/DocDetails"));
@@ -14,6 +13,8 @@ import { courses, semester, category } from "@/constants";
 const MyDash = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+  const [inviteModalOpen, setInviteModalOpen] = useState(false);
+
   const [files, setFiles] = useState([
     {
       name: "pdf-file-for-development.pdf",
@@ -39,7 +40,7 @@ const MyDash = () => {
 
   // Array of ste
   const steps = ["UPLOAD", "DETAILS", "DONE"];
-  
+
   //Extract categories
   const filteredCategory = category.map((data) => data.name);
 
@@ -74,13 +75,10 @@ const MyDash = () => {
             filteredCategory={filteredCategory}
           />
         );
-      case 2:
-        return <UploadDone isOpen={inviteModalOpen} setIsOpen={setInviteModalOpen} handleInvite={handleInvite} />;
       default:
         return null;
     }
   };
- 
 
   // Function to handle the "Previous" button click
   const handlePreviousBtn = () => {
@@ -103,14 +101,11 @@ const MyDash = () => {
     setIsLoading(false);
   };
 
-  const handleInvite = () => {
-    console.log("Inviting friends...");
-  };
-
   // Function to handle the "Submit" button click
   const handleSubmitBtn = () => {
     setIsLoading(true);
     try {
+      //setActiveStep(activeStep + 1);
       setInviteModalOpen(true);
     } catch (error) {
       console.log(error);
@@ -141,9 +136,7 @@ const MyDash = () => {
       {/* Stepper component */}
       <Stepper steps={steps} activeStep={activeStep} />
 
-      {/* Section component based on the active step 
-      <div className="bg-[#1d232a] p-3 rounded-lg mt-5 border border-green-400 w-full max-h-[440px] mb-5 overflow-hidden">
-      </div>*/}
+      {/* Section component based on the active step*/}
 
       <div className="bg-[#1d232a] p-3 rounded-lg mt-5 border border-green-400 w-full max-h-[490px] mb-5 overflow-auto">
         {getSectionComponent()}
@@ -169,11 +162,14 @@ const MyDash = () => {
             {activeStep === 0 ? "Upload" : "Submit"}
             {isLoading && "ing..."}
           </div>
-
         )}
       </div>
+
       {inviteModalOpen && (
-        <UploadDone isOpen={inviteModalOpen} setIsOpen={setInviteModalOpen} handleInvite={handleInvite}/>
+        <UploadDone
+          isOpen={inviteModalOpen}
+          setIsOpen={setInviteModalOpen}
+        />
       )}
     </div>
   );

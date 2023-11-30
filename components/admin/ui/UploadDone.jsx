@@ -1,8 +1,9 @@
 import Image from "next/image";
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
+import { XMarkIcon } from "@heroicons/react/20/solid";
 
-const UploadDone = ({ isOpen, setIsOpen, handleInvite }) => {
+const UploadDone = ({ isOpen, setIsOpen }) => {
   const closeModal = () => {
     setIsOpen(false);
   };
@@ -35,12 +36,10 @@ const UploadDone = ({ isOpen, setIsOpen, handleInvite }) => {
                 leaveTo="opacity-0 scale-95"
               >
                 <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-[#1c1c24] p-6 text-left align-middle shadow-xl transition-all">
-                  <button
-                    className="absolute top-4 right-4 text-lg text-[#4acd8d] hover:text-gray-300 cursor-pointer"
+                  <XMarkIcon
+                    className="text-[#4acd8d] hover:text-gray-300 absolute top-4 right-4 text-lg  cursor-pointer w-6 h-6"
                     onClick={closeModal}
-                  >
-                    x
-                  </button>
+                  />
 
                   <Image
                     src="/submit.png"
@@ -68,10 +67,10 @@ const UploadDone = ({ isOpen, setIsOpen, handleInvite }) => {
                   <div className="mt-4 flex justify-center">
                     <button
                       type="button"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-gray-700 px-4 py-2 text-sm font-medium text-[#4acd8d] hover:bg-gray-500"
-                      onClick={handleInvite}
+                      className="inline-flex justify-center rounded-md border border-transparent bg-gray-700 px-6 py-2 text-base font-medium text-[#4acd8d] hover:bg-gray-500"
+                      onClick={closeModal}
                     >
-                      Submit
+                      ok
                     </button>
                   </div>
                 </Dialog.Panel>
