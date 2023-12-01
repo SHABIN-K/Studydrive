@@ -1,32 +1,54 @@
-import { DocumentTextIcon, TrashIcon } from "@heroicons/react/20/solid";
 import { filesize } from "filesize";
+import { useEffect, useState } from "react";
+import { DocumentTextIcon, TrashIcon } from "@heroicons/react/20/solid";
 
 import ComboBox from "./ComboBox";
-import FormField from "@/components/ui/FormField";
 import RoleSelect from "./ListBox";
+import FormField from "@/components/ui/FormField";
+import { courses, semester, category, subjects } from "@/constants";
 
-const DocDetails = ({
-  files,
-  description,
-  userCourse,
-  userSubject,
-  userSemester,
-  userCategory,
-  setTitle,
-  setDescription,
-  setUserCourses,
-  setUserSubject,
-  setUserSemester,
-  setUserCategory,
-  courses,
-  semester,
-  subjects,
-  category,
-  removeFile,
-}) => {
+const DocDetails = ({ files, removeFile, fileDetails, setFileDetails }) => {
+  const [userCourse, setUserCourses] = useState(courses[6]);
+  const [userSubject, setUserSubject] = useState(subjects[0]);
+  const [userSemester, setUserSemester] = useState(semester[2]);
+
+  // useEffect to update fileDetails when dependencies change
+  useEffect(() => {
+    setFileDetails(
+      files.map((file) => ({
+        title: file.name.replace(/\.[^/.]+$/, ""),
+        description: "",
+        category: category[0].name,
+        course: userCourse.link,
+        semester: userSemester.link,
+        subject: userSubject.link,
+      }))
+    );
+  }, [files, userCourse, userSubject, userSemester, setFileDetails]);
+
+  console.log(fileDetails);
+
+  const handleTitleChange = (index, value) => {
+    const updatedDetails = [...fileDetails];
+    updatedDetails[index].title = value;
+    setFileDetails(updatedDetails);
+  };
+
+  const handleDescriptionChange = (index, value) => {
+    const updatedDetails = [...fileDetails];
+    updatedDetails[index].description = value;
+    setFileDetails(updatedDetails);
+  };
+
+  const handleCategoryChange = (index, value) => {
+    const updatedDetails = [...fileDetails];
+    updatedDetails[index].category = value;
+    setFileDetails(updatedDetails);
+  };
+
   //Extract data
   const filteredCategory = category.map((data) => data.name);
-  
+
   return (
     <div className="w-full">
       <div className="flex flex-wrap justify-between mb-4 items-center space-y-1">
@@ -79,8 +101,9 @@ const DocDetails = ({
                       label="title"
                       type="text"
                       name={`text-${index}`}
-                      value={file.name.replace(/\.[^/.]+$/, "")}
-                      onChange={(e) => setTitle(e.target.value)}
+                      placeholder="Enter your title here"
+                      value={fileDetails[index]?.title || ""}
+                      onChange={(e) => handleTitleChange(index, e.target.value)}
                       classLabel="label_loinForm capitalize"
                       classInput="input_loinForm"
                     />
@@ -90,8 +113,8 @@ const DocDetails = ({
                       category
                     </label>
                     <RoleSelect
-                      value={userCategory}
-                      onChange={setUserCategory}
+                      value={fileDetails[index]?.category || ""}
+                      onChange={(value) => handleCategoryChange(index, value)}
                       data={filteredCategory}
                       style={{ bg: "bg-gray-300" }}
                     />
@@ -110,8 +133,10 @@ const DocDetails = ({
                     rows="3"
                     className="input_loinForm"
                     placeholder="Write document description here"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
+                    value={fileDetails[index]?.description || ""}
+                    onChange={(e) =>
+                      handleDescriptionChange(index, e.target.value)
+                    }
                   ></textarea>
                 </div>
               </div>
