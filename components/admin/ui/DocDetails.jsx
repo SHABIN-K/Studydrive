@@ -72,6 +72,7 @@ const DocDetails = ({ files, removeFile, fileDetails, setFileDetails }) => {
           data={subjects}
           label="Enter the Subject Name or Code"
           zIndex={3}
+          subTrue="subject"
         />
       </div>
       <hr className="bg-gray-700 h-[2px] rounded mx-2 my-2 border-none" />
