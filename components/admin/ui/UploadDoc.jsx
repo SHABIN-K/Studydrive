@@ -47,11 +47,14 @@ const UploadDoc = ({ files, setFiles, removeFile }) => {
         onDrop(acceptedFiles);
       }
     },
-    accept: [
-      "application/pdf",
-      "application/msword",
-      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-    ],
+    accept: {
+      "application/pdf": [".pdf"],
+      "application/msword": [".doc"],
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
+        [".docx"],
+      "application/vnd.openxmlformats-officedocument.presentationml.presentation":
+        [".pptx"],
+    },
   });
 
   return (
@@ -73,6 +76,7 @@ const UploadDoc = ({ files, setFiles, removeFile }) => {
           <p className="text-sm md:text-xs text-gray-400">
             Supported file : pdf, doc, docx, pptx
           </p>
+          <p className="text-sm md:text-xs text-gray-400">Please note that you are allowed to upload a maximum of 3 files.</p>
           <input
             id="dropzone-file"
             type="file"
