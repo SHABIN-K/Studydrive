@@ -10,46 +10,14 @@ const DocDetails = dynamic(() => import("@/components/admin/ui/DocDetails"));
 const UploadDone = dynamic(() => import("@/components/admin/ui/UploadDone"));
 
 import UploadDoc from "@/components/admin/ui/UploadDoc";
-import { courses, semester, category, subjects } from "@/constants";
 
 const Upload = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [submitModalOpen, setSubmitModalOpen] = useState(false);
 
-  const [files, setFiles] = useState([
-    {
-      name: "pdf-file-for-development.pdf",
-      size: 132424,
-    },
-  ]);
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [userCourse, setUserCourses] = useState(courses[6]);
-  const [userSubject, setUserSubject] = useState(subjects[0]);
-  const [userSemester, setUserSemester] = useState(semester[2]);
-  const [userCategory, setUserCategory] = useState(category[0].name);
-
-  const [docData, setDocData] = useState(() => ({
-    title,
-    description,
-    userCourse: {
-      link: userCourse.link,
-    },
-    userSubject,
-    userSemester: {
-      link: userSemester.link,
-    },
-    userCategory,
-    userFile: files,
-  }));
-  //console.log(files);
-  //console.log(docData);
-  console.log("Title:", title);
-  console.log("Description:", description);
-
-  // Array of ste
-  const steps = ["UPLOAD", "DETAILS", "DONE"];
+  const [files, setFiles] = useState([]);
+  const [fileDetails, setFileDetails] = useState([]);
 
   // Function to get the appropriate section component based on the active step
   const getSectionComponent = () => {
@@ -66,22 +34,9 @@ const Upload = () => {
         return (
           <DocDetails
             files={files}
-            description={description}
-            userCourse={userCourse}
-            userSubject={userSubject}
-            userSemester={userSemester}
-            userCategory={userCategory}
-            setTitle={setTitle}
-            setDescription={setDescription}
-            setUserCourses={setUserCourses}
-            setUserSubject={setUserSubject}
-            setUserSemester={setUserSemester}
-            setUserCategory={setUserCategory}
-            courses={courses}
-            semester={semester}
-            subjects={subjects}
-            category={category}
             removeFile={removeFile}
+            setFileDetails={setFileDetails}
+            fileDetails={fileDetails}
           />
         );
       default:
@@ -89,6 +44,25 @@ const Upload = () => {
     }
   };
 
+  // Function to handle the "Submit" button click
+  const handleSubmitBtn = () => {
+    setIsLoading(true);
+    try {
+      //setActiveStep(activeStep + 1);
+      setSubmitModalOpen(true);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  //Function to handle remove items from the list
+  const removeFile = (fileIndex) => {
+    const updatedFiles = [...files];
+    updatedFiles.splice(fileIndex, 1);
+    setFiles(updatedFiles);
+  };
   // Function to handle the "Previous" button click
   const handlePreviousBtn = () => {
     setActiveStep(activeStep - 1);
@@ -110,25 +84,8 @@ const Upload = () => {
     setIsLoading(false);
   };
 
-  // Function to handle the "Submit" button click
-  const handleSubmitBtn = () => {
-    setIsLoading(true);
-    try {
-      //setActiveStep(activeStep + 1);
-      setInviteModalOpen(true);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  //Function to handle remove items from the list
-  const removeFile = (fileIndex) => {
-    const updatedFiles = [...files];
-    updatedFiles.splice(fileIndex, 1);
-    setFiles(updatedFiles);
-  };
+  // Array of ste
+  const steps = ["UPLOAD", "DETAILS", "DONE"];
 
   return (
     <div className="flex flex-col items-center justify-center">

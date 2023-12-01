@@ -82,7 +82,8 @@ const DialogBox = ({ isOpen, setIsOpen }) => {
                     height={100}
                     alt="invite friends"
                     className="mx-auto mb-auto my-auto"
-                    loading="lazy"
+                    priority
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                   <Dialog.Title
                     as="h3"
