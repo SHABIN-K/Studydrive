@@ -3,7 +3,7 @@ import { Dialog, Transition } from "@headlessui/react";
 
 import FormButtons from "../../ui/FormButtons";
 import FormField from "../../ui/FormField";
-import RoleSelect from "./RoleSelect";
+import ListBox from "./ListBox";
 import { roles } from "..";
 
 const AdminModel = ({
@@ -65,12 +65,13 @@ const AdminModel = ({
                     <div className="grid w-full items-center gap-4">
                       <div className="flex flex-col space-y-1.5">
                         <label className="label_form">User role</label>
-                        <RoleSelect
+                        <ListBox
                           value={userData.userRole}
                           onChange={(newValue) => {
                             setUserData({ ...userData, userRole: newValue });
                           }}
                           data={roles}
+                          style={{ bg: "bg-white" }}
                         />
 
                         <FormField

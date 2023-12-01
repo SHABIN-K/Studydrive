@@ -1,15 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { toast } from "sonner";
 
 import { UserValidation } from "@/libs/validations/user";
 import FormButtons from "../ui/FormButtons";
 import FormField from "../ui/FormField";
-import RoleSelect from "./ui/RoleSelect";
+import ListBox from "./ui/ListBox";
 import { roles } from ".";
 
 const AdminPlayground = () => {
-  //const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const [userRole, setUserRole] = useState(roles[1]);
@@ -17,6 +16,10 @@ const AdminPlayground = () => {
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
+  useEffect(() => {
+    const defaultPassword = process.env.NEXT_PUBLIC_DEFAULT_PASSWORD;
+    setPassword(defaultPassword || "");
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,6 +32,7 @@ const AdminPlayground = () => {
       password,
       phoneNumber,
     };
+    console.log(userInput);
 
     try {
       // Validate the user input
@@ -70,7 +74,6 @@ const AdminPlayground = () => {
     setName("");
     setEmail("");
     setPhoneNumber("");
-    setPassword("");
   };
 
   return (
@@ -88,10 +91,11 @@ const AdminPlayground = () => {
             <div className="grid w-full items-center gap-4">
               <div className="flex flex-col space-y-1.5">
                 <label className="label_form">User role</label>
-                <RoleSelect
+                <ListBox
                   value={userRole}
                   onChange={setUserRole}
                   data={roles}
+                  style={{ bg: "bg-white" }}
                 />
 
                 <FormField
@@ -121,16 +125,6 @@ const AdminPlayground = () => {
                   value={phoneNumber}
                   placeholder="+912344353434"
                   onChange={(e) => setPhoneNumber(e.target.value)}
-                  classLabel="label_form"
-                  classInput="input_form"
-                />
-                <FormField
-                  label="Password"
-                  type="password"
-                  name="phonenumber"
-                  value={password}
-                  placeholder="••••••••"
-                  onChange={(e) => setPassword(e.target.value)}
                   classLabel="label_form"
                   classInput="input_form"
                 />
