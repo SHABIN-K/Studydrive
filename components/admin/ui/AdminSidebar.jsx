@@ -45,16 +45,14 @@ const AdminSidebar = () => {
               <AdminDashIcon />
               <span className="mx-4 font-medium">Dashboard</span>
             </Link>
+            <Link href="/upload" className="btn_sidebar">
+              <AdminuploadIcon />
+              <span className="mx-4 font-medium">Upload</span>
+            </Link>
             <Link href="/" className="btn_sidebar">
               <AdminDashIcon />
               <span className="mx-4 font-medium">Home</span>
             </Link>
-
-            <a className="btn_sidebar">
-              <AdminuploadIcon />
-              <span className="mx-4 font-medium">Upload</span>
-            </a>
-
             <a className="btn_sidebar" onClick={handleSignOutButton}>
               <SettingIcon />
               <span className="mx-4 font-medium">Logout</span>
@@ -62,7 +60,9 @@ const AdminSidebar = () => {
           </nav>
         </div>
       </div>
-      <div className="font-medium text-xs text-gray-400 mb-5 mr-5">paschub@2023</div>
+      <div className="font-medium text-xs text-gray-400 mb-5 mr-5">
+        paschub@2023
+      </div>
     </aside>
   );
 };
