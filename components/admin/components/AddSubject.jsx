@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 import { toast } from "sonner";
 import { PlusIcon } from "@heroicons/react/20/solid";
 
@@ -6,11 +7,12 @@ import ComboBox from "../ui/ComboBox";
 import { courses, semester } from "@/constants";
 import FormField from "@/components/ui/FormField";
 import FormButtons from "@/components/ui/FormButtons";
+import { SubjectValidation } from "@/libs/validations/subject";
 
 const AddSubject = () => {
   const [isLoading, setIsLoading] = useState(false);
 
-  const [userCourse, setUserCourses] = useState(courses[6]);
+  const [courseName, setCourseName] = useState(courses[6]);
   const [userSemester, setUserSemester] = useState(semester[2]);
   const [subjectCode, setsubjectCode] = useState("");
   const [subjectName, setSubjectName] = useState("");
@@ -21,17 +23,56 @@ const AddSubject = () => {
       "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5",
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
+
+    // Validate user input using the schema
+    const userInput = {
+      courseName: courseName.link,
+      userSemester: userSemester.link,
+      subjectCode,
+      subjectName,
+    };
+
     try {
-      console.log("hello world");
+      // Validate the user input
+      const validation = SubjectValidation.addSubject.safeParse(userInput);
+
+      //if validation is failure, return error message
+      if (validation.success === false) {
+        const { issues } = validation.error;
+        issues.forEach((err) => {
+          toast.error(err.message);
+        });
+      } else {
+        // If validation is successful, make the API request
+        const response = await axios.post("/api/subject", {
+          courseName: courseName.link,
+          userSemester: userSemester.link,
+          subjectCode,
+          subjectName,
+        });
+        if (response.statusText === "FAILED") {
+          toast.error(response.data);
+        } else {
+          toast.success("Successfully created");
+          handleReset();
+        }
+      }
     } catch (error) {
       console.error("NEXT_AUTH Error: " + error);
-      toast.error("something went wrong during login attempt");
+      toast.error("something went wrong ");
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const handleReset = () => {
+    setCourseName(courses[6]);
+    setUserSemester(semester[2]);
+    setsubjectCode("");
+    setSubjectName("");
   };
 
   return (
@@ -47,8 +88,8 @@ const AddSubject = () => {
           <div class="grid gap-4 mb-4 sm:grid-cols-2">
             <div>
               <ComboBox
-                value={userCourse}
-                onChange={setUserCourses}
+                value={courseName}
+                onChange={setCourseName}
                 data={courses}
                 label="Course Name"
                 zIndex={5}
@@ -69,7 +110,7 @@ const AddSubject = () => {
             </div>
             <div>
               <FormField
-                label="Course Code"
+                label="Subject Code"
                 type="text"
                 name="coursecode"
                 value={subjectCode}

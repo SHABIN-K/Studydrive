@@ -16,6 +16,7 @@ const AdminPlayground = () => {
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
+
   useEffect(() => {
     const defaultPassword = process.env.NEXT_PUBLIC_DEFAULT_PASSWORD;
     setPassword(defaultPassword || "");
@@ -32,7 +33,6 @@ const AdminPlayground = () => {
       password,
       phoneNumber,
     };
-    console.log(userInput);
 
     try {
       // Validate the user input
