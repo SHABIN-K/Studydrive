@@ -1,29 +1,38 @@
 import prisma from "@/libs/prisma";
+import { getSession } from "next-auth/react";
+
 export async function GET() {
   return new Response("hey this is pasc hub api");
 }
 
 export async function POST(req) {
-  const { courseName, userSemester, subjectCode, subjectName } =
+  const { courseName, userSemester, subjectCode, subjectName, userData } =
     await req.json();
 
   try {
-    // Check if a subject already exists
-   //const existingSubject = await prisma.subject.findFirst({
-   //  where: { subject_code: subjectCode },
-   //});
+    //find user by email address
+    const user = await prisma.user.findFirst({
+      where: { email: userData.user.email },
+    });
 
-   //// User with this email already exists
-   //if (existingSubject) {
-   //  return new Response("This subject already exists", {
-   //    status: 200,
-   //    statusText: "FAILED",
-   //  });
-   //}
+    console.log(user);
+    // Check if a subject already exists
+    const existingSubject = await prisma.subject.findFirst({
+      where: { subject_code: subjectCode },
+    });
+
+    // this subject already exists
+    if (existingSubject) {
+      return new Response("This subject already exists", {
+        status: 200,
+        statusText: "FAILED",
+      });
+    }
 
     // Create the new subject
     const newSubject = await prisma.subject.create({
       data: {
+        userId: user.id,
         course_name: courseName,
         semester_code: userSemester,
         subject_code: subjectCode,

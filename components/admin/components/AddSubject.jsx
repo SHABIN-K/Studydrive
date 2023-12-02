@@ -1,21 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "sonner";
 import { PlusIcon } from "@heroicons/react/20/solid";
 
 import ComboBox from "../ui/ComboBox";
+import { SmallLoading } from "@/public/assets";
 import { courses, semester } from "@/constants";
 import FormField from "@/components/ui/FormField";
 import FormButtons from "@/components/ui/FormButtons";
 import { SubjectValidation } from "@/libs/validations/subject";
 
-const AddSubject = () => {
+const AddSubject = ({ sessionData }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const [courseName, setCourseName] = useState(courses[6]);
   const [userSemester, setUserSemester] = useState(semester[2]);
   const [subjectCode, setsubjectCode] = useState("");
   const [subjectName, setSubjectName] = useState("");
+  const [userEmail, setUserEmail] = useState(sessionData);
 
   const styleAddSubject = {
     classlabel: "block mb-2 text-sm font-medium text-gray-900",
@@ -52,6 +54,7 @@ const AddSubject = () => {
           userSemester: userSemester.link,
           subjectCode,
           subjectName,
+          userEmail,
         });
         if (response.statusText === "FAILED") {
           toast.error(response.data);
@@ -85,7 +88,7 @@ const AddSubject = () => {
         </div>
 
         <div>
-          <div class="grid gap-4 mb-4 sm:grid-cols-2">
+          <div className="grid gap-4 mb-4 sm:grid-cols-2">
             <div>
               <ComboBox
                 value={courseName}
@@ -114,10 +117,10 @@ const AddSubject = () => {
                 type="text"
                 name="coursecode"
                 value={subjectCode}
-                placeholder="Type course code"
+                placeholder="Type Subject code"
                 onChange={(e) => setsubjectCode(e.target.value)}
                 classLabel={styleAddSubject.classlabel}
-                classInput={styleAddSubject.classInput}
+                classInput={`${styleAddSubject.classInput} uppercase`}
               />
             </div>
             <div>
@@ -129,14 +132,14 @@ const AddSubject = () => {
                 placeholder="Type Subject name"
                 onChange={(e) => setSubjectName(e.target.value)}
                 classLabel={styleAddSubject.classlabel}
-                classInput={styleAddSubject.classInput}
+                classInput={`${styleAddSubject.classInput} capitalize`}
               />
             </div>
           </div>
           <FormButtons
             primaryLabel={
               <>
-                <PlusIcon className="w-5" />
+                {isLoading ? <SmallLoading /> : <PlusIcon className="w-5" />}
                 <span>{isLoading ? "Please wait..." : "Add new product"}</span>
               </>
             }
