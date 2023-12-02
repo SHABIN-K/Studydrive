@@ -1,10 +1,20 @@
 import { about, addUser, dashboard, upload } from "@/public/assets";
 import {
   Psychology,
+  bba,
+  bca,
   bsw,
+  ca,
+  coop,
+  economics,
   english,
   five,
   four,
+  history,
+  maEnglish,
+  maths,
+  mcomfinance,
+  msw,
   one,
   play,
   polictics,
@@ -84,7 +94,7 @@ export const courses = [
   {
     id: 2,
     name: "Ba History",
-    imgUrl: "/imgUrl",
+    imgUrl: history,
     link: "bahistory",
     description:
       "BA History is an academic program that delves into the study of past events, societies, and cultures, shaping a deep understanding of historical contexts.",
@@ -92,7 +102,7 @@ export const courses = [
   {
     id: 3,
     name: "Economics",
-    imgUrl: "/imgUrl",
+    imgUrl: economics,
     link: "baeconomics",
     description:
       "BA Economics is an academic program that focuses on the study of economic systems, theories, and policies, shaping insights into how societies allocate resources.",
@@ -108,7 +118,7 @@ export const courses = [
   {
     id: 5,
     name: "Mathematics",
-    imgUrl: "monkey",
+    imgUrl: maths,
     link: "bscmath",
     description:
       "BSc Mathematics is an academic program that explores various branches of mathematics, fostering analytical and problem-solving skills.",
@@ -124,7 +134,7 @@ export const courses = [
   {
     id: 7,
     name: "Bca",
-    imgUrl: "/imgUrl",
+    imgUrl: bca,
     link: "bca",
     description:
       "BCA (Bachelor of Computer Applications) is a degree program that provides in-depth knowledge of computer science and its applications.",
@@ -132,7 +142,7 @@ export const courses = [
   {
     id: 8,
     name: "Bba",
-    imgUrl: "/imgUrl",
+    imgUrl: bba,
     link: "bba",
     description:
       "BBA (Bachelor of Business Administration) is an academic program that provides a foundational understanding of business management principles and practices.",
@@ -148,7 +158,7 @@ export const courses = [
   {
     id: 10,
     name: "Bcom Finance",
-    imgUrl: "/imgUrl",
+    imgUrl: mcomfinance,
     link: "bcomfinance",
     description:
       "BCom Finance is an academic program that focuses on financial management, investments, and economics, preparing students for roles in finance and accounting.",
@@ -156,7 +166,7 @@ export const courses = [
   {
     id: 11,
     name: "Bcom CA",
-    imgUrl: "/imgUrl",
+    imgUrl: ca,
     link: "bcomca",
     description:
       "BCom Computer Applications is an academic program that combines business studies with practical computer skills, preparing students for roles in IT-driven business environments.",
@@ -164,7 +174,7 @@ export const courses = [
   {
     id: 12,
     name: "Bcom Co-operation",
-    imgUrl: "/imgUrl",
+    imgUrl: coop,
     link: "bcomcooperation",
     description:
       "BCom Cooperation is an academic program that explores the principles of cooperative management and business strategies, fostering an understanding of collaborative enterprises.",
@@ -172,7 +182,7 @@ export const courses = [
   {
     id: 13,
     name: "Ma English",
-    imgUrl: "/imgUrl",
+    imgUrl: maEnglish,
     link: "maenglish",
     description:
       "MA English is a postgraduate program that offers in-depth exploration of the English language, literature, and critical analysis, enhancing your understanding of cultural narratives and communication.",
@@ -180,7 +190,7 @@ export const courses = [
   {
     id: 14,
     name: "Msw",
-    imgUrl: "/imgUrl",
+    imgUrl: msw,
     link: "msw",
     description:
       "MSW (Master of Social Work) is a postgraduate program that equips students with advanced skills in social work, empowering them to create positive change in communities and individuals' lives.",
@@ -188,7 +198,7 @@ export const courses = [
   {
     id: 15,
     name: "Mcom Finance",
-    imgUrl: "/imgUrl",
+    imgUrl: mcomfinance,
     link: "mcomfinance",
     description:
       "MCom Finance is a postgraduate program that offers specialized knowledge in financial management, preparing you for dynamic roles in the world of finance and business.",
