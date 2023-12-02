@@ -9,6 +9,10 @@ import three from "./three.PNG";
 import four from "./four.PNG";
 import five from "./five.PNG";
 import six from "./six.PNG";
+import bsw from "./bsw.PNG";
+import english from "./english.PNG";
+import polictics from "./polictics.PNG";
+import Psychology from "./Psychology.PNG";
 
 export { 
     play, 
@@ -21,5 +25,9 @@ export {
     three, 
     four, 
     five, 
-    six 
+    six ,
+    bsw,
+    english,
+    polictics,
+    Psychology
 };

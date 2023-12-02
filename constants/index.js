@@ -1,9 +1,13 @@
 import { about, addUser, dashboard, upload } from "@/public/assets";
 import {
+  Psychology,
+  bsw,
+  english,
   five,
   four,
   one,
   play,
+  polictics,
   qp,
   six,
   study,
@@ -72,7 +76,7 @@ export const courses = [
   {
     id: 1,
     name: "Ba English",
-    imgUrl: "monkey",
+    imgUrl: english,
     link: "baenglish",
     description:
       "BA English is an academic program that explores the study of the English language, literature, and its cultural significance.",
@@ -96,7 +100,7 @@ export const courses = [
   {
     id: 4,
     name: "Bsw",
-    imgUrl: "monkey",
+    imgUrl: bsw,
     link: "bsw",
     description:
       "BSW (Bachelor of Social Work) is an academic program that equips students with the skills and understanding to address social issues and contribute to community welfare.",
@@ -112,7 +116,7 @@ export const courses = [
   {
     id: 6,
     name: "Psychology",
-    imgUrl: "/imgUrl",
+    imgUrl: Psychology,
     link: "bscpsychology",
     description:
       "BSc Psychology is an academic program that delves into the study of human behavior and mental processes, offering insights into understanding the mind.",
@@ -136,7 +140,7 @@ export const courses = [
   {
     id: 9,
     name: "Political Science",
-    imgUrl: "/imgUrl",
+    imgUrl: polictics,
     link: "politicalscience",
     description:
       "BA Political Science is an academic program that examines political systems, theories, and dynamics, fostering a comprehensive understanding of governance and public affairs.",
