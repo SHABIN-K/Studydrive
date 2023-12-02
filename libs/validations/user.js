@@ -43,7 +43,6 @@ const UserLoginValidation = User.omit({ name: true, phoneNumber: true });
 export const UserValidation = {
   registration: User.required({
     email: true,
-    password: true,
     name: true,
     phoneNumber: true,
   }),

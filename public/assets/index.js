@@ -14,7 +14,7 @@ import Cloud from "./cloud";
 import AdminDashIcon from "./AdminDashIcon";
 import SettingIcon from "./SettingIcon";
 import AdminuploadIcon from "./AdminuploadIcon";
-
+import SmallLoading from "./SmallLoading";
 
 export {
   addUser,
@@ -33,4 +33,5 @@ export {
   AdminDashIcon,
   SettingIcon,
   AdminuploadIcon,
+  SmallLoading,
 };
