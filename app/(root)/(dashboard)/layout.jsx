@@ -1,7 +1,7 @@
 "use client";
 
-import AdminNavbar from "@/components/admin/ui/AdminNavbar";
-import AdminSidebar from "@/components/admin/ui/AdminSidebar";
+import AdminNavbar from "@/components/admin/components/AdminNavbar";
+import AdminSidebar from "@/components/admin/components/AdminSidebar";
 import { ProtectedLayout } from "@/components/layouts/protectLayouts";
 
 export default function DashboardLayout({ children }) {

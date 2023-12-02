@@ -2,8 +2,8 @@ import { filesize } from "filesize";
 import { useEffect, useState } from "react";
 import { DocumentTextIcon, TrashIcon } from "@heroicons/react/20/solid";
 
-import ComboBox from "./ComboBox";
-import RoleSelect from "./ListBox";
+import ComboBox from "../ui/ComboBox";
+import RoleSelect from "../ui/ListBox";
 import FormField from "@/components/ui/FormField";
 import { courses, semester, category, subjects } from "@/constants";
 

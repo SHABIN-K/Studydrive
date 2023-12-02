@@ -3,7 +3,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import { XMarkIcon } from "@heroicons/react/20/solid";
 
-const UploadDone = ({ isOpen, setIsOpen }) => {
+const UploadDoneModel = ({ isOpen, setIsOpen }) => {
   const closeModal = () => {
     setIsOpen(false);
   };
@@ -82,4 +82,4 @@ const UploadDone = ({ isOpen, setIsOpen }) => {
     </>
   );
 };
-export default UploadDone;
+export default UploadDoneModel;

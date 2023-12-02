@@ -3,7 +3,7 @@
 import { Tab } from "@headlessui/react";
 
 import { AdminPlayground, AdminUser } from "@/components/admin";
-import AdminNavbar from "@/components/admin/ui/AdminNavbar";
+import AdminNavbar from "@/components/admin/components/AdminNavbar";
 import { ProctectAdminlayout } from "@/components/layouts/ProctectAdminlayout";
 
 const Tabs = ["Playground", "Users"];
