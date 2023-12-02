@@ -8,6 +8,7 @@ import {
   coop,
   economics,
   english,
+  finance,
   five,
   four,
   history,
@@ -158,7 +159,7 @@ export const courses = [
   {
     id: 10,
     name: "Bcom Finance",
-    imgUrl: mcomfinance,
+    imgUrl: finance,
     link: "bcomfinance",
     description:
       "BCom Finance is an academic program that focuses on financial management, investments, and economics, preparing students for roles in finance and accounting.",

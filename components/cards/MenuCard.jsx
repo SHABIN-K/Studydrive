@@ -1,8 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
 
-
-
 const MenuCard = ({ data, route, style }) => {
   //https://daisyui.com/components/card/
   return (
