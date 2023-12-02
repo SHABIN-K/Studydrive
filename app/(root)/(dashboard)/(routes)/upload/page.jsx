@@ -6,10 +6,10 @@ import dynamic from "next/dynamic";
 
 // Import components dynamically
 const Stepper = dynamic(() => import("@/components/admin/ui/Stepper"));
-const DocDetails = dynamic(() => import("@/components/admin/ui/DocDetails"));
-const UploadDone = dynamic(() => import("@/components/admin/ui/UploadDone"));
+const DocDetails = dynamic(() => import("@/components/admin/components/DocDetails"));
 
-import UploadDoc from "@/components/admin/ui/UploadDoc";
+import UploadDoc from "@/components/admin/components/UploadDoc";
+import UploadDoneModel from "@/components/admin/ui/UploadDoneModel";
 
 const Upload = () => {
   const [activeStep, setActiveStep] = useState(0);
@@ -132,7 +132,7 @@ const Upload = () => {
       </div>
 
       {submitModalOpen && (
-        <UploadDone isOpen={submitModalOpen} setIsOpen={setSubmitModalOpen} />
+        <UploadDoneModel isOpen={submitModalOpen} setIsOpen={setSubmitModalOpen} />
       )}
     </div>
   );

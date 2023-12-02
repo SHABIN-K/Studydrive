@@ -3,7 +3,7 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import { toast } from "sonner";
 
-import Table from "./ui/Table";
+import Table from "./components/Table";
 import AdminModel from "./ui/AdminModel";
 import { UserValidation } from "@/libs/validations/user";
 import useUsers from "@/libs/hooks/useUsers";
