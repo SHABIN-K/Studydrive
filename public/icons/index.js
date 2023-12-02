@@ -13,6 +13,17 @@ import bsw from "./bsw.PNG";
 import english from "./english.PNG";
 import polictics from "./polictics.PNG";
 import Psychology from "./Psychology.PNG";
+import bba from "./bba.PNG";
+import bca from "./bca.PNG";
+import ca from "./ca.PNG";
+import economics from "./economics.PNG";
+import finance from "./finance.PNG";
+import history from "./history.PNG";
+import maEnglish from "./maEnglish.PNG";
+import maths from "./maths.PNG";
+import mcomfinance from "./mcomfinance.PNG";
+import msw from "./msw.PNG";
+import coop from "./coop.PNG";
 
 export { 
     play, 
@@ -29,5 +40,17 @@ export {
     bsw,
     english,
     polictics,
-    Psychology
+    Psychology,
+    bba,
+    bca,
+    ca,
+    economics,
+    finance,
+    history,
+    maEnglish,
+    maths,
+    mcomfinance,
+    msw,
+    coop
+    
 };
