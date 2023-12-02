@@ -49,6 +49,12 @@ const DocDetails = ({ files, removeFile, fileDetails, setFileDetails }) => {
   //Extract data
   const filteredCategory = category.map((data) => data.name);
 
+  const styleDocDetails = {
+    classlabel: "text-white font-medium md:font-semibold",
+    classInput:
+      "w-full bg-gray-300 py-2 pl-3 pr-10 text-sm text-black font-medium",
+  };
+
   return (
     <div className="w-full">
       <div className="flex flex-wrap justify-between mb-4 items-center space-y-1">
@@ -58,6 +64,8 @@ const DocDetails = ({ files, removeFile, fileDetails, setFileDetails }) => {
           data={courses}
           label="Enter the Course Name"
           zIndex={5}
+          classLabel={styleDocDetails.classlabel}
+          classInput={styleDocDetails.classInput}
         />
         <ComboBox
           value={userSemester}
@@ -65,6 +73,8 @@ const DocDetails = ({ files, removeFile, fileDetails, setFileDetails }) => {
           data={semester}
           label="Enter the Semester"
           zIndex={4}
+          classLabel={styleDocDetails.classlabel}
+          classInput={styleDocDetails.classInput}
         />
         <ComboBox
           value={userSubject}
@@ -72,6 +82,8 @@ const DocDetails = ({ files, removeFile, fileDetails, setFileDetails }) => {
           data={subjects}
           label="Enter the Subject Name or Code"
           zIndex={3}
+          classLabel={styleDocDetails.classlabel}
+          classInput={styleDocDetails.classInput}
           subTrue="subject"
         />
       </div>

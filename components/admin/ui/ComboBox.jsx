@@ -4,7 +4,16 @@ import { Combobox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import Link from "next/link";
 
-const ComboBox = ({ value, onChange, data, label, zIndex, subTrue }) => {
+const ComboBox = ({
+  value,
+  onChange,
+  data,
+  label,
+  zIndex,
+  classLabel,
+  classInput,
+  subTrue,
+}) => {
   const [query, setQuery] = useState("");
 
   const filteredData =
@@ -20,13 +29,11 @@ const ComboBox = ({ value, onChange, data, label, zIndex, subTrue }) => {
   return (
     <div className="relative w-full lg:w-72">
       <Combobox value={value} onChange={onChange}>
-        <Combobox.Label className="text-white font-medium md:font-semibold">
-          {label}
-        </Combobox.Label>
+        <Combobox.Label className={classLabel}>{label}</Combobox.Label>
         <div className="relative mt-1">
           <div className="relative w-full cursor-text overflow-hidden rounded-lg text-left border-black">
             <Combobox.Input
-              className="w-full bg-gray-300 py-2 pl-3 pr-10 text-sm text-black font-medium"
+              className={classInput}
               displayValue={(data) => data.name}
               onChange={(event) => setQuery(event.target.value)}
             />
@@ -50,7 +57,7 @@ const ComboBox = ({ value, onChange, data, label, zIndex, subTrue }) => {
               style={{ zIndex: zIndex }}
             >
               {filteredData.length === 0 && query !== "" && subTrue ? (
-                <Link href="/dashboard">
+                <Link href="/dashboard#addproduct">
                   <div className="relative cursor-pointer select-none px-4 py-2 text-gray-700 hover:text-green-600">
                     Add "{query}" to list
                   </div>
