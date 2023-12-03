@@ -1,8 +1,9 @@
-import { Cloud } from "@/public/assets";
-import { DocumentTextIcon, TrashIcon } from "@heroicons/react/20/solid";
+import { toast } from "sonner";
 import { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
-import { toast } from "sonner";
+import { DocumentTextIcon, TrashIcon } from "@heroicons/react/20/solid";
+
+import { Cloud } from "@/public/assets";
 
 const UploadDoc = ({ files, setFiles, removeFile }) => {
   const onDrop = useCallback(
@@ -63,6 +64,7 @@ const UploadDoc = ({ files, setFiles, removeFile }) => {
         htmlFor="dropzone-file"
         className="flex flex-col items-center justify-center w-full h-64 border-2 border-dashed rounded-lg cursor-pointer hover:bg-bray-800 bg-gray-700 border-gray-600 hover:border-gray-500 hover:bg-gray-600"
         {...getRootProps()}
+        onClick={(event) => event.stopPropagation()}
       >
         <div className="flex flex-col items-center justify-center pt-5 pb-6">
           <Cloud />
@@ -76,7 +78,9 @@ const UploadDoc = ({ files, setFiles, removeFile }) => {
           <p className="text-sm md:text-xs text-gray-400">
             Supported file : pdf, doc, docx, pptx
           </p>
-          <p className="text-sm md:text-xs text-gray-400">Please note that you are allowed to upload a maximum of 3 files.</p>
+          <p className="text-sm md:text-xs text-gray-400">
+            Please note that you are allowed to upload a maximum of 3 files.
+          </p>
           <input
             id="dropzone-file"
             type="file"
