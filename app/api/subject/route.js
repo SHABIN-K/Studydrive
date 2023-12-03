@@ -1,18 +1,40 @@
 import prisma from "@/libs/prisma";
-import { getSession } from "next-auth/react";
+//https://next-auth.js.org/configuration/nextjs#getserversession
 
-export async function GET() {
-  return new Response("hey this is pasc hub api");
+export async function GET(req) {
+  try {
+    /*
+    const filteredSubjects = await prisma.subject.findMany({
+      where: {
+        course_name: courseName,
+        semester_code: semester,
+      },
+    });
+    */
+    const allSubject = await prisma.subject.findMany();
+    return new Response(JSON.stringify(allSubject), {
+      status: 200, // Created
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  } catch (error) {
+    console.error("Error processing the request:", error);
+
+    return new Response("An error occurred", {
+      status: 500, // Internal Server Error
+    });
+  }
 }
 
 export async function POST(req) {
-  const { courseName, userSemester, subjectCode, subjectName, userData } =
+  const { courseName, userSemester, subjectCode, subjectName, userEmail } =
     await req.json();
 
   try {
     //find user by email address
     const user = await prisma.user.findFirst({
-      where: { email: userData.user.email },
+      where: { email: userEmail },
     });
 
     console.log(user);
