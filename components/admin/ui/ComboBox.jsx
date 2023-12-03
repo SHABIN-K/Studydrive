@@ -3,6 +3,7 @@ import { Fragment, useState } from "react";
 import { Combobox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import Link from "next/link";
+import { SmallLoading } from "@/public/assets";
 
 const ComboBox = ({
   value,
@@ -13,6 +14,7 @@ const ComboBox = ({
   classLabel,
   classInput,
   subTrue,
+  isloading,
 }) => {
   const [query, setQuery] = useState("");
 
@@ -44,6 +46,13 @@ const ComboBox = ({
               />
             </Combobox.Button>
           </div>
+          
+          {isloading && (
+            <div className="absolute inset-y-0 pl-8 flex items-center pr-2 text-black gap-2">
+              <SmallLoading />
+              <span>Loading...</span>
+            </div>
+          )}
 
           <Transition
             as={Fragment}

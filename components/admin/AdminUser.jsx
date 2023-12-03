@@ -1,12 +1,12 @@
 import { useEffect, useMemo, useState } from "react";
-import Swal from "sweetalert2";
 import axios from "axios";
+import Swal from "sweetalert2";
 import { toast } from "sonner";
 
 import Table from "./components/Table";
 import AdminModel from "./ui/AdminModel";
-import { UserValidation } from "@/libs/validations/user";
 import useUsers from "@/libs/hooks/useUsers";
+import { UserValidation } from "@/libs/validations/user";
 
 const AdminUser = () => {
   const { data: fetchedData, error, isLoading: loading } = useUsers();
