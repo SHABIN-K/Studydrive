@@ -60,8 +60,7 @@ const UploadDoc = ({ files, setFiles, removeFile }) => {
 
   return (
     <div className="flex flex-col items-center justify-center w-full">
-      <label
-        htmlFor="dropzone-file"
+      <div
         className="flex flex-col items-center justify-center w-full h-64 border-2 border-dashed rounded-lg cursor-pointer hover:bg-bray-800 bg-gray-700 border-gray-600 hover:border-gray-500 hover:bg-gray-600"
         {...getRootProps()}
       >
@@ -87,7 +86,7 @@ const UploadDoc = ({ files, setFiles, removeFile }) => {
             {...getInputProps()}
           />
         </div>
-      </label>
+      </div>
       {files.length > 0 &&
         files.map((file, index) => (
           <div

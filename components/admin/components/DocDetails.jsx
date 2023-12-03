@@ -14,6 +14,7 @@ const DocDetails = ({ files, removeFile, fileDetails, setFileDetails }) => {
   const [userCourse, setUserCourses] = useState(courses[6]);
   const [userSemester, setUserSemester] = useState(semester[2]);
   const [userSubject, setUserSubject] = useState("");
+  const [tempData, setTempData] = useState([]);
 
   const { data: fetchedData, error, isLoading: loading } = useSubject();
 
@@ -41,33 +42,43 @@ const DocDetails = ({ files, removeFile, fileDetails, setFileDetails }) => {
   // useEffect to update fileDetails when dependencies change
   useEffect(() => {
     setFileDetails(
-      files.map((file) => ({
-        title: file.name.replace(/\.[^/.]+$/, ""),
-        description: "",
-        category: category[0].name,
+      files.map((file, index) => ({
+        title: tempData[index]?.title || file.name.replace(/\.[^/.]+$/, ""),
+        description: tempData[index]?.description || "",
+        category: tempData[index]?.category || category[0].name,
         course: userCourse.link,
         semester: userSemester.link,
         subject: userSubject,
       }))
     );
-  }, [files, userCourse, userSubject, userSemester, setFileDetails]);
+  }, [files, userCourse, userSubject, userSemester, setFileDetails, tempData]);
+
+  useEffect(() => {
+    setTempData(
+      files.map(() => ({
+        title: "",
+        description: "",
+        category: category[0].name,
+      }))
+    );
+  }, [files]);
 
   const handleTitleChange = (index, value) => {
-    const updatedDetails = [...fileDetails];
-    updatedDetails[index].title = value;
-    setFileDetails(updatedDetails);
+    const updatedTempData = [...tempData];
+    updatedTempData[index].title = value;
+    setTempData(updatedTempData);
   };
 
   const handleDescriptionChange = (index, value) => {
-    const updatedDetails = [...fileDetails];
-    updatedDetails[index].description = value;
-    setFileDetails(updatedDetails);
+    const updatedTempData = [...tempData];
+    updatedTempData[index].description = value;
+    setTempData(updatedTempData);
   };
 
   const handleCategoryChange = (index, value) => {
-    const updatedDetails = [...fileDetails];
-    updatedDetails[index].category = value;
-    setFileDetails(updatedDetails);
+    const updatedTempData = [...tempData];
+    updatedTempData[index].category = value;
+    setTempData(updatedTempData);
   };
 
   //Extract data
