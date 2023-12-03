@@ -22,6 +22,7 @@ const AdminSidebar = () => {
             src="/profile.jpg"
             width={96}
             height={96}
+            priority
             alt="avatar"
           />
           <h4 className="mx-2 mt-2 font-medium text-gray-200">

@@ -6,7 +6,7 @@ const MyDash = () => {
   const { data: session } = useSession();
   return (
     <>
-      <AddSubject sessionData={session} />
+      <AddSubject sessionData={session.user.email} />
     </>
   );
 };
