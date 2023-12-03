@@ -72,8 +72,6 @@ const AddSubject = ({ sessionEmail }) => {
   };
 
   const handleReset = () => {
-    setCourseName(courses[6]);
-    setUserSemester(semester[2]);
     setsubjectCode("");
     setSubjectName("");
   };
