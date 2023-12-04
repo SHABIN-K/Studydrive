@@ -1,5 +1,26 @@
-```
 Commit message types
+
+- The MAJOR version should increment when you make incompatible API changes.
+- The MINOR version should increment when you add functionality in a backwards-compatible manner.
+- The PATCH version should increment when you make backwards-compatible bug fixes.
+
+This means that PATCHes are bug fixes and MINORs add new features but neither of them break what worked before. <br/> Finally, MAJORs add changes that won’t work with earlier versions.
+
+- :sparkles: Add new feature 🌟
+- :bug: Fix bug 🐛
+- :recycle: Refactor code ♻️
+- :boom: Breaking change 💥
+- :lock: Improve security 🔒
+- :memo: Update documentation 📝
+- :rocket: Improve performance 🚀
+- :lipstick: Improve UI 💄
+- :construction: Work in progress 🚧
+- :tada: Release new version 🎉
+
+<hr/>
+<hr/>
+
+```````
 feat: (adds valuable new features or improvements that directly benefit and engage users.)
 
 E.g. "feat(column): Added new feature.""
@@ -26,5 +47,6 @@ E.g. "test(login): Added tests for user login functionality and refactored exist
 
 chore: (updating build tasks and other non-production code aspects, without changing the actual software.)
 
-E.g. "chore(grunt): Updated Grunt tasks for better task automation and build process efficiency."
-```
+E.g. "chore(grunt): Updated Grunt tasks for better task automation and build process efficiency."``````
+
+```````
