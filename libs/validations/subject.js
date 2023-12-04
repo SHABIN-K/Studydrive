@@ -16,8 +16,8 @@ const Subject = z.object({
       invalid_type_error: "Subject Name must be a string.",
     })
     .min(5, { message: "Subject Name must be at least 5 characters long." })
-    .max(50, {
-      message: "Subject Name can only be up to 50 characters long..",
+    .max(150, {
+      message: "Subject Name can only be up to 150 characters long..",
     }),
   courseName: z
     .string({
