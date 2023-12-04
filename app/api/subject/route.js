@@ -37,7 +37,6 @@ export async function POST(req) {
       where: { email: userEmail },
     });
 
-    console.log(user);
     // Check if a subject already exists
     const existingSubject = await prisma.subject.findFirst({
       where: { subject_code: subjectCode },
@@ -57,7 +56,7 @@ export async function POST(req) {
         userId: user.id,
         course_name: courseName,
         semester_code: userSemester,
-        subject_code: subjectCode,
+        subject_code: subjectCode.toUpperCase(),
         subject_name: subjectName,
       },
     });
