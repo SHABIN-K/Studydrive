@@ -1,5 +1,5 @@
 {
   "startCommand": "npm run start",
-  "buildCommand": "npm run build",
+  "productionCommand": "npm run build",
   "developCommand": "npm run dev"
 }

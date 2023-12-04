@@ -8,12 +8,23 @@ datasource db {
 }
 
 model User {
-  id          String  @id @default(auto()) @map("_id") @db.ObjectId
-  email       String  @unique
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  email       String    @unique
   name        String?
   password    String
   phoneNumber String
-  userRole    Role    @default(USER)
+  subjects    subject[]
+  userRole    Role      @default(USER)
+}
+
+model subject {
+  id            String  @id @default(auto()) @map("_id") @db.ObjectId
+  User          User?   @relation(fields: [userId], references: [id])
+  userId        String? @db.ObjectId
+  course_name   String
+  semester_code String
+  subject_code  String
+  subject_name  String
 }
 
 enum Role {

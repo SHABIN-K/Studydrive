@@ -2,52 +2,93 @@ import { filesize } from "filesize";
 import { useEffect, useState } from "react";
 import { DocumentTextIcon, TrashIcon } from "@heroicons/react/20/solid";
 
-import ComboBox from "./ComboBox";
-import RoleSelect from "./ListBox";
+import ComboBox from "../ui/ComboBox";
+import RoleSelect from "../ui/ListBox";
+import useSubject from "@/libs/hooks/useSubject";
 import FormField from "@/components/ui/FormField";
-import { courses, semester, category, subjects } from "@/constants";
+import { courses, semester, category } from "@/constants";
+import { toast } from "sonner";
 
 const DocDetails = ({ files, removeFile, fileDetails, setFileDetails }) => {
+  const [subjectData, setSubjectData] = useState([]);
   const [userCourse, setUserCourses] = useState(courses[6]);
-  const [userSubject, setUserSubject] = useState(subjects[0]);
   const [userSemester, setUserSemester] = useState(semester[2]);
+  const [userSubject, setUserSubject] = useState("");
+  const [tempData, setTempData] = useState([]);
+
+  const { data: fetchedData, error, isLoading: loading } = useSubject();
+
+  useEffect(() => {
+    if (fetchedData) {
+      const subjects = fetchedData.map((data) => ({
+        id: data.id,
+        name: data.subject_name,
+        link: data.subject_code,
+      }));
+
+      setSubjectData(subjects);
+      // Set default value if userSubject is not already set
+      if (!userSubject && subjects.length > 0) {
+        setUserSubject(subjects[0]);
+      }
+    }
+
+    if (error) {
+      console.error("Error fetching subject data:", error);
+      toast.error("Something went wrong in fetching subjects");
+    }
+  }, [fetchedData, error, userSubject]);
 
   // useEffect to update fileDetails when dependencies change
   useEffect(() => {
     setFileDetails(
-      files.map((file) => ({
-        title: file.name.replace(/\.[^/.]+$/, ""),
-        description: "",
-        category: category[0].name,
+      files.map((file, index) => ({
+        title: tempData[index]?.title || file.name.replace(/\.[^/.]+$/, ""),
+        description: tempData[index]?.description || "",
+        category: tempData[index]?.category || category[0].name,
         course: userCourse.link,
         semester: userSemester.link,
-        subject: userSubject.link,
+        subject: userSubject,
       }))
     );
-  }, [files, userCourse, userSubject, userSemester, setFileDetails]);
+  }, [files, userCourse, userSubject, userSemester, setFileDetails, tempData]);
 
-  console.log(fileDetails);
+  useEffect(() => {
+    setTempData(
+      files.map(() => ({
+        title: "",
+        description: "",
+        category: category[0].name,
+      }))
+    );
+  }, [files]);
 
   const handleTitleChange = (index, value) => {
-    const updatedDetails = [...fileDetails];
-    updatedDetails[index].title = value;
-    setFileDetails(updatedDetails);
+    const updatedTempData = [...tempData];
+    updatedTempData[index].title = value;
+    setTempData(updatedTempData);
   };
 
   const handleDescriptionChange = (index, value) => {
-    const updatedDetails = [...fileDetails];
-    updatedDetails[index].description = value;
-    setFileDetails(updatedDetails);
+    const updatedTempData = [...tempData];
+    updatedTempData[index].description = value;
+    setTempData(updatedTempData);
   };
 
   const handleCategoryChange = (index, value) => {
-    const updatedDetails = [...fileDetails];
-    updatedDetails[index].category = value;
-    setFileDetails(updatedDetails);
+    const updatedTempData = [...tempData];
+    updatedTempData[index].category = value;
+    setTempData(updatedTempData);
   };
 
   //Extract data
   const filteredCategory = category.map((data) => data.name);
+
+  const styleDocDetails = {
+    classlabel: "text-white font-medium md:font-semibold",
+    classInput:
+      "w-full bg-gray-300 py-2 pl-3 pr-10 text-sm text-black font-medium",
+  };
 
   return (
     <div className="w-full">
@@ -58,6 +99,8 @@ const DocDetails = ({ files, removeFile, fileDetails, setFileDetails }) => {
           data={courses}
           label="Enter the Course Name"
           zIndex={5}
+          classLabel={styleDocDetails.classlabel}
+          classInput={styleDocDetails.classInput}
         />
         <ComboBox
           value={userSemester}
@@ -65,13 +108,19 @@ const DocDetails = ({ files, removeFile, fileDetails, setFileDetails }) => {
           data={semester}
           label="Enter the Semester"
           zIndex={4}
+          classLabel={styleDocDetails.classlabel}
+          classInput={styleDocDetails.classInput}
         />
         <ComboBox
           value={userSubject}
           onChange={setUserSubject}
-          data={subjects}
-          label="Enter the Subject Name or Code"
+          data={subjectData}
+          label="Enter the Subject Name"
           zIndex={3}
+          classLabel={styleDocDetails.classlabel}
+          classInput={styleDocDetails.classInput}
+          subTrue="subject"
+          isloading={loading}
         />
       </div>
       <hr className="bg-gray-700 h-[2px] rounded mx-2 my-2 border-none" />

@@ -1,8 +1,21 @@
+/* eslint-disable react/no-unescaped-entities */
 import { Fragment, useState } from "react";
 import { Combobox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
+import Link from "next/link";
+import { SmallLoading } from "@/public/assets";
 
-const ComboBox = ({ value, onChange, data, label, zIndex }) => {
+const ComboBox = ({
+  value,
+  onChange,
+  data,
+  label,
+  zIndex,
+  classLabel,
+  classInput,
+  subTrue,
+  isloading,
+}) => {
   const [query, setQuery] = useState("");
 
   const filteredData =
@@ -18,14 +31,11 @@ const ComboBox = ({ value, onChange, data, label, zIndex }) => {
   return (
     <div className="relative w-full lg:w-72">
       <Combobox value={value} onChange={onChange}>
-        <Combobox.Label className="text-white font-medium md:font-semibold">
-          {label}
-        </Combobox.Label>
+        <Combobox.Label className={classLabel}>{label}</Combobox.Label>
         <div className="relative mt-1">
-
           <div className="relative w-full cursor-text overflow-hidden rounded-lg text-left border-black">
             <Combobox.Input
-              className="w-full bg-gray-300 py-2 pl-3 pr-10 text-sm text-black font-medium"
+              className={classInput}
               displayValue={(data) => data.name}
               onChange={(event) => setQuery(event.target.value)}
             />
@@ -36,6 +46,13 @@ const ComboBox = ({ value, onChange, data, label, zIndex }) => {
               />
             </Combobox.Button>
           </div>
+          
+          {isloading && (
+            <div className="absolute inset-y-0 pl-8 flex items-center pr-2 text-black gap-2">
+              <SmallLoading />
+              <span>Loading...</span>
+            </div>
+          )}
 
           <Transition
             as={Fragment}
@@ -48,7 +65,13 @@ const ComboBox = ({ value, onChange, data, label, zIndex }) => {
               className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 sm:text-sm"
               style={{ zIndex: zIndex }}
             >
-              {filteredData.length === 0 && query !== "" ? (
+              {filteredData.length === 0 && query !== "" && subTrue ? (
+                <Link href="/dashboard#addproduct">
+                  <div className="relative cursor-pointer select-none px-4 py-2 text-gray-700 hover:text-green-600">
+                    Add "{query}" to list
+                  </div>
+                </Link>
+              ) : filteredData.length === 0 && query !== "" ? (
                 <div className="relative cursor-default select-none px-4 py-2 text-gray-700">
                   Nothing found.
                 </div>
@@ -88,7 +111,6 @@ const ComboBox = ({ value, onChange, data, label, zIndex }) => {
               )}
             </Combobox.Options>
           </Transition>
-          
         </div>
       </Combobox>
     </div>
