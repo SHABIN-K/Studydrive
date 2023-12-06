@@ -56,8 +56,8 @@ export async function POST(req) {
         userId: user.id,
         course_name: courseName,
         semester_code: userSemester,
-        subject_code: subjectCode.toUpperCase(),
-        subject_name: subjectName,
+        subject_code: subjectCode.trim().toUpperCase(),
+        subject_name: subjectName.trim(),
       },
     });
 
