@@ -6,10 +6,11 @@ import dynamic from "next/dynamic";
 
 // Import components dynamically
 const Stepper = dynamic(() => import("@/components/admin/ui/Stepper"));
-const DocDetails = dynamic(() => import("@/components/admin/components/DocDetails"));
 
 import UploadDoc from "@/components/admin/components/UploadDoc";
 import UploadDoneModel from "@/components/admin/ui/UploadDoneModel";
+import DocDetails from "@/components/admin/components/DocDetails";
+import { uploadFile, authorize } from "@/libs/googleDrive";
 
 const Upload = () => {
   const [activeStep, setActiveStep] = useState(0);
@@ -45,15 +46,17 @@ const Upload = () => {
   };
 
   // Function to handle the "Submit" button click
-  const handleSubmitBtn = () => {
+  const handleSubmitBtn = async () => {
     setIsLoading(true);
     try {
-      //setActiveStep(activeStep + 1);
-      setSubmitModalOpen(true);
+      const authClient = await authorize();
+      await uploadFile(authClient);
     } catch (error) {
       console.log(error);
     } finally {
       setIsLoading(false);
+      //setActiveStep(activeStep + 1);
+      //setSubmitModalOpen(true);
     }
   };
 
@@ -132,7 +135,10 @@ const Upload = () => {
       </div>
 
       {submitModalOpen && (
-        <UploadDoneModel isOpen={submitModalOpen} setIsOpen={setSubmitModalOpen} />
+        <UploadDoneModel
+          isOpen={submitModalOpen}
+          setIsOpen={setSubmitModalOpen}
+        />
       )}
     </div>
   );
