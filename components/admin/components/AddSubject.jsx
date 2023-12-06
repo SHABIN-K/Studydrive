@@ -138,7 +138,7 @@ const AddSubject = ({ sessionEmail }) => {
             primaryLabel={
               <>
                 {isLoading ? <SmallLoading /> : <PlusIcon className="w-5" />}
-                <span>{isLoading ? "Please wait..." : "Add new product"}</span>
+                <span>{isLoading ? "Please wait..." : "Add new  Subject"}</span>
               </>
             }
             onPrimaryClick={handleSubmit}
