@@ -12,7 +12,6 @@ const Tabs = ["Playground", "Show Data"];
 const MyDash = () => {
   const { data: session } = useSession();
   return (
-    <div>
     <Tab.Group>
       <Tab.List className="flex space-x-1 sm:w-2/5">
         {Tabs.map((tab, index) => (
@@ -30,21 +29,17 @@ const MyDash = () => {
       </Tab.List>
       <Tab.Panels className="mt-3 mx-2 sm:mx-8">
         <Tab.Panel>
-          <AddSubject sessionData={session.user.email} />
+          <div className="space-y-3">
+            <AddSubject sessionData={session.user.email} />
+            <ChangePassword sessionData={session.user.email} />
+          </div>
         </Tab.Panel>
         <Tab.Panel>
           <ShowSubject />
         </Tab.Panel>
       </Tab.Panels>
     </Tab.Group>
-    
-    <div className="text-white">
-      <ChangePassword/>
-    </div>
-    </div>
-    
   );
 };
-
 
 export default MyDash;

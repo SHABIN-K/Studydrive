@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import axios from "axios";
 import { toast } from "sonner";
+import { useState } from "react";
 import dynamic from "next/dynamic";
 
 // Import components dynamically
@@ -10,7 +11,6 @@ const Stepper = dynamic(() => import("@/components/admin/ui/Stepper"));
 import UploadDoc from "@/components/admin/components/UploadDoc";
 import UploadDoneModel from "@/components/admin/ui/UploadDoneModel";
 import DocDetails from "@/components/admin/components/DocDetails";
-import { uploadFile, authorize } from "@/libs/googleDrive";
 
 const Upload = () => {
   const [activeStep, setActiveStep] = useState(0);
@@ -19,7 +19,7 @@ const Upload = () => {
 
   const [files, setFiles] = useState([]);
   const [fileDetails, setFileDetails] = useState([]);
-
+  console.log(files);
   // Function to get the appropriate section component based on the active step
   const getSectionComponent = () => {
     switch (activeStep) {
@@ -49,10 +49,15 @@ const Upload = () => {
   const handleSubmitBtn = async () => {
     setIsLoading(true);
     try {
-      const authClient = await authorize();
-      await uploadFile(authClient);
+      const response = await axios.post("/api/drive", { files });
+      if (response.statusText === "FAILED") {
+        toast.error(response.data);
+      } else {
+        toast.success("Successfully uploaded");
+      }
     } catch (error) {
-      console.log(error);
+      console.error("NEXT_AUTH Error: " + error);
+      toast.error("something went wrong ");
     } finally {
       setIsLoading(false);
       //setActiveStep(activeStep + 1);
