@@ -39,6 +39,11 @@ const User = z.object({
 
 const UserProfileUpdate = User.omit({ password: true });
 const UserLoginValidation = User.omit({ name: true, phoneNumber: true });
+const passwordValidation = User.omit({
+  name: true,
+  phoneNumber: true,
+  email: true,
+});
 
 export const UserValidation = {
   registration: User.required({
@@ -55,4 +60,5 @@ export const UserValidation = {
     email: true,
     password: true,
   }),
+  changepwd: passwordValidation.required({ password: true }),
 };

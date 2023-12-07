@@ -1,10 +1,12 @@
+import axios from "axios";
 import { useState } from "react";
+import { toast } from "sonner";
 
-import FormButtons from "@/components/ui/FormButtons";
 import FormField from "@/components/ui/FormField";
 import { SmallLoading } from "@/public/assets";
+import { UserValidation } from "@/libs/validations/user";
 
-const ChangePassword = () => {
+const ChangePassword = ({ sessionData }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
@@ -15,14 +17,52 @@ const ChangePassword = () => {
       "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5",
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add logic to handle password change
-    console.log("Old Password:", oldPassword);
-    console.log("New Password:", newPassword);
-    // Add your password change logic here
+    setIsLoading(true);
+
+    const userInput = {
+      password: oldPassword,
+      password: newPassword,
+    };
+    try {
+      // Validate the user input
+      const validation = UserValidation.changepwd.safeParse(userInput);
+
+      //if validation is failure, return error message
+      if (validation.success === false) {
+        const { issues } = validation.error;
+        issues.forEach((err) => {
+          toast.error(err.message);
+        });
+      } else {
+        // If validation is successful, make the API request
+        const response = await axios.patch("/api/changepwd", {
+          oldPassword,
+          newPassword,
+          sessionData,
+        });
+        if (response.statusText === "FAILED") {
+          toast.error(response.data);
+        } else {
+          toast.success("Successfully changed");
+          handleReset();
+        }
+      }
+    } catch (error) {
+      console.error("NEXT_AUTH Error: " + error);
+      console.log(error);
+      toast.error("something went wrong ");
+      toast.error(response.data);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
+  const handleReset = () => {
+    setOldPassword("");
+    setNewPassword("");
+  };
   return (
     <div className="relative w-full max-w-sm h-full md:h-auto">
       <div className="relative p-4 bg-white rounded-lg sm:p-5">
