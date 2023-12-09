@@ -19,7 +19,7 @@ const Upload = () => {
 
   const [files, setFiles] = useState([]);
   const [fileDetails, setFileDetails] = useState([]);
-  console.log(files);
+
   // Function to get the appropriate section component based on the active step
   const getSectionComponent = () => {
     switch (activeStep) {
@@ -38,6 +38,7 @@ const Upload = () => {
             removeFile={removeFile}
             setFileDetails={setFileDetails}
             fileDetails={fileDetails}
+            handlePreviousBtn={handlePreviousBtn}
           />
         );
       default:
@@ -48,8 +49,23 @@ const Upload = () => {
   // Function to handle the "Submit" button click
   const handleSubmitBtn = async () => {
     setIsLoading(true);
+
     try {
-      const response = await axios.post("/api/drive", { files });
+      // Create a FormData object to properly format data for file uploads
+      const formData = new FormData(); //https://github.com/meteor/meteor/issues/8125
+
+      files.forEach((file, index) => {
+        console.log(file);
+        formData.append(`doc ${index + 1}`, file);
+      });
+
+      // Make the POST request
+      const response = await axios.post("/api/drive", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      console.log(response);
       if (response.statusText === "FAILED") {
         toast.error(response.data);
       } else {
@@ -60,8 +76,7 @@ const Upload = () => {
       toast.error("something went wrong ");
     } finally {
       setIsLoading(false);
-      //setActiveStep(activeStep + 1);
-      //setSubmitModalOpen(true);
+      // setSubmitModalOpen(true);
     }
   };
 

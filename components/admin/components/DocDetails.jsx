@@ -1,3 +1,4 @@
+import { toast } from "sonner";
 import { filesize } from "filesize";
 import { useEffect, useState } from "react";
 import { DocumentTextIcon, TrashIcon } from "@heroicons/react/20/solid";
@@ -7,9 +8,14 @@ import RoleSelect from "../ui/ListBox";
 import useSubject from "@/libs/hooks/useSubject";
 import FormField from "@/components/ui/FormField";
 import { courses, semester, category } from "@/constants";
-import { toast } from "sonner";
 
-const DocDetails = ({ files, removeFile, fileDetails, setFileDetails }) => {
+const DocDetails = ({
+  files,
+  removeFile,
+  fileDetails,
+  setFileDetails,
+  handlePreviousBtn,
+}) => {
   const [subjectData, setSubjectData] = useState([]);
   const [userCourse, setUserCourses] = useState(courses[6]);
   const [userSemester, setUserSemester] = useState(semester[2]);
@@ -138,9 +144,22 @@ const DocDetails = ({ files, removeFile, fileDetails, setFileDetails }) => {
                     <span className="text-xs">{filesize(file.size)}</span>
                   </p>
                 </div>
-                <p className="text-gray-400 hover:text-white w-5">
-                  <TrashIcon onClick={() => removeFile(index)} />
-                </p>
+                {files.length === 1 ? (
+                  // If there are no files
+                  <p className="text-gray-400 hover:text-white w-5">
+                    <TrashIcon
+                      onClick={() => {
+                        removeFile(index);
+                        handlePreviousBtn();
+                      }}
+                    />
+                  </p>
+                ) : (
+                  // If there are files
+                  <p className="text-gray-400 hover:text-white w-5">
+                    <TrashIcon onClick={() => removeFile(index)} />
+                  </p>
+                )}
               </div>
               <hr className="bg-gray-700 h-[2px] rounded mx-2 my-2 border-none" />
               <div className="space-y-2">
