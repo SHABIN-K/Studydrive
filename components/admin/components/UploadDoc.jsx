@@ -6,11 +6,6 @@ import { DocumentTextIcon, TrashIcon } from "@heroicons/react/20/solid";
 import { Cloud } from "@/public/assets";
 
 const UploadDoc = ({ files, setFiles, removeFile }) => {
- //const [imageUrl, setImageUrl] = useState("");
- //const fileBrowseHandler = (event) => {
- //  let value = URL.createObjectURL(event.target.files[0]);
- //  setImageUrl(value);
- //};
   const onDrop = useCallback(
     (acceptedFiles) => {
       if (files.length + acceptedFiles.length > 3) {
