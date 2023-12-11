@@ -83,7 +83,6 @@ const UploadDoc = ({ files, setFiles, removeFile }) => {
             id="dropzone-file"
             type="file"
             className="hidden"
-            //onChange={fileBrowseHandler}
             {...getInputProps()}
           />
         </div>

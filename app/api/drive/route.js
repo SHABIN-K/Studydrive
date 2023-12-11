@@ -27,3 +27,6 @@ export async function POST(req) {
     });
   }
 }
+//https://www.mohammadfaisal.dev/blog/google-drive-nodejs-react
+//https://github.com/dennisiluma/googleDriveFilesUploadNode/blob/master/index.js
+//https://youtu.be/jaNo14iQdxk?si=ff_dcuKLoE19w_Cu
