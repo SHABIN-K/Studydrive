@@ -47,6 +47,7 @@ const Upload = () => {
   };
 
   // Function to handle the "Submit" button click
+  /*
   const handleSubmitBtn = async () => {
     setIsLoading(true);
 
@@ -78,7 +79,7 @@ const Upload = () => {
       setIsLoading(false);
       // setSubmitModalOpen(true);
     }
-  };
+  };*/
 
   //Function to handle remove items from the list
   const removeFile = (fileIndex) => {
@@ -165,51 +166,3 @@ const Upload = () => {
 };
 
 export default Upload;
-
-
-/*function insertFile(fileData, filename,parentId) {
-    var deferred = $q.defer();
-
-    var boundary = '-------314159265358979323846';
-    var delimiter = "\r\n--" + boundary + "\r\n";
-    var close_delim = "\r\n--" + boundary + "--";
-
-    var reader = new FileReader();
-    reader.readAsBinaryString(fileData);
-    reader.onload = function (e) {
-        var contentType = fileData.type || 'application/octet-stream';
-        var metadata = {
-            'title': filename,
-            'mimeType': contentType,
-            "parents": [{"id":parentId}]
-        };
-
-        var base64Data = btoa(reader.result);
-        var multipartRequestBody =
-            delimiter +
-            'Content-Type: application/json\r\n\r\n' +
-            JSON.stringify(metadata) +
-            delimiter +
-            'Content-Type: ' + contentType + '\r\n' +
-            'Content-Transfer-Encoding: base64\r\n' +
-            '\r\n' +
-            base64Data +
-            close_delim;
-
-        var request = gapi.client.request({
-            'path': '/upload/drive/v2/files',
-            'method': 'POST',
-            'params': {'uploadType': 'multipart'},
-            'headers': {
-                'Content-Type': 'multipart/mixed; boundary="' + boundary + '"'
-            },
-            'body': multipartRequestBody});
-        request.then(function(file){
-            deferred.resolve(file.result);
-        },function(reason){
-            deferred.reject(reason);
-        });
-    };
-
-    return deferred.promise;
-}*/
