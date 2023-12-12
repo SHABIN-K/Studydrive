@@ -5,14 +5,16 @@ import { toast } from "sonner";
 import { useState } from "react";
 import dynamic from "next/dynamic";
 
-// Import components dynamically
-const Stepper = dynamic(() => import("@/components/admin/ui/Stepper"));
-
+import { useEdgeStore } from "@/libs/edgestore";
 import UploadDoc from "@/components/admin/components/UploadDoc";
 import UploadDoneModel from "@/components/admin/ui/UploadDoneModel";
 import DocDetails from "@/components/admin/components/DocDetails";
 
+const Stepper = dynamic(() => import("@/components/admin/ui/Stepper"));
+
 const Upload = () => {
+  const { edgestore } = useEdgeStore();
+
   const [activeStep, setActiveStep] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [submitModalOpen, setSubmitModalOpen] = useState(false);
@@ -47,39 +49,26 @@ const Upload = () => {
   };
 
   // Function to handle the "Submit" button click
-  /*
+
   const handleSubmitBtn = async () => {
     setIsLoading(true);
 
     try {
-      // Create a FormData object to properly format data for file uploads
-      const formData = new FormData(); //https://github.com/meteor/meteor/issues/8125
-
-      files.forEach((file, index) => {
-        console.log(file);
-        formData.append(`doc ${index + 1}`, file);
-      });
-
-      // Make the POST request
-      const response = await axios.post("/api/drive", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
+      const res = await edgestore.publicFies.upload({
+        files,
+        onProgressChange: (progress) => {
+          console.log(progress);
         },
       });
-      console.log(response);
-      if (response.statusText === "FAILED") {
-        toast.error(response.data);
-      } else {
-        toast.success("Successfully uploaded");
-      }
+      console.log(res);
     } catch (error) {
       console.error("NEXT_AUTH Error: " + error);
       toast.error("something went wrong ");
     } finally {
       setIsLoading(false);
-      // setSubmitModalOpen(true);
+      //setSubmitModalOpen(true);
     }
-  };*/
+  };
 
   //Function to handle remove items from the list
   const removeFile = (fileIndex) => {

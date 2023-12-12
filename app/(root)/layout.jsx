@@ -1,7 +1,8 @@
 import { Toaster } from "sonner";
 
-import AuthProvider from "@/components/layouts/ProviderLayouts";
 import "../globals.css";
+import { EdgeStoreProvider } from "@/libs/edgestore";
+import AuthProvider from "@/components/layouts/ProviderLayouts";
 
 export const metadata = {
   title: "pasc hub",
@@ -13,8 +14,10 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className="bg-[#13131a] min-h-screen">
         <AuthProvider>
-          <Toaster richColors closeButton  position="top-center" />
-          {children}
+          <EdgeStoreProvider>
+            <Toaster richColors closeButton position="top-center" />
+            {children}
+          </EdgeStoreProvider>
         </AuthProvider>
       </body>
     </html>
