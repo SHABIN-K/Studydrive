@@ -5,14 +5,16 @@ import { toast } from "sonner";
 import { useState } from "react";
 import dynamic from "next/dynamic";
 
-// Import components dynamically
-const Stepper = dynamic(() => import("@/components/admin/ui/Stepper"));
-
+import { useEdgeStore } from "@/libs/edgestore";
 import UploadDoc from "@/components/admin/components/UploadDoc";
 import UploadDoneModel from "@/components/admin/ui/UploadDoneModel";
 import DocDetails from "@/components/admin/components/DocDetails";
 
+const Stepper = dynamic(() => import("@/components/admin/ui/Stepper"));
+
 const Upload = () => {
+  const { edgestore } = useEdgeStore();
+
   const [activeStep, setActiveStep] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [submitModalOpen, setSubmitModalOpen] = useState(false);
@@ -47,36 +49,24 @@ const Upload = () => {
   };
 
   // Function to handle the "Submit" button click
+
   const handleSubmitBtn = async () => {
     setIsLoading(true);
 
     try {
-      // Create a FormData object to properly format data for file uploads
-      const formData = new FormData(); //https://github.com/meteor/meteor/issues/8125
-
-      files.forEach((file, index) => {
-        console.log(file);
-        formData.append(`doc ${index + 1}`, file);
-      });
-
-      // Make the POST request
-      const response = await axios.post("/api/drive", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
+      const res = await edgestore.publicFies.upload({
+        files,
+        onProgressChange: (progress) => {
+          console.log(progress);
         },
       });
-      console.log(response);
-      if (response.statusText === "FAILED") {
-        toast.error(response.data);
-      } else {
-        toast.success("Successfully uploaded");
-      }
+      console.log(res);
     } catch (error) {
       console.error("NEXT_AUTH Error: " + error);
       toast.error("something went wrong ");
     } finally {
       setIsLoading(false);
-      // setSubmitModalOpen(true);
+      //setSubmitModalOpen(true);
     }
   };
 
@@ -165,51 +155,3 @@ const Upload = () => {
 };
 
 export default Upload;
-
-
-/*function insertFile(fileData, filename,parentId) {
-    var deferred = $q.defer();
-
-    var boundary = '-------314159265358979323846';
-    var delimiter = "\r\n--" + boundary + "\r\n";
-    var close_delim = "\r\n--" + boundary + "--";
-
-    var reader = new FileReader();
-    reader.readAsBinaryString(fileData);
-    reader.onload = function (e) {
-        var contentType = fileData.type || 'application/octet-stream';
-        var metadata = {
-            'title': filename,
-            'mimeType': contentType,
-            "parents": [{"id":parentId}]
-        };
-
-        var base64Data = btoa(reader.result);
-        var multipartRequestBody =
-            delimiter +
-            'Content-Type: application/json\r\n\r\n' +
-            JSON.stringify(metadata) +
-            delimiter +
-            'Content-Type: ' + contentType + '\r\n' +
-            'Content-Transfer-Encoding: base64\r\n' +
-            '\r\n' +
-            base64Data +
-            close_delim;
-
-        var request = gapi.client.request({
-            'path': '/upload/drive/v2/files',
-            'method': 'POST',
-            'params': {'uploadType': 'multipart'},
-            'headers': {
-                'Content-Type': 'multipart/mixed; boundary="' + boundary + '"'
-            },
-            'body': multipartRequestBody});
-        request.then(function(file){
-            deferred.resolve(file.result);
-        },function(reason){
-            deferred.reject(reason);
-        });
-    };
-
-    return deferred.promise;
-}*/
