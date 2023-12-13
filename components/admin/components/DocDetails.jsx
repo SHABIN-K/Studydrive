@@ -1,5 +1,5 @@
 import { toast } from "sonner";
-import { filesize } from "filesize";
+import { formatFileSize } from '@edgestore/react/utils';
 import { useEffect, useState } from "react";
 import { DocumentTextIcon, TrashIcon } from "@heroicons/react/20/solid";
 
@@ -141,7 +141,7 @@ const DocDetails = ({
                     <span className="text-white font-medium text-sm">
                       {file.name}
                     </span>
-                    <span className="text-xs">{filesize(file.size)}</span>
+                    <span className="text-xs">{formatFileSize(file.size)}</span>
                   </p>
                 </div>
                 {files.length === 1 ? (
