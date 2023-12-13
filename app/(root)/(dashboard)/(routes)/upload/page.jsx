@@ -19,9 +19,17 @@ const Upload = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [submitModalOpen, setSubmitModalOpen] = useState(false);
 
+  //for edgeStore
+  const [fileStates, setFileStates] = useState([]);
+  const [uploadRes, setUploadRes] = useState([]);
+
+  //for loaclStore
   const [files, setFiles] = useState([]);
   const [fileDetails, setFileDetails] = useState([]);
 
+  console.log(fileStates);
+  console.log(fileStates);
+  console.log(uploadRes);
   // Function to get the appropriate section component based on the active step
   const getSectionComponent = () => {
     switch (activeStep) {
@@ -31,6 +39,11 @@ const Upload = () => {
             files={files}
             setFiles={setFiles}
             removeFile={removeFile}
+            value={fileStates}
+            onChange={setFileStates}
+            onFilesAdded={async (addedFiles) => {
+              setFileStates([...fileStates, ...addedFiles]);
+            }}
           />
         );
       case 1:
@@ -48,25 +61,29 @@ const Upload = () => {
     }
   };
 
+  const updateFileProgress = (key, progress) => {
+    setFileStates((fileStates) => {
+      const newFileStates = [...fileStates];
+      const fileState = newFileStates.find(
+        (fileState) => fileState.key === key
+      );
+      if (fileState) {
+        fileState.progress = progress;
+      }
+      return newFileStates;
+    });
+  };
+
   // Function to handle the "Submit" button click
-
-  const handleSubmitBtn = async () => {
+  const handleSubmitBtn = () => {
     setIsLoading(true);
-
     try {
-      const res = await edgestore.publicFies.upload({
-        files,
-        onProgressChange: (progress) => {
-          console.log(progress);
-        },
-      });
-      console.log(res);
+      //setActiveStep(activeStep + 1);
+      setSubmitModalOpen(true);
     } catch (error) {
-      console.error("NEXT_AUTH Error: " + error);
-      toast.error("something went wrong ");
+      console.log(error);
     } finally {
       setIsLoading(false);
-      //setSubmitModalOpen(true);
     }
   };
 
@@ -82,19 +99,50 @@ const Upload = () => {
   };
 
   // Function to handle the "Next" button click
-  const handleNextBtn = () => {
+  const handleNextBtn = async () => {
     setIsLoading(true);
 
     // Validate that at least one file is selected
-    if (files.length < 1) {
+    if (fileStates.length < 1) {
       toast.error("One document must be selected for the next step");
       setIsLoading(false);
       return;
     }
 
-    // Proceed to the next step
-    setActiveStep(activeStep + 1);
-    setIsLoading(false);
+    try {
+      await Promise.all(
+        fileStates.map(async (fileState) => {
+          try {
+            if (fileState.progress !== "PENDING") return;
+            const res = await edgestore.publicFiles.upload({
+              file: fileState.file,
+              onProgressChange: async (progress) => {
+                updateFileProgress(fileState.key, progress);
+                if (progress === 100) {
+                  await new Promise((resolve) => setTimeout(resolve, 1000));
+                  updateFileProgress(fileState.key, "COMPLETE");
+                }
+              },
+            });
+            setUploadRes((uploadRes) => [
+              ...uploadRes,
+              {
+                url: res.url,
+                filename: fileState.file.name,
+              },
+            ]);
+          } catch (err) {
+            updateFileProgress(fileState.key, "ERROR");
+          }
+        })
+      );
+      setActiveStep(activeStep + 1);
+    } catch (error) {
+      console.error("An error occurred during file upload:", error);
+      toast.error("An error occurred during file upload");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   // Array of ste
@@ -155,3 +203,32 @@ const Upload = () => {
 };
 
 export default Upload;
+
+/*
+        <div>
+          <input
+            type="file"
+            onChange={(e) => {
+              setFile(e.target.files?.[0] || null);
+            }}
+          />
+          <button
+            onClick={async () => {
+              if (file) {
+                const res = await edgestore.publicFiles.upload({
+                  file,
+                  onProgressChange: (progress) => {
+                    // you can use this to show a progress bar
+                    console.log(progress);
+                  },
+                });
+                // you can run some server action or api here
+                // to add the necessary data to your database
+                console.log(res);
+              }
+            }}
+          >
+            Upload
+          </button>
+        </div>
+*/

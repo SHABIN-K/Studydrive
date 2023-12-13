@@ -17,4 +17,3 @@ const handler = createEdgeStoreNextHandler({
 
 
 export { handler as GET, handler as POST };
-//https://github.com/Speedforce12/Quotion

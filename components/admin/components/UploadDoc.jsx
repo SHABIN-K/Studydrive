@@ -5,7 +5,14 @@ import { DocumentTextIcon, TrashIcon } from "@heroicons/react/20/solid";
 
 import { Cloud } from "@/public/assets";
 
-const UploadDoc = ({ files, setFiles, removeFile }) => {
+const UploadDoc = ({
+  files,
+  setFiles,
+  removeFile,
+  value,
+  onChange,
+  onFilesAdded,
+}) => {
   const onDrop = useCallback(
     (acceptedFiles) => {
       if (files.length + acceptedFiles.length > 3) {
@@ -46,6 +53,16 @@ const UploadDoc = ({ files, setFiles, removeFile }) => {
     onDrop: (acceptedFiles) => {
       if (validateFile(acceptedFiles[0])) {
         onDrop(acceptedFiles);
+      }
+      const files = acceptedFiles;
+      if (files) {
+        const addedFiles = files.map((file) => ({
+          file,
+          key: Math.random().toString(36).slice(2),
+          progress: "PENDING",
+        }));
+        void onFilesAdded?.(addedFiles);
+        void onChange?.([...(value ?? []), ...addedFiles]);
       }
     },
     accept: {
