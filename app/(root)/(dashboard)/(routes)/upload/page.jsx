@@ -27,7 +27,7 @@ const Upload = () => {
   const [files, setFiles] = useState([]);
   const [fileDetails, setFileDetails] = useState([]);
 
-  console.log(fileStates);
+  console.log(files);
   console.log(fileStates);
   console.log(uploadRes);
   // Function to get the appropriate section component based on the active step
@@ -92,6 +92,9 @@ const Upload = () => {
     const updatedFiles = [...files];
     updatedFiles.splice(fileIndex, 1);
     setFiles(updatedFiles);
+    const updatedFile = [...fileStates];
+    updatedFile.splice(fileIndex, 1);
+    setFileStates(updatedFile);
   };
   // Function to handle the "Previous" button click
   const handlePreviousBtn = () => {

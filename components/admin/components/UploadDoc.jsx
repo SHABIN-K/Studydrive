@@ -15,12 +15,17 @@ const UploadDoc = ({
 }) => {
   const onDrop = useCallback(
     (acceptedFiles) => {
-      if (files.length + acceptedFiles.length > 3) {
+      const currentFiles = files || [];
+
+      if (currentFiles.length + acceptedFiles.length > 3) {
         toast.error("You can only upload up to three files.");
         return;
       }
+
       const validFiles = acceptedFiles.filter((file) => {
-        if (files.some((existingFile) => existingFile.name === file.name)) {
+        if (
+          currentFiles.some((existingFile) => existingFile.name === file.name)
+        ) {
           toast.error(`File '${file.name}' is already uploaded.`);
           return false;
         }
@@ -29,11 +34,12 @@ const UploadDoc = ({
         }
         return true;
       });
-      setFiles([...files, ...validFiles]);
+
+      setFiles([...currentFiles, ...validFiles]);
+      return validFiles;
     },
     [files, setFiles]
   );
-
   const validateFile = (file) => {
     if (
       ![
@@ -50,13 +56,11 @@ const UploadDoc = ({
   };
 
   const { getRootProps, getInputProps } = useDropzone({
-    onDrop: (acceptedFiles) => {
-      if (validateFile(acceptedFiles[0])) {
-        onDrop(acceptedFiles);
-      }
-      const files = acceptedFiles;
-      if (files) {
-        const addedFiles = files.map((file) => ({
+    onDrop: async (acceptedFiles) => {
+      const validFiles = onDrop(acceptedFiles);
+
+      if (validFiles.length > 0) {
+        const addedFiles = validFiles.map((file) => ({
           file,
           key: Math.random().toString(36).slice(2),
           progress: "PENDING",
@@ -74,7 +78,6 @@ const UploadDoc = ({
         [".pptx"],
     },
   });
-
   return (
     <div className="flex flex-col items-center justify-center w-full">
       <div
@@ -104,6 +107,22 @@ const UploadDoc = ({
           />
         </div>
       </div>
+      {value?.map((file, index) => (
+        <div
+          key={index}
+          className="mt-1 w-full hover:bg-gray-800 rounded-lg py-1"
+        >
+          <ul className="flex justify-between items-center mr-2 ml-2 text-white">
+            <p className="flex items-center text-sm font-medium mt-1">
+              <DocumentTextIcon className="text-gray-400 w-6 h-6" />
+              <span>{file.file.name}</span>
+            </p>
+            <p className="text-gray-400 hover:text-white w-5">
+              <TrashIcon onClick={() => removeFile(index)} />
+            </p>
+          </ul>
+        </div>
+      ))}
       {files.length > 0 &&
         files.map((file, index) => (
           <div
