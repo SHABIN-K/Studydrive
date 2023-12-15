@@ -35,7 +35,7 @@ const MyDash = () => {
           </div>
         </Tab.Panel>
         <Tab.Panel>
-          <ShowSubject />
+          <ShowSubject userEmail={session.user.email} />
         </Tab.Panel>
       </Tab.Panels>
     </Tab.Group>
