@@ -24,4 +24,15 @@ const useUserSubject = ({ userID }) => {
   };
 };
 
-export { useSubject, useUserSubject };
+const useFilterSubject = ({ courseName }) => {
+  const key = `/api/subject/filter/${courseName}`;
+  const { data, error, isLoading, mutate } = useSWR(key, fetcher);
+  return {
+    data,
+    error,
+    isLoading,
+    mutate,
+  };
+};
+
+export { useSubject, useUserSubject, useFilterSubject };

@@ -6,7 +6,7 @@ import { DocumentTextIcon, TrashIcon } from "@heroicons/react/20/solid";
 import ComboBox from "../ui/ComboBox";
 import RoleSelect from "../ui/ListBox";
 import FormField from "@/components/ui/FormField";
-import { useSubject } from "@/libs/hooks/useSubject";
+import { useFilterSubject } from "@/libs/hooks/useSubject";
 import { courses, semester, category } from "@/constants";
 
 const DocDetails = ({
@@ -22,7 +22,13 @@ const DocDetails = ({
   const [userSubject, setUserSubject] = useState("");
   const [tempData, setTempData] = useState([]);
 
-  const { data: fetchedData, error, isLoading: loading } = useSubject();
+  const {
+    data: fetchedData,
+    error,
+    isLoading: loading,
+  } = useFilterSubject({
+    courseName: userCourse.link,
+  });
 
   useEffect(() => {
     if (fetchedData) {
