@@ -181,7 +181,7 @@ const Upload = () => {
         const response = await axios.post("/api/post", {
           fileDetails,
           uploadRes,
-          user: session.user.email,
+          userEmail: session.user.email,
         });
         if (response.statusText === "FAILED") {
           toast.error(response.data);
