@@ -4,6 +4,8 @@ import axios from "axios";
 import { toast } from "sonner";
 import { useState } from "react";
 import dynamic from "next/dynamic";
+
+
 import { useSession } from "next-auth/react";
 
 import { useEdgeStore } from "@/libs/edgestore";
@@ -186,8 +188,10 @@ const Upload = () => {
         if (response.statusText === "FAILED") {
           toast.error(response.data);
         } else {
-          toast.success("Successfully created");
-         // setSubmitModalOpen(true);
+          for (const upload of uploadRes) {
+            await edgestore.publicFiles.confirmUpload({ url: upload.url });
+          }
+          setSubmitModalOpen(true);
         }
       }
     } catch (error) {
