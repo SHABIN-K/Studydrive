@@ -10,8 +10,7 @@ import FormField from "@/components/ui/FormField";
 import FormButtons from "@/components/ui/FormButtons";
 import { SubjectValidation } from "@/libs/validations/subject";
 
-const AddSubject = ({ sessionEmail }) => {
-  const userEmail = sessionEmail;
+const AddSubject = ({ userEmail }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const [subjectCode, setsubjectCode] = useState("");

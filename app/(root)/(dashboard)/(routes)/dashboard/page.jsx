@@ -30,7 +30,7 @@ const MyDash = () => {
       <Tab.Panels className="mt-3">
         <Tab.Panel>
           <div className="space-y-3">
-            <AddSubject sessionData={session.user.email} />
+            <AddSubject userEmail={session.user.email} />
             <ChangePassword sessionData={session.user.email} />
           </div>
         </Tab.Panel>

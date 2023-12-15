@@ -30,7 +30,7 @@ export async function GET(req) {
 export async function POST(req) {
   const { courseName, userSemester, subjectCode, subjectName, userEmail } =
     await req.json();
-
+  console.log(userEmail);
   try {
     //find user by email address
     const user = await prisma.user.findFirst({

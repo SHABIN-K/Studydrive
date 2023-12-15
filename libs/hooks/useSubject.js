@@ -11,15 +11,10 @@ const useSubject = () => {
   };
 };
 
-const useSubjects = ({ userID }) => {
-  console.log(userID);
+const useUserSubject = ({ userID }) => {
   const { data, error, isLoading, mutate } = useSWR(
     `/api/subject/${userID}`,
-    fetcher,
-    {
-      errorRetryCount: 3,
-      errorRetryInterval: 3000,
-    }
+    fetcher
   );
   return {
     data,
@@ -29,4 +24,4 @@ const useSubjects = ({ userID }) => {
   };
 };
 
-export { useSubject, useSubjects };
+export { useSubject, useUserSubject };

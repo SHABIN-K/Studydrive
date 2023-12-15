@@ -1,18 +1,15 @@
 import prisma from "@/libs/prisma";
 
 export async function GET(req, { params }) {
-  console.log(params);
+  console.log(params); //652a35872725980eed65cc9f
   try {
-    /*
-      const filteredSubjects = await prisma.subject.findMany({
-        where: {
-          course_name: courseName,
-          semester_code: semester,
-        },
-      });
-      */
-    //const allSubject = await prisma.subject.findMany();
-    return new Response(JSON.stringify("hello world"), {
+    const filteredSubjects = await prisma.subject.findMany({
+      where: {
+        userId: params.id,
+      },
+    });
+    console.log(filteredSubjects);
+    return new Response(JSON.stringify(filteredSubjects), {
       status: 200, // Created
       headers: {
         "Content-Type": "application/json",
