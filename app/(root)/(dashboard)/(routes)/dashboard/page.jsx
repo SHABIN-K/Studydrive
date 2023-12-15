@@ -4,7 +4,7 @@ import { Tab } from "@headlessui/react";
 import { useSession } from "next-auth/react";
 
 import AddSubject from "@/components/admin/components/AddSubject";
-import ShowSubject from "@/components/admin/components/ShowSubject";
+import ShowData from "@/components/admin/components/ShowData";
 import ChangePassword from "@/components/admin/components/ChangePassword";
 
 const Tabs = ["Playground", "Show Data"];
@@ -30,12 +30,12 @@ const MyDash = () => {
       <Tab.Panels className="mt-3">
         <Tab.Panel>
           <div className="space-y-3">
-            <AddSubject sessionData={session.user.email} />
+            <AddSubject userEmail={session.user.email} />
             <ChangePassword sessionData={session.user.email} />
           </div>
         </Tab.Panel>
         <Tab.Panel>
-          <ShowSubject />
+          <ShowData userID={session.user.sub} />
         </Tab.Panel>
       </Tab.Panels>
     </Tab.Group>

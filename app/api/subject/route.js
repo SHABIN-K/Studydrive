@@ -3,14 +3,6 @@ import prisma from "@/libs/prisma";
 
 export async function GET(req) {
   try {
-    /*
-    const filteredSubjects = await prisma.subject.findMany({
-      where: {
-        course_name: courseName,
-        semester_code: semester,
-      },
-    });
-    */
     const allSubject = await prisma.subject.findMany();
     return new Response(JSON.stringify(allSubject), {
       status: 200, // Created

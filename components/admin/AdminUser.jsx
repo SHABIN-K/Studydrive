@@ -1,7 +1,7 @@
-import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
-import Swal from "sweetalert2";
 import { toast } from "sonner";
+import Swal from "sweetalert2";
+import { useEffect, useMemo, useState } from "react";
 
 import Table from "./components/Table";
 import AdminModel from "./ui/AdminModel";

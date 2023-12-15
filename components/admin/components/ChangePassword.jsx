@@ -37,7 +37,7 @@ const ChangePassword = ({ sessionData }) => {
         });
       } else {
         // If validation is successful, make the API request
-        const response = await axios.patch("/api/changepwd", {
+        const response = await axios.patch("/api/user/changepwd", {
           oldPassword,
           newPassword,
           sessionData,
