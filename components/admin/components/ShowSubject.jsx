@@ -3,12 +3,12 @@ import { useEffect, useMemo, useState } from "react";
 import Table from "./Table";
 import { useSubjects } from "@/libs/hooks/useSubject";
 
-const ShowSubject = ({ userEmail }) => {
+const ShowSubject = ({ userID }) => {
   const {
     data: fetchedData,
     error,
     isLoading: loading,
-  } = useSubjects({ userEmail });
+  } = useSubjects({ userID });
 
   const [tableData, setTableData] = useState([]);
 

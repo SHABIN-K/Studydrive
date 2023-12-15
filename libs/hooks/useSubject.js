@@ -2,10 +2,7 @@ import useSWR from "swr";
 import fetcher from "../fetcher";
 
 const useSubject = () => {
-  const { data, error, isLoading, mutate } = useSWR("/api/subject", fetcher, {
-    errorRetryCount: 3,
-    errorRetryInterval: 3000,
-  });
+  const { data, error, isLoading, mutate } = useSWR("/api/subject", fetcher);
   return {
     data,
     error,
@@ -14,9 +11,10 @@ const useSubject = () => {
   };
 };
 
-const useSubjects = ({ userEmail }) => {
+const useSubjects = ({ userID }) => {
+  console.log(userID);
   const { data, error, isLoading, mutate } = useSWR(
-    `/api/subject?userEmail=${userEmail}`,
+    `/api/subject/${userID}`,
     fetcher,
     {
       errorRetryCount: 3,
