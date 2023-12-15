@@ -155,14 +155,16 @@ const ShowData = ({ userID }) => {
   };
 
   return (
-    <>
+    <div>
+      <h1 className="text-white text-lg font-medium">Your subject</h1>
       <Table
         data={subjectDatas}
         columns={subjectColumns}
         isLoading={subjectLoading}
       />
+      <h1 className="text-white text-lg font-medium">Your Files</h1>
       <Table data={postDatas} columns={postColumns} isLoading={postLoading} />
-    </>
+    </div>
   );
 };
 
