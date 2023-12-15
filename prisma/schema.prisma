@@ -40,6 +40,7 @@ model post {
   description   String
   category      String
   file_url      String
+  file_name     String
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 }

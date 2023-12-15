@@ -4,16 +4,19 @@ import axios from "axios";
 import { toast } from "sonner";
 import { useState } from "react";
 import dynamic from "next/dynamic";
+import { useSession } from "next-auth/react";
 
 import { useEdgeStore } from "@/libs/edgestore";
+import { PostValidation } from "@/libs/validations/post";
 import UploadDoc from "@/components/admin/components/UploadDoc";
-import UploadDoneModel from "@/components/admin/ui/UploadDoneModel";
 import DocDetails from "@/components/admin/components/DocDetails";
+import UploadDoneModel from "@/components/admin/ui/UploadDoneModel";
 
 const Stepper = dynamic(() => import("@/components/admin/ui/Stepper"));
 
 const Upload = () => {
   const { edgestore } = useEdgeStore();
+  const { data: session } = useSession();
 
   const [activeStep, setActiveStep] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
@@ -27,7 +30,6 @@ const Upload = () => {
   const [files, setFiles] = useState([]);
   const [fileDetails, setFileDetails] = useState([]);
 
-  console.log(uploadRes);
   // Array of ste
   const steps = ["UPLOAD", "DETAILS", "DONE"];
 
@@ -141,10 +143,53 @@ const Upload = () => {
   };
 
   // Function to handle the "Submit" button click
-  const handleSubmitBtn = () => {
+  const handleSubmitBtn = async (e) => {
+    e.preventDefault();
     setIsLoading(true);
+
+    // Validate each fileDetail in the array
+    const validationResults = fileDetails.map((fileDetail, index) => {
+      const userInput = {
+        postTitle: fileDetail.title,
+        postDesc: fileDetail.description,
+      };
+
+      return PostValidation.addPost.safeParse(userInput);
+    });
+
     try {
-      setSubmitModalOpen(true);
+      // Check if any validation failed
+      const hasValidationErrors = validationResults.some(
+        (validation) => validation.success === false
+      );
+
+      //if validation is failure, return error message
+      if (hasValidationErrors) {
+        // Display error messages for each failed validation
+        validationResults.forEach((validation, index) => {
+          if (validation.success === false) {
+            const { issues } = validation.error;
+            issues.forEach((err) => {
+              toast.error(
+                `Validation error for ${fileDetails[index].title}: ${err.message}`
+              );
+            });
+          }
+        });
+      } else {
+        // If validation is successful, make the API request
+        const response = await axios.post("/api/post", {
+          fileDetails,
+          uploadRes,
+          user: session.user.email,
+        });
+        if (response.statusText === "FAILED") {
+          toast.error(response.data);
+        } else {
+          toast.success("Successfully created");
+         // setSubmitModalOpen(true);
+        }
+      }
     } catch (error) {
       console.error("An error occurred during file upload:", error);
       toast.error("An error occurred during file upload");
