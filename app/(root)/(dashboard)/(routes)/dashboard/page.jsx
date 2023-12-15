@@ -27,7 +27,7 @@ const MyDash = () => {
           </Tab>
         ))}
       </Tab.List>
-      <Tab.Panels className="mt-3 mx-2 sm:mx-8">
+      <Tab.Panels className="mt-3">
         <Tab.Panel>
           <div className="space-y-3">
             <AddSubject sessionData={session.user.email} />

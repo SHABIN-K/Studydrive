@@ -1,6 +1,6 @@
-import { useState } from "react";
 import axios from "axios";
 import { toast } from "sonner";
+import { useState } from "react";
 import { PlusIcon } from "@heroicons/react/20/solid";
 
 import ComboBox from "../ui/ComboBox";
@@ -11,13 +11,13 @@ import FormButtons from "@/components/ui/FormButtons";
 import { SubjectValidation } from "@/libs/validations/subject";
 
 const AddSubject = ({ sessionEmail }) => {
+  const userEmail = sessionEmail;
   const [isLoading, setIsLoading] = useState(false);
 
-  const [courseName, setCourseName] = useState(courses[6]);
-  const [userSemester, setUserSemester] = useState(semester[2]);
   const [subjectCode, setsubjectCode] = useState("");
   const [subjectName, setSubjectName] = useState("");
-  const [userEmail, setUserEmail] = useState(sessionEmail);
+  const [courseName, setCourseName] = useState(courses[6]);
+  const [userSemester, setUserSemester] = useState(semester[2]);
 
   const styleAddSubject = {
     classlabel: "block mb-2 text-sm font-medium text-gray-900",

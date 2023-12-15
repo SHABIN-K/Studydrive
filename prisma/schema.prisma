@@ -32,13 +32,15 @@ model post {
   id            String   @id @default(auto()) @map("_id") @db.ObjectId
   User          User?    @relation(fields: [userId], references: [id])
   userId        String?  @db.ObjectId
-  tittle        String
-  description   String
-  category      String
   course_name   String
   semester_code String
   subject_code  String
   subject_name  String
+  title         String
+  description   String
+  category      String
+  file_url      String?
+  file_name     String?
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 }
