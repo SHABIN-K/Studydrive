@@ -27,9 +27,10 @@ const Upload = () => {
   const [files, setFiles] = useState([]);
   const [fileDetails, setFileDetails] = useState([]);
 
-  //console.log(files);
-  //console.log(fileStates);
-  //console.log(uploadRes);
+  console.log(uploadRes);
+  // Array of ste
+  const steps = ["UPLOAD", "DETAILS", "DONE"];
+
   // Function to get the appropriate section component based on the active step
   const getSectionComponent = () => {
     switch (activeStep) {
@@ -74,19 +75,6 @@ const Upload = () => {
     });
   };
 
-  // Function to handle the "Submit" button click
-  const handleSubmitBtn = () => {
-    setIsLoading(true);
-    try {
-      //setActiveStep(activeStep + 1);
-      setSubmitModalOpen(true);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   //Function to handle remove items from the list
   const removeFile = (fileIndex) => {
     const updatedFiles = [...files];
@@ -96,6 +84,7 @@ const Upload = () => {
     updatedFile.splice(fileIndex, 1);
     setFileStates(updatedFile);
   };
+
   // Function to handle the "Previous" button click
   const handlePreviousBtn = () => {
     setActiveStep(activeStep - 1);
@@ -119,6 +108,9 @@ const Upload = () => {
             if (fileState.progress !== "PENDING") return;
             const res = await edgestore.publicFiles.upload({
               file: fileState.file,
+              options: {
+                temporary: true,
+              },
               onProgressChange: async (progress) => {
                 updateFileProgress(fileState.key, progress);
                 if (progress === 100) {
@@ -148,8 +140,18 @@ const Upload = () => {
     }
   };
 
-  // Array of ste
-  const steps = ["UPLOAD", "DETAILS", "DONE"];
+  // Function to handle the "Submit" button click
+  const handleSubmitBtn = () => {
+    setIsLoading(true);
+    try {
+      setSubmitModalOpen(true);
+    } catch (error) {
+      console.error("An error occurred during file upload:", error);
+      toast.error("An error occurred during file upload");
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <div className="flex flex-col items-center justify-center">
@@ -206,32 +208,3 @@ const Upload = () => {
 };
 
 export default Upload;
-
-/*
-        <div>
-          <input
-            type="file"
-            onChange={(e) => {
-              setFile(e.target.files?.[0] || null);
-            }}
-          />
-          <button
-            onClick={async () => {
-              if (file) {
-                const res = await edgestore.publicFiles.upload({
-                  file,
-                  onProgressChange: (progress) => {
-                    // you can use this to show a progress bar
-                    console.log(progress);
-                  },
-                });
-                // you can run some server action or api here
-                // to add the necessary data to your database
-                console.log(res);
-              }
-            }}
-          >
-            Upload
-          </button>
-        </div>
-*/
