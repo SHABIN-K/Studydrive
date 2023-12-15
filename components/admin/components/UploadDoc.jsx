@@ -15,17 +15,12 @@ const UploadDoc = ({
 }) => {
   const onDrop = useCallback(
     (acceptedFiles) => {
-      const currentFiles = files || [];
-
-      if (currentFiles.length + acceptedFiles.length > 3) {
+      if (files.length + acceptedFiles.length > 3) {
         toast.error("You can only upload up to three files.");
-        return;
+        return [];
       }
-
       const validFiles = acceptedFiles.filter((file) => {
-        if (
-          currentFiles.some((existingFile) => existingFile.name === file.name)
-        ) {
+        if (files.some((existingFile) => existingFile.name === file.name)) {
           toast.error(`File '${file.name}' is already uploaded.`);
           return false;
         }
@@ -35,11 +30,12 @@ const UploadDoc = ({
         return true;
       });
 
-      setFiles([...currentFiles, ...validFiles]);
+      setFiles((prevFiles) => [...prevFiles, ...validFiles]);
       return validFiles;
     },
     [files, setFiles]
   );
+
   const validateFile = (file) => {
     if (
       ![
@@ -59,7 +55,7 @@ const UploadDoc = ({
     onDrop: async (acceptedFiles) => {
       const validFiles = onDrop(acceptedFiles);
 
-      if (validFiles.length > 0) {
+      if (validFiles && validFiles.length > 0) {
         const addedFiles = validFiles.map((file) => ({
           file,
           key: Math.random().toString(36).slice(2),

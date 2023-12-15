@@ -27,9 +27,9 @@ const Upload = () => {
   const [files, setFiles] = useState([]);
   const [fileDetails, setFileDetails] = useState([]);
 
-  console.log(files);
-  console.log(fileStates);
-  console.log(uploadRes);
+  //console.log(files);
+  //console.log(fileStates);
+  //console.log(uploadRes);
   // Function to get the appropriate section component based on the active step
   const getSectionComponent = () => {
     switch (activeStep) {
