@@ -155,7 +155,7 @@ const ShowData = ({ userID }) => {
   };
 
   return (
-    <div>
+    <div className="max-w-sm sm:max-w-none pr-4 overflow-hidden">
       <h1 className="text-white text-lg font-medium">Your subject</h1>
       <Table
         data={subjectDatas}

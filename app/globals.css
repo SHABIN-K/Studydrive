@@ -78,6 +78,21 @@ body {
 
 /* loading */
 
+/* skeleton */
+.skeleton {
+  animation: skeleton-loading 2s linear infinite alternate;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-color: theme("colors.gray.300");
+  }
+  100% {
+    background-color: theme("colors.gray.500");
+  }
+}
+/* skeleton */
+
 /*sweetAlert custom*/
 
 .bordered-alert {
