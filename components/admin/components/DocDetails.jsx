@@ -27,7 +27,8 @@ const DocDetails = ({
     error,
     isLoading: loading,
   } = useFilterSubject({
-    courseName: userCourse.link,
+    course: userCourse.link,
+    semester: userSemester.link,
   });
 
   useEffect(() => {

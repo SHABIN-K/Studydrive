@@ -1,13 +1,15 @@
 import prisma from "@/libs/prisma";
 
 export async function GET(req, { params }) {
+  const [courseName, semester] = params.filtered;
   try {
     const filteredSubjects = await prisma.subject.findMany({
       where: {
-        course_name: params.name,
+        course_name: courseName,
+        semester_code: semester,
       },
     });
-    console.log(filteredSubjects);
+
     return new Response(JSON.stringify(filteredSubjects), {
       status: 200, // Created
       headers: {
