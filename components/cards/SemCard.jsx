@@ -1,8 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
 
-import img from "public/icons/doc.png";
-
 const SemCard = ({ data, route, course, category }) => {
   //https://daisyui.com/components/card/
   return (

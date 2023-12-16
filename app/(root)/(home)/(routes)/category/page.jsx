@@ -1,6 +1,6 @@
 "use client";
-import DataCard from "@/components/cards/DataCard";
 import { category } from "@/constants";
+import DataCard from "@/components/cards/DataCard";
 
 import { useSearchParams } from "next/navigation";
 

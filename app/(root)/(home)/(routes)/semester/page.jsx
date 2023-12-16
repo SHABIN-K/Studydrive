@@ -1,8 +1,9 @@
 "use client";
-
-import SemCard from "@/components/cards/SemCard";
 import { semester } from "@/constants";
+import SemCard from "@/components/cards/SemCard";
+
 import { useSearchParams } from "next/navigation";
+
 const UserSemester = () => {
   const searchParams = useSearchParams();
   const course = searchParams.get("name");

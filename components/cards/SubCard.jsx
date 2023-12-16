@@ -10,7 +10,6 @@ const SubCard = ({ data }) => {
   const router = useRouter();
 
   const loading = false;
-  //const loading = true
 
   const handleClick = () => {
     router.push("/view-doc");
