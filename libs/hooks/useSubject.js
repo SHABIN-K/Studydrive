@@ -24,8 +24,8 @@ const useUserSubject = ({ userID }) => {
   };
 };
 
-const useFilterSubject = ({ courseName }) => {
-  const key = `/api/subject/filter/${courseName}`;
+const useFilterSubject = ({ course, semester }) => {
+  const key = `/api/subject/filter/${course}/${semester}`;
   const { data, error, isLoading, mutate } = useSWR(key, fetcher);
   return {
     data,
