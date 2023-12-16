@@ -1,4 +1,4 @@
-import MenuCard from "./cards/MenuCard";
+import DataCard from "./cards/DataCard";
 
 const Feed = ({ label, feedData, styleHead, style, route, cardStyle }) => {
   const feed = feedData;
@@ -8,11 +8,17 @@ const Feed = ({ label, feedData, styleHead, style, route, cardStyle }) => {
       <div className={`grid grid-cols-3 md:gap-[26px] ${style}`}>
         {feed.map((FeedData, index) => {
           return (
-            <MenuCard
+            <DataCard
               key={index}
+              hrefData={{
+                pathname: `/${route}`,
+                query: { name: FeedData.link },
+              }}
               data={FeedData}
-              route={route}
+              altMsg={FeedData.description}
               style={cardStyle}
+              styleContent="flex flex-col"
+              syleName="text-[#808191] tracking-tighter"
             />
           );
         })}

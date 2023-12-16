@@ -1,7 +1,6 @@
 "use client";
 import { category } from "@/constants";
 import DataCard from "@/components/cards/DataCard";
-
 import { useSearchParams } from "next/navigation";
 
 const Mycategory = () => {
@@ -16,9 +15,13 @@ const Mycategory = () => {
             return (
               <DataCard
                 key={index}
+                hrefData={{
+                  pathname: `/semester`,
+                  query: { name: course, category: category.link },
+                }}
                 data={category}
-                route="semester"
-                course={course}
+                altMsg={category.description}
+                style="bg-[#1c1c24] hover:bg-[#2c2f32] py-2"
               />
             );
           })}
