@@ -11,7 +11,7 @@ export async function GET(req, { params }) {
         subject_code: subId,
       },
     });
-    console.log(filteredPost);
+    
     return new Response(JSON.stringify(filteredPost), {
       status: 200, // Created
       headers: {
