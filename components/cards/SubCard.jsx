@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 
-import img from "public/icons/doc.png";
+import { subject } from "@/public/icons";
 
 const SubCard = ({ hrefData, data }) => {
   return (
@@ -11,7 +11,7 @@ const SubCard = ({ hrefData, data }) => {
     >
       <div className="flex flex-row items-center ml-5">
         <figure className="w-16 h-16 md:w-20 md:h-20 bg-gray-300 rounded-full overflow-hidden">
-          <Image src={img} alt={data.subject_name} />
+          <Image src={subject} alt={data.subject_name} />
         </figure>
 
         <div className="text-start ml-5">
