@@ -10,21 +10,21 @@ export async function POST(req) {
     });
 
     // Check if a file already exists
-    //const existingFiles = await prisma.post.findMany({
-    //  where: { file_name: { in: uploadRes.map((res) => res.filename) } },
-    //});
+    const existingFiles = await prisma.post.findMany({
+      where: { file_name: { in: uploadRes.map((res) => res.filename) } },
+    });
 
     // Check if any of the files already exist
-    //if (existingFiles.length > 0) {
-    //  const existingFileNames = existingFiles.map((file) => file.file_name);
-    //  return new Response(
-    //    `These files already uploaded: ${existingFileNames.join(", ")}`,
-    //    {
-    //      status: 200,
-    //      statusText: "FAILED",
-    //    }
-    //  );
-    //}
+    if (existingFiles.length > 0) {
+      const existingFileNames = existingFiles.map((file) => file.file_name);
+      return new Response(
+        `These files already uploaded: ${existingFileNames.join(", ")}`,
+        {
+          status: 200,
+          statusText: "FAILED",
+        }
+      );
+    }
 
     const createdPosts = [];
 

@@ -12,7 +12,7 @@ const PostCard = ({ data }) => {
 
   return (
     <div
-      className="card rounded-lg cursor-pointer bg-[#1c1c24] hover:bg-[#2c2f32] p-3.5"
+      className="card rounded-lg cursor-pointer bg-[#1c1c24] hover:bg-[#2c2f32] p-2"
       title={data.description}
       onClick={() => setIsOpen(true)}
     >
