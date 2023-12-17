@@ -58,7 +58,6 @@ const ViewSubjects = () => {
                       },
                     }}
                     data={item}
-                    isLoading={loading}
                   />
                 ))}
               </div>
