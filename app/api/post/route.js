@@ -1,5 +1,23 @@
 import prisma from "@/libs/prisma";
 
+export async function GET() {
+  try {
+    const allPosts = await prisma.post.findMany();
+    return new Response(JSON.stringify(allPosts), {
+      status: 200, // Created
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  } catch (error) {
+    console.error("Error processing the request:", error);
+
+    return new Response("An error occurred", {
+      status: 500, // Internal Server Error
+    });
+  }
+}
+
 export async function POST(req) {
   try {
     const { fileDetails, uploadRes, userEmail } = await req.json();
@@ -10,21 +28,21 @@ export async function POST(req) {
     });
 
     // Check if a file already exists
-    //const existingFiles = await prisma.post.findMany({
-    //  where: { file_name: { in: uploadRes.map((res) => res.filename) } },
-    //});
+    const existingFiles = await prisma.post.findMany({
+      where: { file_name: { in: uploadRes.map((res) => res.filename) } },
+    });
 
     // Check if any of the files already exist
-    //if (existingFiles.length > 0) {
-    //  const existingFileNames = existingFiles.map((file) => file.file_name);
-    //  return new Response(
-    //    `These files already uploaded: ${existingFileNames.join(", ")}`,
-    //    {
-    //      status: 200,
-    //      statusText: "FAILED",
-    //    }
-    //  );
-    //}
+    if (existingFiles.length > 0) {
+      const existingFileNames = existingFiles.map((file) => file.file_name);
+      return new Response(
+        `These files already uploaded: ${existingFileNames.join(", ")}`,
+        {
+          status: 200,
+          statusText: "FAILED",
+        }
+      );
+    }
 
     const createdPosts = [];
 

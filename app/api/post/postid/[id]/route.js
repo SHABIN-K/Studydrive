@@ -1,18 +1,14 @@
 import prisma from "@/libs/prisma";
 
 export async function GET(req, { params }) {
-  const [courseName, semester, category, subId] = params.filtered;
   try {
-    const filteredPost = await prisma.post.findMany({
+    const post = await prisma.post.findMany({
       where: {
-        course_name: courseName,
-        semester_code: semester,
-        category,
-        subject_code: subId,
+        id: params.id,
       },
     });
-    
-    return new Response(JSON.stringify(filteredPost), {
+    console.log(post);
+    return new Response(JSON.stringify(post), {
       status: 200, // Created
       headers: {
         "Content-Type": "application/json",

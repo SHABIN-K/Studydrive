@@ -12,11 +12,11 @@ const PostCard = ({ data }) => {
 
   return (
     <div
-      className="card rounded-lg cursor-pointer bg-[#1c1c24] hover:bg-[#2c2f32] py-2"
+      className="card rounded-lg cursor-pointer bg-[#1c1c24] hover:bg-[#2c2f32] p-2"
       title={data.description}
       onClick={() => setIsOpen(true)}
     >
-      <div className="flex flex-row items-center ml-5">
+      <div className="flex flex-row items-center">
         <div className="">
           <figure className="w-[70px] h-[70px] md:w-20 md:h-20 bg-gray-300 rounded-full overflow-hidden">
             <Image src={doc} alt={data.description} />
@@ -26,7 +26,7 @@ const PostCard = ({ data }) => {
           <p className="text-base font-semibold font-sans md:font-mono  mt-2 text-white">
             {data.title}
           </p>
-          <p className="text-sm font-medium md:font-semibold font-sans md:font-mono tracking-tighter md:tracking-normal text-[#808191] normal-case">
+          <p className="text-sm font-medium md:font-semibold font-sans md:font-mono tracking-tighter md:tracking-normal text-[#808191] normal-case break-all">
             {shouldShowDots ? `${description}...` : description}
           </p>
         </div>
