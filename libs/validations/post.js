@@ -16,8 +16,8 @@ const Post = z.object({
       invalid_type_error: "Description must be a string.",
     })
     .min(10, { message: "Description must be at least 10 characters long." })
-    .max(150, {
-      message: "Description can only be up to 150 characters long.",
+    .max(500, {
+      message: "Description can only be up to 500 characters long.",
     }),
 });
 
