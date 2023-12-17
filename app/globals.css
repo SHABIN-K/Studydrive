@@ -93,6 +93,21 @@ body {
 }
 /* skeleton */
 
+/* search button*/
+.search-colour {
+  animation: search-loading 1s linear infinite alternate;
+}
+
+@keyframes search-loading {
+  0% {
+    background-color: theme("colors.green.300");
+  }
+  100% {
+    background-color: theme("colors.green.500");
+  }
+}
+/* search button*/
+
 /*sweetAlert custom*/
 
 .bordered-alert {

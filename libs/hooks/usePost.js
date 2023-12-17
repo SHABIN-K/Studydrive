@@ -35,4 +35,17 @@ const useFilterPost = ({ course, semester, category, subId }) => {
   };
 };
 
-export { usePost, useUserPost, useFilterPost };
+const useUserSelectedPost = ({ postId }) => {
+  const { data, error, isLoading, mutate } = useSWR(
+    `/api/post/postid/${postId}`,
+    fetcher
+  );
+  return {
+    data,
+    error,
+    isLoading,
+    mutate,
+  };
+};
+
+export { usePost, useUserPost, useFilterPost, useUserSelectedPost };

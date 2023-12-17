@@ -5,10 +5,11 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
 
+import Search from "../Search";
 import { navlinks } from "@/constants";
 import { usePost } from "@/libs/hooks/usePost";
+import { close, logo, menu } from "@/public/assets";
 import ShareDialogBox from "../models/ShareDialogBox";
-import { close, logo, menu, search } from "@/public/assets";
 
 const Navbar = () => {
   const { data: fetchedData, error, isLoading: loading } = usePost();
@@ -114,24 +115,12 @@ const Navbar = () => {
       <p className=" text-[#4acd8d] align-middle text-center subpixel-antialiased text-3xl font-bold hidden sm:block">
         Pasc Hub <span className="badge">alpha</span>
       </p>
-
-      <div className="lg:flex-1 flex flex-row max-w-[658px] py-2 pl-4 pr-2 h-[52px] bg-[#1c1c24] rounded-[100px]">
-        <input
-          type="text"
-          value={searchText}
-          onChange={handleSearchChange}
-          placeholder="Search for Study materials"
-          className="flex w-full font-epilogue font-normal text-[14px] placeholder:text-[#4b5264] text-white bg-transparent outline-none"
-        />
-        <div className="w-[72px] h-full rounded-[20px] bg-[#4acd8d] flex justify-center items-center cursor-pointer">
-          <Image
-            src={search}
-            alt="search icon"
-            className="w-[15px] h-[15px] object-contain"
-          />
-        </div>
-      </div>
-
+      <Search
+        results={searchedResults}
+        searchText={searchText}
+        onChangeValue={handleSearchChange}
+        Isloading={loading}
+      />
       {/*
       <div className="md:flex hidden flex-row justify-end gap-4">
         <button
