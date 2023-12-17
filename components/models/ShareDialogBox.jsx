@@ -1,10 +1,10 @@
 "use client";
 
-import Image from "next/image";
-import { Dialog, Transition } from "@headlessui/react";
-import { Fragment } from "react";
 import { toast } from "sonner";
+import Image from "next/image";
+import { Fragment } from "react";
 import { XMarkIcon } from "@heroicons/react/20/solid";
+import { Dialog, Transition } from "@headlessui/react";
 
 const ShareDialogBox = ({ isOpen, setIsOpen }) => {
   function closeModal() {

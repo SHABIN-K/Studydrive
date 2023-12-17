@@ -1,13 +1,20 @@
 import Image from "next/image";
+import { useState } from "react";
+
 import doc from "public/icons/doc.png";
+import PostViewDialogBox from "../models/PostViewDialogBox";
 
 const PostCard = ({ data }) => {
   const description = data.desc.slice(0, 120);
   const shouldShowDots = data.desc.length > 120;
+
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <div
       className="card rounded-lg cursor-pointer bg-[#1c1c24] hover:bg-[#2c2f32] py-2"
       title={data.desc}
+      onClick={() => setIsOpen(true)}
     >
       <div className="flex flex-row items-center ml-5">
         <div className="">
@@ -24,6 +31,9 @@ const PostCard = ({ data }) => {
           </p>
         </div>
       </div>
+      {isOpen && (
+        <PostViewDialogBox isOpen={isOpen} setIsOpen={setIsOpen} data={data} />
+      )}
     </div>
   );
 };
