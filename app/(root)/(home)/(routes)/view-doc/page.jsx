@@ -1,8 +1,10 @@
 "use client";
+import { toast } from "sonner";
 import { useSearchParams } from "next/navigation";
+import { useEffect, useMemo, useState } from "react";
 
-import { posts } from "@/constants";
 import PostCard from "@/components/cards/PostCard";
+import { useFilterPost } from "@/libs/hooks/usePost";
 import NoDataFound from "@/components/ui/NoDataFound";
 import SkeletonLoading from "@/components/ui/SkeletonLoading";
 
@@ -13,8 +15,25 @@ const MyDoc = () => {
   const semester = searchParams.get("sem");
   const category = searchParams.get("category");
 
-  const loading = false;
-  const data = posts;
+  const {
+    data: fetchedData,
+    error,
+    isLoading: loading,
+  } = useFilterPost({ course, semester, category, subId });
+
+  useEffect(() => {
+    if (fetchedData) {
+      setUserSelectedData(fetchedData);
+    }
+    if (error) {
+      console.error("Error fetching table data:", error);
+      toast.error("Something went wrong in fetching Posts");
+    }
+  }, [fetchedData, error]);
+
+  const [userSelectedData, setUserSelectedData] = useState([]);
+  const data = useMemo(() => userSelectedData, [userSelectedData]);
+
   return (
     <div>
       <h1 className="select_header">{category}</h1>

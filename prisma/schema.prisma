@@ -38,7 +38,7 @@ model post {
   subject_name  String
   title         String
   description   String
-  category      String
+  category      String?
   file_url      String?
   file_name     String?
   createdAt     DateTime @default(now())
