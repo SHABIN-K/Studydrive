@@ -17,7 +17,7 @@ const Mycategory = () => {
                 key={index}
                 hrefData={{
                   pathname: `/semester`,
-                  query: { name: course, category: category.link },
+                  query: { name: course, category: category.name },
                 }}
                 data={category}
                 altMsg={category.description}
