@@ -1,8 +1,13 @@
+"use client";
+import { useSearchParams } from "next/navigation";
 
 const MyDoc = () => {
-  return (
-    <div>MyDoc</div>
-  )
-}
+  const searchParams = useSearchParams();
+  const subId = searchParams.get("subId");
+  const course = searchParams.get("name");
+  const semester = searchParams.get("sem");
+  const category = searchParams.get("category");
+  return <div>MyDoc</div>;
+};
 
-export default MyDoc
+export default MyDoc;

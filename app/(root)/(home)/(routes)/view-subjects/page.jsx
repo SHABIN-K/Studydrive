@@ -12,6 +12,7 @@ const ViewSubjects = () => {
   const searchParams = useSearchParams();
   const course = searchParams.get("name");
   const semester = searchParams.get("sem");
+  const category = searchParams.get("category");
 
   const {
     data: fetchedData,
@@ -51,7 +52,20 @@ const ViewSubjects = () => {
             ) : (
               <div className="grid md:grid-cols-2 mt-[18px] gap-[10px]">
                 {data.map((item, index) => (
-                  <SubCard key={index} data={item} isLoading={loading} />
+                  <SubCard
+                    key={index}
+                    hrefData={{
+                      pathname: `/view-doc`,
+                      query: {
+                        name: course,
+                        category: category,
+                        sem: semester,
+                        subId: item.subject_code,
+                      },
+                    }}
+                    data={item}
+                    isLoading={loading}
+                  />
                 ))}
               </div>
             )}
