@@ -6,7 +6,7 @@ import { Fragment } from "react";
 import { toast } from "sonner";
 import { XMarkIcon } from "@heroicons/react/20/solid";
 
-const DialogBox = ({ isOpen, setIsOpen }) => {
+const ShareDialogBox = ({ isOpen, setIsOpen }) => {
   function closeModal() {
     setIsOpen(false);
   }
@@ -117,4 +117,4 @@ const DialogBox = ({ isOpen, setIsOpen }) => {
   );
 };
 
-export default DialogBox;
+export default ShareDialogBox;

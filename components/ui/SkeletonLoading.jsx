@@ -18,4 +18,17 @@ const CardSkeleton = () => {
   );
 };
 
-export default CardSkeleton;
+const skeleton = [...Array(4).keys()].map((i) => {
+  return <CardSkeleton key={i} />;
+});
+
+const SkeletonLoading = () => {
+  return (
+    <div className="grid md:grid-cols-2 mt-[18px] gap-[10px] grid-flow-col">
+      <ul className="grid gap-6">{skeleton}</ul>
+      <ul className="hidden sm:grid gap-6">{skeleton}</ul>
+    </div>
+  );
+};
+
+export default SkeletonLoading;

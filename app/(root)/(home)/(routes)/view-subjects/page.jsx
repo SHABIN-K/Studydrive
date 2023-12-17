@@ -6,12 +6,13 @@ import { useEffect, useMemo, useState } from "react";
 import SubCard from "@/components/cards/SubCard";
 import NoDataFound from "@/components/ui/NoDataFound";
 import { useFilterSubject } from "@/libs/hooks/useSubject";
-import CardSkeleton from "@/components/skeleton/CardSkeleton";
+import SkeletonLoading from "@/components/ui/SkeletonLoading";
 
 const ViewSubjects = () => {
   const searchParams = useSearchParams();
   const course = searchParams.get("name");
   const semester = searchParams.get("sem");
+  const category = searchParams.get("category");
 
   const {
     data: fetchedData,
@@ -32,18 +33,12 @@ const ViewSubjects = () => {
   const [userSelectedData, setUserSelectedData] = useState([]);
   const data = useMemo(() => userSelectedData, [userSelectedData]);
 
-  const skeleton = [...Array(4).keys()].map((i) => {
-    return <CardSkeleton key={i} />;
-  });
   return (
     <div>
       <h1 className="select_header">Select Subjects</h1>
       <div className="items-center">
         {loading ? (
-          <div className="grid md:grid-cols-2 mt-[18px] gap-[10px] grid-flow-col">
-            <ul className="grid gap-6">{skeleton}</ul>
-            <ul className="hidden sm:grid gap-6">{skeleton}</ul>
-          </div>
+          <SkeletonLoading />
         ) : (
           <>
             {data.length === 0 ? (
@@ -51,7 +46,19 @@ const ViewSubjects = () => {
             ) : (
               <div className="grid md:grid-cols-2 mt-[18px] gap-[10px]">
                 {data.map((item, index) => (
-                  <SubCard key={index} data={item} isLoading={loading} />
+                  <SubCard
+                    key={index}
+                    hrefData={{
+                      pathname: `/view-doc`,
+                      query: {
+                        name: course,
+                        category: category,
+                        sem: semester,
+                        subId: item.subject_code,
+                      },
+                    }}
+                    data={item}
+                  />
                 ))}
               </div>
             )}

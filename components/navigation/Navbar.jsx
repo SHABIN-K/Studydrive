@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 
 import { navlinks } from "@/constants";
 import { close, logo, menu, search } from "@/public/assets";
-import DialogBox from "../ui/DialogBox";
+import ShareDialogBox from "../models/ShareDialogBox";
 
 const Navbar = () => {
   const router = useRouter();
@@ -153,7 +153,7 @@ const Navbar = () => {
           </ul>
         </div>
       </div>
-      {isOpen && <DialogBox isOpen={isOpen} setIsOpen={setIsOpen} />}
+      {isOpen && <ShareDialogBox isOpen={isOpen} setIsOpen={setIsOpen} />}
     </nav>
   );
 };

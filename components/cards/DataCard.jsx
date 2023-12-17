@@ -12,23 +12,21 @@ const DataCard = ({
 }) => {
   //https://daisyui.com/components/card/
   return (
-    <div className={`rounded-lg ${style}`}>
-      <Link href={hrefData}>
-        <div className={`card cursor-pointer items-center ${styleContent}`}>
-          <figure className="w-16 h-16 md:w-20 md:h-20 bg-gray-300 rounded-full overflow-hidden">
-            <Image src={data.imgUrl} alt={altMsg} />
-          </figure>
-          <div className="items-center text-center">
-            <h2
-              className={`text-base font-medium md:font-semibold font-sans md:font-mono mt-2 ${syleName}`}
-            >
-              {data.name}
-              {sem && <span className="pl-1.5">{sem}</span>}
-            </h2>
-          </div>
+    <Link href={hrefData} className={`rounded-lg ${style}`}>
+      <div className={`card cursor-pointer items-center ${styleContent}`}>
+        <figure className="w-16 h-16 md:w-20 md:h-20 bg-gray-300 rounded-full overflow-hidden">
+          <Image src={data.imgUrl} alt={altMsg} />
+        </figure>
+        <div className="items-center text-center">
+          <h2
+            className={`text-base font-medium md:font-semibold font-sans md:font-mono mt-2 ${syleName}`}
+          >
+            {data.name}
+            {sem && <span className="pl-1.5">{sem}</span>}
+          </h2>
         </div>
-      </Link>
-    </div>
+      </div>
+    </Link>
   );
 };
 
