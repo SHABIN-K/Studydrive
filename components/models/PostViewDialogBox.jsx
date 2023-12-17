@@ -2,10 +2,9 @@
 
 import { toast } from "sonner";
 import { Fragment } from "react";
-import FileSaver from "file-saver";
+import { saveAs } from "file-saver";
 import { XMarkIcon } from "@heroicons/react/20/solid";
 import { Dialog, Transition } from "@headlessui/react";
-import { getDownloadUrl } from "@edgestore/react/utils";
 
 const PostViewDialogBox = ({ isOpen, setIsOpen, data }) => {
   function closeModal() {
@@ -13,8 +12,7 @@ const PostViewDialogBox = ({ isOpen, setIsOpen, data }) => {
   }
 
   const handleDownload = (url, filename) => {
-    getDownloadUrl(url, filename);
-    FileSaver.saveAs(url, `download-${filename}`);
+    saveAs(url, `pasc-download-${filename}`);
     toast("successfully downloaded");
   };
 

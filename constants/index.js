@@ -248,47 +248,90 @@ export const semester = [
 export const posts = [
   {
     id: 1,
-    name: "Python Programming",
-    title: "how to learn python programming",
-    desc: "A description file is an ASCII text file that contains descriptions of file and key ... The sample description files shown in this section describe a data file.",
-    url: "https://files.edgestore.dev/f0rvulnqh3dxfpoz/publicFiles/_public/d7cfb7a5-3d73-424c-bd15-937ebb638cec.pdf",
-    createdAt: "2023-12-15T14:33:08.333Z",
-    uploadedBy: "shabin k",
+    course_name: "bca",
+    semester_code: "three",
+    subject_code: "a11",
+    subject_name: "python ser",
+    title: "leaving",
+    description:
+      "A description file is an ASCII text file that contains descriptions of file and key ... The sample description files shown in this section describe a data file.",
+    category: "Study Materials",
+    file_url:
+      "https://files.edgestore.dev/f0rvulnqh3dxfpoz/publicFiles/_public/05a9d4ca-e0ba-4485-9fe6-b3f0d6e35afa.pdf",
+    file_name: "leaving.pdf",
+    createdAt: {
+      $date: "2023-12-15T14:05:56.178Z",
+    },
   },
   {
     id: 2,
-    name: "Sensors and Transducers",
-    title: "how to learn python programming",
-    desc: "A description file is an ASCII text file that contains descriptions of file and key ... The sample description files shown in this section describe a data file.",
-    url: "https://files.edgestore.dev/f0rvulnqh3dxfpoz/publicFiles/_public/d7cfb7a5-3d73-424c-bd15-937ebb638cec.pdf",
-    createdAt: "2023-12-15T14:33:08.333Z",
-    uploadedBy: "mark zuckerberg",
+    course_name: "bca",
+    semester_code: "three",
+    subject_code: "a11",
+    subject_name: "python ser",
+    title: "leaving",
+    description:
+      "A description file is an ASCII text file that contains descriptions of file and key ... The sample description files shown in this section describe a data file.",
+    category: "Study Materials",
+    file_url:
+      "https://files.edgestore.dev/f0rvulnqh3dxfpoz/publicFiles/_public/05a9d4ca-e0ba-4485-9fe6-b3f0d6e35afa.pdf",
+    file_name: "leaving.pdf",
+    createdAt: {
+      $date: "2023-12-15T14:05:56.178Z",
+    },
   },
   {
     id: 3,
-    name: "Data Structures using C",
-    title: "how to learn python programming",
-    desc: "A description file is an ASCII text file that contains descriptions of file and key ... The sample description files shown in this section describe a data file.",
-    url: "https://files.edgestore.dev/f0rvulnqh3dxfpoz/publicFiles/_public/d7cfb7a5-3d73-424c-bd15-937ebb638cec.pdf",
-    createdAt: "2023-12-15T14:33:08.333Z",
-    uploadedBy: "eric daniyel k",
+    course_name: "bca",
+    semester_code: "three",
+    subject_code: "a11",
+    subject_name: "python ser",
+    title: "leaving",
+    description:
+      "A description file is an ASCII text file that contains descriptions of file and key ... The sample description files shown in this section describe a data file.",
+    category: "Study Materials",
+    file_url:
+      "https://files.edgestore.dev/f0rvulnqh3dxfpoz/publicFiles/_public/05a9d4ca-e0ba-4485-9fe6-b3f0d6e35afa.pdf",
+    file_name: "leaving.pdf",
+    createdAt: {
+      $date: "2023-12-15T14:05:56.178Z",
+    },
   },
   {
     id: 4,
-    name: "Computer Oriented Numberical and Staristical Methods",
-    title: "how to learn python programming",
-    desc: "A description file is an ASCII text file that contains descriptions of file and key ... The sample description files shown in this section describe a data file.",
-    url: "https://files.edgestore.dev/f0rvulnqh3dxfpoz/publicFiles/_public/d7cfb7a5-3d73-424c-bd15-937ebb638cec.pdf",
-    createdAt: "2023-12-15T14:33:08.333Z",
-    uploadedBy: "Elon musk",
+    course_name: "bca",
+    semester_code: "three",
+    subject_code: "a11",
+    subject_name: "python ser",
+    title: "leaving",
+    description:
+      "A description file is an ASCII text file that contains descriptions of file and key ... The sample description files shown in this section describe a data file.",
+    category: "Study Materials",
+    file_url:
+      "https://files.edgestore.dev/f0rvulnqh3dxfpoz/publicFiles/_public/05a9d4ca-e0ba-4485-9fe6-b3f0d6e35afa.pdf",
+    file_name: "leaving.pdf",
+    createdAt: {
+      $date: "2023-12-15T14:05:56.178Z",
+    },
   },
   {
     id: 5,
-    name: "Theory of Computation",
-    title: "how to learn python programming",
-    desc: "A description file is an ASCII text file that contains descriptions of file and key ... The sample description files shown in this section describe a data file.",
-    url: "https://files.edgestore.dev/f0rvulnqh3dxfpoz/publicFiles/_public/d7cfb7a5-3d73-424c-bd15-937ebb638cec.pdf",
-    createdAt: "2023-12-15T14:33:08.333Z",
-    uploadedBy: "bill gates",
+    course_name: "bca",
+    semester_code: "three",
+    subject_code: "a11",
+    subject_name: "python ser",
+    title: "leaving",
+    description:
+      "A description file is an ASCII text file that contains descriptions of file and key ... The sample description files shown in this section describe a data file.",
+    category: "Study Materials",
+    file_url:
+      "https://files.edgestore.dev/f0rvulnqh3dxfpoz/publicFiles/_public/05a9d4ca-e0ba-4485-9fe6-b3f0d6e35afa.pdf",
+    file_name: "leaving.pdf",
+    createdAt: {
+      $date: "2023-12-15T14:05:56.178Z",
+    },
   },
 ];
+
+
+//https://files.edgestore.dev/f0rvulnqh3dxfpoz/publicFiles/_public/d03b73e1-0491-4142-8b7a-dec1fd59bb0e.pdf
