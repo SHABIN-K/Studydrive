@@ -44,7 +44,6 @@ export async function POST(req) {
           file_name: uploadRes[i].filename,
         },
       });
-      console.log("Created new post:", newPost);
       createdPosts.push(newPost);
     }
 
