@@ -1,5 +1,23 @@
 import prisma from "@/libs/prisma";
 
+export async function GET() {
+  try {
+    const allPosts = await prisma.post.findMany();
+    return new Response(JSON.stringify(allPosts), {
+      status: 200, // Created
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  } catch (error) {
+    console.error("Error processing the request:", error);
+
+    return new Response("An error occurred", {
+      status: 500, // Internal Server Error
+    });
+  }
+}
+
 export async function POST(req) {
   try {
     const { fileDetails, uploadRes, userEmail } = await req.json();

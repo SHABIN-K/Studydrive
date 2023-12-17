@@ -1,22 +1,89 @@
 /* eslint-disable @next/next/no-page-custom-font */
 "use client";
 
-import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import { navlinks } from "@/constants";
-import { close, logo, menu, search } from "@/public/assets";
+import { usePost } from "@/libs/hooks/usePost";
 import ShareDialogBox from "../models/ShareDialogBox";
+import { close, logo, menu, search } from "@/public/assets";
 
 const Navbar = () => {
+  const { data: fetchedData, error, isLoading: loading } = usePost();
+
   const router = useRouter();
   const sidebarRef = useRef(null);
   const menuButtonRef = useRef(null);
+
+  const [isOpen, setIsOpen] = useState(false);
   const [isActive, setIsActive] = useState("Home");
   const [toggleDrawer, setToggleDrawer] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
 
+  //for search function
+  const [searchText, setSearchText] = useState("");
+  const [searchTimeout, setSearchTimeout] = useState(null);
+  const [searchedResults, setSearchedResults] = useState([]);
+
+  //for controling fetched data
+  const [posts, setPosts] = useState([]);
+  const data = useMemo(() => posts, [posts]);
+
+  useEffect(() => {
+    if (fetchedData) {
+      setPosts(fetchedData);
+    }
+    if (error) {
+      console.error("Error fetching Search data:", error);
+    }
+  }, [fetchedData, error]);
+
+  const filterPosts = (searchText) => {
+    //https://www.w3schools.com/jsref/jsref_obj_regexp.asp
+    const regex = new RegExp(searchText, "i");
+    return data.filter(
+      (item) =>
+        regex.test(item.subject_name) ||
+        regex.test(item.course_name) ||
+        regex.test(item.description) ||
+        regex.test(item.file_name) ||
+        regex.test(item.category) ||
+        regex.test(item.title)
+    );
+  };
+
+  const handleSearchChange = (e) => {
+    /*
+    Debouncing is a technique used to filter out noise or rapid changes in a signal, typically in input devices like buttons or switches. The debounce method ensures that the event triggered by the input device is only registered after a stable state has been reached.
+    Here's an example JavaScript debounce method:
+
+    function debounce(func, delay) {
+        let timeoutId;
+    return function(...args) {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => func.apply(this, args), delay);
+     };
+    }
+
+    This debounce function takes two parameters: func which is the function to be debounced, and delay which is the time in milliseconds to wait for the input device to settle before triggering the event.
+
+    The returned function uses setTimeout to wait for the specified delay before calling the original function passed as func. If another input event is triggered during this waiting period, the timeoutId is cleared and the timer starts again.
+
+     In this way, the debounce function ensures that the original function is only called once, after a certain period of stability.
+     */
+    clearTimeout(searchTimeout);
+    setSearchText(e.target.value);
+
+    setSearchTimeout(
+      setTimeout(() => {
+        const searchResult = filterPosts(e.target.value);
+        setSearchedResults(searchResult);
+      }, 500)
+    );
+  };
+
+  //for navigation
   const handleToggleDrawer = () => {
     setToggleDrawer((prev) => !prev);
   };
@@ -51,6 +118,8 @@ const Navbar = () => {
       <div className="lg:flex-1 flex flex-row max-w-[658px] py-2 pl-4 pr-2 h-[52px] bg-[#1c1c24] rounded-[100px]">
         <input
           type="text"
+          value={searchText}
+          onChange={handleSearchChange}
           placeholder="Search for Study materials"
           className="flex w-full font-epilogue font-normal text-[14px] placeholder:text-[#4b5264] text-white bg-transparent outline-none"
         />
