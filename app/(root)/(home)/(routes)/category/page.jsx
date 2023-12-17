@@ -1,7 +1,7 @@
 "use client";
 import { category } from "@/constants";
-import DataCard from "@/components/cards/DataCard";
 import { useSearchParams } from "next/navigation";
+import DataCard from "@/components/cards/DataCard";
 
 const Mycategory = () => {
   const searchParams = useSearchParams();
@@ -22,6 +22,7 @@ const Mycategory = () => {
                 data={category}
                 altMsg={category.description}
                 style="bg-[#1c1c24] hover:bg-[#2c2f32] py-2"
+                syleName="text-white"
               />
             );
           })}
