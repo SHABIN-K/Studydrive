@@ -10,13 +10,17 @@ import { navlinks } from "@/constants";
 import { usePost } from "@/libs/hooks/usePost";
 import { close, logo, menu } from "@/public/assets";
 import ShareDialogBox from "../models/ShareDialogBox";
+import PostViewDialogBox from "../models/PostViewDialogBox";
 
 const Navbar = () => {
-  const { data: fetchedData, error, isLoading: loading } = usePost();
+  const { data: fetchedData, error } = usePost();
 
   const router = useRouter();
   const sidebarRef = useRef(null);
   const menuButtonRef = useRef(null);
+
+  const [post, setPost] = useState("");
+  const [isPostOpen, setIsPostOpen] = useState(false);
 
   const [isOpen, setIsOpen] = useState(false);
   const [isActive, setIsActive] = useState("Home");
@@ -124,7 +128,8 @@ const Navbar = () => {
         searchText={searchText}
         setSearchText={setSearchText}
         onChangeValue={handleSearchChange}
-        Isloading={loading}
+        setIsPostOpen={setIsPostOpen}
+        setPost={setPost}
       />
       {/*
       <div className="md:flex hidden flex-row justify-end gap-4">
@@ -217,6 +222,13 @@ const Navbar = () => {
         </div>
       </div>
       {isOpen && <ShareDialogBox isOpen={isOpen} setIsOpen={setIsOpen} />}
+      {isPostOpen && (
+        <PostViewDialogBox
+          isOpen={isPostOpen}
+          setIsOpen={setIsPostOpen}
+          data={post}
+        />
+      )}
     </nav>
   );
 };

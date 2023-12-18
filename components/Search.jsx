@@ -3,7 +3,14 @@ import Image from "next/image";
 import { search } from "@/public/assets";
 import { XMarkIcon } from "@heroicons/react/20/solid";
 
-const Search = ({ results, searchText, onChangeValue, setSearchText }) => {
+const Search = ({
+  results,
+  searchText,
+  onChangeValue,
+  setSearchText,
+  setIsPostOpen,
+  setPost,
+}) => {
   return (
     <div className="md:flex-1 max-w-[658px] py-1.5 pl-4 pr-2 h-[52px] bg-[#1c1c24] rounded-[100px]">
       <div className="flex flex-row ">
@@ -28,7 +35,9 @@ const Search = ({ results, searchText, onChangeValue, setSearchText }) => {
         <SearchDropDown
           result={results}
           searchText={searchText}
-          value={setSearchText}
+          closeSearch={setSearchText}
+          setIsPostOpen={setIsPostOpen}
+          setPost={setPost}
         />
       )}
     </div>
@@ -37,10 +46,22 @@ const Search = ({ results, searchText, onChangeValue, setSearchText }) => {
 
 export default Search;
 
-const SearchDropDown = ({ result, searchText, value }) => {
+const SearchDropDown = ({
+  result,
+  searchText,
+  closeSearch,
+  setIsPostOpen,
+  setPost,
+}) => {
   const handleClose = () => {
-    value("");
+    closeSearch("");
   };
+
+  const handleModel = (post) => {
+    setPost(post);
+    setIsPostOpen(true);
+  };
+
   return (
     <div className="relative top-4 md:top-6 z-50 grid max-h-[500px] w-full gap-1 rounded-3xl bg-[#1c1c24] p-4 overflow-auto shadow-2xl shadow-gray-800">
       <XMarkIcon
@@ -56,7 +77,9 @@ const SearchDropDown = ({ result, searchText, value }) => {
         return (
           <div
             key={index}
+            title={`file Details : \n subject name : ${post.subject_name} \n semester : ${post.semester_code} \n course name : ${post.course_name}`}
             className="flex rounded-full py-2 px-3 w-full hover:bg-[#2c2f32] justify-between items-center"
+            onClick={() => handleModel(post)}
           >
             <p className="text-white font-medium sm:hidden">
               {shouldShowDots ? `${title}...` : title}
