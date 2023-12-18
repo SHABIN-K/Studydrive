@@ -22,7 +22,7 @@ const NoDataFound = () => {
           No File Found !!!
         </h1>
         <p className="text-muted-foreground text-sm text-white text-center select-text">
-          We apologize as the requested file cannot be found currently
+          Maybe go Back and try a diffrent keyword?
         </p>
       </div>
     </section>
