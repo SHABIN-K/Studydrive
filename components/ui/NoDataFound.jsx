@@ -5,8 +5,8 @@ import React from "react";
 const NoDataFound = () => {
   return (
     <section>
-      <div className="p-5 flex flex-col items-center justify-center">
-        <div className="relative mb-3">
+      <div className="p-2 flex flex-col items-center justify-center">
+        <div className="relative ">
           <Image
             src="/nodata.png"
             width={340}
@@ -17,11 +17,11 @@ const NoDataFound = () => {
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         </div>
-        <h1 className="text-muted-foreground text-2xl text-center text-white">
+        <h1 className=" text-2xl text-center text-[#4acd8d]">
           {" "}
           No File Found !!!
         </h1>
-        <p className="text-muted-foreground text-sm text-white text-center select-text">
+        <p className=" text-sm pt-2 text-gray-400 text-center select-text">
           Maybe go Back and try a diffrent keyword?
         </p>
       </div>
