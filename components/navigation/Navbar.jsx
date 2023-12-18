@@ -16,6 +16,8 @@ import PostViewDialogBox from "../models/PostViewDialogBox";
 
 const Navbar = () => {
   const { data: fetchedData, error } = usePost();
+  const setData = usePostStore((state) => state.setPosts);
+
   const router = useRouter();
   const sidebarRef = useRef(null);
   const menuButtonRef = useRef(null);
@@ -35,7 +37,10 @@ const Navbar = () => {
   //for controling fetched data
   const [posts, setPosts] = useState([]);
   const data = useMemo(() => posts, [posts]);
-  usePostStore((state) => state.setPosts)(posts);
+
+  useEffect(() => {
+    setData(posts);
+  }, [posts, setData]);
 
   useEffect(() => {
     if (fetchedData) {
