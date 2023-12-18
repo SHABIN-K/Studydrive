@@ -8,13 +8,13 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import Search from "../Search";
 import { navlinks } from "@/constants";
 import { usePost } from "@/libs/hooks/usePost";
+import { filterPosts } from "@/libs/usefilter";
 import { close, logo, menu } from "@/public/assets";
 import ShareDialogBox from "../models/ShareDialogBox";
 import PostViewDialogBox from "../models/PostViewDialogBox";
 
 const Navbar = () => {
   const { data: fetchedData, error } = usePost();
-
   const router = useRouter();
   const sidebarRef = useRef(null);
   const menuButtonRef = useRef(null);
@@ -44,20 +44,6 @@ const Navbar = () => {
     }
   }, [fetchedData, error]);
 
-  const filterPosts = (searchText) => {
-    //https://www.w3schools.com/jsref/jsref_obj_regexp.asp
-    const regex = new RegExp(searchText, "i");
-    return data.filter(
-      (item) =>
-        regex.test(item.subject_name) ||
-        regex.test(item.course_name) ||
-        regex.test(item.description) ||
-        regex.test(item.file_name) ||
-        regex.test(item.category) ||
-        regex.test(item.title)
-    );
-  };
-
   const handleSearchChange = (e) => {
     /*
     Debouncing is a technique used to filter out noise or rapid changes in a signal, typically in input devices like buttons or switches. The debounce method ensures that the event triggered by the input device is only registered after a stable state has been reached.
@@ -82,7 +68,7 @@ const Navbar = () => {
 
     setSearchTimeout(
       setTimeout(() => {
-        const searchResult = filterPosts(e.target.value);
+        const searchResult = filterPosts(e.target.value, data);
         setSearchedResults(searchResult);
       }, 500)
     );
