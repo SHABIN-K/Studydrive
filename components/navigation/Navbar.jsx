@@ -93,6 +93,9 @@ const Navbar = () => {
     setToggleDrawer(false);
   };
 
+  const handleCloseSearch = () => {
+    setSearchText("");
+  };
   useEffect(() => {
     const handleOutsideClick = (event) => {
       if (
@@ -102,6 +105,7 @@ const Navbar = () => {
         !menuButtonRef.current.contains(event.target)
       ) {
         handleCloseSidebar();
+        handleCloseSearch();
       }
     };
     document.addEventListener("click", handleOutsideClick);
@@ -118,6 +122,7 @@ const Navbar = () => {
       <Search
         results={searchedResults}
         searchText={searchText}
+        setSearchText={setSearchText}
         onChangeValue={handleSearchChange}
         Isloading={loading}
       />
