@@ -8,15 +8,22 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import Search from "../Search";
 import { navlinks } from "@/constants";
 import { usePost } from "@/libs/hooks/usePost";
+import { filterPosts } from "@/libs/usefilter";
 import { close, logo, menu } from "@/public/assets";
+import { usePostStore } from "@/libs/state/useStore";
 import ShareDialogBox from "../models/ShareDialogBox";
+import PostViewDialogBox from "../models/PostViewDialogBox";
 
 const Navbar = () => {
-  const { data: fetchedData, error, isLoading: loading } = usePost();
+  const { data: fetchedData, error } = usePost();
+  const setData = usePostStore((state) => state.setPosts);
 
   const router = useRouter();
   const sidebarRef = useRef(null);
   const menuButtonRef = useRef(null);
+
+  const [post, setPost] = useState("");
+  const [isPostOpen, setIsPostOpen] = useState(false);
 
   const [isOpen, setIsOpen] = useState(false);
   const [isActive, setIsActive] = useState("Home");
@@ -32,6 +39,10 @@ const Navbar = () => {
   const data = useMemo(() => posts, [posts]);
 
   useEffect(() => {
+    setData(posts);
+  }, [posts, setData]);
+
+  useEffect(() => {
     if (fetchedData) {
       setPosts(fetchedData);
     }
@@ -39,20 +50,6 @@ const Navbar = () => {
       console.error("Error fetching Search data:", error);
     }
   }, [fetchedData, error]);
-
-  const filterPosts = (searchText) => {
-    //https://www.w3schools.com/jsref/jsref_obj_regexp.asp
-    const regex = new RegExp(searchText, "i");
-    return data.filter(
-      (item) =>
-        regex.test(item.subject_name) ||
-        regex.test(item.course_name) ||
-        regex.test(item.description) ||
-        regex.test(item.file_name) ||
-        regex.test(item.category) ||
-        regex.test(item.title)
-    );
-  };
 
   const handleSearchChange = (e) => {
     /*
@@ -78,7 +75,7 @@ const Navbar = () => {
 
     setSearchTimeout(
       setTimeout(() => {
-        const searchResult = filterPosts(e.target.value);
+        const searchResult = filterPosts(e.target.value, data);
         setSearchedResults(searchResult);
       }, 500)
     );
@@ -93,6 +90,9 @@ const Navbar = () => {
     setToggleDrawer(false);
   };
 
+  const handleCloseSearch = () => {
+    setSearchText("");
+  };
   useEffect(() => {
     const handleOutsideClick = (event) => {
       if (
@@ -102,6 +102,7 @@ const Navbar = () => {
         !menuButtonRef.current.contains(event.target)
       ) {
         handleCloseSidebar();
+        handleCloseSearch();
       }
     };
     document.addEventListener("click", handleOutsideClick);
@@ -118,8 +119,10 @@ const Navbar = () => {
       <Search
         results={searchedResults}
         searchText={searchText}
+        setSearchText={setSearchText}
         onChangeValue={handleSearchChange}
-        Isloading={loading}
+        setIsPostOpen={setIsPostOpen}
+        setPost={setPost}
       />
       {/*
       <div className="md:flex hidden flex-row justify-end gap-4">
@@ -212,6 +215,13 @@ const Navbar = () => {
         </div>
       </div>
       {isOpen && <ShareDialogBox isOpen={isOpen} setIsOpen={setIsOpen} />}
+      {isPostOpen && (
+        <PostViewDialogBox
+          isOpen={isPostOpen}
+          setIsOpen={setIsPostOpen}
+          data={post}
+        />
+      )}
     </nav>
   );
 };
