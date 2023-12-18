@@ -21,4 +21,4 @@ export default function Home() {
           style="md:flex md:flex-wrap mt-[18px] xs:gap-1.5"
           route="category"
         />
-*/
+  */

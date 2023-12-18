@@ -10,6 +10,7 @@ import { navlinks } from "@/constants";
 import { usePost } from "@/libs/hooks/usePost";
 import { filterPosts } from "@/libs/usefilter";
 import { close, logo, menu } from "@/public/assets";
+import { usePostStore } from "@/libs/state/useStore";
 import ShareDialogBox from "../models/ShareDialogBox";
 import PostViewDialogBox from "../models/PostViewDialogBox";
 
@@ -34,6 +35,7 @@ const Navbar = () => {
   //for controling fetched data
   const [posts, setPosts] = useState([]);
   const data = useMemo(() => posts, [posts]);
+  usePostStore((state) => state.setPosts)(posts);
 
   useEffect(() => {
     if (fetchedData) {
