@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { handleSignOutButton } from "@/libs/logout";
+import { handleSignOutButton } from "@/libs/utils";
 import { useEffect, useRef, useState } from "react";
 import { close, menu } from "@/public/assets";
 import AdminSidebar from "./AdminSidebar";
