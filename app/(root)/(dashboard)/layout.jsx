@@ -11,7 +11,7 @@ export default function DashboardLayout({ children }) {
         <div className="flex-1 flex flex-col overflow-auto">
           <AdminNavbar label="Dashboard" />
           <div className="flex flex-row">
-            <div className="md:flex hidden">
+            <div className="md:block hidden">
               <AdminSidebar />
             </div>
             <main className="p-5 md:p-4 items-start justify-center flex-grow">

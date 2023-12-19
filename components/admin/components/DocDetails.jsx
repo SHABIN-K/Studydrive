@@ -1,22 +1,35 @@
-import { filesize } from "filesize";
+import { toast } from "sonner";
+import { formatFileSize } from "@edgestore/react/utils";
 import { useEffect, useState } from "react";
 import { DocumentTextIcon, TrashIcon } from "@heroicons/react/20/solid";
 
 import ComboBox from "../ui/ComboBox";
 import RoleSelect from "../ui/ListBox";
-import useSubject from "@/libs/hooks/useSubject";
 import FormField from "@/components/ui/FormField";
+import { useFilterSubject } from "@/libs/hooks/useSubject";
 import { courses, semester, category } from "@/constants";
-import { toast } from "sonner";
 
-const DocDetails = ({ files, removeFile, fileDetails, setFileDetails }) => {
+const DocDetails = ({
+  files,
+  removeFile,
+  fileDetails,
+  setFileDetails,
+  handlePreviousBtn,
+}) => {
   const [subjectData, setSubjectData] = useState([]);
   const [userCourse, setUserCourses] = useState(courses[6]);
   const [userSemester, setUserSemester] = useState(semester[2]);
   const [userSubject, setUserSubject] = useState("");
   const [tempData, setTempData] = useState([]);
 
-  const { data: fetchedData, error, isLoading: loading } = useSubject();
+  const {
+    data: fetchedData,
+    error,
+    isLoading: loading,
+  } = useFilterSubject({
+    course: userCourse.link,
+    semester: userSemester.link,
+  });
 
   useEffect(() => {
     if (fetchedData) {
@@ -135,12 +148,25 @@ const DocDetails = ({ files, removeFile, fileDetails, setFileDetails }) => {
                     <span className="text-white font-medium text-sm">
                       {file.name}
                     </span>
-                    <span className="text-xs">{filesize(file.size)}</span>
+                    <span className="text-xs">{formatFileSize(file.size)}</span>
                   </p>
                 </div>
-                <p className="text-gray-400 hover:text-white w-5">
-                  <TrashIcon onClick={() => removeFile(index)} />
-                </p>
+                {files.length === 1 ? (
+                  // If there are no files
+                  <p className="text-gray-400 hover:text-white w-5">
+                    <TrashIcon
+                      onClick={() => {
+                        removeFile(index);
+                        handlePreviousBtn();
+                      }}
+                    />
+                  </p>
+                ) : (
+                  // If there are files
+                  <p className="text-gray-400 hover:text-white w-5">
+                    <TrashIcon onClick={() => removeFile(index)} />
+                  </p>
+                )}
               </div>
               <hr className="bg-gray-700 h-[2px] rounded mx-2 my-2 border-none" />
               <div className="space-y-2">

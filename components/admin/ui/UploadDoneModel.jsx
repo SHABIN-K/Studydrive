@@ -1,11 +1,14 @@
 import Image from "next/image";
-import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
+import { useRouter } from "next/navigation";
 import { XMarkIcon } from "@heroicons/react/20/solid";
+import { Dialog, Transition } from "@headlessui/react";
 
 const UploadDoneModel = ({ isOpen, setIsOpen }) => {
+  const router = useRouter();
   const closeModal = () => {
     setIsOpen(false);
+    router.push("/dashboard");
   };
 
   return (

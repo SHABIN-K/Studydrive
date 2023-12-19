@@ -3,14 +3,6 @@ import prisma from "@/libs/prisma";
 
 export async function GET(req) {
   try {
-    /*
-    const filteredSubjects = await prisma.subject.findMany({
-      where: {
-        course_name: courseName,
-        semester_code: semester,
-      },
-    });
-    */
     const allSubject = await prisma.subject.findMany();
     return new Response(JSON.stringify(allSubject), {
       status: 200, // Created
@@ -56,8 +48,8 @@ export async function POST(req) {
         userId: user.id,
         course_name: courseName,
         semester_code: userSemester,
-        subject_code: subjectCode.toUpperCase(),
-        subject_name: subjectName,
+        subject_code: subjectCode.trim().toUpperCase(),
+        subject_name: subjectName.trim(),
       },
     });
 

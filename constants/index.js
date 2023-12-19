@@ -57,21 +57,21 @@ export const category = [
     name: "Study Materials",
     imgUrl: study,
     link: "notes",
-    description: "videos lesson",
+    description: "Study Materials",
   },
   {
     id: 2,
     name: "Syllabus",
     imgUrl: syllabus,
     link: "syllabus",
-    description: "videos lesson",
+    description: "Syllabus",
   },
   {
     id: 3,
     name: "Question Papers",
     imgUrl: qp,
     link: "questionpapers",
-    description: "videos lesson",
+    description: "Question Papers",
   },
   {
     id: 4,
@@ -242,33 +242,5 @@ export const semester = [
     name: "Sixth",
     link: "six",
     imgUrl: six,
-  },
-];
-
-export const subjects = [
-  {
-    id: 1,
-    name: "Python Programming",
-    link: "a11",
-  },
-  {
-    id: 2,
-    name: "Sensors and Transducers",
-    link: "a22",
-  },
-  {
-    id: 3,
-    name: "Data Structures using C",
-    link: "bca3bo4",
-  },
-  {
-    id: 4,
-    name: "Computer Oriented Numberical and Staristical Methods",
-    link: "bca3c05",
-  },
-  {
-    id: 5,
-    name: "Theory of Computation",
-    link: "bca3bo6",
   },
 ];

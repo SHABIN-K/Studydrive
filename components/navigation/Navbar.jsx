@@ -1,22 +1,87 @@
 /* eslint-disable @next/next/no-page-custom-font */
 "use client";
 
-import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useEffect, useMemo, useRef, useState } from "react";
 
+import Search from "../Search";
 import { navlinks } from "@/constants";
-import { close, logo, menu, search } from "@/public/assets";
-import DialogBox from "../ui/DialogBox";
+import { usePost } from "@/libs/hooks/usePost";
+import { filterPosts } from "@/libs/hooks/usefilter";
+import { close, logo, menu } from "@/public/assets";
+import { usePostStore } from "@/libs/state/useStore";
+import ShareDialogBox from "../models/ShareDialogBox";
+import PostViewDialogBox from "../models/PostViewDialogBox";
 
 const Navbar = () => {
+  const { data: fetchedData, error } = usePost();
+  const setData = usePostStore((state) => state.setPosts);
+
   const router = useRouter();
   const sidebarRef = useRef(null);
   const menuButtonRef = useRef(null);
+
+  const [post, setPost] = useState("");
+  const [isPostOpen, setIsPostOpen] = useState(false);
+
+  const [isOpen, setIsOpen] = useState(false);
   const [isActive, setIsActive] = useState("Home");
   const [toggleDrawer, setToggleDrawer] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
 
+  //for search function
+  const [searchText, setSearchText] = useState("");
+  const [searchTimeout, setSearchTimeout] = useState(null);
+  const [searchedResults, setSearchedResults] = useState([]);
+
+  //for controling fetched data
+  const [posts, setPosts] = useState([]);
+  const data = useMemo(() => posts, [posts]);
+
+  useEffect(() => {
+    setData(posts);
+  }, [posts, setData]);
+
+  useEffect(() => {
+    if (fetchedData) {
+      setPosts(fetchedData);
+    }
+    if (error) {
+      console.error("Error fetching Search data:", error);
+    }
+  }, [fetchedData, error]);
+
+  const handleSearchChange = (e) => {
+    /*
+    Debouncing is a technique used to filter out noise or rapid changes in a signal, typically in input devices like buttons or switches. The debounce method ensures that the event triggered by the input device is only registered after a stable state has been reached.
+    Here's an example JavaScript debounce method:
+
+    function debounce(func, delay) {
+        let timeoutId;
+    return function(...args) {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => func.apply(this, args), delay);
+     };
+    }
+
+    This debounce function takes two parameters: func which is the function to be debounced, and delay which is the time in milliseconds to wait for the input device to settle before triggering the event.
+
+    The returned function uses setTimeout to wait for the specified delay before calling the original function passed as func. If another input event is triggered during this waiting period, the timeoutId is cleared and the timer starts again.
+
+     In this way, the debounce function ensures that the original function is only called once, after a certain period of stability.
+     */
+    clearTimeout(searchTimeout);
+    setSearchText(e.target.value);
+
+    setSearchTimeout(
+      setTimeout(() => {
+        const searchResult = filterPosts(e.target.value, data);
+        setSearchedResults(searchResult);
+      }, 500)
+    );
+  };
+
+  //for navigation
   const handleToggleDrawer = () => {
     setToggleDrawer((prev) => !prev);
   };
@@ -25,6 +90,9 @@ const Navbar = () => {
     setToggleDrawer(false);
   };
 
+  const handleCloseSearch = () => {
+    setSearchText("");
+  };
   useEffect(() => {
     const handleOutsideClick = (event) => {
       if (
@@ -34,6 +102,7 @@ const Navbar = () => {
         !menuButtonRef.current.contains(event.target)
       ) {
         handleCloseSidebar();
+        handleCloseSearch();
       }
     };
     document.addEventListener("click", handleOutsideClick);
@@ -47,22 +116,14 @@ const Navbar = () => {
       <p className=" text-[#4acd8d] align-middle text-center subpixel-antialiased text-3xl font-bold hidden sm:block">
         Pasc Hub <span className="badge">alpha</span>
       </p>
-
-      <div className="lg:flex-1 flex flex-row max-w-[658px] py-2 pl-4 pr-2 h-[52px] bg-[#1c1c24] rounded-[100px]">
-        <input
-          type="text"
-          placeholder="Search for Study materials"
-          className="flex w-full font-epilogue font-normal text-[14px] placeholder:text-[#4b5264] text-white bg-transparent outline-none"
-        />
-        <div className="w-[72px] h-full rounded-[20px] bg-[#4acd8d] flex justify-center items-center cursor-pointer">
-          <Image
-            src={search}
-            alt="search icon"
-            className="w-[15px] h-[15px] object-contain"
-          />
-        </div>
-      </div>
-
+      <Search
+        results={searchedResults}
+        searchText={searchText}
+        setSearchText={setSearchText}
+        onChangeValue={handleSearchChange}
+        setIsPostOpen={setIsPostOpen}
+        setPost={setPost}
+      />
       {/*
       <div className="md:flex hidden flex-row justify-end gap-4">
         <button
@@ -153,7 +214,14 @@ const Navbar = () => {
           </ul>
         </div>
       </div>
-      {isOpen && <DialogBox isOpen={isOpen} setIsOpen={setIsOpen} />}
+      {isOpen && <ShareDialogBox isOpen={isOpen} setIsOpen={setIsOpen} />}
+      {isPostOpen && (
+        <PostViewDialogBox
+          isOpen={isPostOpen}
+          setIsOpen={setIsPostOpen}
+          data={post}
+        />
+      )}
     </nav>
   );
 };

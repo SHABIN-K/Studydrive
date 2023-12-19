@@ -1,22 +1,23 @@
-import MenuCard from "./cards/MenuCard";
-
-const Feed = ({ label, feedData, styleHead, style, route, cardStyle }) => {
-  const feed = feedData;
+import { courses } from "@/constants";
+import DataCard from "./cards/DataCard";
+const Feed = ({ label, styleHead, style }) => {
   return (
     <div>
-      <h1
-        className={`select_header ${styleHead}`}
-      >
-        {label}
-      </h1>
+      <h1 className={`select_header ${styleHead}`}>{label}</h1>
       <div className={`grid grid-cols-3 md:gap-[26px] ${style}`}>
-        {feed.map((FeedData, index) => {
+        {courses.map((item, index) => {
           return (
-            <MenuCard
+            <DataCard
               key={index}
-              data={FeedData}
-              route={route}
-              style={cardStyle}
+              hrefData={{
+                pathname: `/category`,
+                query: { name: item.link },
+              }}
+              data={item}
+              altMsg={item.description}
+              style="mt-2 md:mt-0"
+              styleContent="flex flex-col"
+              syleName="text-[#808191] tracking-tighter"
             />
           );
         })}

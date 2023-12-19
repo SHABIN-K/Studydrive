@@ -24,6 +24,7 @@ import maths from "./maths.PNG";
 import mcomfinance from "./mcomfinance.PNG";
 import msw from "./msw.PNG";
 import coop from "./coop.PNG";
+import subject from "./subject.PNG";
 
 export { 
     play, 
@@ -51,6 +52,6 @@ export {
     maths,
     mcomfinance,
     msw,
-    coop
-    
+    coop,
+    subject
 };

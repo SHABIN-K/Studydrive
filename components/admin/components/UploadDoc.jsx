@@ -1,16 +1,29 @@
 import { toast } from "sonner";
 import { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
-import { DocumentTextIcon, TrashIcon } from "@heroicons/react/20/solid";
+import { formatFileSize } from "@edgestore/react/utils";
+import {
+  DocumentCheckIcon,
+  DocumentTextIcon,
+  ExclamationCircleIcon,
+  TrashIcon,
+} from "@heroicons/react/20/solid";
 
 import { Cloud } from "@/public/assets";
 
-const UploadDoc = ({ files, setFiles, removeFile }) => {
+const UploadDoc = ({
+  files,
+  setFiles,
+  removeFile,
+  value,
+  onChange,
+  onFilesAdded,
+}) => {
   const onDrop = useCallback(
     (acceptedFiles) => {
       if (files.length + acceptedFiles.length > 3) {
         toast.error("You can only upload up to three files.");
-        return;
+        return [];
       }
       const validFiles = acceptedFiles.filter((file) => {
         if (files.some((existingFile) => existingFile.name === file.name)) {
@@ -22,7 +35,9 @@ const UploadDoc = ({ files, setFiles, removeFile }) => {
         }
         return true;
       });
-      setFiles([...files, ...validFiles]);
+
+      setFiles((prevFiles) => [...prevFiles, ...validFiles]);
+      return validFiles;
     },
     [files, setFiles]
   );
@@ -43,9 +58,17 @@ const UploadDoc = ({ files, setFiles, removeFile }) => {
   };
 
   const { getRootProps, getInputProps } = useDropzone({
-    onDrop: (acceptedFiles) => {
-      if (validateFile(acceptedFiles[0])) {
-        onDrop(acceptedFiles);
+    onDrop: async (acceptedFiles) => {
+      const validFiles = onDrop(acceptedFiles);
+
+      if (validFiles && validFiles.length > 0) {
+        const addedFiles = validFiles.map((file) => ({
+          file,
+          key: Math.random().toString(36).slice(2),
+          progress: "PENDING",
+        }));
+        void onFilesAdded?.(addedFiles);
+        void onChange?.([...(value ?? []), ...addedFiles]);
       }
     },
     accept: {
@@ -57,7 +80,6 @@ const UploadDoc = ({ files, setFiles, removeFile }) => {
         [".pptx"],
     },
   });
-
   return (
     <div className="flex flex-col items-center justify-center w-full">
       <div
@@ -87,23 +109,53 @@ const UploadDoc = ({ files, setFiles, removeFile }) => {
           />
         </div>
       </div>
-      {files.length > 0 &&
-        files.map((file, index) => (
-          <div
-            key={index}
-            className="mt-1 w-full hover:bg-gray-800 rounded-lg py-1"
-          >
-            <ul className="flex justify-between items-center mr-2 ml-2 text-white">
-              <p className="flex items-center text-sm font-medium mt-1">
-                <DocumentTextIcon className="text-gray-400 w-6 h-6" />
-                <span>{file.name}</span>
-              </p>
-              <p className="text-gray-400 hover:text-white w-5">
-                <TrashIcon onClick={() => removeFile(index)} />
-              </p>
-            </ul>
+      {value?.map((file, index) => (
+        <div
+          key={index}
+          className="flex h-16 w-full max-w-[100vw] flex-col justify-center rounded border border-gray-300 px-4 py-2 mt-2"
+        >
+          <div className="flex items-center gap-2 text-white">
+            <DocumentTextIcon className="text-gray-400 w-6 h-6 shrink" />
+            <div className="min-w-0 text-sm">
+              <div className="overflow-hidden overflow-ellipsis whitespace-nowrap">
+                {file.file.name}
+              </div>
+              <div className="text-xs text-gray-400">
+                {formatFileSize(file.file.size)}
+              </div>
+            </div>
+            <div className="grow" />
+            <div className="flex w-12 justify-end text-xs cursor-pointer">
+              {file.progress === "PENDING" ? (
+                <button
+                  className="rounded-md p-1 transition-colors duration-200 text-gray-400 hover:text-white w-5"
+                  onClick={() => removeFile(index)}
+                >
+                  <TrashIcon className="shrink-0 w-5" />
+                </button>
+              ) : file.progress === "ERROR" ? (
+                <ExclamationCircleIcon className="shrink-0 text-red-400 w-6" />
+              ) : file.progress !== "COMPLETE" ? (
+                <div className="cursor-wait">{Math.round(file.progress)}%</div>
+              ) : (
+                <DocumentCheckIcon className="shrink-0 text-gray-400 w-6" />
+              )}
+            </div>
           </div>
-        ))}
+          {typeof file.progress === "number" && (
+            <div className="relative h-0">
+              <div className="absolute top-1 h-1 w-full overflow-clip rounded-full bg-gray-700 ">
+                <div
+                  className="h-full transition-all duration-300 ease-in-out bg-white"
+                  style={{
+                    width: file.progress ? `${file.progress}%` : "0%",
+                  }}
+                />
+              </div>
+            </div>
+          )}
+        </div>
+      ))}
     </div>
   );
 };

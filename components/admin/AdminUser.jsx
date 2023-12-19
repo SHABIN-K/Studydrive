@@ -1,21 +1,36 @@
-import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
-import Swal from "sweetalert2";
 import { toast } from "sonner";
+import Swal from "sweetalert2";
+import { useEffect, useMemo, useState } from "react";
 
 import Table from "./components/Table";
 import AdminModel from "./ui/AdminModel";
 import useUsers from "@/libs/hooks/useUsers";
 import { UserValidation } from "@/libs/validations/user";
+import { usePost } from "@/libs/hooks/usePost";
+import { useSubject } from "@/libs/hooks/useSubject";
 
 const AdminUser = () => {
   const { data: fetchedData, error, isLoading: loading } = useUsers();
+  const {
+    data: fetchedPostData,
+    error: postError,
+    isLoading: PostLoading,
+  } = usePost();
+  const {
+    data: fetchedSubjectData,
+    error: subjectError,
+    isLoading: SubjectLoading,
+  } = useSubject();
 
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const [userData, setUserData] = useState({});
+
   const [tableData, setTableData] = useState([]);
+  const [postData, setPostData] = useState([]);
+  const [subjectData, setSubjectData] = useState([]);
 
   useEffect(() => {
     if (fetchedData) {
@@ -28,7 +43,31 @@ const AdminUser = () => {
     }
   }, [fetchedData, error]);
 
+  useEffect(() => {
+    if (fetchedSubjectData) {
+      setSubjectData(fetchedSubjectData);
+    }
+
+    if (subjectError) {
+      console.error("Error fetching table data:", subjectError);
+      toast.error("Something went wrong in fetching table data");
+    }
+  }, [fetchedSubjectData, subjectError]);
+
+  useEffect(() => {
+    if (fetchedPostData) {
+      setPostData(fetchedPostData);
+    }
+
+    if (postError) {
+      console.error("Error fetching table data:", postError);
+      toast.error("Something went wrong in fetching Post data");
+    }
+  }, [fetchedPostData, postError]);
+
   const data = useMemo(() => tableData, [tableData]);
+  const subjectDatas = useMemo(() => subjectData, [subjectData]);
+  const postDatas = useMemo(() => postData, [postData]);
   /** @type import('@tanstack/react-table').ColumnDef<any> */
   const columns = [
     {
@@ -73,6 +112,96 @@ const AdminUser = () => {
       ),
     },
   ];
+
+    /** @type import('@tanstack/react-table').ColumnDef<any> */
+    const subjectColumns = [
+      {
+        accessorKey: "NO",
+        header: "#",
+        cell: (info) => `${info.row.index + 1}`,
+      },
+      {
+        accessorKey: "subject_name",
+        header: "Name",
+      },
+      {
+        accessorKey: "course_name",
+        header: "Course name",
+      },
+      {
+        accessorKey: "semester_code",
+        header: "Semester",
+      },
+      {
+        accessorKey: "subject_code",
+        header: "Subject code",
+      },
+      {
+        accessorKey: "action",
+        header: "Action",
+        cell: (info) => (
+          <div className="flex text-left space-x-3">
+            <button
+              onClick={() => handleUpdateButton(info.row.original)}
+              className="btn btn-xs sm:btn-sm text-blue-500 hover:text-blue-700 cursor-pointer border-blue-400"
+            >
+              Edit
+            </button>
+            <button
+              onClick={() => handleDeleteButton(info.row.original)}
+              className="btn btn-xs sm:btn-sm text-red-500 hover:text-red-700 cursor-pointer border-red-400"
+            >
+              Remove
+            </button>
+          </div>
+        ),
+      },
+    ];
+  
+    /** @type import('@tanstack/react-table').ColumnDef<any> */
+    const postColumns = [
+      {
+        accessorKey: "NO",
+        header: "#",
+        cell: (info) => `${info.row.index + 1}`,
+      },
+      {
+        accessorKey: "title",
+        header: "File name",
+      },
+      {
+        accessorKey: "course_name",
+        header: "Course name",
+      },
+      {
+        accessorKey: "category",
+        header: "Category",
+      },
+      {
+        accessorKey: "semester_code",
+        header: "Semester",
+      },
+      {
+        accessorKey: "action",
+        header: "Action",
+        cell: (info) => (
+          <div className="flex text-left space-x-3">
+            <button
+              onClick={() => handlePostUpdateButton(info.row.original)}
+              className="btn btn-xs sm:btn-sm text-blue-500 hover:text-blue-700 cursor-pointer border-blue-400"
+            >
+              Edit
+            </button>
+            <button
+              onClick={() => handlePostDeleteButton(info.row.original)}
+              className="btn btn-xs sm:btn-sm text-red-500 hover:text-red-700 cursor-pointer border-red-400"
+            >
+              Remove
+            </button>
+          </div>
+        ),
+      },
+    ];
 
   //Delete button form table
   const handleDeleteButton = (userDelete) => {
@@ -200,7 +329,12 @@ const AdminUser = () => {
 
   return (
     <>
+      <h1 className="text-white text-lg font-medium">Users</h1>
       <Table data={data} columns={columns} isLoading={loading} />
+      <h1 className="text-white text-lg font-medium">Documents</h1>
+      <Table data={postDatas} columns={postColumns} isLoading={PostLoading} />
+      <h1 className="text-white text-lg font-medium">Subject</h1>
+      <Table data={subjectDatas} columns={subjectColumns} isLoading={SubjectLoading} />
       <AdminModel
         isOpen={isOpen}
         setIsOpen={setIsOpen}

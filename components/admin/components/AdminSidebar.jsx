@@ -2,7 +2,7 @@ import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { handleSignOutButton } from "@/libs/logout";
+import { handleSignOutButton } from "@/libs/utils";
 import { AdminDashIcon, AdminuploadIcon, SettingIcon } from "@/public/assets";
 
 const AdminSidebar = () => {
