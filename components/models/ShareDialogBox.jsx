@@ -16,7 +16,7 @@ const ShareDialogBox = ({ isOpen, setIsOpen }) => {
     title: "Explore the web app designed for studies",
     content:
       "Discover a wealth of helpful study materials on our web app designed for students. Follow this link to join and enhance your learning experience.",
-    url: "https://paschub.vercel.app",
+    url: process.env.NEXT_PUBLIC_APP_URL,
   };
 
   return (
