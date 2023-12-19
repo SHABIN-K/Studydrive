@@ -27,4 +27,17 @@ const filterUrl = (params, postData) => {
   return [];
 };
 
-export { filterPosts, filterUrl };
+const filterSyllabus = (syllabus, postData) => {
+  if (syllabus && syllabus.length === 2) {
+    const [course, category] = syllabus;
+    const regexcourse = new RegExp(course, "i");
+    const regexCategory = new RegExp(category, "i");
+    return postData.filter(
+      (item) =>
+        regexcourse.test(item.course_name) && regexCategory.test(item.category)
+    );
+  }
+  return [];
+};
+
+export { filterPosts, filterUrl, filterSyllabus };
