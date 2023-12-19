@@ -16,7 +16,7 @@ const MyPost = ({ params }) => {
   //  if (!data) {
   //    console.log(data.length === 0);
   //    toast("No data found !");
-  //    //router.push("/");
+      //router.push("/");
   //  }
   //}, [data, router]);
   //
