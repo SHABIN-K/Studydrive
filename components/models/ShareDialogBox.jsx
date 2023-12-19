@@ -1,10 +1,11 @@
 "use client";
 
-import { toast } from "sonner";
 import Image from "next/image";
 import { Fragment } from "react";
 import { XMarkIcon } from "@heroicons/react/20/solid";
 import { Dialog, Transition } from "@headlessui/react";
+
+import { handlesharebtn } from "@/libs/utils";
 
 const ShareDialogBox = ({ isOpen, setIsOpen }) => {
   function closeModal() {
@@ -16,32 +17,6 @@ const ShareDialogBox = ({ isOpen, setIsOpen }) => {
     content:
       "Discover a wealth of helpful study materials on our web app designed for students. Follow this link to join and enhance your learning experience.",
     url: "https://paschub.vercel.app",
-  };
-
-  const handlesharebtn = () => {
-    if (navigator.share) {
-      navigator
-        .share({
-          title: post.title,
-          text: post.content,
-          url: post.url,
-        })
-        .then(() => {
-          toast("Thanks for sharing!");
-        })
-        .catch(console.error);
-    } else {
-      // navigator.clipboard.writeText(`${post.title} \n\n ${post.content} \n ${post.url}`).then(() =>{
-      //   toast("link copied")
-      // })
-      const el = document.createElement("textarea");
-      el.value = `${post.title} \n\n ${post.content} \n ${post.url}`;
-      document.body.appendChild(el);
-      el.select();
-      document.execCommand("copy");
-      document.body.removeChild(el);
-      toast("Copied to clipboard");
-    }
   };
 
   return (
@@ -101,7 +76,7 @@ const ShareDialogBox = ({ isOpen, setIsOpen }) => {
                   <button
                     type="button"
                     className="inline-flex justify-center rounded-md border border-transparent bg-gray-700 px-4 py-2 text-sm font-medium text-[#4acd8d] hover:bg-gray-500"
-                    onClick={(e) => handlesharebtn(e)}
+                    onClick={() => handlesharebtn(post)}
                   >
                     Invite Friends
                   </button>
