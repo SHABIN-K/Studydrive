@@ -8,7 +8,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import Search from "../Search";
 import { navlinks } from "@/constants";
 import { usePost } from "@/libs/hooks/usePost";
-import { filterPosts } from "@/libs/usefilter";
+import { filterPosts } from "@/libs/hooks/usefilter";
 import { close, logo, menu } from "@/public/assets";
 import { usePostStore } from "@/libs/state/useStore";
 import ShareDialogBox from "../models/ShareDialogBox";

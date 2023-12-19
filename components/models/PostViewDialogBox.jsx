@@ -3,8 +3,10 @@
 import { toast } from "sonner";
 import { Fragment } from "react";
 import { saveAs } from "file-saver";
-import { XMarkIcon } from "@heroicons/react/20/solid";
 import { Dialog, Transition } from "@headlessui/react";
+import { ShareIcon, XMarkIcon } from "@heroicons/react/20/solid";
+
+import { handlesharebtn } from "@/libs/utils";
 
 const PostViewDialogBox = ({ isOpen, setIsOpen, data }) => {
   function closeModal() {
@@ -14,6 +16,16 @@ const PostViewDialogBox = ({ isOpen, setIsOpen, data }) => {
   const handleDownload = (url, filename) => {
     saveAs(url, `pasc-download-${filename}`);
     toast("successfully downloaded");
+  };
+
+  const SharePost = {
+    title: "",
+    content: `Hey! Check out ${data.course_name} ${
+      data.title
+    } on PascHub!\n#${data.subject_name.replace(/\s/g, "")}\n`,
+    url: `${process.env.NEXT_PUBLIC_APP_URL}/post/${data.id.slice(
+      15
+    )}/${data.title.replace(/\s+/g, "-")}`,
   };
 
   return (
@@ -63,15 +75,22 @@ const PostViewDialogBox = ({ isOpen, setIsOpen, data }) => {
                     <li>Category : {data.category}</li>
                   </ul>
                 </div>
-                <div className="mt-4 flex justify-center">
+                <div className="mt-4 flex justify-center gap-1">
                   <button
                     type="button"
-                    className="rounded-full flex items-center justify-center text-white bg-black hover:bg-gray-700 py-2.5 px-4 capitalize mt-4 w-full"
+                    className="rounded-full  items-center justify-center text-white bg-black hover:bg-gray-700 py-2.5 px-4 capitalize mt-4 w-full"
                     onClick={() =>
                       handleDownload(data.file_url, data.file_name)
                     }
                   >
                     Download
+                  </button>
+                  <button
+                    type="button"
+                    className="flex-1 rounded-full items-center mt-4 py-2.5 px-4 text-white bg-black hover:bg-gray-700 w-full"
+                    onClick={() => handlesharebtn(SharePost)}
+                  >
+                    <ShareIcon className="h-6 w-6" />
                   </button>
                 </div>
               </Dialog.Panel>

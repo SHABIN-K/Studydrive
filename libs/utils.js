@@ -1,7 +1,8 @@
 import Swal from "sweetalert2";
+import { toast } from "sonner";
 import { signOut } from "next-auth/react";
 
-export const handleSignOutButton = () => {
+const handleSignOutButton = () => {
   Swal.fire({
     title: "Logout",
     text: "Are you sure you want to log out?",
@@ -26,3 +27,31 @@ export const handleSignOutButton = () => {
     }
   });
 };
+
+const handlesharebtn = (post) => {
+  if (navigator.share) {
+    navigator
+      .share({
+        title: post.title,
+        text: post.content,
+        url: post.url,
+      })
+      .then(() => {
+        toast("Thanks for sharing!");
+      })
+      .catch(console.error);
+  } else {
+    // navigator.clipboard.writeText(`${post.title} \n\n ${post.content} \n ${post.url}`).then(() =>{
+    //   toast("link copied")
+    // })
+    const el = document.createElement("textarea");
+    el.value = `${post.title} \n\n ${post.content} \n ${post.url}`;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand("copy");
+    document.body.removeChild(el);
+    toast("Copied to clipboard");
+  }
+};
+
+export { handleSignOutButton, handlesharebtn };
