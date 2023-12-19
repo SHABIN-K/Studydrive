@@ -1,7 +1,5 @@
 import Image from "next/image";
 
-import React from "react";
-
 const NoDataFound = () => {
   return (
     <section>
@@ -11,17 +9,16 @@ const NoDataFound = () => {
             src="/nodata.png"
             width={340}
             height={100}
-            alt="N file found"
-            className="mx-auto mb-auto my-auto"
+            alt="No file found"
+            className="mx-auto mb-auto my-auto w-[260px]"
             priority
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         </div>
-        <h1 className=" text-2xl text-center text-[#4acd8d]">
-          {" "}
+        <h1 className="text-2xl text-center text-[#4acd8d] font-semibold">
           No File Found !!!
         </h1>
-        <p className=" text-sm pt-2 text-gray-400 text-center select-text">
+        <p className="text-sm pt-2 text-gray-400 text-center">
           Maybe go Back and try a diffrent keyword?
         </p>
       </div>
