@@ -6,7 +6,7 @@ import { AdminPlayground, AdminUser } from "@/components/admin";
 import AdminNavbar from "@/components/admin/components/AdminNavbar";
 import { ProctectAdminlayout } from "@/components/layouts/ProctectAdminlayout";
 
-const Tabs = ["Playground", "Users"];
+const Tabs = ["Playground", "Show data"];
 
 const AdminPanel = () => {
   return (

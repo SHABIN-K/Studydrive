@@ -1,12 +1,40 @@
 "use client";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
+
 import { semester } from "@/constants";
 import DataCard from "@/components/cards/DataCard";
-import { useSearchParams } from "next/navigation";
+import { usePostStore } from "@/libs/state/useStore";
+import NoDataFound from "@/components/ui/NoDataFound";
+import { filterSyllabus } from "@/libs/hooks/usefilter";
+import PostViewDialogBox from "@/components/models/PostViewDialogBox";
 
 const UserSemester = () => {
   const searchParams = useSearchParams();
   const course = searchParams.get("name");
   const category = searchParams.get("category");
+
+  const [isPostOpen, setIsPostOpen] = useState(false);
+  const [data, setData] = useState(null);
+
+  if (category === "Videos") {
+    return <NoDataFound />;
+  }
+
+  useEffect(() => {
+    if (category === "Syllabus") {
+      const fetchedData = usePostStore((state) => state.posts);
+      const post = filterSyllabus([course, category], fetchedData);
+      const [syllabusData] = post.map((items) => items);
+
+      // Set the state to make the dialog box open and pass data
+      if (syllabusData) {
+        setIsPostOpen(true);
+        setData(syllabusData);
+      }
+    }
+  }, [category, course]);
+
   return (
     <div>
       <h1 className="select_header">Select Semester</h1>
@@ -30,6 +58,13 @@ const UserSemester = () => {
           })}
         </div>
       </div>
+      {isPostOpen && data && (
+        <PostViewDialogBox
+          isOpen={isPostOpen}
+          setIsOpen={setIsPostOpen}
+          data={data}
+        />
+      )}
     </div>
   );
 };
