@@ -83,12 +83,12 @@ export async function POST(req) {
 export async function DELETE(req) {
   const { id } = await req.json();
   try {
-    await prisma.post.delete({
+    const deletedPost = await prisma.post.delete({
       where: { id: id },
     });
-
+    
     // Process the data and send an appropriate response
-    return new Response("Request processed successfully", {
+    return new Response(JSON.stringify(deletedPost), {
       status: 200,
     });
   } catch (error) {

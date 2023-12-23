@@ -7,10 +7,12 @@ import Table from "./components/Table";
 import AdminModel from "./ui/AdminModel";
 import useUsers from "@/libs/hooks/useUsers";
 import { usePost } from "@/libs/hooks/usePost";
+import { useEdgeStore } from "@/libs/edgestore";
 import { useSubject } from "@/libs/hooks/useSubject";
 import { UserValidation } from "@/libs/validations/user";
 
 const AdminUser = () => {
+  const { edgestore } = useEdgeStore();
   const { data: fetchedData, error, isLoading: loading } = useUsers();
   const {
     data: fetchedPostData,
@@ -338,7 +340,9 @@ const AdminUser = () => {
               id: data.id,
             },
           });
-
+          await edgestore.publicFiles.delete({
+            url: data.file_url,
+          });
           if (res.status === 200) {
             Swal.fire({
               title: "Deleted!",
@@ -350,6 +354,7 @@ const AdminUser = () => {
                 popup: "bordered-alert",
               },
             });
+
             setPostData((prevTableData) =>
               prevTableData.filter((document) => document.id !== data.id)
             );

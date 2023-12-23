@@ -1,13 +1,15 @@
+import axios from "axios";
+import { toast } from "sonner";
+import Swal from "sweetalert2";
 import { useEffect, useMemo, useState } from "react";
 
 import Table from "./Table";
+import { useEdgeStore } from "@/libs/edgestore";
 import { useUserPost } from "@/libs/hooks/usePost";
 import { useUserSubject } from "@/libs/hooks/useSubject";
-import Swal from "sweetalert2";
-import { toast } from "sonner";
-import axios from "axios";
 
 const ShowData = ({ userID }) => {
+  const { edgestore } = useEdgeStore();
   const {
     data: fetchedSubjectData,
     error: subjectError,
@@ -119,6 +121,7 @@ const ShowData = ({ userID }) => {
     },
   ];
 
+  //functions for Post
   const handlePostDeleteButton = (data) => {
     Swal.fire({
       title: "Delete Document",
@@ -142,7 +145,9 @@ const ShowData = ({ userID }) => {
               id: data.id,
             },
           });
-
+          await edgestore.publicFiles.delete({
+            url: data.file_url,
+          });
           if (res.status === 200) {
             Swal.fire({
               title: "Deleted!",
@@ -154,6 +159,7 @@ const ShowData = ({ userID }) => {
                 popup: "bordered-alert",
               },
             });
+
             setPostData((prevTableData) =>
               prevTableData.filter((document) => document.id !== data.id)
             );
@@ -177,7 +183,6 @@ const ShowData = ({ userID }) => {
       }
     });
   };
-
   //functions for Subject
   const handleSubjectDeleteButton = (data) => {
     Swal.fire({
