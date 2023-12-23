@@ -144,20 +144,12 @@ const AdminUser = () => {
       accessorKey: "action",
       header: "Action",
       cell: (info) => (
-        <div className="flex text-left space-x-3">
-          <button
-            onClick={() => handlePostUpdateButton(info.row.original)}
-            className="btn btn-xs sm:btn-sm text-blue-500 hover:text-blue-700 cursor-pointer border-blue-400"
-          >
-            Edit
-          </button>
-          <button
-            onClick={() => handlePostDeleteButton(info.row.original)}
-            className="btn btn-xs sm:btn-sm text-red-500 hover:text-red-700 cursor-pointer border-red-400"
-          >
-            Remove
-          </button>
-        </div>
+        <button
+          onClick={() => handlePostDeleteButton(info.row.original)}
+          className="btn btn-xs sm:btn-sm text-red-500 hover:text-red-700 cursor-pointer border-red-400"
+        >
+          Remove
+        </button>
       ),
     },
   ];
@@ -189,20 +181,12 @@ const AdminUser = () => {
       accessorKey: "action",
       header: "Action",
       cell: (info) => (
-        <div className="flex text-left space-x-3">
-          <button
-            onClick={() => handleSubjectUpdateButton(info.row.original)}
-            className="btn btn-xs sm:btn-sm text-blue-500 hover:text-blue-700 cursor-pointer border-blue-400"
-          >
-            Edit
-          </button>
-          <button
-            onClick={() => handleSubjectDeleteButton(info.row.original)}
-            className="btn btn-xs sm:btn-sm text-red-500 hover:text-red-700 cursor-pointer border-red-400"
-          >
-            Remove
-          </button>
-        </div>
+        <button
+          onClick={() => handleSubjectDeleteButton(info.row.original)}
+          className="btn btn-xs sm:btn-sm text-red-500 hover:text-red-700 cursor-pointer border-red-400"
+        >
+          Remove
+        </button>
       ),
     },
   ];
@@ -354,7 +338,7 @@ const AdminUser = () => {
               id: data.id,
             },
           });
-          
+
           if (res.status === 200) {
             Swal.fire({
               title: "Deleted!",
@@ -390,10 +374,6 @@ const AdminUser = () => {
     });
   };
 
-  const handlePostUpdateButton = (userUpdate) => {
-    setUserData(userUpdate);
-    setIsOpen(true);
-  };
   //functions for Subject
   const handleSubjectDeleteButton = (data) => {
     Swal.fire({
@@ -451,11 +431,6 @@ const AdminUser = () => {
         }
       }
     });
-  };
-
-  const handleSubjectUpdateButton = (userUpdate) => {
-    setUserData(userUpdate);
-    setIsOpen(true);
   };
 
   return (

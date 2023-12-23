@@ -3,6 +3,9 @@ import { useEffect, useMemo, useState } from "react";
 import Table from "./Table";
 import { useUserPost } from "@/libs/hooks/usePost";
 import { useUserSubject } from "@/libs/hooks/useSubject";
+import Swal from "sweetalert2";
+import { toast } from "sonner";
+import axios from "axios";
 
 const ShowData = ({ userID }) => {
   const {
@@ -29,9 +32,6 @@ const ShowData = ({ userID }) => {
       console.error("Error fetching table data:", subjectError);
       toast.error("Something went wrong in fetching table data");
     }
-  }, [fetchedSubjectData, subjectError]);
-
-  useEffect(() => {
     if (fetchedPostData) {
       setPostData(fetchedPostData);
     }
@@ -40,7 +40,7 @@ const ShowData = ({ userID }) => {
       console.error("Error fetching table data:", postError);
       toast.error("Something went wrong in fetching Post data");
     }
-  }, [fetchedPostData, postError]);
+  }, [fetchedPostData, fetchedSubjectData, postError, subjectError]);
 
   const subjectDatas = useMemo(() => subjectData, [subjectData]);
   const postDatas = useMemo(() => postData, [postData]);
@@ -72,20 +72,12 @@ const ShowData = ({ userID }) => {
       accessorKey: "action",
       header: "Action",
       cell: (info) => (
-        <div className="flex text-left space-x-3">
-          <button
-            onClick={() => handleUpdateButton(info.row.original)}
-            className="btn btn-xs sm:btn-sm text-blue-500 hover:text-blue-700 cursor-pointer border-blue-400"
-          >
-            Edit
-          </button>
-          <button
-            onClick={() => handleDeleteButton(info.row.original)}
-            className="btn btn-xs sm:btn-sm text-red-500 hover:text-red-700 cursor-pointer border-red-400"
-          >
-            Remove
-          </button>
-        </div>
+        <button
+          onClick={() => handleSubjectDeleteButton(info.row.original)}
+          className="btn btn-xs sm:btn-sm text-red-500 hover:text-red-700 cursor-pointer border-red-400"
+        >
+          Remove
+        </button>
       ),
     },
   ];
@@ -117,41 +109,132 @@ const ShowData = ({ userID }) => {
       accessorKey: "action",
       header: "Action",
       cell: (info) => (
-        <div className="flex text-left space-x-3">
-          <button
-            onClick={() => handlePostUpdateButton(info.row.original)}
-            className="btn btn-xs sm:btn-sm text-blue-500 hover:text-blue-700 cursor-pointer border-blue-400"
-          >
-            Edit
-          </button>
-          <button
-            onClick={() => handlePostDeleteButton(info.row.original)}
-            className="btn btn-xs sm:btn-sm text-red-500 hover:text-red-700 cursor-pointer border-red-400"
-          >
-            Remove
-          </button>
-        </div>
+        <button
+          onClick={() => handlePostDeleteButton(info.row.original)}
+          className="btn btn-xs sm:btn-sm text-red-500 hover:text-red-700 cursor-pointer border-red-400"
+        >
+          Remove
+        </button>
       ),
     },
   ];
 
-  //Delete button form table
-  const handleDeleteButton = () => {
-    console.log("hello delete button");
+  const handlePostDeleteButton = (data) => {
+    Swal.fire({
+      title: "Delete Document",
+      text: "This will permanently Delete your Document",
+      icon: "warning",
+      color: "#fff",
+      background: "#13131a",
+      showCancelButton: true,
+      confirmButtonColor: "#4acd8d",
+      cancelButtonColor: "#1c1c24",
+      confirmButtonText: "Yes, delete it!",
+      customClass: {
+        cancelButton: "bordered-alert",
+        popup: "bordered-alert",
+      },
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const res = await axios.delete("/api/post", {
+            data: {
+              id: data.id,
+            },
+          });
+
+          if (res.status === 200) {
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your Document has been permanently Deleted.",
+              icon: "success",
+              color: "#fff",
+              background: "#13131a",
+              customClass: {
+                popup: "bordered-alert",
+              },
+            });
+            setPostData((prevTableData) =>
+              prevTableData.filter((document) => document.id !== data.id)
+            );
+          } else {
+            Swal.fire({
+              title: "Failed",
+              text: "Subject not found",
+              icon: "error",
+              color: "#fff",
+              background: "#13131a",
+              customClass: {
+                popup: "bordered-alert",
+              },
+            });
+          }
+        } catch (error) {
+          console.error("NEXT_AUTH_ERROR: " + error);
+          console.log(error.response);
+          toast.error("something went wrong !!");
+        }
+      }
+    });
   };
 
-  //Update button form table
-  const handleUpdateButton = () => {
-    console.log("hello update button");
-  };
-
-  const handlePostDeleteButton = () => {
-    console.log("hello delete button");
-  };
-
-  //Update button form table
-  const handlePostUpdateButton = () => {
-    console.log("hello update button");
+  //functions for Subject
+  const handleSubjectDeleteButton = (data) => {
+    Swal.fire({
+      title: "Delete Subject",
+      text: "This will permanently Delete your Subject",
+      icon: "warning",
+      color: "#fff",
+      background: "#13131a",
+      showCancelButton: true,
+      confirmButtonColor: "#4acd8d",
+      cancelButtonColor: "#1c1c24",
+      confirmButtonText: "Yes, delete it!",
+      customClass: {
+        cancelButton: "bordered-alert",
+        popup: "bordered-alert",
+      },
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const res = await axios.delete("/api/subject", {
+            data: {
+              id: data.id,
+            },
+          });
+          if (res.status === 200) {
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your Subject has been permanently Deleted.",
+              icon: "success",
+              color: "#fff",
+              background: "#13131a",
+              customClass: {
+                popup: "bordered-alert",
+              },
+            });
+            setSubjectData((prevTableData) =>
+              prevTableData.filter((subject) => subject.id !== data.id)
+            );
+          } else {
+            Swal.fire({
+              title: "Failed",
+              text: "Subject not found",
+              icon: "error",
+              color: "#fff",
+              background: "#13131a",
+              customClass: {
+                popup: "bordered-alert",
+              },
+            });
+          }
+        } catch (error) {
+          console.error("NEXT_AUTH_ERROR: " + error);
+          console.log(error.response);
+          toast.error("something went wrong !!");
+        }
+      }
+    });
   };
 
   return (
