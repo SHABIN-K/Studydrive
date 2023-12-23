@@ -118,51 +118,6 @@ const AdminUser = () => {
   ];
 
   /** @type import('@tanstack/react-table').ColumnDef<any> */
-  const subjectColumns = [
-    {
-      accessorKey: "NO",
-      header: "#",
-      cell: (info) => `${info.row.index + 1}`,
-    },
-    {
-      accessorKey: "subject_name",
-      header: "Name",
-    },
-    {
-      accessorKey: "course_name",
-      header: "Course name",
-    },
-    {
-      accessorKey: "semester_code",
-      header: "Semester",
-    },
-    {
-      accessorKey: "subject_code",
-      header: "Subject code",
-    },
-    {
-      accessorKey: "action",
-      header: "Action",
-      cell: (info) => (
-        <div className="flex text-left space-x-3">
-          <button
-            onClick={() => handleUpdateButton(info.row.original)}
-            className="btn btn-xs sm:btn-sm text-blue-500 hover:text-blue-700 cursor-pointer border-blue-400"
-          >
-            Edit
-          </button>
-          <button
-            onClick={() => handleSubjectDeleteButton(info.row.original)}
-            className="btn btn-xs sm:btn-sm text-red-500 hover:text-red-700 cursor-pointer border-red-400"
-          >
-            Remove
-          </button>
-        </div>
-      ),
-    },
-  ];
-
-  /** @type import('@tanstack/react-table').ColumnDef<any> */
   const postColumns = [
     {
       accessorKey: "NO",
@@ -207,6 +162,52 @@ const AdminUser = () => {
     },
   ];
 
+  /** @type import('@tanstack/react-table').ColumnDef<any> */
+  const subjectColumns = [
+    {
+      accessorKey: "NO",
+      header: "#",
+      cell: (info) => `${info.row.index + 1}`,
+    },
+    {
+      accessorKey: "subject_name",
+      header: "Name",
+    },
+    {
+      accessorKey: "course_name",
+      header: "Course name",
+    },
+    {
+      accessorKey: "semester_code",
+      header: "Semester",
+    },
+    {
+      accessorKey: "subject_code",
+      header: "Subject code",
+    },
+    {
+      accessorKey: "action",
+      header: "Action",
+      cell: (info) => (
+        <div className="flex text-left space-x-3">
+          <button
+            onClick={() => handleSubjectUpdateButton(info.row.original)}
+            className="btn btn-xs sm:btn-sm text-blue-500 hover:text-blue-700 cursor-pointer border-blue-400"
+          >
+            Edit
+          </button>
+          <button
+            onClick={() => handleSubjectDeleteButton(info.row.original)}
+            className="btn btn-xs sm:btn-sm text-red-500 hover:text-red-700 cursor-pointer border-red-400"
+          >
+            Remove
+          </button>
+        </div>
+      ),
+    },
+  ];
+
+  //functions for user Data
   //Delete button form table
   const handleDeleteButton = (userDelete) => {
     Swal.fire({
@@ -265,72 +266,11 @@ const AdminUser = () => {
       }
     });
   };
-
-  //Delete button form table
-  const handleSubjectDeleteButton = (subjectDelete) => {
-    Swal.fire({
-      title: "Deactivate account",
-      text: "This will permanently deactivate your account",
-      icon: "warning",
-      color: "#fff",
-      background: "#13131a",
-      showCancelButton: true,
-      confirmButtonColor: "#4acd8d",
-      cancelButtonColor: "#1c1c24",
-      confirmButtonText: "Yes, delete it!",
-      customClass: {
-        cancelButton: "bordered-alert",
-        popup: "bordered-alert",
-      },
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        try {
-          const res = await axios.delete("/api/user", {
-            data: {
-              email: userDelete.email,
-            },
-          });
-          if (res.status === 200) {
-            Swal.fire({
-              title: "Deactivated!",
-              text: "Your account has been permanently deactivated.",
-              icon: "success",
-              color: "#fff",
-              background: "#13131a",
-              customClass: {
-                popup: "bordered-alert",
-              },
-            });
-            setTableData((prevTableData) =>
-              prevTableData.filter((user) => user.email !== userDelete.email)
-            );
-          } else {
-            Swal.fire({
-              title: "Deactivation Failed",
-              text: "User not found",
-              icon: "error",
-              color: "#fff",
-              background: "#13131a",
-              customClass: {
-                popup: "bordered-alert",
-              },
-            });
-          }
-        } catch (error) {
-          console.error("NEXT_AUTH_ERROR: " + error);
-          console.log(error.response);
-          toast.error("something went wrong !!");
-        }
-      }
-    });
-  };
-
   //Update button form table
   const handleUpdateButton = (userUpdate) => {
     setUserData(userUpdate);
     setIsOpen(true);
   };
-
   //Submit button form dialog box
   const handleSubmitButton = async (e) => {
     e.preventDefault();
@@ -388,6 +328,134 @@ const AdminUser = () => {
       setIsLoading(false);
       setIsOpen(false);
     }
+  };
+
+  //functions for Post
+  const handlePostDeleteButton = (data) => {
+    Swal.fire({
+      title: "Delete Document",
+      text: "This will permanently Delete your Document",
+      icon: "warning",
+      color: "#fff",
+      background: "#13131a",
+      showCancelButton: true,
+      confirmButtonColor: "#4acd8d",
+      cancelButtonColor: "#1c1c24",
+      confirmButtonText: "Yes, delete it!",
+      customClass: {
+        cancelButton: "bordered-alert",
+        popup: "bordered-alert",
+      },
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const res = await axios.delete("/api/post", {
+            data: {
+              id: data.id,
+            },
+          });
+          
+          if (res.status === 200) {
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your Document has been permanently Deleted.",
+              icon: "success",
+              color: "#fff",
+              background: "#13131a",
+              customClass: {
+                popup: "bordered-alert",
+              },
+            });
+            setPostData((prevTableData) =>
+              prevTableData.filter((document) => document.id !== data.id)
+            );
+          } else {
+            Swal.fire({
+              title: "Failed",
+              text: "Subject not found",
+              icon: "error",
+              color: "#fff",
+              background: "#13131a",
+              customClass: {
+                popup: "bordered-alert",
+              },
+            });
+          }
+        } catch (error) {
+          console.error("NEXT_AUTH_ERROR: " + error);
+          console.log(error.response);
+          toast.error("something went wrong !!");
+        }
+      }
+    });
+  };
+
+  const handlePostUpdateButton = (userUpdate) => {
+    setUserData(userUpdate);
+    setIsOpen(true);
+  };
+  //functions for Subject
+  const handleSubjectDeleteButton = (data) => {
+    Swal.fire({
+      title: "Delete Subject",
+      text: "This will permanently Delete your Subject",
+      icon: "warning",
+      color: "#fff",
+      background: "#13131a",
+      showCancelButton: true,
+      confirmButtonColor: "#4acd8d",
+      cancelButtonColor: "#1c1c24",
+      confirmButtonText: "Yes, delete it!",
+      customClass: {
+        cancelButton: "bordered-alert",
+        popup: "bordered-alert",
+      },
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const res = await axios.delete("/api/subject", {
+            data: {
+              id: data.id,
+            },
+          });
+          if (res.status === 200) {
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your Subject has been permanently Deleted.",
+              icon: "success",
+              color: "#fff",
+              background: "#13131a",
+              customClass: {
+                popup: "bordered-alert",
+              },
+            });
+            setSubjectData((prevTableData) =>
+              prevTableData.filter((subject) => subject.id !== data.id)
+            );
+          } else {
+            Swal.fire({
+              title: "Failed",
+              text: "Subject not found",
+              icon: "error",
+              color: "#fff",
+              background: "#13131a",
+              customClass: {
+                popup: "bordered-alert",
+              },
+            });
+          }
+        } catch (error) {
+          console.error("NEXT_AUTH_ERROR: " + error);
+          console.log(error.response);
+          toast.error("something went wrong !!");
+        }
+      }
+    });
+  };
+
+  const handleSubjectUpdateButton = (userUpdate) => {
+    setUserData(userUpdate);
+    setIsOpen(true);
   };
 
   return (
