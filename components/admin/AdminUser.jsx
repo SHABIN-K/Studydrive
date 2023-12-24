@@ -6,11 +6,13 @@ import { useEffect, useMemo, useState } from "react";
 import Table from "./components/Table";
 import AdminModel from "./ui/AdminModel";
 import useUsers from "@/libs/hooks/useUsers";
-import { UserValidation } from "@/libs/validations/user";
 import { usePost } from "@/libs/hooks/usePost";
+import { useEdgeStore } from "@/libs/edgestore";
 import { useSubject } from "@/libs/hooks/useSubject";
+import { UserValidation } from "@/libs/validations/user";
 
 const AdminUser = () => {
+  const { edgestore } = useEdgeStore();
   const { data: fetchedData, error, isLoading: loading } = useUsers();
   const {
     data: fetchedPostData,
@@ -28,8 +30,8 @@ const AdminUser = () => {
 
   const [userData, setUserData] = useState({});
 
-  const [tableData, setTableData] = useState([]);
   const [postData, setPostData] = useState([]);
+  const [tableData, setTableData] = useState([]);
   const [subjectData, setSubjectData] = useState([]);
 
   useEffect(() => {
@@ -41,9 +43,7 @@ const AdminUser = () => {
       console.error("Error fetching table data:", error);
       toast.error("Something went wrong in fetching table data");
     }
-  }, [fetchedData, error]);
 
-  useEffect(() => {
     if (fetchedSubjectData) {
       setSubjectData(fetchedSubjectData);
     }
@@ -52,9 +52,7 @@ const AdminUser = () => {
       console.error("Error fetching table data:", subjectError);
       toast.error("Something went wrong in fetching table data");
     }
-  }, [fetchedSubjectData, subjectError]);
 
-  useEffect(() => {
     if (fetchedPostData) {
       setPostData(fetchedPostData);
     }
@@ -63,11 +61,19 @@ const AdminUser = () => {
       console.error("Error fetching table data:", postError);
       toast.error("Something went wrong in fetching Post data");
     }
-  }, [fetchedPostData, postError]);
+  }, [
+    fetchedData,
+    error,
+    fetchedSubjectData,
+    subjectError,
+    fetchedPostData,
+    postError,
+  ]);
 
-  const data = useMemo(() => tableData, [tableData]);
-  const subjectDatas = useMemo(() => subjectData, [subjectData]);
+  const UserDatas = useMemo(() => tableData, [tableData]);
   const postDatas = useMemo(() => postData, [postData]);
+  const subjectDatas = useMemo(() => subjectData, [subjectData]);
+
   /** @type import('@tanstack/react-table').ColumnDef<any> */
   const columns = [
     {
@@ -113,96 +119,81 @@ const AdminUser = () => {
     },
   ];
 
-    /** @type import('@tanstack/react-table').ColumnDef<any> */
-    const subjectColumns = [
-      {
-        accessorKey: "NO",
-        header: "#",
-        cell: (info) => `${info.row.index + 1}`,
-      },
-      {
-        accessorKey: "subject_name",
-        header: "Name",
-      },
-      {
-        accessorKey: "course_name",
-        header: "Course name",
-      },
-      {
-        accessorKey: "semester_code",
-        header: "Semester",
-      },
-      {
-        accessorKey: "subject_code",
-        header: "Subject code",
-      },
-      {
-        accessorKey: "action",
-        header: "Action",
-        cell: (info) => (
-          <div className="flex text-left space-x-3">
-            <button
-              onClick={() => handleUpdateButton(info.row.original)}
-              className="btn btn-xs sm:btn-sm text-blue-500 hover:text-blue-700 cursor-pointer border-blue-400"
-            >
-              Edit
-            </button>
-            <button
-              onClick={() => handleDeleteButton(info.row.original)}
-              className="btn btn-xs sm:btn-sm text-red-500 hover:text-red-700 cursor-pointer border-red-400"
-            >
-              Remove
-            </button>
-          </div>
-        ),
-      },
-    ];
-  
-    /** @type import('@tanstack/react-table').ColumnDef<any> */
-    const postColumns = [
-      {
-        accessorKey: "NO",
-        header: "#",
-        cell: (info) => `${info.row.index + 1}`,
-      },
-      {
-        accessorKey: "title",
-        header: "File name",
-      },
-      {
-        accessorKey: "course_name",
-        header: "Course name",
-      },
-      {
-        accessorKey: "category",
-        header: "Category",
-      },
-      {
-        accessorKey: "semester_code",
-        header: "Semester",
-      },
-      {
-        accessorKey: "action",
-        header: "Action",
-        cell: (info) => (
-          <div className="flex text-left space-x-3">
-            <button
-              onClick={() => handlePostUpdateButton(info.row.original)}
-              className="btn btn-xs sm:btn-sm text-blue-500 hover:text-blue-700 cursor-pointer border-blue-400"
-            >
-              Edit
-            </button>
-            <button
-              onClick={() => handlePostDeleteButton(info.row.original)}
-              className="btn btn-xs sm:btn-sm text-red-500 hover:text-red-700 cursor-pointer border-red-400"
-            >
-              Remove
-            </button>
-          </div>
-        ),
-      },
-    ];
+  /** @type import('@tanstack/react-table').ColumnDef<any> */
+  const postColumns = [
+    {
+      accessorKey: "NO",
+      header: "#",
+      cell: (info) => `${info.row.index + 1}`,
+    },
+    {
+      accessorKey: "title",
+      header: "File name",
+    },
+    {
+      accessorKey: "course_name",
+      header: "Course name",
+    },
+    {
+      accessorKey: "category",
+      header: "Category",
+    },
+    {
+      accessorKey: "semester_code",
+      header: "Semester",
+    },
+    {
+      accessorKey: "action",
+      header: "Action",
+      cell: (info) => (
+        <button
+          onClick={() => handlePostDeleteButton(info.row.original)}
+          className="btn btn-xs sm:btn-sm text-red-500 hover:text-red-700 cursor-pointer border-red-400"
+        >
+          Remove
+        </button>
+      ),
+    },
+  ];
 
+  /** @type import('@tanstack/react-table').ColumnDef<any> */
+  const subjectColumns = [
+    {
+      accessorKey: "NO",
+      header: "#",
+      cell: (info) => `${info.row.index + 1}`,
+    },
+    {
+      accessorKey: "subject_name",
+      header: "Name",
+    },
+    {
+      accessorKey: "course_name",
+      header: "Course name",
+    },
+    {
+      accessorKey: "semester_code",
+      header: "Semester",
+    },
+    {
+      accessorKey: "subject_code",
+      header: "Subject code",
+    },
+    {
+      accessorKey: "action",
+      header: "Action",
+      cell: (info) => (
+        <button
+          onClick={() => handleSubjectDeleteButton(info.row.original)}
+          className="btn btn-xs sm:btn-sm text-red-500 hover:text-red-700 cursor-pointer border-red-400"
+        >
+          Remove
+        </button>
+      ),
+    },
+  ];
+
+  //functions for user Data
   //Delete button form table
   const handleDeleteButton = (userDelete) => {
     Swal.fire({
@@ -261,13 +252,11 @@ const AdminUser = () => {
       }
     });
   };
-
   //Update button form table
   const handleUpdateButton = (userUpdate) => {
     setUserData(userUpdate);
     setIsOpen(true);
   };
-
   //Submit button form dialog box
   const handleSubmitButton = async (e) => {
     e.preventDefault();
@@ -327,14 +316,140 @@ const AdminUser = () => {
     }
   };
 
+  //functions for Post
+  const handlePostDeleteButton = (data) => {
+    Swal.fire({
+      title: "Delete Document",
+      text: "This will permanently Delete your Document",
+      icon: "warning",
+      color: "#fff",
+      background: "#13131a",
+      showCancelButton: true,
+      confirmButtonColor: "#4acd8d",
+      cancelButtonColor: "#1c1c24",
+      confirmButtonText: "Yes, delete it!",
+      customClass: {
+        cancelButton: "bordered-alert",
+        popup: "bordered-alert",
+      },
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const res = await axios.delete("/api/post", {
+            data: {
+              id: data.id,
+            },
+          });
+          await edgestore.publicFiles.delete({
+            url: data.file_url,
+          });
+          if (res.status === 200) {
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your Document has been permanently Deleted.",
+              icon: "success",
+              color: "#fff",
+              background: "#13131a",
+              customClass: {
+                popup: "bordered-alert",
+              },
+            });
+
+            setPostData((prevTableData) =>
+              prevTableData.filter((document) => document.id !== data.id)
+            );
+          } else {
+            Swal.fire({
+              title: "Failed",
+              text: "Subject not found",
+              icon: "error",
+              color: "#fff",
+              background: "#13131a",
+              customClass: {
+                popup: "bordered-alert",
+              },
+            });
+          }
+        } catch (error) {
+          console.error("NEXT_AUTH_ERROR: " + error);
+          console.log(error.response);
+          toast.error("something went wrong !!");
+        }
+      }
+    });
+  };
+
+  //functions for Subject
+  const handleSubjectDeleteButton = (data) => {
+    Swal.fire({
+      title: "Delete Subject",
+      text: "This will permanently Delete your Subject",
+      icon: "warning",
+      color: "#fff",
+      background: "#13131a",
+      showCancelButton: true,
+      confirmButtonColor: "#4acd8d",
+      cancelButtonColor: "#1c1c24",
+      confirmButtonText: "Yes, delete it!",
+      customClass: {
+        cancelButton: "bordered-alert",
+        popup: "bordered-alert",
+      },
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const res = await axios.delete("/api/subject", {
+            data: {
+              id: data.id,
+            },
+          });
+          if (res.status === 200) {
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your Subject has been permanently Deleted.",
+              icon: "success",
+              color: "#fff",
+              background: "#13131a",
+              customClass: {
+                popup: "bordered-alert",
+              },
+            });
+            setSubjectData((prevTableData) =>
+              prevTableData.filter((subject) => subject.id !== data.id)
+            );
+          } else {
+            Swal.fire({
+              title: "Failed",
+              text: "Subject not found",
+              icon: "error",
+              color: "#fff",
+              background: "#13131a",
+              customClass: {
+                popup: "bordered-alert",
+              },
+            });
+          }
+        } catch (error) {
+          console.error("NEXT_AUTH_ERROR: " + error);
+          console.log(error.response);
+          toast.error("something went wrong !!");
+        }
+      }
+    });
+  };
+
   return (
     <>
       <h1 className="text-white text-lg font-medium">Users</h1>
-      <Table data={data} columns={columns} isLoading={loading} />
+      <Table data={UserDatas} columns={columns} isLoading={loading} />
       <h1 className="text-white text-lg font-medium">Documents</h1>
       <Table data={postDatas} columns={postColumns} isLoading={PostLoading} />
       <h1 className="text-white text-lg font-medium">Subject</h1>
-      <Table data={subjectDatas} columns={subjectColumns} isLoading={SubjectLoading} />
+      <Table
+        data={subjectDatas}
+        columns={subjectColumns}
+        isLoading={SubjectLoading}
+      />
       <AdminModel
         isOpen={isOpen}
         setIsOpen={setIsOpen}

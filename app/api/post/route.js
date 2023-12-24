@@ -79,3 +79,23 @@ export async function POST(req) {
     });
   }
 }
+
+export async function DELETE(req) {
+  const { id } = await req.json();
+  try {
+    const deletedPost = await prisma.post.delete({
+      where: { id: id },
+    });
+    
+    // Process the data and send an appropriate response
+    return new Response(JSON.stringify(deletedPost), {
+      status: 200,
+    });
+  } catch (error) {
+    console.error("Error processing the request:", error);
+
+    return new Response("An error occurred", {
+      status: 500, // Internal Server Error
+    });
+  }
+}
