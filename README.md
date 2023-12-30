@@ -1,52 +1,45 @@
-Commit message types
+# StudyDrive
 
-- The MAJOR version should increment when you make incompatible API changes.
-- The MINOR version should increment when you add functionality in a backwards-compatible manner.
-- The PATCH version should increment when you make backwards-compatible bug fixes.
+With advanced social media features including Google authentication, create, edit, delete, and displaying on other people's profiles, search and filter data, and much more.
 
-This means that PATCHes are bug fixes and MINORs add new features but neither of them break what worked before. <br/> Finally, MAJORs add changes that won’t work with earlier versions.
-
-- :sparkles: Add new feature 🌟
-- :bug: Fix bug 🐛
-- :recycle: Refactor code ♻️
-- :boom: Breaking change 💥
-- :lock: Improve security 🔒
-- :memo: Update documentation 📝
-- :rocket: Improve performance 🚀
-- :lipstick: Improve UI 💄
-- :construction: Work in progress 🚧
-- :tada: Release new version 🎉
+## Tech Stack
+   * NEXT.JS
+   * TailwindCss
+   * mongodb
+   * Nextauth
 
 <hr/>
-<hr/>
+<img src="https://github.com/SHABIN-K/Prompt_sharing/assets/73272797/04890f4a-28af-46e6-9523-e32b060d7f20">
 
-```````
-feat: (adds valuable new features or improvements that directly benefit and engage users.)
 
-E.g. "feat(column): Added new feature.""
+## Environment Variables
 
-fix: ( resolve user-related issues, improving the software's reliability and providing a smoother user experience.)
+To run this project, you will need to add the following environment variables to your .env file
 
-E.g. "fix(case): Fixed case sensitivity issue in search functionality for accurate results."
+**Client:**
+* `GOOGLE_CLIENT_ID` Google Client [id](https://console.cloud.google.com/)
+* `GOOGLE_CLIENT_SECRET ` Google Client [secret](https://console.cloud.google.com/)
+* `MONGODB_URI ` your Mongodb [url](https://www.mongodb.com/)
+* `NEXTAUTH_URL ` [help](https://github.com/SHABIN-K/Prompt_sharing/blob/main/.env.sample)
+* `NEXTAUTH_URL_INTERNAL`  [help](https://github.com/SHABIN-K/Prompt_sharing/blob/main/.env.sample)
+* `NEXTAUTH_SECRET `  [help](https://github.com/SHABIN-K/Prompt_sharing/blob/main/.env.sample)
+ 
+## Run Locally
 
-docs: (making changes or updates to the documentation for better clarity and understanding.)
+Clone the project
 
-E.g. "docs(readme): Updated README file with installation instructions and usage examples."
+```bash
+  git clone https://github.com/SHABIN-K/PASC-HUB.git
+  npm install
+  # <Create .env appropriately>
+  npm run dev
+````
 
-style: ( focus on improving code appearance, such as formatting and fixing missing semicolons, without affecting functionality.)
+## Support   
+Join Our [Telegram Group](https://www.telegram.dog/codexbotzsupport) For Support/Assistance And Our [Channel](https://www.telegram.dog/codexbotz) For Updates.   
+   
+Report Bugs, Give Feature Requests There..   
 
-E.g. "style(format): Corrected indentation and added missing semicolons for consistent code style."
+##
 
-refactor: (modifying the production code, such as renaming variables, to improve its structure and maintainability.)
-
-E.g. "refactor(variables): Renamed variables for improved code clarity and maintainability."
-
-test: (adding tests that were missing and improving existing tests, without changing the production code.)
-
-E.g. "test(login): Added tests for user login functionality and refactored existing login tests."
-
-chore: (updating build tasks and other non-production code aspects, without changing the actual software.)
-
-E.g. "chore(grunt): Updated Grunt tasks for better task automation and build process efficiency."``````
-
-```````
+   **Star this Repo if you Liked it ⭐⭐⭐**
