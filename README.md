@@ -3,11 +3,12 @@ A full stack web application that makes studying easier for students and documen
 
 ## Features
 
-- **Easy Navigation:** Find study materials, sorted by subjects, courses, and categories effortlessly.
-- **Advanced Search:** Utilize powerful search functionality to quickly locate specific study materials.
+- **Lightweight:**: Crafted with minimalistic UI design.
+- **Easy Navigation:** Students can effortlessly find study materials, sorted by subjects, courses, and categories.
+- **Advanced Search:** Powerful search functionality to quickly locate specific study materials.
 - **Document Management:** Teachers can easily upload, organize, and manage a variety of educational resources.
-- **Admin Dashboard:** Control and manage users and roles conveniently.
-- **Security Measures:** Ensure secure file upload and storage.
+- **Admin Dashboard:** Admins can conveniently control and manage users and roles.
+- **Security Measures:** Ensuring secure file upload and storage..
 - **User Authentication:** Secure login for teachers and admin.
 - **Responsive Design:** User-friendly experience on various devices.
   
