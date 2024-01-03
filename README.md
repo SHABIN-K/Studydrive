@@ -46,7 +46,7 @@ A full stack web application that makes studying easier for students and documen
 - [MongoDB](https://www.mongodb.com/) for persisting data.
 
 
-## Environment Variables
+### Environment Variables
 
 To run this project, you will need to add the following environment variables to your .env file
 
@@ -60,7 +60,7 @@ To run this project, you will need to add the following environment variables to
 * `EDGE_STORE_ACCESS_KEY`:Access key for Edge Store,  
 * `EDGE_STORE_SECRET_KEY`:Secret key for Edge Store
  
-## How To Use
+### How To Use
 From your command line:
 
 ```bash
@@ -80,7 +80,7 @@ From your command line:
 # Start the app in development mode with hot-code reloading by running:
   $npm run dev
 ````
-### Contributing
+## Contributing
    We welcome contributions from the community. Please fork the repository and submit pull requests.
    
 ## Support   
@@ -88,7 +88,7 @@ Join Our [Telegram Group](https://www.telegram.dog/codexbotzsupport) For Support
    
 Report Bugs, Give Feature Requests There..   
 
-### Licence
+## Licence
 [Studydrive](https://github.com/SHABIN-K/PASC-HUB) is Free Software: You can use, study share and improve it at your
 will. Specifically you can redistribute and/or modify it under the terms of the
 [MIT License](https://opensource.org/license/mit/l) as
