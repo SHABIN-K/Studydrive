@@ -1,18 +1,6 @@
 # StudyDrive
 A full stack web application that makes studying easier for students and document management hassle-free for teachers. Students can easily find study materials sorted by subjects and courses, while teachers can upload, organize, and manage resources effortlessly. StudyHub encourages teamwork, makes study materials easy to access, and acts as a hub for all educational resources 
 
-## Table of Contents
-
-- [Features](#features)
-- [Tech Stack](#tech-stack)
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Environment Variables](#environment)
-  - [Installation](#run)
-- [Contributing](#contributing)
-- [Support](#support)
-- [Licence](#licence)
-
 ## Features
 
 - **WhatsApp OTP Delivery**: Send one-time passcodes (OTPs) to users' WhatsApp accounts for secure mobile number verification.
