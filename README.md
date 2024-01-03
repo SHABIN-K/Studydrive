@@ -1,14 +1,34 @@
 # StudyDrive
 A full stack web application that makes studying easier for students and document management hassle-free for teachers. Students can easily find study materials sorted by subjects and courses, while teachers can upload, organize, and manage resources effortlessly. StudyHub encourages teamwork, makes study materials easy to access, and acts as a hub for all educational resources 
 
+## Table of Contents
+
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+- [Contributing](#contributing)
+
+## Features
+
+- **WhatsApp OTP Delivery**: Send one-time passcodes (OTPs) to users' WhatsApp accounts for secure mobile number verification.
+- **Node.js and Express.js Backend**: Utilize the power of Node.js and Express.js to create a robust and scalable server.
+- **whatsapp-web.js Integration**: Seamlessly interact with WhatsApp accounts through the WhatsApp Web API.
+- **Developer-Friendly APIs**: Integrate user verification functionalities easily into various applications.
+- **Real-Time Interaction**: Engage with users in real-time via WhatsApp messages during the verification process.
+- 
 ## Tech Stack
    * NEXT.JS
    * TailwindCss
    * mongodb
    * Nextauth
 
-<hr/>
-<img src="https://github.com/SHABIN-K/Prompt_sharing/assets/73272797/04890f4a-28af-46e6-9523-e32b060d7f20">
+## Getting Started
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) installed on your machine.
 
 
 ## Environment Variables
@@ -33,7 +53,9 @@ Clone the project
   # <Create .env appropriately>
   npm run dev
 ````
-
+### Contributing
+   We welcome contributions from the community. Please fork the repository and submit pull requests.
+   
 ## Support   
 Join Our [Telegram Group](https://www.telegram.dog/codexbotzsupport) For Support/Assistance And Our [Channel](https://www.telegram.dog/codexbotz) For Updates.   
    
