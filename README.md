@@ -1,4 +1,4 @@
-![osi-badge-dark](https://github.com/SHABIN-K/PASC-HUB/assets/73272797/7fedb710-cd38-49ad-872c-631386a25f08)# StudyDrive
+# StudyDrive
 A full stack web application that makes studying easier for students and document management hassle-free for teachers. Students can easily find study materials sorted by subjects and courses, while teachers can upload, organize, and manage resources effortlessly. StudyHub encourages teamwork, makes study materials easy to access, and acts as a hub for all educational resources 
 
 ## Table of Contents
@@ -7,8 +7,11 @@ A full stack web application that makes studying easier for students and documen
 - [Tech Stack](#tech-stack)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
+  - [Environment Variables](#environmentvariables)
+  - [Installation](#runlocally)
 - [Contributing](#contributing)
+- [Support](#support)
+- [Licence](#licence)
 
 ## Features
 
@@ -35,15 +38,15 @@ A full stack web application that makes studying easier for students and documen
 
 To run this project, you will need to add the following environment variables to your .env file
 
-* `NEXTAUTH_URL ` [help](https://github.com/SHABIN-K/Prompt_sharing/blob/main/.env.sample)
-* `NEXTAUTH_URL_INTERNAL`  [help](https://github.com/SHABIN-K/Prompt_sharing/blob/main/.env.sample)
-* `NEXTAUTH_SECRET `  [help](https://github.com/SHABIN-K/Prompt_sharing/blob/main/.env.sample)
-* `NEXT_SHARP_PATH` [help](https://github.com/SHABIN-K/Prompt_sharing/blob/main/.env.sample)
-* `NEXT_DEFAULT_PASSWORD` Google Client [id](https://console.cloud.google.com/)
-* `NEXT_PUBLIC_APP_URL` Google Client [id](https://console.cloud.google.com/)
-* `DATABASE_URL ` your Mongodb [url](https://www.mongodb.com/)
-* `EDGE_STORE_ACCESS_KEY`  [help](https://github.com/SHABIN-K/Prompt_sharing/blob/main/.env.sample)
-* `EDGE_STORE_SECRET_KEY`  [help](https://github.com/SHABIN-K/Prompt_sharing/blob/main/.env.sample)
+* `NEXTAUTH_URL `:The public URL of your NextAuth authentication service.
+* `NEXTAUTH_URL_INTERNAL` :The internal URL used for authentication within the project.
+* `NEXTAUTH_SECRET `:A secret key for securing sessions and tokens in NextAuth.  
+* `NEXT_SHARP_PATH`:Path for Next.js image processing with Sharp.
+* `NEXT_DEFAULT_PASSWORD`:Default password used during project setup or user creation.
+* `NEXT_PUBLIC_APP_URL`:The public URL of your application.
+* `DATABASE_URL `:Your MongoDB connection URL.
+* `EDGE_STORE_ACCESS_KEY`:Access key for Edge Store,  
+* `EDGE_STORE_SECRET_KEY`:Secret key for Edge Store
  
 ## Run Locally
 
