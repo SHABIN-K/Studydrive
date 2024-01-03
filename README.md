@@ -1,6 +1,5 @@
 # StudyDrive
-
-With advanced social media features including Google authentication, create, edit, delete, and displaying on other people's profiles, search and filter data, and much more.
+A full stack web application that makes studying easier for students and document management hassle-free for teachers. Students can easily find study materials sorted by subjects and courses, while teachers can upload, organize, and manage resources effortlessly. StudyHub encourages teamwork, makes study materials easy to access, and acts as a hub for all educational resources 
 
 ## Tech Stack
    * NEXT.JS
