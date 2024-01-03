@@ -35,13 +35,15 @@ A full stack web application that makes studying easier for students and documen
 
 To run this project, you will need to add the following environment variables to your .env file
 
-**Client:**
-* `GOOGLE_CLIENT_ID` Google Client [id](https://console.cloud.google.com/)
-* `GOOGLE_CLIENT_SECRET ` Google Client [secret](https://console.cloud.google.com/)
-* `MONGODB_URI ` your Mongodb [url](https://www.mongodb.com/)
 * `NEXTAUTH_URL ` [help](https://github.com/SHABIN-K/Prompt_sharing/blob/main/.env.sample)
 * `NEXTAUTH_URL_INTERNAL`  [help](https://github.com/SHABIN-K/Prompt_sharing/blob/main/.env.sample)
 * `NEXTAUTH_SECRET `  [help](https://github.com/SHABIN-K/Prompt_sharing/blob/main/.env.sample)
+* `NEXT_SHARP_PATH` [help](https://github.com/SHABIN-K/Prompt_sharing/blob/main/.env.sample)
+* `NEXT_DEFAULT_PASSWORD` Google Client [id](https://console.cloud.google.com/)
+* `NEXT_PUBLIC_APP_URL` Google Client [id](https://console.cloud.google.com/)
+* `DATABASE_URL ` your Mongodb [url](https://www.mongodb.com/)
+* `EDGE_STORE_ACCESS_KEY`  [help](https://github.com/SHABIN-K/Prompt_sharing/blob/main/.env.sample)
+* `EDGE_STORE_SECRET_KEY`  [help](https://github.com/SHABIN-K/Prompt_sharing/blob/main/.env.sample)
  
 ## Run Locally
 
