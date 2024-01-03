@@ -51,7 +51,7 @@ From your command line:
 
 ```bash
 # Clone this repository
-  $git clone https://github.com/your_github_name/PASC-HUB.git
+  $git clone https://github.com/your_github_name/studydrive.git
 
 # Go into the repository
   $cd studydrive
@@ -68,6 +68,7 @@ From your command line:
 ````
 ## Contributing 🤝
    We welcome contributions from the community. Please fork the repository and submit pull requests.
+   **Make sure to see [contributing.md](https://github.com/SHABIN-K/studydrive/blob/main/CONTRIBUTING.md) for instructions on contributing to the project!**
    
 ## Support 💬
 Join Our [Telegram Group](https://www.telegram.dog/codexbotzsupport) For Support/Assistance And Our [Channel](https://www.telegram.dog/codexbotz) For Updates.   
@@ -75,7 +76,7 @@ Join Our [Telegram Group](https://www.telegram.dog/codexbotzsupport) For Support
 Report Bugs, Give Feature Requests There..   
 
 ## Licence 📝
-[Studydrive](https://github.com/SHABIN-K/PASC-HUB) is Free Software: You can use, study share and improve it at your
+[Studydrive](https://github.com/SHABIN-K/studydrive) is Free Software: You can use, study share and improve it at your
 will. Specifically you can redistribute and/or modify it under the terms of the
 [MIT License](https://opensource.org/license/mit/l) as
 published by the Free Software Foundation, either version 3 of the License, or
