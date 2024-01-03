@@ -51,7 +51,7 @@ From your command line:
 
 ```bash
 # Clone this repository
-  $git clone https://github.com/SHABIN-K/PASC-HUB.git
+  $git clone https://github.com/your_github_name/PASC-HUB.git
 
 # Go into the repository
   $cd studydrive
