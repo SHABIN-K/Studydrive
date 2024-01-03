@@ -20,18 +20,30 @@ A full stack web application that makes studying easier for students and documen
 - **whatsapp-web.js Integration**: Seamlessly interact with WhatsApp accounts through the WhatsApp Web API.
 - **Developer-Friendly APIs**: Integrate user verification functionalities easily into various applications.
 - **Real-Time Interaction**: Engage with users in real-time via WhatsApp messages during the verification process.
-- 
+
+  
 ## Tech Stack
-   * NEXT.JS
-   * TailwindCss
-   * mongodb
-   * Nextauth
+- **NEXT.JS:** React-based framework for building modern web applications.
+
+- **Tailwind CSS:** Utility-first CSS framework for highly customizable UIs.
+
+- **MongoDB:** NoSQL database for flexible and scalable data storage.
+
+- **NextAuth:** Authentication solution for Next.js with social logins and more.
+
+- **Prisma:** Modern database toolkit for simplified data access.
+
+- **Zustand:** Lightweight state management library for React.
 
 ## Getting Started
 
 ### Prerequisites
 
 - [Node.js](https://nodejs.org/) installed on your machine.
+- [Git](https://git-scm.com/)
+- [npm](https://www.npmjs.com/)
+- [Edgestore](https://edgestore.dev/) for managing all the uploaded douments
+- [MongoDB](https://www.mongodb.com/) for persisting data.
 
 
 ## Environment Variables
@@ -48,15 +60,25 @@ To run this project, you will need to add the following environment variables to
 * `EDGE_STORE_ACCESS_KEY`:Access key for Edge Store,  
 * `EDGE_STORE_SECRET_KEY`:Secret key for Edge Store
  
-## Run Locally
-
-Clone the project
+## How To Use
+From your command line:
 
 ```bash
-  git clone https://github.com/SHABIN-K/PASC-HUB.git
-  npm install
+# Clone this repository
+  $git clone https://github.com/SHABIN-K/PASC-HUB.git
+
+# Go into the repository
+  $cd studydrive
+
+# Install dependencies
+  $npm install
   # <Create .env appropriately>
-  npm run dev
+
+# This is needed if you are planning to run studydrive locally
+  $npx prisma db push
+
+# Start the app in development mode with hot-code reloading by running:
+  $npm run dev
 ````
 ### Contributing
    We welcome contributions from the community. Please fork the repository and submit pull requests.
