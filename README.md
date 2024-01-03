@@ -3,12 +3,13 @@ A full stack web application that makes studying easier for students and documen
 
 ## Features
 
-- **WhatsApp OTP Delivery**: Send one-time passcodes (OTPs) to users' WhatsApp accounts for secure mobile number verification.
-- **Node.js and Express.js Backend**: Utilize the power of Node.js and Express.js to create a robust and scalable server.
-- **whatsapp-web.js Integration**: Seamlessly interact with WhatsApp accounts through the WhatsApp Web API.
-- **Developer-Friendly APIs**: Integrate user verification functionalities easily into various applications.
-- **Real-Time Interaction**: Engage with users in real-time via WhatsApp messages during the verification process.
-
+- **Easy Navigation:** Find study materials, sorted by subjects, courses, and categories effortlessly.
+- **Advanced Search:** Utilize powerful search functionality to quickly locate specific study materials.
+- **Document Management:** Teachers can easily upload, organize, and manage a variety of educational resources.
+- **Admin Dashboard:** Control and manage users and roles conveniently.
+- **Security Measures:** Ensure secure file upload and storage.
+- **User Authentication:** Secure login for teachers and admin.
+- **Responsive Design:** User-friendly experience on various devices.
   
 ## Tech Stack
 - **NEXT.JS:** React-based framework for building modern web applications.
@@ -36,7 +37,7 @@ A full stack web application that makes studying easier for students and documen
 
 ### Environment Variables
 
-To run this project, you will need to add the following environment variables to your .env file
+To run this project, you will need to add the following environment variables to your .env file:
 
 * `NEXTAUTH_URL `:The public URL of your NextAuth authentication service.
 * `NEXTAUTH_URL_INTERNAL` :The internal URL used for authentication within the project.
@@ -86,4 +87,5 @@ published by the Free Software Foundation, either version 3 of the License, or
 
 ##
 
-   **Star this Repo if you Liked it ⭐⭐⭐**
+  **⭐️ Star this Repo if you Liked it! ⭐️**
+
