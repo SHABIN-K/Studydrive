@@ -114,7 +114,7 @@ const Navbar = () => {
   return (
     <nav className="flex md:flex-row flex-col-reverse justify-between mb-[35px] gap-6">
       <p className=" text-[#4acd8d] align-middle text-center subpixel-antialiased text-3xl font-bold hidden sm:block">
-        Pasc Hub <span className="badge">alpha</span>
+        Pasc Hub <span className="badge">beta</span>
       </p>
       <Search
         results={searchedResults}
@@ -159,7 +159,7 @@ const Navbar = () => {
         </div>
 
         <p className="text-[#4acd8d] align-middle text-center subpixel-antialiased text-3xl font-bold">
-          Pasc Hub<span className="badge">alpha</span>
+          Pasc Hub<span className="badge">beta</span>
         </p>
 
         <div
