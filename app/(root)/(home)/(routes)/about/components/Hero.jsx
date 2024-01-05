@@ -16,7 +16,6 @@ const Hero = () => {
         <p className="mx-auto mt-4 max-w-xl sm:text-xl/relaxed">
           {text.descrption}
         </p>
-
       </div>
     </section>
   );
