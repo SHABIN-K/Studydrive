@@ -74,8 +74,8 @@ const Team = () => {
       name: "Muzammil",
       role: "Frontend developer",
       img: "/team/member-2.jpeg",
-      githubUsername: "SHABIN-K",
-      instagramUsername: "_shabink/",
+      githubUsername: "muzammilk03",
+      instagramUsername: "muzammilsidhique",
     },
     {
       name: "Mohammed Nisham nk",
@@ -89,7 +89,8 @@ const Team = () => {
       name: "Mufasil",
       role: "Visual designer",
       img: "/team/member-3.jpeg",
-      instagramUsername: "_shabink/",
+      linkedinUsername: "Mufasil.Muthu",
+      instagramUsername: "mufasill_",
     },
     {
       name: "Shefna N",
