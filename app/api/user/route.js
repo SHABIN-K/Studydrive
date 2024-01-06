@@ -1,15 +1,24 @@
 import prisma from "@/libs/prisma";
 import bcrypt from "bcrypt";
+import { getServerSession } from "next-auth";
 
 export async function GET() {
+  const session = await getServerSession();
   try {
-    const allUsers = await prisma.user.findMany();
-    return new Response(JSON.stringify(allUsers), {
-      status: 200, // Created
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    if (!session) {
+     // res.status(401).json({ message: "You must be logged in." });
+      return new Response("You must be logged in.", {
+        status: 401, // Internal Server Error
+      });
+    } else {
+      const allUsers = await prisma.user.findMany();
+      return new Response(JSON.stringify(allUsers), {
+        status: 200, // Created
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+    }
   } catch (error) {
     console.error("Error processing the request:", error);
 
