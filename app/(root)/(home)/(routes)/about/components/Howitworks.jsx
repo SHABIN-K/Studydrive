@@ -1,9 +1,5 @@
-
-
 const Howitworks = () => {
-  return (
-    <div>howitworks</div>
-  )
-}
+  return <div>howitworks</div>;
+};
 
-export default Howitworks
+export default Howitworks;

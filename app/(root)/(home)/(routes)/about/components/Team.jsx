@@ -42,17 +42,17 @@ const Team = () => {
       name: "Shefna N",
       role: "QA Tester",
       img: "/team/member-4.jpg",
-      instagramUrl: "_shabink",
+      instagramUrl: "shefna_n",
     },
   ];
 
   return (
     <div className="px-4 py-1 mx-auto">
       <div className="mx-auto mb-10 lg:max-w-xl text-center">
-        <p class="text-gray-500 text-lg text-center font-normal pb-3">
+        <p className="text-gray-500 text-lg text-center font-normal pb-3">
           Meet the team
         </p>
-        <h1 class="mx-auto text-3xl text-center text-gray-200  font-extrabold ">
+        <h1 className="mx-auto text-3xl text-center text-gray-200  font-extrabold ">
           The Talented People Behind the Scenes of the Organization
         </h1>
       </div>
