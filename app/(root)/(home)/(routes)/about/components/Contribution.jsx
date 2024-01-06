@@ -19,8 +19,11 @@ const Contribution = () => {
             height={350}
           />
         </div>
-        <div className="items-center text-center text-base sm:text-lg font-normal sm:font-medium w-full md:w-[60%] text-[#808191]">
-          <h3 className="text-lg md:text-2xl font-bold text-white mb-2">
+        <div className="items-center text-center font-normal sm:font-medium w-full md:w-[60%] text-[#808191]">
+          <p class="text-gray-500 text-lg text-center font-normal pb-3">
+            Contribute.
+          </p>
+          <h3 className="text-3xl font-bold text-white mb-2">
             {contributeText.title}
           </h3>
           <p>{contributeText.desc}</p>
