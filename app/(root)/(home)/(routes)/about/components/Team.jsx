@@ -1,3 +1,4 @@
+import Link from "next/link";
 import {
   IconBrandGithub,
   IconBrandInstagram,
@@ -5,8 +6,59 @@ import {
   IconBrandX,
 } from "@tabler/icons-react";
 import Image from "next/image";
-import Link from "next/link";
-import React from "react";
+
+const SocialLinks = ({
+  githubUsername,
+  xUsername,
+  linkedinUsername,
+  instagramUsername,
+}) => {
+  return (
+    <div className="flex justify-start space-x-1">
+      {githubUsername && (
+        <SocialLink
+          icon={<IconBrandGithub className="social-icon" />}
+          tooltip="Github"
+          url={`https://github.com/${githubUsername}`}
+        />
+      )}
+      {xUsername && (
+        <SocialLink
+          icon={<IconBrandX className="social-icon" />}
+          tooltip="twitter"
+          url={`https://twitter.com/${xUsername}`}
+        />
+      )}
+      {linkedinUsername && (
+        <SocialLink
+          icon={<IconBrandLinkedin className="social-icon" />}
+          tooltip="Linkedin"
+          url={`https://www.linkedin.com/in/${linkedinUsername}`}
+        />
+      )}
+      {instagramUsername && (
+        <SocialLink
+          icon={<IconBrandInstagram className="social-icon" />}
+          tooltip="Instagram"
+          url={`https://www.instagram.com/${instagramUsername}`}
+        />
+      )}
+    </div>
+  );
+};
+
+const SocialLink = ({ icon, tooltip, url }) => {
+  return (
+    <Link
+      className="tooltip tooltip-bottom"
+      data-tip={tooltip}
+      href={url}
+      target="_blank"
+    >
+      {icon}
+    </Link>
+  );
+};
 
 const Team = () => {
   const teamMembers = [
@@ -14,35 +66,36 @@ const Team = () => {
       name: "Mohammed shabin k",
       role: "Team lead | software Engineer",
       img: "/team/member-1.jpeg",
-      githubUrl: "SHABIN-K",
-      xUrl: "shabink9",
-      linkedinUrl: "-shabink/",
+      githubUsername: "SHABIN-K",
+      xUsername: "shabink9",
+      linkedinUsername: "-shabink",
     },
     {
       name: "Muzammil",
       role: "Frontend developer",
       img: "/team/member-2.jpeg",
-      githubUrl: "SHABIN-K",
-      instagramUrl: "_shabink/",
+      githubUsername: "SHABIN-K",
+      instagramUsername: "_shabink/",
     },
     {
       name: "Mohammed Nisham nk",
       role: "Visual designer",
       img: "/team/member-5.jpg",
-      linkedinUrl: "-shabink/",
-      instagramUrl: "_shabink/",
+      githubUsername: "Nisham-N-K",
+      linkedinUsername: "mohammed-nisham-nk-b9a05b267",
+      instagramUsername: "nisham_nk",
     },
     {
       name: "Mufasil",
       role: "Visual designer",
       img: "/team/member-3.jpeg",
-      instagramUrl: "_shabink/",
+      instagramUsername: "_shabink/",
     },
     {
       name: "Shefna N",
       role: "QA Tester",
       img: "/team/member-4.jpg",
-      instagramUrl: "shefna_n",
+      instagramUsername: "shefna_n",
     },
   ];
 
@@ -68,7 +121,7 @@ const Team = () => {
                 alt="Person"
               />
               <div className="flex flex-col items-start justify-center text-center capitalize">
-                <p className="text-base font-bold tracking-tighter">
+                <p className="text-base font-bold tracking-tighter text-gray-300">
                   {member.name}
                 </p>
                 <p className="text-sm text-[#808191] tracking-tighter">
@@ -85,51 +138,3 @@ const Team = () => {
 };
 
 export default Team;
-
-const SocialLinks = ({ githubUrl, xUrl, linkedinUrl, instagramUrl }) => {
-  return (
-    <div className="flex justify-start space-x-1">
-      {githubUrl && (
-        <SocialLink
-          icon={<IconBrandGithub className="w-6 md:w-4 hover:text-white" />}
-          tooltip="Github"
-          url={`https://github.com/${githubUrl}`}
-        />
-      )}
-      {xUrl && (
-        <SocialLink
-          icon={<IconBrandX className="w-6 md:w-4 hover:text-white" />}
-          tooltip="twitter"
-          url={`https://twitter.com/${xUrl}`}
-        />
-      )}
-      {linkedinUrl && (
-        <SocialLink
-          icon={<IconBrandLinkedin className="w-6 md:w-4 hover:text-white" />}
-          tooltip="Linkedin"
-          url={`https://www.linkedin.com/in/${linkedinUrl}`}
-        />
-      )}
-      {instagramUrl && (
-        <SocialLink
-          icon={<IconBrandInstagram className="w-6 md:w-4 hover:text-white" />}
-          tooltip="Instagram"
-          url={`https://www.instagram.com/${instagramUrl}`}
-        />
-      )}
-    </div>
-  );
-};
-
-const SocialLink = ({ icon, tooltip, url }) => {
-  return (
-    <Link
-      className="tooltip tooltip-bottom"
-      data-tip={tooltip}
-      href={url}
-      target="_blank"
-    >
-      {icon}
-    </Link>
-  );
-};

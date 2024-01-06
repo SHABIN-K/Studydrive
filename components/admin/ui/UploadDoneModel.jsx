@@ -45,7 +45,7 @@ const UploadDoneModel = ({ isOpen, setIsOpen }) => {
                   />
 
                   <Image
-                    src="/submit.png"
+                    src="/img/submit.png"
                     width={340}
                     height={100}
                     alt="Done"

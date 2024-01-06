@@ -19,7 +19,7 @@ const AdminSidebar = () => {
         <div className="flex flex-col items-center mt-6 -mx-2">
           <Image
             className="object-cover w-24 h-24 mx-2 rounded-full"
-            src="/profile.jpg"
+            src="/img/profile.jpg"
             width={96}
             height={96}
             priority
