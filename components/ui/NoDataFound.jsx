@@ -8,7 +8,7 @@ const NoDataFound = () => {
       <div className="p-2 flex flex-col items-center justify-center">
         <div className="relative ">
           <Image
-            src="/nodata.png"
+            src="/img/nodata.png"
             width={340}
             height={100}
             alt="No file found"

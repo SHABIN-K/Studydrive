@@ -58,7 +58,7 @@ export default function NotFound() {
         <div className="relative w-full mt-12 lg:w-1/2 lg:mt-0">
           <Image
             className="w-full max-w-lg lg:mx-auto"
-            src="/illustration.svg"
+            src="/img/illustration.svg"
             priority={true} // {false} | {true}
             width={500}
             height={150}

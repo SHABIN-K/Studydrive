@@ -6,7 +6,7 @@ export const Empty = ({ label, error, reset }) => {
       <div className="p-20 flex flex-col items-center justify-center">
         <div className="relative mb-3">
           <Image
-            src="/cry.png"
+            src="/img/cry.png"
             alt="Empty"
             width={320}
             height={300}
