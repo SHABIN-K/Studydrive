@@ -1,4 +1,6 @@
+/* eslint-disable react/no-unescaped-entities */
 import Image from "next/image";
+import Link from "next/link";
 
 const NoDataFound = () => {
   return (
@@ -19,7 +21,15 @@ const NoDataFound = () => {
           No File Found !!!
         </h1>
         <p className="text-sm pt-2 text-gray-400 text-center">
-          Maybe go Back and try a diffrent keyword?
+          Unable to find what you're looking for?
+          <br />
+          Explore other options or
+          <Link
+            href={`${process.env.NEXT_PUBLIC_APP_URL}/about`}
+            className="text-blue-300 ml-1 underline"
+          >
+            meet our amazing team!
+          </Link>
         </p>
       </div>
     </section>
