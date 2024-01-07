@@ -11,16 +11,16 @@ const Contribution = () => {
   return (
     <section className="w-full mt-3 ">
       <div className="flex justify-center items-center flex-col-reverse md:flex-row">
-        <div className="">
+        <div>
           <Image
-            src="/contriubute.svg"
+            src="/img/contriubute.svg"
             alt="github contribution svg"
             width={350}
             height={350}
           />
         </div>
         <div className="items-center text-center font-normal sm:font-medium w-full md:w-[60%] text-[#808191]">
-          <p class="text-gray-500 text-lg text-center font-normal pb-3">
+          <p className="text-gray-500 text-lg text-center font-normal pb-3">
             Contribute.
           </p>
           <h3 className="text-3xl font-bold text-white mb-2">

@@ -51,7 +51,7 @@ const ShareDialogBox = ({ isOpen, setIsOpen }) => {
                   onClick={closeModal}
                 />
                 <Image
-                  src="/invite_img.webp"
+                  src="/img/invite_img.webp"
                   width={340}
                   height={100}
                   alt="invite friends"
