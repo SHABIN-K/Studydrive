@@ -71,10 +71,11 @@ const Team = () => {
       linkedinUsername: "-shabink",
     },
     {
-      name: "Muzammil",
+      name: "Muhammad Muzammil k",
       role: "Frontend developer",
       img: "/team/member-2.jpeg",
       githubUsername: "muzammilk03",
+      linkedinUsername: "Muhammed Muzammil",
       instagramUsername: "muzammilsidhique",
     },
     {
