@@ -4,6 +4,7 @@ A full stack web application that makes studying easier for students and documen
 ## Features 🌟
 
 - **Lightweight:**: Crafted with minimalistic UI design.
+- **PWA:** Install as a Progressive Web App on your device.
 - **Easy Navigation:** Students can effortlessly find study materials, sorted by subjects, courses, and categories.
 - **Advanced Search:** Powerful search functionality to quickly locate specific study materials.
 - **Document Management:** Teachers can easily upload, organize, and manage a variety of educational resources.
