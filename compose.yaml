@@ -15,13 +15,7 @@ services:
       # the second number is the port inside the container
     ports:
       - 3000:3000
-
-    volumes:
-      # Mount the db-data volume to persist MongoDB data
-      - db-data:/data/db
-    depends_on:
-      # Depend on the mongo service for database connectivity
-      - db
+      
     # specify the environment variables for the web service
     # these environment variables will be available inside the container
     environment:
@@ -50,26 +44,6 @@ services:
         - path: .
           target: /app
           action: sync
-
-  # define the database service
-  db:
-    # specify the image to use for the db service from docker hub. If we have a custom image, we can specify that in this format
-    # In the above two services, we're using the build context to build the image for the service from the Dockerfile so we specify the image as "build: ./frontend" or "build: ./backend".
-    # but for the db service, we're using the image from docker hub so we specify the image as "image: mongo:latest"
-    # you can find the image name and tag for mongodb from docker hub here: https://hub.docker.com/_/mongo
-    image: mongo:latest
-
-    # specify the ports to expose for the db service
-    # generally, we do this in api service using mongodb atlas. But for demo purposes, we're using a local mongodb instance
-    # usually, mongodb runs on port 27017. So we're exposing the port 27017 on the host machine and mapping it to the port 27017 inside the container
-    ports:
-      - 27017:27017
-
-    # specify the volumes to mount for the db service
-    # we're mounting the volume named "anime" inside the container at /data/db directory
-    # this is done so that the data inside the mongodb container is persisted even if the container is stopped
-    volumes:
-      - db-data:/data/db
 
 # define the volumes to be used by the services
 volumes:
