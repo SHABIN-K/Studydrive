@@ -1,7 +1,5 @@
 import Image from "next/image";
 import { useState } from "react";
-
-import doc from "public/icons/doc.png";
 import PostViewDialogBox from "../models/PostViewDialogBox";
 
 const PostCard = ({ data }) => {
@@ -19,7 +17,13 @@ const PostCard = ({ data }) => {
       <div className="flex flex-row items-center">
         <div className="">
           <figure className="w-[70px] h-[70px] md:w-20 md:h-20 bg-gray-300 rounded-full overflow-hidden">
-            <Image src={doc} alt={data.description} />
+            {/* Use the absolute path for the image */}
+            <Image 
+              src="/icons/doc.png" 
+              alt={data.description} 
+              width={70} 
+              height={70} 
+            />
           </figure>
         </div>
         <div className="text-start ml-5">
