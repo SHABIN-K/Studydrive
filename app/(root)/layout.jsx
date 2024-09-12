@@ -53,6 +53,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className="bg-[#13131a] min-h-screen">
+        <script defer src="https://cloud.umami.is/script.js" data-website-id="185225b6-6381-46c7-8afd-a753b57db4a4"></script>
         <AuthProvider>
           <EdgeStoreProvider>
             <Toaster richColors closeButton position="top-center" />
